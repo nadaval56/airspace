@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-08-16T20:37:12Z",
- "last_success": "2026-08-16T19:39:31Z",
+ "generated_at": "2026-08-16T21:14:14Z",
+ "last_success": "2026-08-16T21:14:14Z",
  "last_error": {
   "at": "2026-08-16T20:37:12Z",
   "message": "faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; notams.online/LLLL: החזיר 200 אך ללא נוטאמים; notams.online/LLBG: החזיר 200 אך ללא נוטאמים; notams.online/LLHA: החזיר 200 אך ללא נוטאמים; notams.online/LLIB: החזיר 200 אך ללא נוטאמים; notams.online/LLRD: החזיר 200 אך ללא נוטאמים; notams.online/LLHZ: החזיר 200 אך ללא נוטאמים; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrieva"
  },
- "stale": true,
+ "stale": false,
  "fir": "LLLL",
  "airports": [
   "LLBG",
@@ -15,6 +15,48 @@
   "LLHZ"
  ],
  "sources": [
+  {
+   "source": "iaa",
+   "icao": "LLLL",
+   "ok": true,
+   "count": 127,
+   "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
+  },
+  {
+   "source": "iaa",
+   "icao": "LLBG",
+   "ok": true,
+   "count": 0,
+   "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
+  },
+  {
+   "source": "iaa",
+   "icao": "LLHA",
+   "ok": true,
+   "count": 0,
+   "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
+  },
+  {
+   "source": "iaa",
+   "icao": "LLIB",
+   "ok": true,
+   "count": 0,
+   "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
+  },
+  {
+   "source": "iaa",
+   "icao": "LLRD",
+   "ok": true,
+   "count": 0,
+   "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
+  },
+  {
+   "source": "iaa",
+   "icao": "LLHZ",
+   "ok": true,
+   "count": 0,
+   "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
+  },
   {
    "source": "faa-api",
    "icao": "LLLL",
@@ -197,12 +239,3188 @@
   }
  ],
  "counts": {
-  "total": 0,
+  "total": 127,
   "mapped": 0,
   "fir_wide": 0,
-  "no_geo": 0,
+  "no_geo": 127,
   "low_altitude": 0,
-  "administrative": 0
+  "administrative": 18
  },
- "notams": []
+ "notams": [
+  {
+   "id": "C1760/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1760/26 NOTAMN\nA) LLLL\nE) AN AREA AT TLALIM WI 0.3NM RADIUS CENTERED ON PSN",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AN AREA AT TLALIM WI 0.3NM RADIUS CENTERED ON PSN",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1757/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1757/26 NOTAMN\nA) LLLL\nE) LLMG TRG AREA AND ULTRALIGHT BUBBLE NR B-WEST (BMGWB)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "LLMG TRG AREA AND ULTRALIGHT BUBBLE NR B-WEST (BMGWB)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1756/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1756/26 NOTAMN\nA) LLLL\nE) ULTRALIGHT AND HEL RTE CLSD",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ULTRALIGHT AND HEL RTE CLSD",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1755/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1755/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD DUE ILS ACT WI LLRD",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD DUE ILS ACT WI LLRD",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1754/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1754/26 NOTAMN\nA) LLMG\nE) AIRSTRIP LTD TO MAX 400FT AMSL DUE ILS ACT WI LLRD",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLMG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AIRSTRIP LTD TO MAX 400FT AMSL DUE ILS ACT WI LLRD",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1753/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1753/26 NOTAMN\nA) LLLL\nE) PJE AIRSPACE HOF-HATMARIM CLSD.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "PJE AIRSPACE HOF-HATMARIM CLSD.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1752/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1752/26 NOTAMN\nA) LLLL\nE) ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1751/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1751/26 NOTAMN\nA) LLSO\nE) AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLSO"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1750/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1750/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1749/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1749/26 NOTAMN\nA) LLLL\nE) HEL RTE CLSD",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "HEL RTE CLSD",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1748/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1748/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD FRDIS-BOREN-HOTRM.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD FRDIS-BOREN-HOTRM.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1747/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1747/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD ZOFAR-HRGVS.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD ZOFAR-HRGVS.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1746/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1746/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD HAREL-HNINA-ANATA.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD HAREL-HNINA-ANATA.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1745/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1745/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD AFULA-EITAN.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD AFULA-EITAN.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1744/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1744/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD FAZEL-ARGMN-TIRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD FAZEL-ARGMN-TIRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1743/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1743/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1742/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1742/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1741/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1741/26 NOTAMN\nA) LLLL\nE) ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1740/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1740/26 NOTAMN\nA) LLLL\nE) ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1738/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1738/26 NOTAMN\nA) LLSO\nE) AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLSO"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1737/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1737/26 NOTAMN\nA) LLSO\nE) AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLSO"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1735/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1735/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1734/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1734/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1730/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1730/26 NOTAMN\nA) LLLL\nE) AN AREA AT ARRAH WI 1.5NM RADIUS CENTERED ON PSN",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AN AREA AT ARRAH WI 1.5NM RADIUS CENTERED ON PSN",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1729/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1729/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT YERUHAM, FM GND UP TO 300M AGL.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT YERUHAM, FM GND UP TO 300M AGL.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1727/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1727/26 NOTAMN\nA) LLLL\nE) CAPTIVE BALLOON WILL TAKE PLACE AT HACHULA-LAKE,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT HACHULA-LAKE,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1726/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1726/26 NOTAMN\nA) LLLL\nE) PJE WILL TAKE PLACE AT REVIVIM.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "PJE WILL TAKE PLACE AT REVIVIM.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1725/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1725/26 NOTAMN\nA) LLLL\nE) CVFR AND HEL RTE CLSD AT 1,200FT,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CVFR AND HEL RTE CLSD AT 1,200FT,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1723/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1723/26 NOTAMN\nA) LLLL\nE) CAPTIVE BALLOON WILL TAKE PLACE AT RAHAT, UP TO 1,700FT AMSL.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT RAHAT, UP TO 1,700FT AMSL.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1719/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1719/26 NOTAMN\nA) LLLL\nE) CAPTIVE BALLOON WILL TAKE PLACE AT HACHULA-LAKE,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT HACHULA-LAKE,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1718/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1718/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT YERUHAM, FM GND UP TO 600M AGL.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT YERUHAM, FM GND UP TO 600M AGL.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1708/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1708/26 NOTAMN\nA) LLLL\nE) CAPTIVE BALLOON WILL TAKE PLACE AT MEI-AMI.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT MEI-AMI.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1698/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1698/26 NOTAMN\nA) LLIB\nE) 2 OBST PSN 325907.85N0353409.91E HGT 2M AGL AND 1M AGL.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLIB"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "2 OBST PSN 325907.85N0353409.91E HGT 2M AGL AND 1M AGL.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1679/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1679/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT EITANIM-HOSPITAL.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT EITANIM-HOSPITAL.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1656/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1656/26 NOTAMN\nA) LLIB\nE) REFUELING ALL TYP OF AIRCRAFT/HEL NOT AVBL.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLIB"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "REFUELING ALL TYP OF AIRCRAFT/HEL NOT AVBL.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1630/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1630/26 NOTAMN\nA) LLLL\nE) UAS ACT WILL TAKE PLACE AT TAANACHIM AND GADISH.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS ACT WILL TAKE PLACE AT TAANACHIM AND GADISH.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1626/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1626/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT PARK-REEM.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT PARK-REEM.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1616/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1616/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT KESARYA UP TO 100M AGL,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT KESARYA UP TO 100M AGL,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1608/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1608/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT ZIV-HOSPITAL/TZFAT.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT ZIV-HOSPITAL/TZFAT.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1596/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1596/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT NESHER WI LLHA CTR",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT NESHER WI LLHA CTR",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1595/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1595/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT DALIA/TZAFIT, WI ULTRALIGHT",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT DALIA/TZAFIT, WI ULTRALIGHT",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1592/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1592/26 NOTAMN\nA) LLIB\nE) DEP/ARR AVBL VIA SOUTH ENTRY/EXIT ONLY.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLIB"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "DEP/ARR AVBL VIA SOUTH ENTRY/EXIT ONLY.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1591/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1591/26 NOTAMN\nA) LLLL\nE) LLIB TRG AREA NR A AND B CLSD.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "LLIB TRG AREA NR A AND B CLSD.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1590/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1590/26 NOTAMN\nA) LLRS\nE) FLT DEPARTING AIRSTRIP NB VIA TYONA PILOT SHALL CONTACT",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLRS"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "FLT DEPARTING AIRSTRIP NB VIA TYONA PILOT SHALL CONTACT",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1589/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1589/26 NOTAMN\nA) LLMG\nE) GLD ACT AVBL S OF ROAD NR 85 AND ROAD NR 91,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLMG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "GLD ACT AVBL S OF ROAD NR 85 AND ROAD NR 91,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1588/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1588/26 NOTAMN\nA) LLGV\nE) CTR AVBL FOR UAS/UAV OR AGRICULTURE FLT ONLY.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLGV"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CTR AVBL FOR UAS/UAV OR AGRICULTURE FLT ONLY.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1587/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1587/26 NOTAMN\nA) LLLL\nE) ULTRALIGHT BUBBLE RAMAT HAGOLAN (BRGOL) CLSD N OF ROAD NR 91.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ULTRALIGHT BUBBLE RAMAT HAGOLAN (BRGOL) CLSD N OF ROAD NR 91.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1584/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1584/26 NOTAMN\nA) LLLL\nE) ULTRALIGHT BUBBLE CLSD HAHULA (BHULA), KARMIEL (BKRML).)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ULTRALIGHT BUBBLE CLSD HAHULA (BHULA), KARMIEL (BKRML).)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1583/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1583/26 NOTAMN\nA) LLLL\nE) ULTRALIGHT BUBBLE SHDEROT NORTH (BDRTN) AVBL UP TO 1,000FT AMSL,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ULTRALIGHT BUBBLE SHDEROT NORTH (BDRTN) AVBL UP TO 1,000FT AMSL,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1581/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1581/26 NOTAMN\nA) LLLL\nE) PILOT SHALL FLY AT MNM 500FT AGL WI ULTRALIGHT BUBBLE,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "PILOT SHALL FLY AT MNM 500FT AGL WI ULTRALIGHT BUBBLE,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1580/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1580/26 NOTAMN\nA) LLLL\nE) OPS OF FLT FM EGYPT BOUNDRAY TO 6KM WB REQUIRES",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OPS OF FLT FM EGYPT BOUNDRAY TO 6KM WB REQUIRES",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1579/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1579/26 NOTAMN\nA) LLLL\nE) OPS OF FLT FM JORDAN BOUNDRAY TO 6KM WB REQUIRES",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OPS OF FLT FM JORDAN BOUNDRAY TO 6KM WB REQUIRES",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1578/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1578/26 NOTAMN\nA) LLLL\nE) AN AREA FM SYRIA BOUNDRAY TO 6KM WB CLSD TO ALL DOM FLT,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AN AREA FM SYRIA BOUNDRAY TO 6KM WB CLSD TO ALL DOM FLT,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1577/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1577/26 NOTAMN\nA) LLLL\nE) AN AREA FM LEBANON BOUNDRAY TO 8KM SB CLSD TO ALL DOM FLT,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AN AREA FM LEBANON BOUNDRAY TO 8KM SB CLSD TO ALL DOM FLT,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1576/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1576/26 NOTAMN\nA) LLLL\nE) AN AREA N OF ROAD NR 85 AND ROAD NR 91 CLSD TO ALL DOM FLT,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AN AREA N OF ROAD NR 85 AND ROAD NR 91 CLSD TO ALL DOM FLT,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1575/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1575/26 NOTAMN\nA) LLLL\nE) AN AREA AT GAZA-STRIP BTN FLW PSN CLSD TO ALL FLT, EXC",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AN AREA AT GAZA-STRIP BTN FLW PSN CLSD TO ALL FLT, EXC",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1574/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1574/26 NOTAMN\nA) LLHZ\nE) TWR FREQ TEMPO CHG TO 125.600MHZ,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHZ"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TWR FREQ TEMPO CHG TO 125.600MHZ,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1562/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1562/26 NOTAMN\nA) LLLL\nE) UAS ACT WILL TAKE PLACE AT KFAR-SABA WI LLHZ TRG AREA NR 3,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS ACT WILL TAKE PLACE AT KFAR-SABA WI LLHZ TRG AREA NR 3,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1558/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1558/26 NOTAMN\nA) LLLL\nE) FRNG WILL TAKE PLACE AT RAMAT-BEKA WI LLP14.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "FRNG WILL TAKE PLACE AT RAMAT-BEKA WI LLP14.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1556/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1556/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT LOD TRAIN, FM GND",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT LOD TRAIN, FM GND",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1541/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1541/26 NOTAMN\nA) LLHZ\nE) THE FLW ELEMENTS PENETRATING RWY STRIP",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHZ"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "THE FLW ELEMENTS PENETRATING RWY STRIP",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1529/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1529/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT MAGEN-SHAUL, UP TO 100M AGL.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT MAGEN-SHAUL, UP TO 100M AGL.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1361/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1361/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT ASHDOD, FM GND UP TO 100M AGL.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT ASHDOD, FM GND UP TO 100M AGL.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1281/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1281/26 NOTAMN\nA) LLLL\nE) AN AREA AT GOLANI-INTERCHANGE WI 0.6NM RADIUS CENTRED",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AN AREA AT GOLANI-INTERCHANGE WI 0.6NM RADIUS CENTRED",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1244/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1244/26 NOTAMN\nA) LLLL\nE) LLER TRG AREA HAR BERECH CLSD TO ALL FLT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "LLER TRG AREA HAR BERECH CLSD TO ALL FLT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C0431/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C0431/26 NOTAMN\nA) LLLL\nE) OPS OF UAS/UAV OR MODEL ACFT WI 500M RADIUS CENTERED ON",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OPS OF UAS/UAV OR MODEL ACFT WI 500M RADIUS CENTERED ON",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C0037/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C0037/26 NOTAMN\nA) LLLL\nE) OPS OF HOT-AIR BALLOON AT MOLEDET-CENTER WI 4.5KM RADIUS",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OPS OF HOT-AIR BALLOON AT MOLEDET-CENTER WI 4.5KM RADIUS",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C0032/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C0032/26 NOTAMN\nA) LLLL\nE) AN AREA AT NAURA WI LLMG TRG AREA B-WEST WI 2.2KM RADIUS",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AN AREA AT NAURA WI LLMG TRG AREA B-WEST WI 2.2KM RADIUS",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C0010/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C0010/26 NOTAMN\nA) LLLL\nE) UAS ACT WILL TAKE PLACE AT LATRUN.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS ACT WILL TAKE PLACE AT LATRUN.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C0005/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C0005/26 NOTAMN\nA) LLLL\nE) UAS/UAV ACT WILL TAKE PLACE AT OR-AKIVA INDUSTRY AREA.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT OR-AKIVA INDUSTRY AREA.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0657/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0657/26 NOTAMN\nA) LLBG\nE) DUE CRANE AT SHOHAM RWY 12 CLSD FOR TKOF, RWY 30 CLSD FOR LDG.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "DUE CRANE AT SHOHAM RWY 12 CLSD FOR TKOF, RWY 30 CLSD FOR LDG.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0656/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0656/26 NOTAMN\nA) LLBG\nE) CRANE ERECTED AT SHOAH WI LLBG CTR.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CRANE ERECTED AT SHOAH WI LLBG CTR.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0655/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0655/26 NOTAMN\nA) LLBG\nE) RWY 12 CLSD FOR TKOF ONLY, EXC RWY INT DUE CRANE.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "RWY 12 CLSD FOR TKOF ONLY, EXC RWY INT DUE CRANE.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0654/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0654/26 NOTAMN\nA) LLBG\nE) CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0646/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0646/26 NOTAMN\nA) LLLL\nE) VOR/DME NAT FREQ 112.400MHZ WITHDRAWN FOR MAINT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "VOR/DME NAT FREQ 112.400MHZ WITHDRAWN FOR MAINT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0645/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0645/26 NOTAMN\nA) LLER\nE) ILS RWY 19 C/S RB FREQ 110.500MHZ WITHDRAWN FOR MAINT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ILS RWY 19 C/S RB FREQ 110.500MHZ WITHDRAWN FOR MAINT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0644/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0644/26 NOTAMN\nA) LLER\nE) ILS RWY 19 C/S RB FREQ 110.500MHZ WITHDRAWN FOR MAINT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ILS RWY 19 C/S RB FREQ 110.500MHZ WITHDRAWN FOR MAINT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0643/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0643/26 NOTAMN\nA) LLER\nE) ILS RWY 01 C/S RC FREQ 108.700MHZ WITHDRAWN FOR MAINT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ILS RWY 01 C/S RC FREQ 108.700MHZ WITHDRAWN FOR MAINT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0622/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0622/26 NOTAMN\nA) LLLL\nE) ATS RTE W13 AVBL H24 BTN TAPUZ-JILET-DAFNA BTN 12,000FT-FL325.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ATS RTE W13 AVBL H24 BTN TAPUZ-JILET-DAFNA BTN 12,000FT-FL325.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0616/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0616/26 NOTAMN\nA) LLLL\nE) LLR01 ACTIVATED H24, XNG MERVA NOT AVBL EXC BY ATC.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "LLR01 ACTIVATED H24, XNG MERVA NOT AVBL EXC BY ATC.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0613/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0613/26 NOTAMN\nA) LLLL\nE) ATS RTE L53 BTN TALMI-TAPUZ AND N134 BTN VOLFO-SALAM",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ATS RTE L53 BTN TALMI-TAPUZ AND N134 BTN VOLFO-SALAM",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0612/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0612/26 NOTAMN\nA) LLLL\nE) ATS RTE L53 BTN TALMI-TAPUZ AND N134 BTN VOLFO-SALAM",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ATS RTE L53 BTN TALMI-TAPUZ AND N134 BTN VOLFO-SALAM",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0600/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0600/26 NOTAMN\nA) LLBG\nE) RESTRICTIONS OF LDG 4 ENGINE ACFT WI LLBG TEMPO WITHDRAWN.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "RESTRICTIONS OF LDG 4 ENGINE ACFT WI LLBG TEMPO WITHDRAWN.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0599/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0599/26 NOTAMN\nA) LLBG\nE) NIGHT RESTRICTIONS BTN 0140-0500LMT (2240-0200UTC) TEMPO",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "NIGHT RESTRICTIONS BTN 0140-0500LMT (2240-0200UTC) TEMPO",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0598/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0598/26 NOTAMN\nA) LLBG\nE) CLOSURE FOR LDG BTN 0100-0200LMT (2200-2300UTC) TEMPO WITHDRAWN.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CLOSURE FOR LDG BTN 0100-0200LMT (2200-2300UTC) TEMPO WITHDRAWN.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0596/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0596/26 NOTAMN\nA) LLLL\nE) POSS INTRP TO AIRBORNE GNSS EQPT WI TEL-AVIV FIR.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "POSS INTRP TO AIRBORNE GNSS EQPT WI TEL-AVIV FIR.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0595/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0595/26 NOTAMN\nA) LLLL\nE) MAX ALT ALONG ATS RTE J10 BTN NURIT-SIVAK 18,000FT AMSL.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "MAX ALT ALONG ATS RTE J10 BTN NURIT-SIVAK 18,000FT AMSL.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0592/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0592/26 NOTAMN\nA) LLLL\nE) ATS RTE Q30 CLSD BTN BEXOM-NURIT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ATS RTE Q30 CLSD BTN BEXOM-NURIT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0575/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0575/26 NOTAMN\nA) LLER\nE) OCA(H) FOR ILS RWY 19 CHG TO 500(228) FOR ALL CAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OCA(H) FOR ILS RWY 19 CHG TO 500(228) FOR ALL CAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0572/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0572/26 NOTAMN\nA) LLER\nE) OCA(H) FOR ILS RWY 01 CHG TO 500(248) FOR ALL CAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OCA(H) FOR ILS RWY 01 CHG TO 500(248) FOR ALL CAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0571/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0571/26 NOTAMN\nA) LLBG\nE) RWY 12 CLSD FOR TKOF ONLY, EXC RWY INT DUE CRANE.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "RWY 12 CLSD FOR TKOF ONLY, EXC RWY INT DUE CRANE.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0561/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0561/26 NOTAMN\nA) LLBG\nE) CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0501/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0501/26 NOTAMN\nA) LLBG\nE) OCA(H) FOR ILS RWY 30 CHG TO 500(370) FOR ALL CAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OCA(H) FOR ILS RWY 30 CHG TO 500(370) FOR ALL CAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0500/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0500/26 NOTAMN\nA) LLBG\nE) OCA(H) FOR ILS RWY 26 CHG TO 500(376) FOR ALL CAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OCA(H) FOR ILS RWY 26 CHG TO 500(376) FOR ALL CAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0499/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0499/26 NOTAMN\nA) LLBG\nE) OCA(H) FOR ILS RWY 21 CHG TO 500(366) FOR ALL CAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OCA(H) FOR ILS RWY 21 CHG TO 500(366) FOR ALL CAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0498/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0498/26 NOTAMN\nA) LLBG\nE) OCA(H) FOR ILS RWY 12 CHG TO 500(397) FOR ALL CAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OCA(H) FOR ILS RWY 12 CHG TO 500(397) FOR ALL CAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0497/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0497/26 NOTAMN\nA) LLBG\nE) OCA(H) FOR ILS RWY 08 CHG TO 500(403) FOR ALL CAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "OCA(H) FOR ILS RWY 08 CHG TO 500(403) FOR ALL CAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0475/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0475/26 NOTAMN\nA) LLHA\nE) CRANE ERECTED WI LLHA CTR, FM GND UP TO 26M 89FT AGL,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHA"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CRANE ERECTED WI LLHA CTR, FM GND UP TO 26M 89FT AGL,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0467/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0467/26 NOTAMN\nA) LLER\nE) PAPI RWY 19 EAST U/S.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "PAPI RWY 19 EAST U/S.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0457/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0457/26 NOTAMN\nA) LLBG\nE) MNM CMB GRADIENT CHG AS FLW",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "MNM CMB GRADIENT CHG AS FLW",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0434/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0434/26 NOTAMN\nA) LLNV\nE) TWY Z LOCATED S OF RWY 07/25, MARKED AND LIT AS RWY,",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLNV"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TWY Z LOCATED S OF RWY 07/25, MARKED AND LIT AS RWY,",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0433/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0433/26 NOTAMN\nA) LLNV\nE) RADAR SER NOT AVBL.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLNV"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "RADAR SER NOT AVBL.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0409/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0409/26 NOTAMN\nA) LLHA\nE) ACFT STAND A1 CLSD, DUE WIP.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHA"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ACFT STAND A1 CLSD, DUE WIP.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0354/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0354/26 NOTAMN\nA) LLBG\nE) AD CLSD DUE WIP.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AD CLSD DUE WIP.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0353/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0353/26 NOTAMN\nA) LLBG\nE) AD CLSD DUE WIP.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "AD CLSD DUE WIP.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0281/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0281/26 NOTAMN\nA) LLHA\nE) ACFT STAND J10 CLSD.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHA"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ACFT STAND J10 CLSD.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0117/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0117/26 NOTAMN\nA) LLBG\nE) TWY W4 PCR 1,520/F/C/X/T.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TWY W4 PCR 1,520/F/C/X/T.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0116/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0116/26 NOTAMN\nA) LLBG\nE) RWY 08/26 PCR 880/F/C/X/T.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "RWY 08/26 PCR 880/F/C/X/T.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0056/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0056/26 NOTAMN\nA) LLLL\nE) ATS RTE P42 BTN TAPUZ-MERVA AVBL BY ATC ONLY.",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "ATS RTE P42 BTN TAPUZ-MERVA AVBL BY ATC ONLY.",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1678/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1678/26 NOTAMN\nA) LLLL\nE) TRIGGER NOTAM - NIL AIRAC DOM AIP AMDT WEF 03 SEP 2026.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - NIL AIRAC DOM AIP AMDT WEF 03 SEP 2026.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1647/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1647/26 NOTAMN\nA) LLLL\nE) CHECKLIST",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CHECKLIST",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1467/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1467/26 NOTAMN\nA) LLHD\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHD"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1466/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1466/26 NOTAMN\nA) LLKS\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLKS"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1465/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1465/26 NOTAMN\nA) LLMZ\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLMZ"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1464/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1464/26 NOTAMN\nA) LLFK\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLFK"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1463/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1463/26 NOTAMN\nA) LLEY\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLEY"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1462/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1462/26 NOTAMN\nA) LLBO\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBO"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1461/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1461/26 NOTAMN\nA) LLIB\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLIB"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1460/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1460/26 NOTAMN\nA) LLHA\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHA"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1459/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1459/26 NOTAMN\nA) LLHZ\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHZ"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "C1458/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "C1458/26 NOTAMN\nA) LLLL\nE) TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC DOM AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0630/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0630/26 NOTAMN\nA) LLLL\nE) TRIGGER NOTAM - NIL AIRAC AIP AMDT WEF 03 SEP 2026.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - NIL AIRAC AIP AMDT WEF 03 SEP 2026.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0610/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0610/26 NOTAMN\nA) LLLL\nE) CHECKLIST",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "CHECKLIST",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0537/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0537/26 NOTAMN\nA) LLHA\nE) TRIGGER NOTAM - AIRAC AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHA"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0536/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0536/26 NOTAMN\nA) LLER\nE) TRIGGER NOTAM - AIRAC AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0535/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0535/26 NOTAMN\nA) LLBG\nE) TRIGGER NOTAM - AIRAC AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  },
+  {
+   "id": "A0534/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "A0534/26 NOTAMN\nA) LLLL\nE) TRIGGER NOTAM - AIRAC AIP AMDT 01/26 WEF 06 AUG 2026",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": null,
+   "geo": null,
+   "altitude": null,
+   "valid_from": null,
+   "valid_to": null,
+   "schedule": null,
+   "text": "TRIGGER NOTAM - AIRAC AIP AMDT 01/26 WEF 06 AUG 2026",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [
+    "שורת Q חסרה"
+   ],
+   "floor_ft": null,
+   "low_altitude": false
+  }
+ ]
 }

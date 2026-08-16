@@ -1,11 +1,16 @@
 {
- "generated_at": null,
+ "generated_at": "2026-08-16T21:14:20Z",
  "last_success": null,
- "last_error": null,
+ "last_error": {
+  "at": "2026-08-16T21:14:20Z",
+  "message": "המקור הוחזר בלי דיווחים"
+ },
  "stale": true,
  "source": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Weather",
  "source_name": "רשות שדות התעופה",
- "counts": { "total": 0 },
+ "counts": {
+  "total": 0
+ },
  "reports": [],
  "_comment": "קובץ זרע. יידרס בריצה הראשונה של fetch_weather.py"
 }
