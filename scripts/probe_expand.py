@@ -198,6 +198,11 @@ def main() -> int:
         print(f"    'Valid To' בגוף: {body.count('Valid To')} · 'trMore': {body.count('trMore')}")
         if after and after != baseline:
             print(f"    --- הבלוק:\n    {after[:2200]}")
+        elif len(body) < len(page) // 2:
+            # תשובת delta של ASP.NET AJAX. אם היא שגיאה, היא אומרת את זה
+            # במפורש בפורמט |error|; אחרת יש בה את תוכן הפאנל.
+            flat = re.sub(r"\s+", " ", body)
+            print(f"    --- 2,500 התווים הראשונים של ה-delta:\n    {flat[:2500]}")
     return 0
 
 
