@@ -247,6 +247,37 @@ def probe_iaa() -> None:
         for m in re.finditer(r"^.*(?:requestURL|\.asmx|\.open\s*\(|responseXML|responseText).*$", js, re.M):
             print(f"      {m.group(0).strip()[:190]}")
 
+    # (1) הבקשה שמביאה את ההודעה המלאה — שורת Q וזמני תוקף.
+    js, status, _ = fetch("https://brin.iaa.gov.il/aeroinfo/JS/MoreInfo.js")
+    if js:
+        print(f"\n  --- MoreInfo.js ({status}, {len(js):,} bytes) — כל שורה עם requestURL/asmx:")
+        for m in re.finditer(r"^.*(?:requestURL|asmx|\.open\s*\(|send\().*$", js, re.M):
+            print(f"      {m.group(0).strip()[:200]}")
+
+    # (3) קואורדינטות תחנות, כדי שאפשר יהיה לסמן מזג אוויר על המפה
+    # בלי להמציא מיקומים.
+    js, status, _ = fetch("https://brin.iaa.gov.il/aeroinfo/JS/Locations.js")
+    if js:
+        print(f"\n  --- Locations.js ({status}, {len(js):,} bytes):")
+        print("      " + js[:1500].replace("\n", "\n      "))
+
+    # (4) שכבות רט"ג — 542 שמורות טבע שאין להן קואורדינטות בפמ"ת.
+    for name, url in (
+        ("רט\"ג — דף טיסה", "https://www.parks.org.il/new/tisa/"),
+        ("רת\"א — פרק 11", "https://www.gov.il/he/Departments/Guides/aip?chapterIndex=11"),
+    ):
+        page, status, _ = fetch(url)
+        print(f"\n  --- {name} ({status}, {len(page):,} bytes)" if page else f"\n  --- {name}: נכשל")
+        if not page:
+            continue
+        files = re.findall(r'href="([^"]*\.(?:kml|kmz|zip|geojson|json|shp|gpx)[^"]*)"', page, re.I)
+        print(f"      {len(files)} קישורי שכבה:")
+        for f in dict.fromkeys(files)[:20] if isinstance(files, list) else []:
+            print(f"        {f}")
+        for word in ("kml", "kmz", "geojson", "shapefile", "ArcGIS", "arcgis", "MapServer"):
+            if word.lower() in page.lower():
+                print(f"      הדף מזכיר '{word}'")
+
     # דף מזג האוויר החזיר 0 דיווחים — כנראה מבנה טבלה אחר. מדפיסים את
     # שמות המחלקות של התאים ואת השורה הראשונה בגולמי.
     wx, status, _ = fetch(

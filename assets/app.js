@@ -231,13 +231,57 @@ function renderNotams(notams) {
           color, weight: 3, fillColor: color, fillOpacity: 0.35
         });
 
-    shape.bindPopup(notamCard(n, { forPopup: true }), { maxWidth: 360 });
+    shape.bindPopup(notamPopup(n), { maxWidth: 260, minWidth: 200 });
     shape.addTo(notamLayer);
     if (n.id) notamShapes.set(n.id, shape);
     drawn += 1;
   });
 
   return drawn;
+}
+
+/**
+ * חלונית מפה — מכוונת להיות קטנה.
+ *
+ * הגרסה הראשונה הציגה כאן את הכרטיס המלא, והוא חנק את המפה: בדיוק
+ * ברגע שרוצים לראות היכן האזור יושב ביחס לסביבה, החלונית מכסה אותה.
+ * לכן כאן רק מה שמזהה את הנוטאם, וכפתור שקופץ לכרטיס המלא ברשימה.
+ */
+function notamPopup(n) {
+  const subject = subjectText(n);
+  const rows = [];
+  const from = fmtStamp(n.valid_from, null);
+  if (from) rows.push(['מ־', from]);
+  const until = fmtStamp(n.valid_to, null);
+  if (until) rows.push(['עד', until]);
+  rows.push(['גבהים', altitudeText(n)]);
+
+  const anchor = n.id ? 'notam-' + n.id.replace(/[^A-Za-z0-9]/g, '-') : null;
+  return `
+    <div class="popup">
+      <div class="card__id">${esc(n.id || 'ללא מזהה')}</div>
+      ${subject ? `<p class="popup__subject">${esc(subject)}</p>` : ''}
+      <dl class="kv kv--tight">${rows.map(([k, v]) =>
+        `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      ${anchor ? `<button type="button" class="popup__jump" data-jump="${esc(anchor)}">פרטים מלאים ↓</button>` : ''}
+    </div>`;
+}
+
+/**
+ * קפיצה מהחלונית אל הכרטיס המלא ברשימה, עם הבהוב קצר כדי שהעין
+ * תמצא אותו. מאזין אחד על המסמך — החלוניות נבנות כמחרוזות.
+ */
+function wireJumpButtons() {
+  document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-jump]');
+    if (!button) return;
+    const target = document.getElementById(button.getAttribute('data-jump'));
+    if (!target) return;
+    if (map) map.closePopup();
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target.classList.add('notam-card--found');
+    setTimeout(() => target.classList.remove('notam-card--found'), 2200);
+  });
 }
 
 /* --- כרטיס נוטאם (משותף למפה ולרשימה) --------------------------------- */
@@ -507,6 +551,7 @@ async function init() {
 
   renderLegend(aipCount > 0);
   renderList(notams);
+  wireJumpButtons();
 
   // מזג אוויר — שכבה עצמאית עם מתג משלה, כבויה כברירת מחדל.
   const weather = weatherResult.status === 'fulfilled' ? weatherResult.value : null;

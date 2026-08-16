@@ -566,3 +566,44 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 }
 
 .badge--trunc { color: #92400e; background: #fef3c7; }
+
+/* --- חלונית מפה קומפקטית ---------------------------------------------- */
+/* הגרסה הראשונה הציגה כאן את הכרטיס המלא והוא חנק את המפה. */
+
+.popup { font-size: 0.9rem; }
+
+.popup__subject {
+  margin: 3px 0 6px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.kv--tight {
+  gap: 2px 8px;
+  font-size: 0.84rem;
+  margin: 6px 0 0;
+}
+
+.popup__jump {
+  margin-top: 10px;
+  width: 100%;
+  min-height: 38px;
+  padding: 7px 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--paper-2);
+  background: var(--navy);
+  border: 2px solid var(--navy);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.popup__jump:hover { background: var(--navy-2); }
+
+/* הבהוב קצר על הכרטיס שאליו קפצנו, כדי שהעין תמצא אותו */
+.notam-card--found {
+  outline: 4px solid var(--amber);
+  outline-offset: 3px;
+}
