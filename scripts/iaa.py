@@ -22,9 +22,14 @@
     <td class="Location">LLLL</td>
     <td class="MsgText">E) AN AREA AT TLALIM WI 0.3NM RADIUS ...</td>
 
-**אין בדף שורות Q.** הן נמשכות פר־הודעה משירות נפרד
-(`getMoreMsgInfo`). לכן רשומה מכאן מגיעה בלי גיאומטריה מובנית, ומה
-שאפשר לחלץ מגיע מטקסט ה-E עצמו — בזהירות, ורק כשהניסוח חד־משמעי.
+**אין בדף שורות Q, והטקסט חתוך.** דף הרשימה מציג תצוגה מקדימה של כ-70
+תווים, שנקטעת בדיוק היכן שהקואורדינטות אמורות להופיע:
+
+    AN AREA AT TLALIM WI 0.3NM RADIUS CENTERED ON PSN
+
+ההודעה המלאה נפתחת בלחיצה על ה-`+`. לכן רשומה מכאן מגיעה בלי גיאומטריה,
+מסומנת `expandable` כשיש לה המשך, ומה שאפשר לחלץ מגיע מהטקסט החלקי —
+בזהירות, ורק כשהניסוח חד־משמעי.
 
 ## קידוד
 
@@ -40,15 +45,21 @@ BASE = "https://brin.iaa.gov.il/aeroinfo"
 NOTAM_URL = f"{BASE}/AeroInfo.aspx?msgType=Notam"
 WEATHER_URL = f"{BASE}/AeroInfo.aspx?msgType=Weather"
 
-# שורת טבלה אחת. התאים מרווחים בכבדות ולכן \s* בכל מקום.
-_ROW_RE = re.compile(
-    r'<td[^>]*class="NotamID"[^>]*>\s*(?P<id>[^<]*?)\s*</td>.*?'
-    r'<td[^>]*class="Location"[^>]*>\s*(?P<loc>[^<]*?)\s*</td>.*?'
-    r'<td[^>]*class="MsgText"[^>]*>\s*(?P<text>.*?)\s*</td>',
-    re.S | re.I,
-)
+# שורת טבלה שלמה. חותכים לפי <tr> ואז קוראים את התאים לפי שם המחלקה
+# ולא לפי מיקום — שני הדפים משתמשים בשמות שונים לאותם שדות:
+#
+#   נוטאמים:    NotamID   Location          MsgText
+#   מזג אוויר:  MsgType   weatherLocation   MsgText
+#
+# הניסיון הראשון קיבע את שמות הנוטאמים, ולכן דף מזג האוויר החזיר אפס
+# שורות למרות שהיו בו 33.
+_TR_RE = re.compile(r'<tr[^>]*class="tblBody"[^>]*>(.*?)</tr>', re.S | re.I)
+_TD_RE = re.compile(r'<td[^>]*class="([^"]+)"[^>]*>(.*?)</td>', re.S | re.I)
 
-_MSGNUM_RE = re.compile(r'id="DataList1_MoreImg_(\d+)"')
+_ID_CLASSES = ("NotamID", "MsgType")
+_LOCATION_CLASSES = ("Location", "weatherLocation")
+
+_MSGNUM_RE = re.compile(r'MoreImg_(\d+)')
 _TAG_RE = re.compile(r"<[^>]+>")
 
 # קואורדינטה בתוך טקסט ההודעה, בפורמט הנוטאמי הרגיל: 3155N03518E
@@ -71,19 +82,29 @@ def _text(fragment: str) -> str:
 
 
 def parse_rows(page: str) -> list[dict]:
-    """מחזיר [{id, location, text, msg_num}] לכל שורה בטבלה."""
-    numbers = _MSGNUM_RE.findall(page)
+    """מחזיר [{id, location, text, msg_num, expandable}] לכל שורה בטבלה."""
     rows = []
-    for index, m in enumerate(_ROW_RE.finditer(page)):
-        identifier = _text(m.group("id"))
-        text = _text(m.group("text"))
+    for match in _TR_RE.finditer(page):
+        block = match.group(1)
+        cells = {name: _text(value) for name, value in _TD_RE.findall(block)}
+        if not cells:
+            continue
+
+        identifier = next((cells[c] for c in _ID_CLASSES if cells.get(c)), None)
+        location = next((cells[c] for c in _LOCATION_CLASSES if cells.get(c)), None)
+        text = cells.get("MsgText") or None
         if not identifier and not text:
             continue
+
+        number = _MSGNUM_RE.search(block)
         rows.append({
-            "id": identifier or None,
-            "location": _text(m.group("loc")) or None,
-            "text": text or None,
-            "msg_num": numbers[index] if index < len(numbers) else None,
+            "id": identifier,
+            "location": location,
+            "text": text,
+            "msg_num": number.group(1) if number else None,
+            # שורה עם כפתור הרחבה מחזיקה תוכן נוסף שאינו בדף הרשימה.
+            # הטקסט כאן חתוך, וזה חייב להיאמר ולא להיבלע.
+            "expandable": bool(number),
         })
     return rows
 
@@ -158,6 +179,7 @@ def parse_weather_page(page: str) -> list[dict]:
             "station": row.get("location"),
             "kind": kind.group(1).upper() if kind else None,
             "text": text or None,
+            "truncated": row.get("expandable", False),
             "valid_from": valid.group(1) if valid else None,
             "valid_to": valid.group(2) if valid else None,
         })

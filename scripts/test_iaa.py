@@ -77,6 +77,21 @@ class TestPosition(unittest.TestCase):
         self.assertIsNone(iaa.extract_position(""))
 
 
+class TestTruncation(unittest.TestCase):
+    """הטקסט בדף הרשימה חתוך; שורה עם כפתור הרחבה מסומנת."""
+
+    def test_row_with_expand_button(self):
+        self.assertTrue(iaa.parse_rows(ROW)[0]["expandable"])
+
+    def test_row_without_expand_button(self):
+        page = ('<tr class="tblBody"><td class="MsgType">METAR</td>'
+                '<td class="weatherLocation">LLBG</td><td class="MsgText">SHORT</td></tr>')
+        self.assertFalse(iaa.parse_rows(page)[0]["expandable"])
+
+    def test_weather_report_carries_the_flag(self):
+        self.assertIn("truncated", iaa.parse_weather_page(TestWeather.PAGE)[0])
+
+
 class TestRawNotam(unittest.TestCase):
     def test_builds_parsable_block(self):
         raw = iaa.to_raw_notam(iaa.parse_rows(ROW)[0])
@@ -94,10 +109,13 @@ class TestRawNotam(unittest.TestCase):
 
 
 class TestWeather(unittest.TestCase):
+    """דף מזג האוויר משתמש בשמות מחלקות אחרים לאותם שדות."""
+
     PAGE = '''
     <tr class="tblBody">
-        <td class="NotamID">TAF</td>
-        <td class="Location">LLBG</td>
+        <td class="ImgField">&nbsp;</td>
+        <td class="MsgType">TAF</td>
+        <td class="weatherLocation">LLBG</td>
         <td class="MsgText">TAF BEN GURION, VALID FROM 161800 TILL 171800, WIND 330 DEGREES</td>
     </tr>
     '''
@@ -111,8 +129,16 @@ class TestWeather(unittest.TestCase):
         self.assertEqual(report["valid_from"], "161800")
         self.assertEqual(report["valid_to"], "171800")
 
+    def test_weather_cell_classes_differ_from_notam(self):
+        """הבאג שהיה: המפרסר חיפש NotamID/Location, ודף מזג האוויר
+        משתמש ב-MsgType/weatherLocation — ולכן החזיר אפס שורות."""
+        rows = iaa.parse_rows(self.PAGE)
+        self.assertEqual(rows[0]["id"], "TAF")
+        self.assertEqual(rows[0]["location"], "LLBG")
+
     def test_rows_without_text_are_dropped(self):
-        page = '<tr><td class="NotamID">X</td><td class="Location">Y</td><td class="MsgText"></td></tr>'
+        page = ('<tr class="tblBody"><td class="MsgType">X</td>'
+                '<td class="weatherLocation">Y</td><td class="MsgText"></td></tr>')
         self.assertEqual(iaa.parse_weather_page(page), [])
 
 
