@@ -20,6 +20,7 @@ import math
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
@@ -151,11 +152,98 @@ def intersects_bbox(coords: list) -> bool:
 # ---------------------------------------------------------------------------
 
 
+# gov.il מחזיר 404 לבקשות שלא נראות כמו דפדפן. הכותרות האלה נדרשות.
+_BROWSER_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/pdf,text/html;q=0.9,*/*;q=0.8",
+    "Accept-Language": "he-IL,he;q=0.9,en;q=0.8",
+    "Referer": "https://www.gov.il/he/pages/aip",
+}
+
+AIP_INDEX_PAGES = [
+    "https://www.gov.il/he/pages/aip",
+    "https://www.gov.il/he/departments/guides/aip",
+]
+
+
+def _fetch(url: str, timeout: int = 120) -> bytes:
+    req = urllib.request.Request(url, headers=_BROWSER_HEADERS)
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return resp.read()
+
+
+def _url_variants(url: str) -> list[str]:
+    """גרסאות קידוד שונות לאותה כתובת. הגרש בשם הקובץ הוא מקור צרות."""
+    variants = [url]
+    if "'" in url:
+        variants.append(url.replace("'", "%27"))
+    if "%27" in url:
+        variants.append(url.replace("%27", "'"))
+    if "%D7%90" in url:
+        variants.append(url.replace("%D7%90", "א"))
+    seen: list[str] = []
+    for v in variants:
+        if v not in seen:
+            seen.append(v)
+    return seen
+
+
+def discover_pdf_url() -> str | None:
+    """מאתר את הקישור ל-א-17 מתוך דף המדריך של הפמ"ת.
+
+    נדרש כי שם הקובץ ב-gov.il השתנה בעבר. עדיף לגלות מהמקור מאשר לקבע.
+    """
+    for page in AIP_INDEX_PAGES:
+        try:
+            html = _fetch(page, timeout=60).decode("utf-8", errors="replace")
+        except Exception as exc:
+            print(f"  גילוי: {page} — {exc}", file=sys.stderr)
+            continue
+        links = re.findall(r"""["'(]([^"'()\s]*BlobFolder[^"'()\s]*\.pdf)""", html)
+        print(f"  גילוי: {page} — {len(links)} קישורי PDF", file=sys.stderr)
+        for link in links:
+            decoded = urllib.parse.unquote(link)
+            if re.search(r"א\s*'?\s*-?\s*17", decoded):
+                full = link if link.startswith("http") else "https://www.gov.il" + link
+                print(f"  נמצא: {full}", file=sys.stderr)
+                return full
+    return None
+
+
 def download_pdf(url: str, dest: str) -> str:
-    req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-    with urllib.request.urlopen(req, timeout=120) as resp, open(dest, "wb") as fh:
-        fh.write(resp.read())
-    return dest
+    """מוריד את ה-PDF. מנסה וריאנטים של קידוד, ואז גילוי מדף המדריך."""
+    attempts = _url_variants(url)
+    for candidate in attempts:
+        try:
+            data = _fetch(candidate)
+        except Exception as exc:
+            print(f"  {getattr(exc, 'code', '')} {candidate} — {exc}", file=sys.stderr)
+            continue
+        if data[:4] != b"%PDF":
+            print(f"  לא PDF ({len(data)} בתים): {candidate}", file=sys.stderr)
+            continue
+        with open(dest, "wb") as fh:
+            fh.write(data)
+        print(f"  הורד {len(data):,} בתים מ-{candidate}", file=sys.stderr)
+        return dest
+
+    print("הכתובת הישירה נכשלה — מנסה לגלות מדף המדריך.", file=sys.stderr)
+    found = discover_pdf_url()
+    if found:
+        data = _fetch(found)
+        if data[:4] == b"%PDF":
+            with open(dest, "wb") as fh:
+                fh.write(data)
+            print(f"  הורד {len(data):,} בתים מ-{found}", file=sys.stderr)
+            return dest
+
+    raise RuntimeError(
+        "לא הצלחתי להוריד את ה-PDF של הפמ\"ת. "
+        "הורידו ידנית מ-https://www.gov.il/he/pages/aip והריצו עם --pdf."
+    )
 
 
 def pdf_pages(path: str) -> list[str]:

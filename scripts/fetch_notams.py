@@ -21,6 +21,7 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
@@ -39,8 +40,16 @@ USER_AGENT = (
     "binyamin-airspace/1.0 (+https://github.com/nadaval56/airspace) "
     "static site data fetcher"
 )
-TIMEOUT = 30
+TIMEOUT = 20
 RETRIES = 3
+# תקרה גלובלית. עדיף לחזור עם חלק מהמקורות מאשר להיתקע — ריצה שעתית
+# שנמשכת חצי שעה חופפת את עצמה ושורפת דקות Actions.
+DEADLINE_SECONDS = 240
+_started_at = time.monotonic()
+
+
+def _time_left() -> float:
+    return DEADLINE_SECONDS - (time.monotonic() - _started_at)
 
 # כותרת נוטאם — משמשת לחיתוך גוש טקסט לרשומות בודדות.
 _NOTAM_HEADER_RE = re.compile(r"(?m)^\s*([A-Z]\d{1,4}/\d{2}\s+NOTAM[NRC]\b)")
@@ -54,9 +63,15 @@ _TAG_RE = re.compile(r"<(script|style)\b.*?</\1>", re.S | re.I)
 
 
 def http_get(url: str, accept: str = "*/*") -> tuple[str, str]:
-    """מחזיר (גוף, content-type). זורק אחרי RETRIES ניסיונות עם backoff."""
+    """מחזיר (גוף, content-type).
+
+    חוזר על הניסיון רק כשיש סיכוי שזה יעזור: תקלת רשת, timeout או 5xx.
+    404 או 403 לא ישתנו בניסיון שני — חזרה עליהם רק מבזבזת את התקציב.
+    """
     last_exc: Exception | None = None
     for attempt in range(RETRIES):
+        if _time_left() <= 0:
+            raise RuntimeError(f"{url} — חריגה מתקרת הזמן")
         try:
             req = urllib.request.Request(
                 url,
@@ -66,14 +81,19 @@ def http_get(url: str, accept: str = "*/*") -> tuple[str, str]:
                     "Accept-Language": "en",
                 },
             )
-            with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            timeout = max(5, min(TIMEOUT, _time_left()))
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
                 ctype = resp.headers.get("Content-Type", "")
                 body = resp.read().decode("utf-8", errors="replace")
                 return body, ctype
-        except (urllib.error.URLError, urllib.error.HTTPError, OSError) as exc:
+        except urllib.error.HTTPError as exc:
+            if exc.code < 500:
+                raise RuntimeError(f"{url} — HTTP {exc.code}") from exc
             last_exc = exc
-            if attempt < RETRIES - 1:
-                time.sleep(2 ** (attempt + 1))
+        except (urllib.error.URLError, OSError) as exc:
+            last_exc = exc
+        if attempt < RETRIES - 1:
+            time.sleep(min(2 ** (attempt + 1), max(0, _time_left())))
     raise RuntimeError(f"{url} — {last_exc}")
 
 
@@ -189,40 +209,56 @@ def extract_from_response(body: str, ctype: str) -> list[str]:
 # את הדף.
 
 
+_NOTAMS_ONLINE_BASE = "https://notams.online"
+_NOTAMS_ONLINE_CANDIDATES = [
+    "{base}/api/icao/{icao}",
+    "{base}/api/notams/{icao}",
+    "{base}/api/v1/notams/{icao}",
+    "{base}/icao/{icao}?format=json",
+    "{base}/data/{icao}.json",
+]
+# תבנית ה-endpoint שנמצאה בפועל, כדי לא לגשש מחדש לכל ICAO.
+# None = טרם גיששנו, "" = אין endpoint, נופלים ל-HTML.
+_notams_online_pattern: str | None = None
+
+
 def source_notams_online(icao: str) -> tuple[list[str], str]:
     """notams.online — המקור הראשי לפי המפרט.
 
-    התוכן נטען דינמית, אז מנסים קודם endpoint שמחזיר JSON. אם אין —
-    נופלים לפרסור ה-HTML של הדף עצמו.
+    התוכן נטען דינמית, אז מגששים אחר endpoint שמחזיר JSON. הגישוש נעשה
+    פעם אחת בלבד; מה שנמצא (או לא) חל על שאר ה-ICAO.
     """
-    base = "https://notams.online"
-    candidates = [
-        f"{base}/api/icao/{icao}",
-        f"{base}/api/notams/{icao}",
-        f"{base}/api/v1/notams/{icao}",
-        f"{base}/icao/{icao}?format=json",
-        f"{base}/data/{icao}.json",
-    ]
-    for url in candidates:
-        try:
-            body, ctype = http_get(url, accept="application/json")
-        except RuntimeError:
-            continue
-        blocks = extract_from_response(body, ctype)
-        if blocks:
-            return blocks, url
+    global _notams_online_pattern
 
-    url = f"{base}/icao/{icao}"
+    if _notams_online_pattern is None:
+        _notams_online_pattern = ""
+        for pattern in _NOTAMS_ONLINE_CANDIDATES:
+            url = pattern.format(base=_NOTAMS_ONLINE_BASE, icao=icao)
+            try:
+                body, ctype = http_get(url, accept="application/json")
+            except RuntimeError:
+                continue
+            blocks = extract_from_response(body, ctype)
+            if blocks:
+                _notams_online_pattern = pattern
+                print(f"  endpoint של notams.online: {pattern}", file=sys.stderr)
+                return blocks, url
+
+    if _notams_online_pattern:
+        url = _notams_online_pattern.format(base=_NOTAMS_ONLINE_BASE, icao=icao)
+        body, ctype = http_get(url, accept="application/json")
+        return extract_from_response(body, ctype), url
+
+    url = f"{_NOTAMS_ONLINE_BASE}/icao/{icao}"
     body, ctype = http_get(url, accept="text/html")
     return extract_from_response(body, ctype), url
 
 
 def source_autorouter(icao: str) -> tuple[list[str], str]:
     """autorouter.aero — API ציבורי שמחזיר JSON, בלי הרשמה."""
-    url = (
-        "https://api.autorouter.aero/v1.0/notam"
-        f'?itemas=["{icao}"]&offset=0&limit=200'
-    )
+    # הסוגריים והמרכאות בפרמטר חייבים קידוד — בלעדיו השרת מחזיר שגיאה.
+    itemas = urllib.parse.quote(f'["{icao}"]', safe="")
+    url = f"https://api.autorouter.aero/v1.0/notam?itemas={itemas}&offset=0&limit=200"
     body, ctype = http_get(url, accept="application/json")
     return extract_from_response(body, ctype), url
 
@@ -258,6 +294,10 @@ def collect(icaos: list[str]) -> tuple[list[dict], list[dict]]:
     for source_name, fetch in SOURCES:
         for icao in icaos:
             entry = {"source": source_name, "icao": icao, "ok": False, "count": 0}
+            if _time_left() <= 0:
+                entry["error"] = "דולג — חריגה מתקרת הזמן"
+                report.append(entry)
+                continue
             try:
                 blocks, url = fetch(icao)
                 entry["url"] = url
@@ -328,14 +368,20 @@ def main() -> int:
         print(f"משיכה עבור: {', '.join(icaos)}", file=sys.stderr)
         records, report = collect(icaos)
 
-    any_source_ok = any(entry["ok"] for entry in report)
     notams = sort_for_display(dedupe_and_resolve(records))
+
+    # מקור שמחזיר 200 ריק אינו הצלחה. במרחב LLLL יש תמיד נוטאמים פעילים,
+    # אז אפס רשומות מכל המקורות פירושו שהגרידה נשברה — לא ששמי המרחב פנויים.
+    # הצגת "0 נוטאמים" כעובדה היא בדיוק סוג השקר שהכלי הזה אמור למנוע.
+    any_source_ok = any(entry["ok"] and entry.get("count") for entry in report)
 
     if not any_source_ok:
         # כל המקורות נפלו. שומרים את הנתונים הישנים ומסמנים אותם כישנים —
         # נתון ישן עם חותמת זמן כנה עדיף על דף ריק.
         message = "; ".join(
-            f"{e['source']}/{e['icao']}: {e.get('error', 'unknown')}" for e in report
+            f"{e['source']}/{e['icao']}: "
+            f"{e.get('error') or ('החזיר 200 אך ללא נוטאמים' if e['ok'] else 'unknown')}"
+            for e in report
         )[:1000]
         if existing:
             payload = dict(existing)
