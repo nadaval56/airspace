@@ -22,14 +22,16 @@
     <td class="Location">LLLL</td>
     <td class="MsgText">E) AN AREA AT TLALIM WI 0.3NM RADIUS ...</td>
 
-**אין בדף שורות Q, והטקסט חתוך.** דף הרשימה מציג תצוגה מקדימה של כ-70
-תווים, שנקטעת בדיוק היכן שהקואורדינטות אמורות להופיע:
+**הודעה ארוכה נשברת על פני כמה שורות טבלה**, ורק לראשונה יש מזהה. מי
+שמסנן שורות בלי מזהה זורק את המשך ההודעה — ואיתו את הקואורדינטות,
+שיושבות בדיוק אחרי המילה שבה השורה נגמרת:
 
-    AN AREA AT TLALIM WI 0.3NM RADIUS CENTERED ON PSN
+    AN AREA AT TLALIM WI 0.3NM RADIUS CENTERED ON PSN     ← שורה 1
+    3055N03446E IS CLSD                                    ← שורה 2
 
-ההודעה המלאה נפתחת בלחיצה על ה-`+`. לכן רשומה מכאן מגיעה בלי גיאומטריה,
-מסומנת `expandable` כשיש לה המשך, ומה שאפשר לחלץ מגיע מהטקסט החלקי —
-בזהירות, ורק כשהניסוח חד־משמעי.
+`merge_continuations` מאחד אותן. **אין בדף שורות Q** — הן נפתחות
+בלחיצה על ה-`+` — ולכן הגיאומטריה מגיעה ממה שאפשר לחלץ מטקסט ההודעה,
+בזהירות ורק כשהניסוח חד־משמעי.
 
 ## קידוד
 
@@ -102,8 +104,8 @@ def parse_rows(page: str) -> list[dict]:
             "location": location,
             "text": text,
             "msg_num": number.group(1) if number else None,
-            # שורה עם כפתור הרחבה מחזיקה תוכן נוסף שאינו בדף הרשימה.
-            # הטקסט כאן חתוך, וזה חייב להיאמר ולא להיבלע.
+            # כפתור ההרחבה מוביל לפרטים נוספים באתר (שורת Q, זמני תוקף).
+            # הטקסט עצמו שלם אחרי איחוד שורות ההמשך.
             "expandable": bool(number),
         })
     return rows
@@ -153,9 +155,33 @@ def to_raw_notam(row: dict) -> str:
     return "\n".join(parts)
 
 
+def merge_continuations(rows: list[dict]) -> list[dict]:
+    """מאחד שורות המשך אל ההודעה שלהן.
+
+    הודעה ארוכה נשברת על פני כמה שורות טבלה, ורק לראשונה יש מזהה:
+
+        TAF BEN GURION, VALID FROM 161800 TILL 171800, WIND 330 DEGREES, 7
+        KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5
+
+    הניסיון הראשון סינן שורות בלי מזהה, ובכך זרק את המשך ההודעה — ואיתו
+    את הקואורדינטות, שיושבות בדיוק אחרי המילה שבה השורה נגמרת. זו הסיבה
+    שאפס נוטאמים מופו, ולא קיטוע מצד המקור.
+    """
+    merged: list[dict] = []
+    for row in rows:
+        if row.get("id") or not merged:
+            merged.append(dict(row))
+            continue
+        previous = merged[-1]
+        extra = row.get("text")
+        if extra:
+            previous["text"] = f"{previous.get('text') or ''} {extra}".strip()
+    return merged
+
+
 def parse_notam_page(page: str) -> list[dict]:
-    """שורות הנוטאמים מדף הרשימה."""
-    return [row for row in parse_rows(page) if row.get("id")]
+    """שורות הנוטאמים מדף הרשימה, כולל שורות ההמשך."""
+    return [row for row in merge_continuations(parse_rows(page)) if row.get("id")]
 
 
 # ---------------------------------------------------------------------------
@@ -168,9 +194,12 @@ _VALID_RE = re.compile(r"VALID\s+FROM\s+(\d{6})\s+TILL\s+(\d{6})", re.I)
 
 
 def parse_weather_page(page: str) -> list[dict]:
-    """הודעות מזג אוויר. אותו מבנה טבלה, תוכן אחר."""
+    """הודעות מזג אוויר. אותו מבנה טבלה, תוכן אחר.
+
+    TAF בשפה פתוחה נשבר על פני כמה שורות, ולכן אותו איחוד כמו בנוטאמים.
+    """
     reports = []
-    for row in parse_rows(page):
+    for row in merge_continuations(parse_rows(page)):
         text = row.get("text") or ""
         kind = _WX_KIND_RE.search(text) or _WX_KIND_RE.search(row.get("id") or "")
         valid = _VALID_RE.search(text)
