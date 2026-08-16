@@ -1,0 +1,478 @@
+/* ---------------------------------------------------------------------------
+   מגבלות מרחב אווירי — מטה בנימין
+   כיוון עיצובי: מפה אווירית בשמש. ניגודיות גבוהה, מסגרות עבות במקום צללים
+   עדינים, טיפוגרפיה כבדה. שום טקסט אפור־בהיר, שום גוון פסטל — הדף נקרא
+   בטלפון בחוץ באמצע היום.
+   מובייל־פירסט, RTL.
+--------------------------------------------------------------------------- */
+
+:root {
+  --ink:        #10161d;
+  --ink-soft:   #3b4754;
+  --paper:      #f6f3ec;   /* נייר חם — פחות סנוור מלבן טהור */
+  --paper-2:    #fffdf8;
+  --navy:       #1c2b3a;
+  --navy-2:     #26394c;
+  --rule:       #c3bcae;
+  --rule-hard:  #10161d;
+
+  --amber:      #e8b100;
+  --alert:      #b3151b;
+  --alert-bg:   #fdecec;
+
+  /* צבעי שכבות — נבחרו להיות מובחנים גם בשמש וגם בעיוורון צבעים אדום/ירוק */
+  --z-prohibited: #b3151b;   /* אסור */
+  --z-restricted: #c2410c;   /* מוגבל */
+  --z-danger:     #a16207;   /* מסוכן */
+  --z-uav:        #6b21a8;   /* אסור לכטב"ם */
+  --z-other:      #334155;
+
+  --n-low:        #d1006e;   /* נוטאם שרצפתו מתחת ל-3,000 רגל */
+  --n-high:       #0f6fa8;   /* נוטאם גבוה */
+
+  --tap: 44px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Segoe UI", "Noto Sans Hebrew", "Arial Hebrew", Arial, system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+a { color: #0b5d8f; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* --- כותרת ------------------------------------------------------------ */
+
+.masthead {
+  background: var(--navy);
+  color: var(--paper-2);
+  padding: 18px 0 20px;
+  border-bottom: 4px solid var(--amber);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.masthead h1 {
+  margin: 2px 0 14px;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* חותמת הזמן — בגודל שאי אפשר לפספס */
+.freshness {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 10px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--navy-2);
+  border: 2px solid rgba(255, 255, 255, 0.16);
+}
+
+.freshness__label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #b9c6d4;
+}
+
+.freshness__value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.freshness__note {
+  flex-basis: 100%;
+  font-size: 0.85rem;
+  color: #cfd9e3;
+}
+
+.freshness--stale {
+  background: #4a1113;
+  border-color: #ff6b6b;
+}
+.freshness--stale .freshness__value { color: #ffd9d9; }
+.freshness--stale .freshness__label,
+.freshness--stale .freshness__note { color: #ffc2c2; }
+
+/* --- באנר NFOU -------------------------------------------------------- */
+
+.nfou {
+  background: #2b0b0d;
+  color: #ffe9e9;
+  border-bottom: 3px solid var(--alert);
+  padding: 14px 0;
+}
+
+.nfou__main {
+  margin: 0 0 6px;
+  font-size: 1.02rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.nfou__sub {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #f3c9c9;
+}
+
+.nfou__sub strong { color: #fff; }
+
+/* --- התראות ----------------------------------------------------------- */
+
+#alerts:empty { display: none; }
+
+.alert {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 2px solid var(--alert);
+  border-inline-start-width: 8px;
+  background: var(--alert-bg);
+  color: #4a0c0f;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.alert--warn {
+  border-color: #b45309;
+  background: #fef4e2;
+  color: #4a2c04;
+}
+
+/* --- מפה -------------------------------------------------------------- */
+
+.map-section { margin-top: 16px; }
+
+#map {
+  height: 62vh;
+  min-height: 340px;
+  background: #e4e0d6;
+  border-block: 3px solid var(--rule-hard);
+}
+
+.map-tools {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-block: 16px;
+}
+
+.layers {
+  margin: 0;
+  padding: 12px 14px 14px;
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper-2);
+}
+
+.layers legend {
+  padding-inline: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: var(--tap);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.switch input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--navy);
+  flex: none;
+}
+
+.switch__text { flex: 1; }
+
+.switch__count {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+  background: #e9e4d8;
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.legend__item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.legend__swatch {
+  width: 22px;
+  height: 14px;
+  border-radius: 3px;
+  flex: none;
+  border: 2px solid currentColor;
+}
+
+.legend__swatch--dashed { border-style: dashed; background: transparent !important; }
+
+/* --- חלונית מידע על המפה --------------------------------------------- */
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  border: 2px solid var(--rule-hard);
+  background: var(--paper-2);
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  direction: rtl;
+  text-align: right;
+  max-height: 55vh;
+  overflow-y: auto;
+}
+
+/* --- כרטיס נוטאם (משותף למפה ולרשימה) -------------------------------- */
+
+.card__id {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.card__title {
+  margin: 4px 0 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.badge {
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  white-space: nowrap;
+}
+
+.badge--low   { color: var(--n-low); background: #ffe9f4; }
+.badge--high  { color: var(--n-high); background: #e4f1f9; }
+.badge--fir   { color: #7c2d12; background: #fdece0; }
+.badge--nogeo { color: #3f3f46; background: #ececec; }
+.badge--admin { color: #3f3f46; background: #ececec; }
+.badge--perm  { color: #14532d; background: #e3f4e8; }
+.badge--est   { color: #713f12; background: #fdf3d7; }
+.badge--cancel{ color: #7f1d1d; background: #fde8e8; }
+
+.kv {
+  margin: 8px 0 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 12px;
+  font-size: 0.9rem;
+}
+
+.kv dt { font-weight: 800; color: var(--ink-soft); }
+.kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+.card__text {
+  margin: 10px 0 0;
+  padding: 10px 12px;
+  background: #efeade;
+  border-inline-start: 4px solid var(--navy);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.93rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  /* טקסט הנוטאם באנגלית — נכפה כיוון כדי שלא יישבר בתצוגת RTL */
+  direction: ltr;
+  text-align: left;
+}
+
+.raw {
+  margin-top: 10px;
+  border: 2px solid var(--rule);
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.raw > summary {
+  padding: 9px 12px;
+  min-height: var(--tap);
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.raw pre {
+  margin: 0;
+  padding: 0 12px 12px;
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+  direction: ltr;
+  text-align: left;
+}
+
+/* --- רשימה ------------------------------------------------------------ */
+
+.list-section { padding-block: 8px 32px; }
+
+.list-head { border-top: 3px solid var(--rule-hard); padding-top: 16px; }
+
+.list-head h2 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.list-sub {
+  margin: 4px 0 0;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.notam-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.notam-card {
+  padding: 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  /* פס צד בצבע הסיווג — סורקים את הרשימה בעין, לא קוראים אותה */
+  border-inline-start: 8px solid var(--z-other);
+  scroll-margin-top: 12px;
+}
+
+.notam-card--low   { border-inline-start-color: var(--n-low); }
+.notam-card--high  { border-inline-start-color: var(--n-high); }
+.notam-card--admin { border-inline-start-color: #9ca3af; background: #f2f0ea; }
+
+.notam-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.locate {
+  min-height: 36px;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.83rem;
+  font-weight: 800;
+  color: var(--paper-2);
+  background: var(--navy);
+  border: 2px solid var(--navy);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.locate:hover { background: var(--navy-2); }
+
+.empty {
+  padding: 24px 16px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--ink-soft);
+  border: 2px dashed var(--rule);
+  border-radius: 8px;
+}
+
+/* --- תחתית ------------------------------------------------------------ */
+
+.site-footer {
+  border-top: 3px solid var(--rule-hard);
+  background: var(--navy);
+  color: #cfd9e3;
+  padding: 20px 0 28px;
+  font-size: 0.88rem;
+}
+
+.site-footer p { margin: 0 0 6px; }
+.site-footer a { color: var(--amber); }
+
+/* --- מסכים גדולים ------------------------------------------------------ */
+
+@media (min-width: 720px) {
+  body { font-size: 18px; }
+  .masthead h1 { font-size: 2.1rem; }
+  #map { height: 68vh; }
+  .map-tools { flex-direction: row; align-items: flex-start; justify-content: space-between; }
+  .layers { flex: 0 0 320px; }
+  .legend { flex: 1; align-content: flex-start; padding-top: 8px; }
+  #map { border-radius: 10px; border: 3px solid var(--rule-hard); }
+  .map-section { padding-inline: 16px; max-width: 960px; margin-inline: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,73 @@
+name: בניית שכבת הפמ"ת
+
+# עבודה חד־פעמית ברובה — מופעלת ידנית, לא בתזמון.
+# הפמ"ת מתעדכן במחזורי AIRAC (כל 28 יום), אז הרצה מחדש נדרשת רק אחרי עדכון.
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'dump = הדפסת טקסט ה-PDF לבדיקה, build = חילוץ וכתיבת GeoJSON'
+        type: choice
+        options: [dump, build]
+        default: dump
+      pages:
+        description: 'טווח עמודים, למשל 40-60. ריק = כל המסמך'
+        type: string
+        default: ''
+      url:
+        description: 'כתובת ה-PDF (ריק = ברירת המחדל בסקריפט)'
+        type: string
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: התקנת תלויות
+        run: pip install --disable-pip-version-check -r requirements.txt
+
+      - name: הרצה
+        # ה-inputs מועברים דרך env ולא מוזרקים לתוך ה-shell.
+        env:
+          MODE: ${{ inputs.mode }}
+          PAGES: ${{ inputs.pages }}
+          PDF_URL: ${{ inputs.url }}
+        run: |
+          set -euo pipefail
+          args=()
+          if [ -n "$PAGES" ];       then args+=(--pages "$PAGES"); fi
+          if [ -n "$PDF_URL" ];     then args+=(--url "$PDF_URL"); fi
+          if [ "$MODE" = "dump" ];  then args+=(--dump-text); fi
+          python scripts/build_aip_geojson.py "${args[@]}"
+
+      - name: שמירת ה-PDF כארטיפקט
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aip-a17-pdf
+          path: aip-a17.pdf
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: קומיט אם השתנה
+        if: inputs.mode == 'build'
+        run: |
+          if git diff --quiet -- data/aip-permanent.geojson; then
+            echo "אין שינוי בשכבה."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/aip-permanent.geojson
+          git commit -m "עדכון שכבת הפמ\"ת מנספחי א-17"
+          git push

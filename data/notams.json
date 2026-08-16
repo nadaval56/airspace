@@ -1,0 +1,19 @@
+{
+ "generated_at": null,
+ "last_success": null,
+ "last_error": null,
+ "stale": true,
+ "fir": "LLLL",
+ "airports": ["LLBG", "LLHA", "LLIB", "LLRD", "LLHZ"],
+ "sources": [],
+ "counts": {
+  "total": 0,
+  "mapped": 0,
+  "fir_wide": 0,
+  "no_geo": 0,
+  "low_altitude": 0,
+  "administrative": 0
+ },
+ "notams": [],
+ "_comment": "קובץ זרע. יידרס בריצה הראשונה של .github/workflows/fetch-notams.yml"
+}

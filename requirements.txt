@@ -1,0 +1,7 @@
+# משיכת הנוטאמים עצמה עובדת על ספריית התקן בלבד.
+# beautifulsoup4 משפר את פרסור ה-HTML כשמקור לא מחזיר JSON; בלעדיו
+# scripts/fetch_notams.py נופל לרג'קס ועדיין עובד.
+beautifulsoup4>=4.12
+
+# נדרש רק ל-scripts/build_aip_geojson.py (חילוץ נספחי הפמ"ת מה-PDF).
+pdfplumber>=0.11
