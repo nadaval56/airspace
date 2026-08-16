@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="מפת מגבלות מרחב אווירי באזור מטה בנימין — אזורים אסורים, מוגבלים ומסוכנים מתוך הפמ&quot;ת, ונוטאמים פעילים של מרחב תל אביב.">
+<meta name="theme-color" content="#1c2b3a">
+<title>מגבלות מרחב אווירי — מטה בנימין</title>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231c2b3a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23e8b100' stroke-width='2.5' stroke-dasharray='4 3'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%23e8b100'/%3E%3C/svg%3E">
+
+<!-- Leaflet מגיע מתוך המאגר ולא מ-CDN: כלי שדה לא צריך תלות ברשת צד־שלישי. -->
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">מרחב אווירי — מטה בנימין</p>
+    <h1>מה מוגבל עכשיו</h1>
+
+    <!-- חותמת הזמן היא הדבר הראשון שצריך להיקלט. אם היא ישנה, כל השאר חשוד. -->
+    <div id="freshness" class="freshness freshness--loading" role="status" aria-live="polite">
+      <span class="freshness__label">עדכון אחרון</span>
+      <strong class="freshness__value" id="freshness-value">טוען…</strong>
+      <span class="freshness__note" id="freshness-note"></span>
+    </div>
+  </div>
+</header>
+
+<!-- באנר NFOU — קבוע, לא נסגר, לא מתקפל. -->
+<aside class="nfou" role="note">
+  <div class="wrap">
+    <p class="nfou__main">מידע זה אינו מיועד לשימוש מבצעי. אינו מחליף תדריך רשמי או תיאום מול הגורמים המוסמכים.</p>
+    <p class="nfou__sub">הכלי מסתמך על מקור צד־שלישי לא רשמי. פעילות מקומית בגובה נמוך לרוב אינה מופצת בערוץ הבינלאומי כלל — <strong>היעדר נוטאם כאן אינו ראיה להיעדר מגבלה.</strong></p>
+  </div>
+</aside>
+
+<div id="alerts" class="wrap" role="alert"></div>
+
+<main>
+  <section class="map-section" aria-label="מפה">
+    <div id="map"></div>
+
+    <div class="map-tools wrap">
+      <fieldset class="layers">
+        <legend>שכבות</legend>
+        <label class="switch">
+          <input type="checkbox" id="toggle-aip" checked>
+          <span class="switch__text">מגבלות קבועות (פמ"ת)</span>
+          <span class="switch__count" id="count-aip">—</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="toggle-notam" checked>
+          <span class="switch__text">מגבלות זמניות (נוטאם)</span>
+          <span class="switch__count" id="count-notam">—</span>
+        </label>
+      </fieldset>
+
+      <div class="legend" id="legend" aria-label="מקרא"></div>
+    </div>
+  </section>
+
+  <section class="list-section wrap" aria-labelledby="list-heading">
+    <div class="list-head">
+      <h2 id="list-heading">כל הנוטאמים הפעילים</h2>
+      <p class="list-sub" id="list-sub">כולל נוטאמים ללא מיקום גיאוגרפי. ממוין לפי זמן תחילת תוקף, החדש למעלה.</p>
+    </div>
+    <ol class="notam-list" id="notam-list"></ol>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>הנתונים נמשכים אוטומטית אחת לשעה ונשמרים בתוך המאגר. הדף אינו פונה למקור חיצוני בזמן טעינה.</p>
+    <p><a href="https://github.com/nadaval56/airspace">קוד המקור והסבר על מגבלות הנתונים</a></p>
+  </div>
+</footer>
+
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

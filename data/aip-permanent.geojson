@@ -1,0 +1,13 @@
+{
+ "type": "FeatureCollection",
+ "metadata": {
+  "title": "מגבלות קבועות — פמ\"ת פרק א-17, נספחים ב' ו-ג'",
+  "source_pdf": "https://www.gov.il/BlobFolder/guide/aip/he/aip_א'-17.pdf",
+  "bbox": [35.0, 31.7, 35.4, 32.1],
+  "extracted_at": null,
+  "status": "empty",
+  "status_he": "הנספחים טרם חולצו מקובץ הפמ\"ת. הריצו את .github/workflows/build-aip.yml כדי לייצר את השכבה.",
+  "note": "לא הוזנו כאן קואורדינטות שלא חולצו ישירות מהמקור הרשמי. אזור מגבלה שגוי מסוכן יותר מאזור חסר."
+ },
+ "features": []
+}
