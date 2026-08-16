@@ -32,6 +32,13 @@ jobs:
         run: python -m unittest discover -s scripts -p 'test_*.py'
 
       - name: משיכה ופרסור
+        # מקור שאין לו אישורים מדלג על עצמו בשקט ולא נחשב ככשל.
+        # הגדרת הסודות: Settings → Secrets and variables → Actions.
+        env:
+          FAA_CLIENT_ID: ${{ secrets.FAA_CLIENT_ID }}
+          FAA_CLIENT_SECRET: ${{ secrets.FAA_CLIENT_SECRET }}
+          AUTOROUTER_CLIENT_ID: ${{ secrets.AUTOROUTER_CLIENT_ID }}
+          AUTOROUTER_CLIENT_SECRET: ${{ secrets.AUTOROUTER_CLIENT_SECRET }}
         run: python scripts/fetch_notams.py
 
       - name: קומיט אם השתנה
