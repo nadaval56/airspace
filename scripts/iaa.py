@@ -188,9 +188,51 @@ def parse_notam_page(page: str) -> list[dict]:
 # מזג אוויר
 # ---------------------------------------------------------------------------
 
-_WX_KIND_RE = re.compile(r"\b(METAR|SPECI|TAF)\b", re.I)
+_WX_KIND_RE = re.compile(r"\b(METAR|SPECI|TAF|AIRMET|SIGMET)\b", re.I)
 # "VALID FROM 161800 TILL 171800" — DDHHMM
 _VALID_RE = re.compile(r"VALID\s+FROM\s+(\d{6})\s+TILL\s+(\d{6})", re.I)
+
+# AIRMET ו-SIGMET הם היחידים מבין הודעות מזג האוויר שנושאים **גיאומטריה
+# מפורשת**. METAR ו-TAF מדווחים על תחנה — נקודה — ומיקום התחנה אינו
+# מופיע בשום מקום בדף, ולכן הם לא מסומנים על המפה. אבל אזור ה-AIRMET
+# רשום בטקסט עצמו כרשימת קודקודים:
+#
+#   LLLL AIRMET 4 VALID 161900/162300 LLBD- LLLL TEL AVIV FIR MT OBSC
+#   FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426
+#   - N3321 E03548 STNR INTSF=
+#
+# זה פוליגון סגור, מהמקור הרשמי, בלי שום ניחוש. הוא נעצר בסימן `=` או
+# במילת מצב כמו STNR/MOV/NC — ולכן חותכים שם ולא ממשיכים לבלוע מספרים.
+_WX_AREA_RE = re.compile(r"\bWI\b(.*?)(?:\b(?:STNR|MOV|NC|INTSF|WKN|NO\s+SIG)\b|=|$)", re.I | re.S)
+_WX_POINT_RE = re.compile(r"\b([NS])(\d{2})(\d{2})(\d{2})?\s+([EW])(\d{3})(\d{2})(\d{2})?\b")
+
+
+def _dms(degrees: str, minutes: str, seconds: str | None, hemisphere: str) -> float:
+    value = int(degrees) + int(minutes) / 60.0 + (int(seconds) / 3600.0 if seconds else 0.0)
+    return -value if hemisphere in ("S", "W") else value
+
+
+def extract_area(text: str) -> list[list[float]] | None:
+    """טבעת [lon, lat] מתוך סעיף ה-WI של AIRMET/SIGMET.
+
+    מחזיר None אם אין מספיק קודקודים לשטח. פחות משלוש נקודות אינו
+    פוליגון, ואזור מזג אוויר שגוי מטעה בדיוק כמו אזור מגבלה שגוי.
+    """
+    section = _WX_AREA_RE.search(text or "")
+    if not section:
+        return None
+    ring = []
+    for ns, lat_d, lat_m, lat_s, ew, lon_d, lon_m, lon_s in _WX_POINT_RE.findall(section.group(1)):
+        ring.append([
+            round(_dms(lon_d, lon_m, lon_s, ew), 6),
+            round(_dms(lat_d, lat_m, lat_s, ns), 6),
+        ])
+    # המקור סוגר את הטבעת בעצמו; אם לא — סוגרים.
+    if len(ring) >= 2 and ring[0] == ring[-1]:
+        ring = ring[:-1]
+    if len(ring) < 3:
+        return None
+    return ring + [ring[0]]
 
 
 def parse_weather_page(page: str) -> list[dict]:
@@ -211,5 +253,7 @@ def parse_weather_page(page: str) -> list[dict]:
             "truncated": row.get("expandable", False),
             "valid_from": valid.group(1) if valid else None,
             "valid_to": valid.group(2) if valid else None,
+            # רק ל-AIRMET/SIGMET. אצל השאר זה None, וכך גם צריך להיות.
+            "area": extract_area(text),
         })
     return [r for r in reports if r["text"]]

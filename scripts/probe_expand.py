@@ -141,8 +141,19 @@ def main() -> int:
     # `f_getMoreInfo` קיימת וחיה, אבל אין בקובץ שום שורת `.open(` שאינה
     # הערה. כלומר הבקשה נבנית במקום אחר — צריך לקרוא את הגוף המלא.
     js, status = fetch(f"{iaa.BASE}/JS/MoreInfo.js")
-    print(f"\n  --- MoreInfo.js ({status}, {len(js):,} bytes) — הקובץ המלא:")
-    print("      " + js.replace("\n", "\n      "))
+    print(f"\n  --- MoreInfo.js ({status}, {len(js):,} bytes)")
+    # החצי השני של הקובץ — `f_buildMoreMsgInfo(xml)` — כבר נקרא, והוא
+    # מראה בדיוק מה חוזר: XML עם NotamID, Location, Airfield, CreateDate,
+    # FromDate ו-ToDate, ואחריו רשימת MsgText. חסר רק החצי הראשון:
+    # איך הבקשה נשלחת. חותכים משם ועד תחילת הבנייה.
+    start = js.find("function f_getMoreInfo")
+    end = js.find("function f_buildMoreMsgInfo")
+    if start == -1:
+        print("      אין f_getMoreInfo בקובץ.")
+    else:
+        section = js[start: end if end > start else start + 4000]
+        print(f"      --- f_getMoreInfo ואילך ({len(section):,} תווים):")
+        print("      " + section.replace("\n", "\n      "))
 
     # אם הכפתור הוא __doPostBack, ההרחבה נבנית בשרת ומגיעה בדף עצמו —
     # אין שום שירות לקרוא לו, רק לשחזר את ה-POST של WebForms.
