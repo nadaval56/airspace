@@ -13,10 +13,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import iaa  # noqa: E402
 
+# מבנה אמיתי מהדף החי. ה-`<tr>` עטוף ב-`divMainInfo_<msgNum>`, וממנו
+# — ולא מ-`MoreImg_0` — נלקח מספר ההודעה: ה-onclick עושה `.substr(12)`
+# על מזהה האב, ו-"divMainInfo_" הוא בדיוק 12 תווים.
 ROW = '''
+<div id="divMainInfo_2046996" style="display: inline;">
+<table id="tblMainInfo_2046996" class="tblMainInfo">
 <tr class="tblBody">
     <td class="ImgField">
-        <img id="DataList1_MoreImg_0" onclick="javascript:f_getMoreInfo(this.id,&#39;more&#39;);" src="Images/plus.gif" />
+        <img id="DataList1_MoreImg_0" onclick="javascript:f_getMoreInfo(this.parentNode.parentNode.parentNode.parentNode.parentNode.id.substr(12),&#39;more&#39;);" src="Images/plus.gif" />
     </td>
     <td class="NotamID">
         C1760/26
@@ -28,6 +33,8 @@ ROW = '''
         E) AN AREA AT TLALIM WI 0.3NM RADIUS CENTERED ON PSN 3055N03446E IS CLSD
     </td>
 </tr>
+</table>
+</div>
 '''
 
 
@@ -47,7 +54,8 @@ class TestRows(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["id"], "C1760/26")
         self.assertEqual(rows[0]["location"], "LLLL")
-        self.assertEqual(rows[0]["msg_num"], "0")
+        # מזהה ההודעה, לא האינדקס של השורה ב-DataList.
+        self.assertEqual(rows[0]["msg_num"], "2046996")
         self.assertIn("TLALIM", rows[0]["text"])
 
     def test_whitespace_collapsed(self):
@@ -119,10 +127,17 @@ class TestContinuationRows(unittest.TestCase):
 
 
 class TestTruncation(unittest.TestCase):
-    """הטקסט בדף הרשימה חתוך; שורה עם כפתור הרחבה מסומנת."""
+    """שורה שאפשר להרחיב מסומנת, ואיתה מספר ההודעה לבקשה."""
 
     def test_row_with_expand_button(self):
         self.assertTrue(iaa.parse_rows(ROW)[0]["expandable"])
+
+    def test_each_row_gets_its_own_message_number(self):
+        """שתי שורות, שני עוטפים — כל שורה חייבת לקבל את המספר שלה
+        ולא את זה של קודמתה."""
+        page = ROW + ROW.replace("2046996", "2047001").replace("C1760/26", "C1761/26")
+        rows = iaa.parse_rows(page)
+        self.assertEqual([r["msg_num"] for r in rows], ["2046996", "2047001"])
 
     def test_row_without_expand_button(self):
         page = ('<tr class="tblBody"><td class="MsgType">METAR</td>'

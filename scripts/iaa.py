@@ -61,7 +61,17 @@ _TD_RE = re.compile(r'<td[^>]*class="([^"]+)"[^>]*>(.*?)</td>', re.S | re.I)
 _ID_CLASSES = ("NotamID", "MsgType")
 _LOCATION_CLASSES = ("Location", "weatherLocation")
 
-_MSGNUM_RE = re.compile(r'MoreImg_(\d+)')
+# מספר ההודעה לכפתור ההרחבה. ה-onclick של התמונה הוא:
+#
+#     f_getMoreInfo(this.parentNode…(x5).id.substr(12), 'more')
+#
+# והאב החמישי הוא `<div id="divMainInfo_2046996">`. ל-"divMainInfo_"
+# יש בדיוק 12 תווים, כלומר msgNum = 2046996 — **מזהה הודעה אמיתי**.
+#
+# הניסיון הראשון קרא `MoreImg_(\d+)` והחזיר 0,1,2… — האינדקס של השורה
+# ב-DataList, שאין לו שום קשר. עם המספר הזה ה-postback חזר עם הדף
+# ההתחלתי בדיוק, בלי שום הרחבה, וזה נראה כאילו המנגנון לא עובד.
+_MAININFO_RE = re.compile(r'id="(?:div|tbl)MainInfo_(\d+)"')
 _TAG_RE = re.compile(r"<[^>]+>")
 
 # קואורדינטה בתוך טקסט ההודעה, בפורמט הנוטאמי הרגיל: 3155N03518E
@@ -84,7 +94,21 @@ def _text(fragment: str) -> str:
 
 
 def parse_rows(page: str) -> list[dict]:
-    """מחזיר [{id, location, text, msg_num, expandable}] לכל שורה בטבלה."""
+    """מחזיר [{id, location, text, msg_num, expandable}] לכל שורה בטבלה.
+
+    `msg_num` נלקח מ-`divMainInfo_<n>` **העוטף** את השורה, ולכן הוא
+    נמצא לפי מיקום בטקסט ולא בתוך ה-`<tr>` עצמו.
+    """
+    anchors = [(m.start(), m.group(1)) for m in _MAININFO_RE.finditer(page)]
+
+    def msg_num_before(position: int) -> str | None:
+        found = None
+        for start, number in anchors:
+            if start > position:
+                break
+            found = number
+        return found
+
     rows = []
     for match in _TR_RE.finditer(page):
         block = match.group(1)
@@ -98,14 +122,14 @@ def parse_rows(page: str) -> list[dict]:
         if not identifier and not text:
             continue
 
-        number = _MSGNUM_RE.search(block)
+        number = msg_num_before(match.start())
         rows.append({
             "id": identifier,
             "location": location,
             "text": text,
-            "msg_num": number.group(1) if number else None,
-            # כפתור ההרחבה מוביל לפרטים נוספים באתר (שורת Q, זמני תוקף).
-            # הטקסט עצמו שלם אחרי איחוד שורות ההמשך.
+            "msg_num": number,
+            # כפתור ההרחבה מוביל לפרטים נוספים באתר (זמני תוקף, שדה
+            # תעופה). הטקסט עצמו שלם אחרי איחוד שורות ההמשך.
             "expandable": bool(number),
         })
     return rows
