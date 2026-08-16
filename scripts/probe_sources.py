@@ -254,6 +254,26 @@ def probe_iaa() -> None:
         for m in re.finditer(r"^.*(?:requestURL|asmx|\.open\s*\(|send\().*$", js, re.M):
             print(f"      {m.group(0).strip()[:200]}")
 
+    # (1) AeroInfo.asmx הוא שירות SOAP חי — Locations.js קורא לו עם
+    # SOAPAction של tempuri.org. ה-WSDL ייתן את החוזה המלא: שמות
+    # הפעולות והפרמטרים, ומשם אפשר לבנות את getMoreMsgInfo כמו שצריך
+    # במקום לנחש מקוד שמסומן כהערה.
+    for name, url in (
+        ("AeroInfo.asmx", "https://brin.iaa.gov.il/aeroinfo/AeroInfo.asmx"),
+        ("AeroInfo.asmx?WSDL", "https://brin.iaa.gov.il/aeroinfo/AeroInfo.asmx?WSDL"),
+    ):
+        body, status, ctype = fetch(url)
+        print(f"\n  --- {name} ({status}, {len(body):,} bytes)" if body else f"\n  --- {name}: נכשל")
+        if not body:
+            continue
+        ops = re.findall(r'(?:operation|soap:operation|wsdl:operation)[^>]*name="([^"]+)"', body, re.I)
+        print(f"      פעולות: {sorted(set(ops))[:25]}")
+        for m in re.finditer(r'<s:element[^>]*name="(getMoreMsgInfo|GetMoreMsgInfo)".*?</s:element>', body, re.S | re.I):
+            print(f"      --- הגדרת getMoreMsgInfo:\n      " + m.group(0)[:900].replace("\n", "\n      "))
+        if "getMoreMsgInfo" in body and not ops:
+            i = body.find("getMoreMsgInfo")
+            print("      הקשר: " + re.sub(r"\s+", " ", body[max(0, i-350): i+600])[:900])
+
     # (3) קואורדינטות תחנות, כדי שאפשר יהיה לסמן מזג אוויר על המפה
     # בלי להמציא מיקומים.
     js, status, _ = fetch("https://brin.iaa.gov.il/aeroinfo/JS/Locations.js")
@@ -272,7 +292,7 @@ def probe_iaa() -> None:
             continue
         files = re.findall(r'href="([^"]*\.(?:kml|kmz|zip|geojson|json|shp|gpx)[^"]*)"', page, re.I)
         print(f"      {len(files)} קישורי שכבה:")
-        for f in dict.fromkeys(files)[:20] if isinstance(files, list) else []:
+        for f in list(dict.fromkeys(files))[:20]:
             print(f"        {f}")
         for word in ("kml", "kmz", "geojson", "shapefile", "ArcGIS", "arcgis", "MapServer"):
             if word.lower() in page.lower():
