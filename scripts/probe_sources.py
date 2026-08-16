@@ -238,30 +238,32 @@ def probe_iaa() -> None:
         print("  --- HTML גולמי סביב המזהה הראשון:")
         print("  " + html[max(0, first.start() - 900): first.start() + 900].replace("\n", "\n  "))
 
-    # קוד הלקוח — שם מוגדרת הבקשה שמביאה את הטקסט המלא ואת מזג האוויר.
-    for src in ("JS/general.js", "JS/MoreInfo.js", "JS/WeatherTypes.js", "JS/Locations.js"):
-        js, status, _ = fetch(f"https://brin.iaa.gov.il/aeroinfo/{src}")
-        if not js:
-            continue
-        print(f"\n  --- {src} ({status}, {len(js):,} bytes)")
-        for m in re.finditer(
-            r"(?:\.open\s*\(|ajax|WebMethod|PageMethods|\.aspx|\.asmx|\.ashx|getMsg|MoreInfo)[^\n;]{0,160}",
-            js, re.I,
-        ):
-            print(f"      {m.group(0).strip()[:150]}")
+    # טקסט ההודעה בדף הרשימה **קטוע** — הוא נחתך בדיוק היכן שהקואורדינטות
+    # אמורות להופיע ("CENTERED ON PSN"). ההודעה המלאה מגיעה משירות נפרד,
+    # ולכן צריך את הבנייה המלאה של requestURL ולא רק את שם ה-op.
+    js, status, _ = fetch("https://brin.iaa.gov.il/aeroinfo/JS/MoreInfo.js")
+    if js:
+        print(f"\n  --- MoreInfo.js ({status}, {len(js):,} bytes) — בניית הבקשה:")
+        for m in re.finditer(r"^.*(?:requestURL|\.asmx|\.open\s*\(|responseXML|responseText).*$", js, re.M):
+            print(f"      {m.group(0).strip()[:190]}")
 
-    # אותו דף עם msgsType=WEATHER — לפי app.js זה המתג בין נוטאם למזג אוויר.
-    weather, status, ctype = fetch(
+    # דף מזג האוויר החזיר 0 דיווחים — כנראה מבנה טבלה אחר. מדפיסים את
+    # שמות המחלקות של התאים ואת השורה הראשונה בגולמי.
+    wx, status, _ = fetch(
         "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Weather",
         extra={"Referer": IAA_URL},
     )
-    if weather:
-        metar = len(re.findall(r"METAR|TAF", weather))
-        print(f"\n  --- msgType=Weather: HTTP {status}, {len(weather):,} bytes, {metar} מופעי METAR/TAF")
-        m = re.search(r"METAR|TAF", weather)
+    if wx:
+        classes = {}
+        for c in re.findall(r'<td[^>]*class="([^"]+)"', wx):
+            classes[c] = classes.get(c, 0) + 1
+        print(f"\n  --- msgType=Weather ({status}, {len(wx):,} bytes)")
+        print(f"      מחלקות תאים: {sorted(classes.items(), key=lambda kv: -kv[1])[:12]}")
+        m = re.search(r"METAR|TAF", wx)
         if m:
-            excerpt = re.sub(r"<[^>]+>", " ", weather[max(0, m.start() - 200): m.start() + 500])
-            print("      …" + re.sub(r"\s+", " ", excerpt).strip()[:500] + "…")
+            start = wx.rfind("<tr", 0, m.start())
+            print("      --- שורה גולמית סביב הדיווח הראשון:")
+            print("      " + wx[max(0, start): m.start() + 700].replace("\n", "\n      ")[:2200])
 
     print("  --- 1,200 התווים הראשונים:")
     print("  " + html[:1200].replace("\n", "\n  "))
