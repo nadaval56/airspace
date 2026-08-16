@@ -159,29 +159,45 @@ def main() -> int:
     # אז משחזרים בדיוק את זה. ה-.asmx נזנח — כל הקוד שקורא לו מסומן
     # כהערה, ו-`?WSDL` חסום על ידי Radware. לא נוגעים בו.
     head("postback של ההרחבה")
-    fields = iaa.more_info_payload(page, msg_num)
-    print(f"  עוגיות: {[c.name for c in _JAR]}")
-    print(f"  {len(fields)} שדות: {sorted(fields)}")
-    print(f"  btnMoreInfo בטופס: {'btnMoreInfo' in fields}")
     import urllib.parse
-    body, status = fetch(
-        iaa.NOTAM_URL,
-        urllib.parse.urlencode(fields).encode(),
-        {"Content-Type": "application/x-www-form-urlencoded"},
-    )
-    print(f"  HTTP {status} · {len(body):,} bytes (הרשימה: {len(page):,})")
-    print(f"  parse_more_info: {iaa.parse_more_info(body)}")
 
-    # ההשוואה היא הבדיקה האמיתית: מה השתנה בתוך divMoreInfo_<n> בין
-    # הדף המקורי לתשובת ה-postback. אם כלום לא השתנה — לא נפתח כלום.
+    base = iaa.more_info_payload(page, msg_num)
+    print(f"  עוגיות: {[c.name for c in _JAR]}")
+    print(f"  btnMoreInfo בטופס: {'btnMoreInfo' in base}")
+
+    # הדף עטוף ב-UpdatePanel-ים. אם `btnMoreInfo` רשום כטריגר אסינכרוני,
+    # postback מלא לא יפעיל את הקוד שממלא את הטבלה — צריך את הדפוס של
+    # ASP.NET AJAX. שם ה-ScriptManager מופיע בהפעלה שלו בדף.
+    manager = re.search(r"PageRequestManager\._initialize\(\s*'([^']+)'", page)
+    panels = list(dict.fromkeys(re.findall(r'id="(UpdatePanel\d*)"', page)))
+    print(f"  ScriptManager: {manager.group(1) if manager else 'לא נמצא'} · פאנלים: {panels}")
+
     def block(html: str) -> str:
-        spot = html.find(f'divMoreInfo_{msg_num}"')
-        return re.sub(r"\s+", " ", html[spot: spot + 1800]) if spot != -1 else ""
+        """הבלוק שאמור להתמלא — כולל טבלת הפרטים שבתוכו."""
+        spot = html.find(f"tblMoreInfo1_{msg_num}")
+        return re.sub(r"\s+", " ", html[spot: spot + 5000]) if spot != -1 else ""
 
-    before, after = block(page), block(body)
-    print(f"  divMoreInfo_{msg_num}: לפני {len(before)} תווים, אחרי {len(after)}")
-    print(f"  זהה: {before == after}")
-    print(f"  --- אחרי:\n  {after[:1600]}")
+    attempts = [("postback מלא", base, {})]
+    if manager:
+        # `<שם הפאנל>|<שם הכפתור>` הוא הפורמט שהדפדפן שולח.
+        async_fields = dict(base)
+        async_fields[manager.group(1)] = f"{panels[0] if panels else 'UpdatePanel3'}|btnMoreInfo"
+        async_fields["__ASYNCPOST"] = "true"
+        attempts.append(("postback אסינכרוני", async_fields, {"X-MicrosoftAjax": "Delta=true"}))
+
+    baseline = block(page)
+    print(f"  הבלוק לפני: {len(baseline)} תווים")
+    for label, payload, extra in attempts:
+        headers = {"Content-Type": "application/x-www-form-urlencoded"}
+        headers.update(extra)
+        body, status = fetch(iaa.NOTAM_URL, urllib.parse.urlencode(payload).encode(), headers)
+        after = block(body)
+        print(f"\n  ▸ {label}: HTTP {status} · {len(body):,} bytes · הבלוק {len(after)} תווים")
+        print(f"    השתנה: {after != baseline}")
+        print(f"    parse_more_info: {iaa.parse_more_info(body)}")
+        print(f"    'Valid To' בגוף: {body.count('Valid To')} · 'trMore': {body.count('trMore')}")
+        if after and after != baseline:
+            print(f"    --- הבלוק:\n    {after[:2200]}")
     return 0
 
 
