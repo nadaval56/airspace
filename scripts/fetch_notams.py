@@ -62,25 +62,30 @@ _TAG_RE = re.compile(r"<(script|style)\b.*?</\1>", re.S | re.I)
 # ---------------------------------------------------------------------------
 
 
-def http_get(url: str, accept: str = "*/*") -> tuple[str, str]:
+def http_get(
+    url: str,
+    accept: str = "*/*",
+    extra_headers: dict | None = None,
+    data: bytes | None = None,
+) -> tuple[str, str]:
     """מחזיר (גוף, content-type).
 
     חוזר על הניסיון רק כשיש סיכוי שזה יעזור: תקלת רשת, timeout או 5xx.
     404 או 403 לא ישתנו בניסיון שני — חזרה עליהם רק מבזבזת את התקציב.
     """
     last_exc: Exception | None = None
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": accept,
+        "Accept-Language": "en",
+    }
+    headers.update(extra_headers or {})
+
     for attempt in range(RETRIES):
         if _time_left() <= 0:
             raise RuntimeError(f"{url} — חריגה מתקרת הזמן")
         try:
-            req = urllib.request.Request(
-                url,
-                headers={
-                    "User-Agent": USER_AGENT,
-                    "Accept": accept,
-                    "Accept-Language": "en",
-                },
-            )
+            req = urllib.request.Request(url, headers=headers, data=data)
             timeout = max(5, min(TIMEOUT, _time_left()))
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 ctype = resp.headers.get("Content-Type", "")
@@ -204,70 +209,114 @@ def extract_from_response(body: str, ctype: str) -> list[str]:
 # ---------------------------------------------------------------------------
 # מקורות
 # ---------------------------------------------------------------------------
-# כל מקור מחזיר רשימת גושי טקסט גולמיים. השרשור מכוון: המקור הראשי הוא
-# notams.online (אומת ידנית), והשאר גיבוי כדי שנפילה של אתר אחד לא תרוקן
-# את הדף.
+# כל מקור מחזיר רשימת גושי טקסט גולמיים. מקור שדורש אישורים ולא הוגדר
+# מדלג על עצמו בהודעה ברורה, ולא נחשב ככשל.
+#
+# מצב המקורות נכון לאחרון שנבדק (ראו scripts/probe_sources.py):
+#
+#   FAA NOTAM API   דורש client_id/secret. הרשמה חינם ב-api.faa.gov.
+#   autorouter      דורש client_id/secret. הרשמה חינם ב-autorouter.aero.
+#   notams.online   הדף מחזיר HTML ריק. ה-endpoint שלו, api/notams.php,
+#                   מחזיר תשובה מעורפלת שמפוענחת ב-notam-parser.js שלהם.
+#                   זו הגנה מכוונת מפני גרידה ואנחנו לא עוקפים אותה.
+#                   נשאר בשרשרת רק למקרה שיפרסמו תוכן קריא.
+#   FAA DINS        מחזיר 403 לכל בקשה שאינה דפדפן.
 
 
-_NOTAMS_ONLINE_BASE = "https://notams.online"
-_NOTAMS_ONLINE_CANDIDATES = [
-    # ה-endpoint האמיתי, כפי שנמצא ב-assets/js/app.js של האתר:
-    #   fetch(`/api/notams.php?location=${app.currentLocation}`)
-    "{base}/api/notams.php?location={icao}",
-    # גיבויים למקרה שהאתר ישנה מבנה. הגישוש עולה בקשה אחת ורק פעם אחת.
-    "{base}/api/icao/{icao}",
-    "{base}/api/notams/{icao}",
-    "{base}/api/v1/notams/{icao}",
-    "{base}/data/{icao}.json",
-]
-# תבנית ה-endpoint שנמצאה בפועל, כדי לא לגשש מחדש לכל ICAO.
-# None = טרם גיששנו, "" = אין endpoint, נופלים ל-HTML.
-_notams_online_pattern: str | None = None
+class SourceUnconfigured(RuntimeError):
+    """המקור דורש אישורים שלא הוגדרו. לא כשל — פשוט לא זמין."""
+
+
+def _credentials(*names: str) -> list[str] | None:
+    values = [os.environ.get(name, "").strip() for name in names]
+    return values if all(values) else None
+
+
+def source_faa_api(icao: str) -> tuple[list[str], str]:
+    """FAA NOTAM API — המקור הרשמי. דורש הרשמה חינמית ב-api.faa.gov.
+
+    האישורים מגיעים מ-secrets של ה-repo דרך משתני סביבה.
+    """
+    creds = _credentials("FAA_CLIENT_ID", "FAA_CLIENT_SECRET")
+    if not creds:
+        raise SourceUnconfigured(
+            "חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov."
+        )
+    client_id, client_secret = creds
+    url = (
+        "https://external-api.faa.gov/notamapi/v1/notams"
+        f"?icaoLocation={icao}&pageSize=1000&pageNum=1"
+    )
+    body, ctype = http_get(
+        url,
+        accept="application/json",
+        extra_headers={"client_id": client_id, "client_secret": client_secret},
+    )
+    return extract_from_response(body, ctype), url
+
+
+_autorouter_token: str | None = None
+
+
+def _autorouter_auth() -> str:
+    """OAuth2 client_credentials. הטוקן נמשך פעם אחת לכל הריצה."""
+    global _autorouter_token
+    if _autorouter_token:
+        return _autorouter_token
+
+    creds = _credentials("AUTOROUTER_CLIENT_ID", "AUTOROUTER_CLIENT_SECRET")
+    if not creds:
+        raise SourceUnconfigured(
+            "חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. "
+            "הרשמה חינם ב-autorouter.aero."
+        )
+    client_id, client_secret = creds
+    payload = urllib.parse.urlencode({
+        "grant_type": "client_credentials",
+        "client_id": client_id,
+        "client_secret": client_secret,
+    }).encode()
+    body, _ = http_get(
+        "https://api.autorouter.aero/v1.0/oauth2/token",
+        accept="application/json",
+        extra_headers={"Content-Type": "application/x-www-form-urlencoded"},
+        data=payload,
+    )
+    token = (json.loads(body) or {}).get("access_token")
+    if not token:
+        raise RuntimeError("autorouter: לא התקבל access_token")
+    _autorouter_token = token
+    return token
+
+
+def source_autorouter(icao: str) -> tuple[list[str], str]:
+    """autorouter.aero — JSON. דורש הרשמה חינמית."""
+    token = _autorouter_auth()
+    # הסוגריים והמרכאות בפרמטר חייבים קידוד — בלעדיו השרת מחזיר שגיאה.
+    itemas = urllib.parse.quote(f'["{icao}"]', safe="")
+    url = f"https://api.autorouter.aero/v1.0/notam?itemas={itemas}&offset=0&limit=200"
+    body, ctype = http_get(
+        url,
+        accept="application/json",
+        extra_headers={"Authorization": f"Bearer {token}"},
+    )
+    return extract_from_response(body, ctype), url
 
 
 def source_notams_online(icao: str) -> tuple[list[str], str]:
-    """notams.online — המקור הראשי לפי המפרט.
+    """notams.online — המקור שאומת ידנית במפרט.
 
-    התוכן נטען דינמית, אז מגששים אחר endpoint שמחזיר JSON. הגישוש נעשה
-    פעם אחת בלבד; מה שנמצא (או לא) חל על שאר ה-ICAO.
+    התוכן נטען דינמית. ה-endpoint שלו מחזיר מטען מעורפל שמפוענח בקוד
+    הלקוח שלהם — הגנה מכוונת מפני גרידה, ואנחנו לא מפענחים אותה.
+    לכן נשארת רק קריאת הדף עצמו, שכיום מחזיר HTML בלי תוכן.
     """
-    global _notams_online_pattern
-
-    if _notams_online_pattern is None:
-        _notams_online_pattern = ""
-        for pattern in _NOTAMS_ONLINE_CANDIDATES:
-            url = pattern.format(base=_NOTAMS_ONLINE_BASE, icao=icao)
-            try:
-                body, ctype = http_get(url, accept="application/json")
-            except RuntimeError:
-                continue
-            blocks = extract_from_response(body, ctype)
-            if blocks:
-                _notams_online_pattern = pattern
-                print(f"  endpoint של notams.online: {pattern}", file=sys.stderr)
-                return blocks, url
-
-    if _notams_online_pattern:
-        url = _notams_online_pattern.format(base=_NOTAMS_ONLINE_BASE, icao=icao)
-        body, ctype = http_get(url, accept="application/json")
-        return extract_from_response(body, ctype), url
-
-    url = f"{_NOTAMS_ONLINE_BASE}/icao/{icao}"
+    url = f"https://notams.online/icao/{icao}"
     body, ctype = http_get(url, accept="text/html")
     return extract_from_response(body, ctype), url
 
 
-def source_autorouter(icao: str) -> tuple[list[str], str]:
-    """autorouter.aero — API ציבורי שמחזיר JSON, בלי הרשמה."""
-    # הסוגריים והמרכאות בפרמטר חייבים קידוד — בלעדיו השרת מחזיר שגיאה.
-    itemas = urllib.parse.quote(f'["{icao}"]', safe="")
-    url = f"https://api.autorouter.aero/v1.0/notam?itemas={itemas}&offset=0&limit=200"
-    body, ctype = http_get(url, accept="application/json")
-    return extract_from_response(body, ctype), url
-
-
 def source_faa_dins(icao: str) -> tuple[list[str], str]:
-    """FAA DINS — שירות ציבורי, מחזיר HTML. גיבוי אחרון."""
+    """FAA DINS — מחזיר 403 לכל בקשה שאינה דפדפן. נשאר כגיבוי."""
     url = (
         "https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do"
         f"?reportType=Raw&retrieveLocId={icao}&actionType=notamRetrievalByICAOs"
@@ -278,8 +327,9 @@ def source_faa_dins(icao: str) -> tuple[list[str], str]:
 
 
 SOURCES = [
-    ("notams.online", source_notams_online),
+    ("faa-api", source_faa_api),
     ("autorouter", source_autorouter),
+    ("notams.online", source_notams_online),
     ("faa-dins", source_faa_dins),
 ]
 
@@ -294,9 +344,16 @@ def collect(icaos: list[str]) -> tuple[list[dict], list[dict]]:
     records: list[dict] = []
     report: list[dict] = []
 
+    unconfigured: set[str] = set()
+
     for source_name, fetch in SOURCES:
         for icao in icaos:
             entry = {"source": source_name, "icao": icao, "ok": False, "count": 0}
+            if source_name in unconfigured:
+                entry["unconfigured"] = True
+                entry["error"] = "דולג — המקור לא הוגדר"
+                report.append(entry)
+                continue
             if _time_left() <= 0:
                 entry["error"] = "דולג — חריגה מתקרת הזמן"
                 report.append(entry)
@@ -308,6 +365,11 @@ def collect(icaos: list[str]) -> tuple[list[dict], list[dict]]:
                 entry["count"] = len(blocks)
                 for block in blocks:
                     records.append(parse_notam(block, source=f"{source_name}:{icao}"))
+            except SourceUnconfigured as exc:
+                # לא כשל — פשוט אין אישורים. מדלגים על שאר ה-ICAO של המקור.
+                unconfigured.add(source_name)
+                entry["unconfigured"] = True
+                entry["error"] = str(exc)[:300]
             except Exception as exc:  # מקור שנפל לא מפיל את השאר
                 entry["error"] = f"{type(exc).__name__}: {exc}"[:300]
             report.append(entry)
