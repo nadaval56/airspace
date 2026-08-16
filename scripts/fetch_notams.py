@@ -357,11 +357,16 @@ def source_faa_dins(icao: str) -> tuple[list[str], str]:
     return extract_from_response(body, ctype), url
 
 
+# notams.online הוסר מהשרשרת. שתי סיבות, וכל אחת מספיקה:
+#   1. ה-endpoint שלו מחזיר מטען מעורפל שמפוענח בקוד הלקוח שלהם. זו
+#      הגנה מכוונת מפני גרידה ואנחנו לא עוקפים אותה.
+#   2. משרתי GitHub הוא לא נגיש כלל ("Network is unreachable"), ושרף
+#      כ-4 דקות בכל ריצה עד שהתקרה עצרה אותו — כל התקציב על מקור מת.
+# הפונקציה נשארת מתועדת למקרה שהאתר יפרסם תוכן קריא.
 SOURCES = [
     ("iaa", source_iaa),
     ("faa-api", source_faa_api),
     ("autorouter", source_autorouter),
-    ("notams.online", source_notams_online),
     ("faa-dins", source_faa_dins),
 ]
 
