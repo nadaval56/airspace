@@ -131,7 +131,14 @@ function initMap() {
     box.addEventListener('click', (e) => {
       const view = e.target.getAttribute('data-view');
       if (view === 'home') map.setView(CENTER, ZOOM);
-      if (view === 'country') map.fitBounds(COUNTRY_BOUNDS);
+      if (view === 'country') {
+        // מתאימים לגבולות השכבה עצמה כשהיא קיימת — היא צרה וגבוהה,
+        // ותיבה קבועה משאירה שוליים מיותרים.
+        const bounds = aipLayer.getLayers().length
+          ? L.featureGroup(aipLayer.getLayers()).getBounds()
+          : L.latLngBounds(COUNTRY_BOUNDS);
+        map.fitBounds(bounds, { padding: [20, 20] });
+      }
     });
     return box;
   };
@@ -351,6 +358,44 @@ function renderLegend(hasAip) {
     </span>`).join('');
 }
 
+/* --- מזג אוויר --------------------------------------------------------- */
+
+/**
+ * שכבה נפרדת לגמרי מהנוטאמים, עם מתג משלה. היא כבויה כברירת מחדל:
+ * המשתמש נכנס לדף כדי לדעת מה מוגבל, ומזג האוויר הוא תוספת שנדלקת
+ * כשרוצים אותה.
+ */
+function renderWeather(payload) {
+  const reports = (payload && payload.reports) || [];
+  el('count-weather').textContent = reports.length;
+  const list = el('weather-list');
+  list.innerHTML = '';
+
+  if (!reports.length) {
+    list.innerHTML = '<li class="empty">אין דיווחי מזג אוויר בקובץ.</li>';
+  }
+
+  reports.forEach((report) => {
+    const li = document.createElement('li');
+    const kind = (report.kind || '').toUpperCase();
+    li.className = 'wx-card' + (kind === 'TAF' ? ' wx-card--taf' : '');
+    li.innerHTML = `
+      <div class="wx-card__head">
+        <span class="wx-card__station">${esc(report.station || report.id || '—')}</span>
+        ${kind ? `<span class="wx-card__kind">${esc(kind)}</span>` : ''}
+      </div>
+      <p class="wx-card__text">${esc(report.text || '')}</p>`;
+    list.appendChild(li);
+  });
+
+  const stamp = fmtTime(payload && (payload.last_success || payload.generated_at));
+  const parts = [`${reports.length} דיווחים`];
+  if (payload && payload.source_name) parts.push(`מקור: ${payload.source_name}`);
+  if (stamp) parts.push(`עדכון ${stamp}`);
+  if (payload && payload.stale) parts.push('הנתונים אינם עדכניים');
+  el('weather-sub').textContent = parts.join(' · ');
+}
+
 /* --- חותמת זמן והתראות ------------------------------------------------ */
 
 function renderFreshness(payload) {
@@ -404,9 +449,10 @@ async function init() {
     addAlert('<strong>המפה לא נטענה.</strong> ספריית המפות לא עלתה. כל הנוטאמים מופיעים ברשימה שמתחת, כולל טווחי הגובה והמיקומים.', 'warn');
   }
 
-  const [notamResult, aipResult] = await Promise.allSettled([
+  const [notamResult, aipResult, weatherResult] = await Promise.allSettled([
     loadJson('data/notams.json'),
-    loadJson('data/aip-permanent.geojson')
+    loadJson('data/aip-permanent.geojson'),
+    loadJson('data/weather.json')
   ]);
 
   if (notamResult.status === 'fulfilled') {
@@ -460,6 +506,20 @@ async function init() {
 
   renderLegend(aipCount > 0);
   renderList(notams);
+
+  // מזג אוויר — שכבה עצמאית עם מתג משלה, כבויה כברירת מחדל.
+  const weather = weatherResult.status === 'fulfilled' ? weatherResult.value : null;
+  renderWeather(weather);
+  const weatherToggle = el('toggle-weather');
+  const weatherSection = el('weather-section');
+  weatherToggle.addEventListener('change', (e) => {
+    weatherSection.hidden = !e.target.checked;
+    if (e.target.checked) weatherSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  if (!weather) {
+    weatherToggle.disabled = true;
+    el('count-weather').textContent = '—';
+  }
 
   if (!hasMap) {
     document.querySelector('.layers').style.display = 'none';

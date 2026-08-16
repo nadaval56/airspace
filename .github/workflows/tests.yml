@@ -23,3 +23,4 @@ jobs:
         run: |
           python -c "import json;json.load(open('data/notams.json'))"
           python -c "import json;json.load(open('data/aip-permanent.geojson'))"
+          python -c "import json;json.load(open('data/weather.json'))"

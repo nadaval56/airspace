@@ -504,3 +504,63 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 
 .view-switch button:last-child { border-bottom: none; }
 .view-switch button:hover { background: var(--amber); }
+
+/* --- מזג אוויר --------------------------------------------------------- */
+
+.wx-section { padding-block: 8px 24px; }
+
+.wx-list {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wx-card {
+  padding: 12px 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  border-inline-start: 8px solid #0f6fa8;
+}
+
+.wx-card--taf { border-inline-start-color: #7c3aed; }
+
+.wx-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.wx-card__station {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 1.02rem;
+  font-weight: 800;
+}
+
+.wx-card__kind {
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  color: #0f6fa8;
+  background: #e4f1f9;
+}
+
+.wx-card--taf .wx-card__kind { color: #7c3aed; background: #f1e9fd; }
+
+.wx-card__text {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  /* הדיווחים באנגלית — כופים כיוון כדי שלא יישברו בתצוגת RTL */
+  direction: ltr;
+  text-align: left;
+}

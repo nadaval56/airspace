@@ -1,0 +1,11 @@
+{
+ "generated_at": null,
+ "last_success": null,
+ "last_error": null,
+ "stale": true,
+ "source": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Weather",
+ "source_name": "רשות שדות התעופה",
+ "counts": { "total": 0 },
+ "reports": [],
+ "_comment": "קובץ זרע. יידרס בריצה הראשונה של fetch_weather.py"
+}

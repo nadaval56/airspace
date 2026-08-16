@@ -27,6 +27,7 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import iaa  # noqa: E402
 from parse_qline import dedupe_and_resolve, parse_notam, sort_for_display  # noqa: E402
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -303,6 +304,34 @@ def source_autorouter(icao: str) -> tuple[list[str], str]:
     return extract_from_response(body, ctype), url
 
 
+def source_iaa(icao: str) -> tuple[list[str], str]:
+    """רשות שדות התעופה — המקור הרשמי הישראלי.
+
+    נמשך פעם אחת בלבד: הדף מגיש את כל ההודעות יחד ואינו מסונן לפי ICAO,
+    אז משיכה לכל שדה בנפרד הייתה מביאה את אותו תוכן שוב ושוב.
+
+    הדף לא מגיש שורות Q. רשומה שאין בטקסט שלה קואורדינטה מפורשת תגיע
+    בלי גיאומטריה ותופיע ברשימה בלבד — וזה בסדר, זה מה שהמקור נותן.
+    """
+    global _iaa_blocks
+    if icao != FIR:
+        return [], iaa.NOTAM_URL
+    if _iaa_blocks is None:
+        req = urllib.request.Request(
+            iaa.NOTAM_URL,
+            headers={"User-Agent": USER_AGENT, "Accept": "text/html", "Accept-Language": "he-IL,he;q=0.9"},
+        )
+        with urllib.request.urlopen(req, timeout=max(5, min(TIMEOUT, _time_left()))) as resp:
+            page = iaa.decode(resp.read())
+        rows = iaa.parse_notam_page(page)
+        _iaa_blocks = [iaa.to_raw_notam(row) for row in rows]
+        print(f"  רשות שדות התעופה: {len(_iaa_blocks)} הודעות", file=sys.stderr)
+    return _iaa_blocks, iaa.NOTAM_URL
+
+
+_iaa_blocks: list[str] | None = None
+
+
 def source_notams_online(icao: str) -> tuple[list[str], str]:
     """notams.online — המקור שאומת ידנית במפרט.
 
@@ -327,6 +356,7 @@ def source_faa_dins(icao: str) -> tuple[list[str], str]:
 
 
 SOURCES = [
+    ("iaa", source_iaa),
     ("faa-api", source_faa_api),
     ("autorouter", source_autorouter),
     ("notams.online", source_notams_online),
@@ -364,7 +394,11 @@ def collect(icaos: list[str]) -> tuple[list[dict], list[dict]]:
                 entry["ok"] = True
                 entry["count"] = len(blocks)
                 for block in blocks:
-                    records.append(parse_notam(block, source=f"{source_name}:{icao}"))
+                    record = parse_notam(block, source=f"{source_name}:{icao}")
+                    if record["geo"] is None and record.get("text"):
+                        # אין שורת Q במקור הישראלי; מנסים מטקסט ההודעה.
+                        record["geo"] = iaa.extract_position(record["text"])
+                    records.append(record)
             except SourceUnconfigured as exc:
                 # לא כשל — פשוט אין אישורים. מדלגים על שאר ה-ICAO של המקור.
                 unconfigured.add(source_name)
