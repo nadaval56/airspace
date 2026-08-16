@@ -134,20 +134,40 @@ python3 -m unittest discover -s scripts -p 'test_*.py' -v
 החילוץ מוגבל לתיבה **31.7–32.1°N, 35.0–35.4°E**. כל הארץ תהפוך את המפה
 לבלתי קריאה.
 
+### gov.il חוסם הורדה אוטומטית
+
+זה נבדק מול הרשת האמיתית מ-GitHub Actions:
+
+| ניסיון | תוצאה |
+|--------|-------|
+| `BlobFolder/guide/aip/he/aip_א'-17.pdf` (שתי צורות קידוד) | **404** |
+| `gov.il/he/pages/aip` | **403** |
+| `gov.il/he/departments/guides/aip` | **403** |
+
+הכתובת עצמה תקפה בדפדפן — האתר פשוט חוסם לקוחות שאינם דפדפן ו/או כתובות
+IP של מרכזי נתונים. כותרות דפדפן לא הספיקו.
+
+**לכן ה-PDF צריך להגיע ידנית.** זה עולה בקנה אחד עם המפרט, שהגדיר את שכבת
+הפמ"ת כעבודה חד־פעמית וידנית ברובה.
+
 ### הרצה
 
-מריצים את workflow **"בניית שכבת הפמ"ת"** ב-Actions:
+1. הורידו את פרק א-17 מ-<https://www.gov.il/he/pages/aip> בדפדפן.
+2. שמרו אותו כ-`data/aip-a17.pdf` ועשו לו קומיט. הסקריפט מזהה אותו לבד
+   ומעדיף אותו על הורדה מהרשת.
+3. Actions → **בניית שכבת הפמ"ת** → `mode: dump` — מדפיס את טקסט ה-PDF
+   ליומן, לאיתור עמודי נספחים ב' ו-ג'.
+4. אותו workflow עם `mode: build` ו-`pages` של הנספחים — מחלץ, ממיר
+   ל-GeoJSON ועושה קומיט.
 
-1. `mode: dump` — מדפיס את טקסט ה-PDF ליומן הריצה. משמש לאיתור העמודים של
-   הנספחים ולבדיקת מבנה הטבלאות בפועל.
-2. `mode: build` עם `pages` של הנספחים — מחלץ, ממיר ל-GeoJSON, ועושה קומיט.
+אפשר גם להצביע על כתובת אחרת דרך הקלט `url` ב-workflow.
 
-או מקומית:
+מקומית:
 
 ```bash
 pip install -r requirements.txt
-python3 scripts/build_aip_geojson.py --dump-text --pages 40-60
-python3 scripts/build_aip_geojson.py --pages 40-60
+python3 scripts/build_aip_geojson.py --pdf data/aip-a17.pdf --dump-text --pages 40-60
+python3 scripts/build_aip_geojson.py --pdf data/aip-a17.pdf --pages 40-60
 ```
 
 **הסקריפט שמרני בכוונה.** בלוק שלא הניב לפחות שלוש נקודות או הגדרת עיגול
