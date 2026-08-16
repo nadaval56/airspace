@@ -27,6 +27,14 @@ const LOW_ALTITUDE_FT = 3000;
 // מזג אוויר בגוון שלישי, שאינו אדום ואינו כחול — כדי שלא ייקרא כמגבלה.
 const WEATHER_COLOR = '#0f766e';
 
+/**
+ * "לא צוין" הוא ניסוח שמזמין אי־הבנה: הוא נשמע כאילו לנוטאם אין תוקף
+ * מוגדר, בזמן שהאמת היא שהמקור פשוט לא נותן אותו ברשימה. זמני התוקף
+ * והגבהים נפתחים באתר עצמו בלחיצה על ה-`+`, ואי אפשר למשוך אותם —
+ * הבקשה שפותחת אותם נחסמת בזיהוי בוטים (ההסבר המלא ב-scripts/iaa.py).
+ */
+const NO_VALIDITY = 'לא פורסם ברשימה';
+
 const el = (id) => document.getElementById(id);
 
 /* --- עזרי טקסט -------------------------------------------------------- */
@@ -73,7 +81,9 @@ function altitudeText(n) {
   const upper = n.upper_limit && n.upper_limit.raw;
   if (lower || upper) return `${lower || '—'} עד ${upper || '—'}`;
   const alt = n.altitude;
-  if (!alt) return 'לא צוין';
+  // אותה סיבה כמו בזמני התוקף: פריטי F)/G) נפתחים רק בכפתור ההרחבה
+  // באתר, ולא מגיעים לרשימה.
+  if (!alt) return NO_VALIDITY;
   if (alt.unlimited) return 'ללא הגבלת גובה';
   return `${alt.lower_ft.toLocaleString('he-IL')} עד ${alt.upper_ft.toLocaleString('he-IL')} רגל`;
 }
@@ -309,8 +319,8 @@ function badges(n) {
 function notamCard(n, opts) {
   opts = opts || {};
   const rows = [
-    ['תוקף מ־', fmtStamp(n.valid_from, 'לא צוין')],
-    ['תוקף עד', fmtStamp(n.valid_to, 'לא צוין')],
+    ['תוקף מ־', fmtStamp(n.valid_from, NO_VALIDITY)],
+    ['תוקף עד', fmtStamp(n.valid_to, NO_VALIDITY)],
     ['גבהים', altitudeText(n)]
   ];
   if (n.schedule) rows.push(['לוח זמנים', n.schedule]);

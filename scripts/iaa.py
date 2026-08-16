@@ -209,11 +209,14 @@ def parse_notam_page(page: str) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# ההרחבה — הכפתור `+`
+# ההרחבה — הכפתור `+`, ולמה היא לא נמשכת
 # ---------------------------------------------------------------------------
 #
-# דף הרשימה לא נותן זמני תוקף. הם נפתחים בלחיצה על ה-`+`, ולזה יש
-# מנגנון מדויק ב-`MoreInfo.js`:
+# דף הרשימה לא נותן זמני תוקף. הם נפתחים בלחיצה על ה-`+`, ולכן נבדק
+# לעומק אם אפשר לפתוח אותם אוטומטית. **התשובה היא לא**, ומתועד כאן
+# למה, כדי שאיש לא ינסה שוב מאפס.
+#
+# מה הכפתור עושה, לפי `MoreInfo.js`:
 #
 #     document.getElementById('hidMsgNum').value = msgNum;
 #     document.getElementById('hidMode').value = mode;
@@ -221,103 +224,22 @@ def parse_notam_page(page: str) -> list[dict]:
 #     document.getElementById('hidTblClientId').value = "";
 #     document.getElementById('btnMoreInfo').click();
 #
-# כלומר **postback רגיל של WebForms**, לא שירות אינטרנט. באותו קובץ יש
-# גם נתיב ישן שקורא ל-`AeroInfo.asmx?op=getMoreMsgInfo` — אבל כל שורה
-# בו מסומנת כהערה, וה-`?WSDL` שלו חסום מאחורי Radware. הנתיב הזנוח לא
-# מעניין אותנו; משחזרים את מה שהדפדפן באמת עושה.
+# כלומר postback של WebForms. באותו קובץ יש גם נתיב ישן דרך
+# `AeroInfo.asmx?op=getMoreMsgInfo` — כל שורה בו מסומנת כהערה, וה-`?WSDL`
+# שלו מחזיר `Unauthorized Request Blocked` מ-Radware.
 #
-# `msgNum` הוא **אינדקס השורה בדף** (0..n), לא מזהה נוטאם. הוא משתנה
-# בין טעינות, ולכן חייבים להשתמש באינדקס מאותו דף שממנו נלקח ה-VIEWSTATE.
-
-_INPUT_RE = re.compile(r"<input\b([^>]*)>", re.I)
-_ATTR_RE = re.compile(r'(\w+)\s*=\s*"([^"]*)"', re.I)
-
-_MORE_FIELDS = ("hidMsgNum", "hidMode", "hidCurOrHist", "hidTblClientId")
-
-
-def form_fields(page: str) -> dict[str, str]:
-    """כל שדות ה-input של הטופס, לשחזור ה-postback.
-
-    כולל `__VIEWSTATE` ו-`__EVENTVALIDATION` — בלעדיהם WebForms דוחה
-    את הבקשה. שדות בלי name נזרקים, ו-checkbox שאינו מסומן לא נשלח,
-    בדיוק כמו בדפדפן.
-    """
-    fields: dict[str, str] = {}
-    for raw in _INPUT_RE.findall(page):
-        attrs = {k.lower(): v for k, v in _ATTR_RE.findall(raw)}
-        name = attrs.get("name")
-        if not name:
-            continue
-        if attrs.get("type", "").lower() in ("checkbox", "radio") and "checked" not in raw.lower():
-            continue
-        fields[name] = _html.unescape(attrs.get("value", ""))
-    return fields
-
-
-def more_info_payload(page: str, msg_num: str) -> dict[str, str]:
-    """שדות ה-POST שפותחים את השורה מספר `msg_num`."""
-    fields = form_fields(page)
-    fields.update({
-        "hidMsgNum": str(msg_num), "hidMode": "more",
-        "hidCurOrHist": "Current", "hidTblClientId": "",
-    })
-    return fields
-
-
-# השורות שנפתחות מסומנות במחלקות משלהן. `more_NotamInfo` נושא תוויות
-# בשפה חופשית ("Valid From : 16/08/2026 19:00"), ומהן שולפים את הזמנים.
-_MORE_CELL_RE = re.compile(
-    r'<td[^>]*class="(more_NotamID|more_NotamInfo|more_MsgText)"[^>]*>(.*?)</td>',
-    re.S | re.I,
-)
-_MORE_LABEL_RE = re.compile(
-    r"(Valid From|Valid To|Created|Location Indicator|Location Description|Notam NO|Weather Type)"
-    r"\s*:?\s*(.*)", re.I,
-)
-# "16/08/2026 19:00" — יום/חודש/שנה ושעה, כפי שהשרת מרכיב אותם.
-_MORE_STAMP_RE = re.compile(r"(\d{2})/(\d{2})/(\d{4})\s+(\d{2}):(\d{2})")
-
-
-def _iso_from_more(value: str) -> str | None:
-    m = _MORE_STAMP_RE.search(value or "")
-    if not m:
-        return None
-    day, month, year, hour, minute = m.groups()
-    return f"{year}-{month}-{day}T{hour}:{minute}:00Z"
-
-
-def parse_more_info(page: str) -> dict:
-    """קורא את הבלוק שנפתח: זמני תוקף, שדה תעופה, וטקסט מלא.
-
-    מחזיר מילון עם מה שנמצא בלבד. שדה חסר אינו שגיאה — הוא פשוט לא
-    מופיע, וכך גם צריך להיות: עדיף בלי זמן תוקף מאשר עם זמן מנוחש.
-    """
-    found: dict[str, str] = {}
-    texts: list[str] = []
-    for kind, raw in _MORE_CELL_RE.findall(page):
-        value = _text(raw)
-        if kind == "more_MsgText":
-            if value:
-                texts.append(value)
-            continue
-        label = _MORE_LABEL_RE.match(value)
-        if not label:
-            continue
-        key, rest = label.group(1).lower(), label.group(2).strip()
-        if key == "valid from":
-            found["valid_from"] = _iso_from_more(rest) or rest
-        elif key == "valid to":
-            found["valid_to"] = _iso_from_more(rest) or rest
-        elif key == "created":
-            found["created"] = _iso_from_more(rest) or rest
-        elif key == "location description":
-            found["airfield"] = rest
-        elif key in ("notam no", "weather type"):
-            found["id"] = rest
-    if texts:
-        found["text"] = " ".join(texts)
-    return found
-
+# מה שנבדק בפועל, מול השרת החי, עם עוגיות סשן ועם כל שדות הטופס:
+#
+#   postback מלא        → HTTP 200, הדף חוזר **זהה**. שום הרחבה לא נפתחת.
+#   postback אסינכרוני  → HTTP 200 עם `Error 100` — דף חסימה של זיהוי
+#                         בוטים (stormcaster.js, validate.perfdrive.com).
+#
+# החסימה השנייה היא הגנה מכוונת מפני אוטומציה. לא עוקפים אותה. ההשלכה:
+# **זמני התוקף אינם זמינים לכלי הזה**, והכרטיסים מציגים "לא צוין" —
+# וזו האמת, לא תקלה. מי שצריך אותם ילחץ על ה-`+` באתר עצמו.
+#
+# מה שכן נשמר מהחקירה: `msg_num`. הוא מזהה ההודעה באתר, והוא זה שמסמן
+# אילו שורות ניתנות להרחבה שם.
 
 # ---------------------------------------------------------------------------
 # מזג אוויר
