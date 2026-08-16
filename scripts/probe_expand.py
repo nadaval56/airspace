@@ -17,6 +17,7 @@
 
 from __future__ import annotations
 
+import http.cookiejar
 import os
 import re
 import sys
@@ -33,6 +34,11 @@ BROWSER_UA = (
 )
 ASMX = f"{iaa.BASE}/AeroInfo.asmx"
 
+# WebForms שומר את מצב הדף בסשן. בלי עוגייה, ה-postback מגיע כסשן חדש
+# והשרת פשוט מחזיר את הדף ההתחלתי — בדיוק מה שקרה בניסיון הראשון.
+_JAR = http.cookiejar.CookieJar()
+_OPENER = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(_JAR))
+
 
 def fetch(url: str, data: bytes | None = None, extra: dict | None = None):
     """מחזיר (גוף, סטטוס). לא זורק — כישלון הוא תוצאה לגיטימית באבחון."""
@@ -40,7 +46,7 @@ def fetch(url: str, data: bytes | None = None, extra: dict | None = None):
     headers.update(extra or {})
     request = urllib.request.Request(url, data=data, headers=headers)
     try:
-        with urllib.request.urlopen(request, timeout=45) as response:
+        with _OPENER.open(request, timeout=45) as response:
             return iaa.decode(response.read()), response.status
     except urllib.error.HTTPError as exc:
         return iaa.decode(exc.read()), exc.code
@@ -169,35 +175,6 @@ def main() -> int:
         for line in live:
             print(f"      {line.strip()[:170]}")
 
-    # אם הכפתור הוא __doPostBack, ההרחבה נבנית בשרת ומגיעה בדף עצמו —
-    # אין שום שירות לקרוא לו, רק לשחזר את ה-POST של WebForms.
-    target = re.search(r"__doPostBack\(&#39;([^&]+)&#39;|__doPostBack\('([^']+)'", page)
-    if target:
-        control = target.group(1) or target.group(2)
-        head(f"__doPostBack — {control}")
-        fields = dict(re.findall(
-            r'<input[^>]*name="(__[A-Z]+)"[^>]*value="([^"]*)"', page
-        ))
-        fields["__EVENTTARGET"] = control
-        fields["__EVENTARGUMENT"] = ""
-        import urllib.parse
-        body, status = fetch(
-            iaa.NOTAM_URL,
-            urllib.parse.urlencode(fields).encode(),
-            {"Content-Type": "application/x-www-form-urlencoded"},
-        )
-        print(f"  HTTP {status} · {len(body):,} bytes (הרשימה: {len(page):,})")
-        expanded = iaa.parse_notam_page(body)
-        print(f"  {len(expanded)} שורות אחרי ה-postback")
-        if expanded:
-            first = expanded[0]
-            print(f"  השורה הראשונה: {first['id']}")
-            print(f"    {(first.get('text') or '')[:700]!r}")
-            has_q = [r for r in expanded if re.search(r"\bQ\)\s*LL", r.get("text") or "")]
-            print(f"  שורות עם שורת Q: {len(has_q)}")
-            if has_q:
-                print(f"    {(has_q[0].get('text') or '')[:700]!r}")
-
     # (2) ההרחבה היא postback של WebForms, לא שירות. `f_getMoreInfo`
     # ממלאת ארבעה שדות מוסתרים ולוחצת על כפתור:
     #
@@ -208,62 +185,28 @@ def main() -> int:
     # כהערה, ו-`?WSDL` חסום על ידי Radware. לא נוגעים בו.
     head("postback של ההרחבה")
     fields = iaa.more_info_payload(page, msg_num)
-    print(f"  {len(fields)} שדות טופס · מוסתרים: "
-          f"{[k for k in fields if k.startswith('hid')]}")
+    print(f"  עוגיות: {[c.name for c in _JAR]}")
+    print(f"  {len(fields)} שדות: {sorted(fields)}")
+    print(f"  btnMoreInfo בטופס: {'btnMoreInfo' in fields}")
     import urllib.parse
     body, status = fetch(
         iaa.NOTAM_URL,
         urllib.parse.urlencode(fields).encode(),
         {"Content-Type": "application/x-www-form-urlencoded"},
     )
-    print(f"  HTTP {status} · {len(body):,} bytes")
-    for needle in ("Valid From", "Valid To", "more_NotamInfo", "more_MsgText"):
-        print(f"  {needle!r}: {body.count(needle)} מופעים")
+    print(f"  HTTP {status} · {len(body):,} bytes (הרשימה: {len(page):,})")
     print(f"  parse_more_info: {iaa.parse_more_info(body)}")
-    spot = body.find("Valid From")
-    if spot != -1:
-        start = body.rfind("<table", 0, spot)
-        print("  --- הבלוק שנפתח:")
-        print("  " + re.sub(r"\s+", " ", body[max(0, start): spot + 2500])[:2500])
-    else:
-        print("  --- אין 'Valid From'. 1,000 תווים סביב tblMoreInfo1_0:")
-        spot = body.find(f"tblMoreInfo1_{msg_num}")
-        if spot != -1:
-            print("  " + re.sub(r"\s+", " ", body[max(0, spot - 400): spot + 1200]))
-    namespace, params = read_contract(wsdl)
-    operations = sorted(set(_OP_RE.findall(wsdl)))
-    print(f"  מרחב שמות: {namespace}")
-    print(f"  {len(operations)} פעולות: {operations}")
-    for operation in operations:
-        signature = params.get(operation, [])
-        rendered = ", ".join(f"{n}: {t.split(':')[-1]}" for n, t in signature)
-        print(f"    {operation}({rendered})")
 
-    # (3) הפעלה בפועל של כל פעולה שנראית כמו ההרחבה.
-    head("הפעלה")
-    candidates = [o for o in operations if re.search(r"more|msg|notam|info|text", o, re.I)]
-    print(f"  מועמדים: {candidates or 'אין — מנסים הכול'}")
-    guesses = {
-        "msgnum": msg_num, "messagenum": msg_num, "num": msg_num, "id": msg_num,
-        "msgid": msg_num, "messageid": msg_num,
-        "mode": "0", "currorhist": "C", "lang": "1", "language": "1",
-        "msgtype": "Notam", "type": "Notam",
-    }
-    for operation in candidates or operations:
-        signature = params.get(operation)
-        if signature is None:
-            print(f"    {operation}: אין הגדרת פרמטרים בסכימה — מדלגים")
-            continue
-        values = {name: guesses.get(name.lower(), "") for name, _ in signature}
-        print(f"  {operation}({values})")
-        body, status = soap_call(namespace, operation, values)
-        if show_result("SOAP", body, status):
-            continue
-        # ה-WebForms הישן חושף את אותן פעולות גם ב-GET/POST פשוט.
-        query = "&".join(f"{k}={v}" for k, v in values.items())
-        body, status = fetch(f"{ASMX}/{operation}?{query}")
-        show_result("GET ", body, status)
+    # ההשוואה היא הבדיקה האמיתית: מה השתנה בתוך divMoreInfo_<n> בין
+    # הדף המקורי לתשובת ה-postback. אם כלום לא השתנה — לא נפתח כלום.
+    def block(html: str) -> str:
+        spot = html.find(f'id="divMoreInfo_{msg_num}"')
+        return re.sub(r"\s+", " ", html[spot: spot + 1800]) if spot != -1 else ""
 
+    before, after = block(page), block(body)
+    print(f"  divMoreInfo_{msg_num}: לפני {len(before)} תווים, אחרי {len(after)}")
+    print(f"  זהה: {before == after}")
+    print(f"  --- אחרי:\n  {after[:1600]}")
     return 0
 
 
