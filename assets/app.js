@@ -7,6 +7,8 @@
 
 const CENTER = [31.9558, 35.3392];   // כוכב השחר
 const ZOOM = 11;
+// גבולות הכיסוי הארצי, לכפתור "כל הארץ".
+const COUNTRY_BOUNDS = [[29.4, 34.2], [33.4, 35.9]];
 const TZ = 'Asia/Jerusalem';
 const NM_TO_M = 1852;
 const STALE_AFTER_MS = 3 * 60 * 60 * 1000;   // ה-cron רץ כל שעה; שלוש שעות = תקלה
@@ -116,6 +118,24 @@ function initMap() {
 
   aipLayer = L.layerGroup().addTo(map);
   notamLayer = L.layerGroup().addTo(map);
+
+  // הכיסוי הורחב לכל הארץ, אבל ברירת המחדל נשארת מטה בנימין — שם
+  // המשתמש עומד בשטח. שני כפתורים מחליפים בין המבטים.
+  const views = L.control({ position: 'topright' });
+  views.onAdd = () => {
+    const box = L.DomUtil.create('div', 'view-switch');
+    box.innerHTML =
+      '<button type="button" data-view="home">מטה בנימין</button>' +
+      '<button type="button" data-view="country">כל הארץ</button>';
+    L.DomEvent.disableClickPropagation(box);
+    box.addEventListener('click', (e) => {
+      const view = e.target.getAttribute('data-view');
+      if (view === 'home') map.setView(CENTER, ZOOM);
+      if (view === 'country') map.fitBounds(COUNTRY_BOUNDS);
+    });
+    return box;
+  };
+  views.addTo(map);
   return true;
 }
 

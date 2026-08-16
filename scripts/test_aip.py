@@ -203,18 +203,21 @@ class TestBbox(unittest.TestCase):
     def _feature(self, lon, lat):
         return {"geometry": {"coordinates": [[(lon, lat), (lon + 0.01, lat), (lon, lat + 0.01), (lon, lat)]]}}
 
-    def test_inside(self):
+    def test_binyamin(self):
         self.assertTrue(intersects_bbox(self._feature(35.2, 31.9)))
 
-    def test_far_north(self):
-        self.assertFalse(intersects_bbox(self._feature(35.2, 33.0)))
+    def test_galilee_is_included_nationwide(self):
+        self.assertTrue(intersects_bbox(self._feature(35.2, 33.0)))
 
-    def test_far_west(self):
-        self.assertFalse(intersects_bbox(self._feature(34.5, 31.9)))
+    def test_eilat_is_included_nationwide(self):
+        self.assertTrue(intersects_bbox(self._feature(34.95, 29.55)))
+
+    def test_far_outside_country(self):
+        self.assertFalse(intersects_bbox(self._feature(30.0, 31.9)))
 
     def test_touching_edge_is_kept(self):
         """אזור שנוגע בתיבה נשמר בשלמותו — לא מקצצים גיאומטריה."""
-        self.assertTrue(intersects_bbox(self._feature(34.995, 31.9)))
+        self.assertTrue(intersects_bbox(self._feature(33.495, 31.9)))
 
 
 class TestAnnexDetection(unittest.TestCase):

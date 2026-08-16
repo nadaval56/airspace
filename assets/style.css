@@ -476,3 +476,31 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* --- מחליף מבט (מטה בנימין / כל הארץ) ------------------------------- */
+
+.view-switch {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.view-switch button {
+  min-height: 36px;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: none;
+  border-bottom: 2px solid var(--rule);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.view-switch button:last-child { border-bottom: none; }
+.view-switch button:hover { background: var(--amber); }

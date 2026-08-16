@@ -230,6 +230,39 @@ def probe_iaa() -> None:
     for value, text in options[:20]:
         print(f"      {value!r} = {text.strip()!r}")
 
+    # הדף מכיל מזהי נוטאם אבל לא שורות Q — כלומר זו רשימה, והטקסט המלא
+    # נמשך בנפרד. מדפיסים HTML גולמי סביב המזהה הראשון כדי לראות איך
+    # השורה בנויה ומה מפעיל את הטעינה.
+    first = re.search(r"\b[A-Z]\d{1,4}/\d{2}\b", html)
+    if first:
+        print("  --- HTML גולמי סביב המזהה הראשון:")
+        print("  " + html[max(0, first.start() - 900): first.start() + 900].replace("\n", "\n  "))
+
+    # קוד הלקוח — שם מוגדרת הבקשה שמביאה את הטקסט המלא ואת מזג האוויר.
+    for src in ("JS/general.js", "JS/MoreInfo.js", "JS/WeatherTypes.js", "JS/Locations.js"):
+        js, status, _ = fetch(f"https://brin.iaa.gov.il/aeroinfo/{src}")
+        if not js:
+            continue
+        print(f"\n  --- {src} ({status}, {len(js):,} bytes)")
+        for m in re.finditer(
+            r"(?:\.open\s*\(|ajax|WebMethod|PageMethods|\.aspx|\.asmx|\.ashx|getMsg|MoreInfo)[^\n;]{0,160}",
+            js, re.I,
+        ):
+            print(f"      {m.group(0).strip()[:150]}")
+
+    # אותו דף עם msgsType=WEATHER — לפי app.js זה המתג בין נוטאם למזג אוויר.
+    weather, status, ctype = fetch(
+        "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Weather",
+        extra={"Referer": IAA_URL},
+    )
+    if weather:
+        metar = len(re.findall(r"METAR|TAF", weather))
+        print(f"\n  --- msgType=Weather: HTTP {status}, {len(weather):,} bytes, {metar} מופעי METAR/TAF")
+        m = re.search(r"METAR|TAF", weather)
+        if m:
+            excerpt = re.sub(r"<[^>]+>", " ", weather[max(0, m.start() - 200): m.start() + 500])
+            print("      …" + re.sub(r"\s+", " ", excerpt).strip()[:500] + "…")
+
     print("  --- 1,200 התווים הראשונים:")
     print("  " + html[:1200].replace("\n", "\n  "))
 
