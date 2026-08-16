@@ -211,10 +211,13 @@ def extract_from_response(body: str, ctype: str) -> list[str]:
 
 _NOTAMS_ONLINE_BASE = "https://notams.online"
 _NOTAMS_ONLINE_CANDIDATES = [
+    # ה-endpoint האמיתי, כפי שנמצא ב-assets/js/app.js של האתר:
+    #   fetch(`/api/notams.php?location=${app.currentLocation}`)
+    "{base}/api/notams.php?location={icao}",
+    # גיבויים למקרה שהאתר ישנה מבנה. הגישוש עולה בקשה אחת ורק פעם אחת.
     "{base}/api/icao/{icao}",
     "{base}/api/notams/{icao}",
     "{base}/api/v1/notams/{icao}",
-    "{base}/icao/{icao}?format=json",
     "{base}/data/{icao}.json",
 ]
 # תבנית ה-endpoint שנמצאה בפועל, כדי לא לגשש מחדש לכל ICAO.
