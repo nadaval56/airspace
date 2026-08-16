@@ -76,19 +76,30 @@ _NUMBER_RE = re.compile(r"\d+(?:\.\d+)?")
 # ---------------------------------------------------------------------------
 
 
-def reverse_hebrew(text: str) -> str:
-    """מיישר טקסט שחולץ הפוך. שורות בלי עברית נשארות כמות שהן.
+def _unmirror_line(line: str) -> str:
+    """מיישר שורה אחת שחולצה הפוך.
 
-    תא שם יכול להשתרע על כמה שורות ('שטח אש' מעל '902'), ואת המספר
-    אסור להפוך — 902 היה הופך ל-209.
+    לא מספיק להפוך את כל השורה: ספרות ולטינית יוצאות מה-PDF **תקינות**,
+    והיפוך גורף היה הופך גם אותן. 'שט"ן 83' היה הופך ל-'שט"ן 38' —
+    שם של אזור אחר לגמרי.
+
+    לכן מפרקים לרצפים, הופכים את סדר הרצפים, ומהפכים תווים רק בתוך
+    רצפי עברית.
     """
-    parts = []
-    for line in text.split("\n"):
-        line = line.strip()
-        if not line:
-            continue
-        parts.append("".join(reversed(line)) if _HEBREW_RE.search(line) else line)
-    return " ".join(parts).strip()
+    # רצף עברי בולע גם גרשיים, כדי ש-'ן"טש' יתהפך כיחידה ל-'שט"ן'.
+    # הרווחים הם רצף בפני עצמם, אחרת הם נדבקים לרצף העברי ומהגרים לקצהו.
+    runs = re.findall(r"[֐-׿\"'’״׳]+|\s+|[^֐-׿\s]+", line)
+    out = [
+        "".join(reversed(run)) if _HEBREW_RE.search(run) else run
+        for run in reversed(runs)
+    ]
+    return re.sub(r"\s+", " ", "".join(out)).strip()
+
+
+def reverse_hebrew(text: str) -> str:
+    """מיישר טקסט שחולץ הפוך. תא יכול להשתרע על כמה שורות."""
+    parts = [_unmirror_line(line) for line in text.split("\n") if line.strip()]
+    return " ".join(p for p in parts if p).strip()
 
 
 def parse_dms_pairs(text: str) -> list[tuple[float, float]]:
