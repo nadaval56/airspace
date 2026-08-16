@@ -139,10 +139,16 @@ def main() -> int:
     # הכפתור עושה בפועל: onclick עם שם פונקציה, או __doPostBack של
     # WebForms — ואלה שני עולמות שונים לגמרי.
     head("סימון הכפתור בדף")
+    ids = list(dict.fromkeys(re.findall(r'id="([^"]*[Mm]ore[^"]*)"', page)))
+    print(f"  {len(ids)} מזהי 'More' ייחודיים, ראשונים: {ids[:8]}")
+    # ה-JS לוקח את המזהה של האב החמישי וחותך ממנו 12 תווים:
+    #   f_getMoreInfo(this.parentNode(x5).id.substr(12), 'more')
+    # כלומר msgNum הוא **הזנב של מזהה השורה**, לא האינדקס של התמונה.
     hit = re.search(r"MoreImg_\d+", page)
     if hit:
-        start = page.rfind("<td", 0, hit.start())
-        print("  " + page[max(0, start): hit.start() + 700].replace("\n", "\n  ")[:1600])
+        start = max(0, hit.start() - 2500)
+        chunk = re.sub(r"\s+", " ", page[start: hit.start() + 300])
+        print(f"  --- 2,500 תווים לפני MoreImg_0 (מזהי האבות):\n  {chunk}")
 
     # `f_getMoreInfo` קיימת וחיה, אבל אין בקובץ שום שורת `.open(` שאינה
     # הערה. כלומר הבקשה נבנית במקום אחר — צריך לקרוא את הגוף המלא.
@@ -200,7 +206,7 @@ def main() -> int:
     # ההשוואה היא הבדיקה האמיתית: מה השתנה בתוך divMoreInfo_<n> בין
     # הדף המקורי לתשובת ה-postback. אם כלום לא השתנה — לא נפתח כלום.
     def block(html: str) -> str:
-        spot = html.find(f'id="divMoreInfo_{msg_num}"')
+        spot = html.find(f'divMoreInfo_{msg_num}"')
         return re.sub(r"\s+", " ", html[spot: spot + 1800]) if spot != -1 else ""
 
     before, after = block(page), block(body)

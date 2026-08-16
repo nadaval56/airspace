@@ -241,6 +241,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   gap: 8px 14px;
 }
 
+/* פער ידוע במפה. לא אזהרה אדומה — אזהרה שלישית ברציפות מאבדת את כוחה —
+   אבל גם לא הערת שוליים אפורה שאיש לא קורא. */
+.gap-note {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper-2);
+  border-inline-start: 6px solid var(--amber);
+  border-radius: 6px;
+}
+
 .legend__item {
   display: flex;
   align-items: center;
