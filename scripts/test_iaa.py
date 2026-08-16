@@ -190,5 +190,50 @@ class TestWeather(unittest.TestCase):
         self.assertEqual(iaa.parse_weather_page(page), [])
 
 
+class WeatherAreaTests(unittest.TestCase):
+    """סעיף ה-WI של AIRMET/SIGMET — הגיאומטריה היחידה שיש למזג אוויר."""
+
+    AIRMET = (
+        "LLLL AIRMET 4 VALID 161900/162300 LLBD- LLLL TEL AVIV FIR MT OBSC "
+        "FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 "
+        "- N3321 E03548 STNR INTSF="
+    )
+
+    def test_extracts_closed_ring(self):
+        ring = iaa.extract_area(self.AIRMET)
+        # ארבעה קודקודים ייחודיים, והטבעת נסגרת חזרה על הראשון.
+        self.assertEqual(len(ring), 5)
+        self.assertEqual(ring[0], ring[-1])
+        self.assertEqual(ring[0], [35.8, 33.35])
+
+    def test_stops_at_movement_word(self):
+        """בלי העצירה ב-STNR/MOV, מספרי המשך היו נבלעים כקודקודים."""
+        ring = iaa.extract_area(self.AIRMET + " N9999 E09999")
+        self.assertEqual(len(ring), 5)
+
+    def test_seconds_form(self):
+        ring = iaa.extract_area(
+            "SIGMET WI N332130 E0354830 - N330000 E0353000 - N301800 E0343500 MOV E="
+        )
+        self.assertEqual(len(ring), 4)
+        self.assertAlmostEqual(ring[0][1], 33.358333, places=5)
+
+    def test_metar_has_no_area(self):
+        self.assertIsNone(iaa.extract_area(
+            "METAR LLBG 162220Z VRB02KT 9999 SCT025 28/22 Q1009 NOSIG="))
+
+    def test_two_points_are_not_an_area(self):
+        """שתי נקודות אינן פוליגון. עדיף בלי אזור מאשר אזור מומצא."""
+        self.assertIsNone(iaa.extract_area("AIRMET WI N3321 E03548 - N3257 E03555 STNR="))
+
+    def test_report_carries_area(self):
+        page = ('<tr class="tblBody"><td class="MsgType">AIRMET</td>'
+                '<td class="weatherLocation">LLLL</td>'
+                f'<td class="MsgText">{self.AIRMET}</td></tr>')
+        report = iaa.parse_weather_page(page)[0]
+        self.assertEqual(report["kind"], "AIRMET")
+        self.assertEqual(len(report["area"]), 5)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

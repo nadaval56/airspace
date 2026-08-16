@@ -198,16 +198,38 @@ def main() -> int:
             if has_q:
                 print(f"    {(has_q[0].get('text') or '')[:700]!r}")
 
-    # (2) החוזה עצמו. `?WSDL` חסום על ידי Radware ("Unauthorized Request
-    # Blocked") — חסימה מכוונת של נקודת המטא־דאטה. לא עוקפים אותה;
-    # בודקים רק אם הקריאה הרגילה, זו שהדף עצמו עושה, עוברת.
-    head("WSDL")
-    wsdl, status = fetch(f"{ASMX}?WSDL")
-    blocked = "Unauthorized" in wsdl
-    print(f"  HTTP {status} · {len(wsdl):,} bytes · {'חסום (Radware)' if blocked else 'עבר'}")
-    if blocked or "operation" not in wsdl.lower():
-        print("  אין חוזה. ממשיכים לפי מה שקוד הלקוח מראה בלבד.")
-        return 0
+    # (2) ההרחבה היא postback של WebForms, לא שירות. `f_getMoreInfo`
+    # ממלאת ארבעה שדות מוסתרים ולוחצת על כפתור:
+    #
+    #   hidMsgNum = msgNum;  hidMode = mode;  hidCurOrHist = 'Current';
+    #   hidTblClientId = "";  btnMoreInfo.click();
+    #
+    # אז משחזרים בדיוק את זה. ה-.asmx נזנח — כל הקוד שקורא לו מסומן
+    # כהערה, ו-`?WSDL` חסום על ידי Radware. לא נוגעים בו.
+    head("postback של ההרחבה")
+    fields = iaa.more_info_payload(page, msg_num)
+    print(f"  {len(fields)} שדות טופס · מוסתרים: "
+          f"{[k for k in fields if k.startswith('hid')]}")
+    import urllib.parse
+    body, status = fetch(
+        iaa.NOTAM_URL,
+        urllib.parse.urlencode(fields).encode(),
+        {"Content-Type": "application/x-www-form-urlencoded"},
+    )
+    print(f"  HTTP {status} · {len(body):,} bytes")
+    for needle in ("Valid From", "Valid To", "more_NotamInfo", "more_MsgText"):
+        print(f"  {needle!r}: {body.count(needle)} מופעים")
+    print(f"  parse_more_info: {iaa.parse_more_info(body)}")
+    spot = body.find("Valid From")
+    if spot != -1:
+        start = body.rfind("<table", 0, spot)
+        print("  --- הבלוק שנפתח:")
+        print("  " + re.sub(r"\s+", " ", body[max(0, start): spot + 2500])[:2500])
+    else:
+        print("  --- אין 'Valid From'. 1,000 תווים סביב tblMoreInfo1_0:")
+        spot = body.find(f"tblMoreInfo1_{msg_num}")
+        if spot != -1:
+            print("  " + re.sub(r"\s+", " ", body[max(0, spot - 400): spot + 1200]))
     namespace, params = read_contract(wsdl)
     operations = sorted(set(_OP_RE.findall(wsdl)))
     print(f"  מרחב שמות: {namespace}")
