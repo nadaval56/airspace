@@ -10,6 +10,7 @@
 
 from __future__ import annotations
 
+import http.cookiejar
 import json
 import os
 import re
@@ -134,10 +135,101 @@ def inspect_scripts(html: str) -> None:
                 print(f"    {t[:170]}")
 
 
+IAA_URL = "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
+
+
+def probe_iaa() -> None:
+    """רשות שדות התעופה — מקור ישראלי רשמי.
+
+    הדף הוא ASP.NET WebForms, אז צריך עוגיות ו-__VIEWSTATE. בודקים גם
+    GET רגיל וגם POST חוזר, שהוא הדפוס שמפעיל טבלאות בדפים כאלה.
+    """
+    print(f"\n{'=' * 72}\n▶▶ רשות שדות התעופה — {IAA_URL}\n{'=' * 72}")
+
+    # עוגיות נדרשות: ASP.NET מנהל session, ובלעדיה ה-POST ייכשל.
+    jar = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
+    headers = {
+        "User-Agent": BROWSER_UA,
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "he-IL,he;q=0.9,en;q=0.8",
+    }
+
+    def fetch(url, data=None, extra=None):
+        hdrs = dict(headers)
+        hdrs.update(extra or {})
+        req = urllib.request.Request(url, headers=hdrs, data=data)
+        try:
+            with opener.open(req, timeout=60) as resp:
+                return resp.read().decode("utf-8", errors="replace"), resp.status, resp.headers.get("Content-Type", "")
+        except urllib.error.HTTPError as exc:
+            return exc.read().decode("utf-8", errors="replace"), exc.code, ""
+        except Exception as exc:
+            print(f"  נכשל: {type(exc).__name__}: {exc}")
+            return None, None, None
+
+    html, status, ctype = fetch(IAA_URL)
+    if html is None:
+        return
+
+    blocks = extract_from_response(html, ctype)
+    print(f"  GET → HTTP {status}  {ctype}  {len(html):,} bytes  →  {len(blocks)} נוטאמים")
+    if blocks:
+        print("  --- הראשון:")
+        print("  " + blocks[0][:800].replace("\n", "\n  "))
+        return
+
+    # מה יש בדף: שדות טופס, סקריפטים, ורמזים לתוכן
+    fields = dict(re.findall(
+        r'<input[^>]+name="([^"]+)"[^>]*value="([^"]*)"', html, re.I))
+    print(f"  --- {len(fields)} שדות טופס: {[k for k in fields][:20]}")
+
+    action = re.search(r'<form[^>]+action="([^"]+)"', html, re.I)
+    print(f"  --- action: {action.group(1) if action else 'לא נמצא'}")
+
+    selects = re.findall(r'<select[^>]+name="([^"]+)"', html, re.I)
+    print(f"  --- select: {selects[:15]}")
+
+    scripts = re.findall(r'<script[^>]+src="([^"]+)"', html, re.I)
+    print(f"  --- {len(scripts)} סקריפטים: {scripts[:15]}")
+
+    handlers = re.findall(r'["\']([^"\'\s]*\.(?:ashx|asmx|svc|json)[^"\'\s]*)["\']', html, re.I)
+    print(f"  --- handlers אפשריים: {list(dict.fromkeys(handlers))[:15]}")
+
+    for marker in ("NOTAM", "Q)", "NOTAMN", "iframe", "GridView", "RadGrid"):
+        if marker in html:
+            print(f"  --- הדף מכיל '{marker}'")
+
+    frames = re.findall(r'<iframe[^>]+src="([^"]+)"', html, re.I)
+    if frames:
+        print(f"  --- iframes: {frames[:10]}")
+
+    print("  --- 1,200 התווים הראשונים:")
+    print("  " + html[:1200].replace("\n", "\n  "))
+
+    # POST חוזר עם ה-VIEWSTATE — הדפוס שמפעיל טבלאות ב-WebForms
+    if "__VIEWSTATE" in fields:
+        payload = urllib.parse.urlencode(
+            {k: v for k, v in fields.items() if k.startswith("__")}
+        ).encode()
+        body, status, ctype = fetch(
+            IAA_URL, payload,
+            {"Content-Type": "application/x-www-form-urlencoded", "Referer": IAA_URL},
+        )
+        if body is not None:
+            found = extract_from_response(body, ctype)
+            print(f"\n  POST → HTTP {status}  {len(body):,} bytes  →  {len(found)} נוטאמים")
+            if found:
+                print("  --- הראשון:")
+                print("  " + found[0][:800].replace("\n", "\n  "))
+
+
 def main() -> int:
     print("=" * 72)
     print("אבחון מקורות נוטאמים")
     print("=" * 72)
+
+    probe_iaa()
 
     # ה-endpoint שנמצא ב-app.js. מדפיסים ממנו הרבה, כי הוא המקור היחיד
     # שאינו חסום ואנחנו צריכים לראות בדיוק באיזה מבנה הוא מחזיר.
