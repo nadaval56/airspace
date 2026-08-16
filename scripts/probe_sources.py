@@ -139,6 +139,33 @@ def main() -> int:
     print("אבחון מקורות נוטאמים")
     print("=" * 72)
 
+    # ה-endpoint שנמצא ב-app.js. מדפיסים ממנו הרבה, כי הוא המקור היחיד
+    # שאינו חסום ואנחנו צריכים לראות בדיוק באיזה מבנה הוא מחזיר.
+    body = probe(
+        "notams.online — ה-endpoint מ-app.js",
+        f"https://notams.online/api/notams.php?location={ICAO}",
+        {"Accept": "application/json, text/plain, */*", "X-Requested-With": "XMLHttpRequest",
+         "Referer": f"https://notams.online/icao/{ICAO}"},
+    )
+    if body:
+        print("  --- 2,500 התווים הראשונים של הגוף:")
+        print("  " + body[:2500].replace("\n", "\n  "))
+        try:
+            payload = json.loads(body)
+            print(f"  --- JSON תקין. סוג: {type(payload).__name__}")
+            if isinstance(payload, dict):
+                print(f"      מפתחות עליונים: {list(payload)[:25]}")
+                for key, value in payload.items():
+                    if isinstance(value, list) and value:
+                        print(f"      {key}: רשימה של {len(value)}, "
+                              f"מפתחות הפריט: {list(value[0])[:25] if isinstance(value[0], dict) else type(value[0]).__name__}")
+            elif isinstance(payload, list) and payload:
+                print(f"      רשימה של {len(payload)}, "
+                      f"מפתחות הפריט: {list(payload[0])[:25] if isinstance(payload[0], dict) else type(payload[0]).__name__}")
+                print(f"      פריט ראשון: {json.dumps(payload[0], ensure_ascii=False)[:1200]}")
+        except (json.JSONDecodeError, ValueError):
+            print("  --- לא JSON.")
+
     html = probe(
         "notams.online — הדף עצמו",
         f"https://notams.online/icao/{ICAO}",
