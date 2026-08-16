@@ -140,6 +140,18 @@ def main() -> int:
 
     # `f_getMoreInfo` קיימת וחיה, אבל אין בקובץ שום שורת `.open(` שאינה
     # הערה. כלומר הבקשה נבנית במקום אחר — צריך לקרוא את הגוף המלא.
+    # אין בכל MoreInfo.js אף שורת `.open(` שאינה הערה — כל בניית הבקשה
+    # מסומנת כהערה. השערה: אין בקשה. הדף שוקל 1.4MB ל-127 נוטאמים, הרבה
+    # מעבר לטקסט הנראה, ולכן ייתכן שתוכן ההרחבה כבר מוטמע בו ו-JS רק
+    # מחליף display. אם זה נכון — זמני התוקף כבר אצלנו.
+    head("האם ההרחבה כבר בדף?")
+    for needle in ("divMoreInfo_", "tblMoreInfo1_", "Valid From", "FromDate", "ToDate", "getMoreMsgInfo"):
+        print(f"  {needle!r}: {page.count(needle)} מופעים")
+    spot = page.find("divMoreInfo_0")
+    if spot != -1:
+        print("  --- HTML סביב divMoreInfo_0:")
+        print("  " + page[spot - 200: spot + 1400].replace("\n", "\n  "))
+
     js, status = fetch(f"{iaa.BASE}/JS/MoreInfo.js")
     print(f"\n  --- MoreInfo.js ({status}, {len(js):,} bytes)")
     # החצי השני של הקובץ — `f_buildMoreMsgInfo(xml)` — כבר נקרא, והוא
@@ -152,8 +164,10 @@ def main() -> int:
         print("      אין f_getMoreInfo בקובץ.")
     else:
         section = js[start: end if end > start else start + 4000]
-        print(f"      --- f_getMoreInfo ואילך ({len(section):,} תווים):")
-        print("      " + section.replace("\n", "\n      "))
+        live = [ln for ln in section.splitlines() if ln.strip() and not ln.strip().startswith("//")]
+        print(f"      --- f_getMoreInfo: {len(section):,} תווים, {len(live)} שורות שאינן הערה:")
+        for line in live:
+            print(f"      {line.strip()[:170]}")
 
     # אם הכפתור הוא __doPostBack, ההרחבה נבנית בשרת ומגיעה בדף עצמו —
     # אין שום שירות לקרוא לו, רק לשחזר את ה-POST של WebForms.

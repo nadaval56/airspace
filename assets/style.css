@@ -528,6 +528,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 
 .wx-card--taf { border-inline-start-color: #7c3aed; }
 
+/* דיווח שיש לו אזור מצויר על המפה — אותו גוון כמו הפוליגון. */
+.wx-card--area { border-inline-start-color: #0f766e; }
+.wx-card__kind--area { color: #0f766e; background: #e0f2f0; }
+
 .wx-card__head {
   display: flex;
   flex-wrap: wrap;
@@ -603,6 +607,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .popup__jump:hover { background: var(--navy-2); }
 
 /* הבהוב קצר על הכרטיס שאליו קפצנו, כדי שהעין תמצא אותו */
+/* הבהוב הכרטיס שקפצנו אליו — נוטאם או דיווח מזג אוויר, אותו סימון. */
 .notam-card--found {
   outline: 4px solid var(--amber);
   outline-offset: 3px;

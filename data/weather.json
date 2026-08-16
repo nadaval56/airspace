@@ -32,7 +32,8 @@
    "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 161800 TILL 171800, WIND 330 DEGREES, 7 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
    "truncated": true,
    "valid_from": "161800",
-   "valid_to": "171800"
+   "valid_to": "171800",
+   "area": null
   },
   {
    "id": "METAR",
@@ -41,7 +42,8 @@
    "text": "METAR LLBG 162220Z VRB02KT 9999 SCT025 28/22 Q1009 NOSIG=",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   },
   {
    "id": "METAR",
@@ -50,7 +52,8 @@
    "text": "METAR LLHA 162150Z NIL=",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   },
   {
    "id": "METAR",
@@ -59,7 +62,8 @@
    "text": "METAR LLER 162150Z AUTO 01009KT CAVOK 32/17 Q1009=",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   },
   {
    "id": "METAR",
@@ -68,16 +72,39 @@
    "text": "METAR LLIB 162150Z NIL=",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   },
   {
    "id": "AIRMET",
    "station": "LLLL",
-   "kind": null,
+   "kind": "AIRMET",
    "text": "LLLL AIRMET 4 VALID 161900/162300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR INTSF=",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": [
+    [
+     35.8,
+     33.35
+    ],
+    [
+     35.916667,
+     32.95
+    ],
+    [
+     34.583333,
+     30.3
+    ],
+    [
+     34.433333,
+     30.7
+    ],
+    [
+     35.8,
+     33.35
+    ]
+   ]
   },
   {
    "id": "TAFLG",
@@ -86,7 +113,8 @@
    "text": "TAF LLBG 161705Z 1618/1718 33007KT 9999 SCT025 TX32/1712Z TN25/1703Z BECMG 1619/1621 VRB04KT",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   },
   {
    "id": "TAFLG",
@@ -95,7 +123,8 @@
    "text": "TAF LLER 161702Z 1618/1718 36008KT CAVOK TX39/1712Z TN27/1703Z PROB40 TEMPO 1618/1619 34012KT",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   },
   {
    "id": "TAFLG",
@@ -104,7 +133,8 @@
    "text": "TAF LLHA 161706Z 1618/1718 33008KT 9999 SCT025 TX31/1712Z TN26/1704Z BECMG 1619/1621 28006KT",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   },
   {
    "id": "TAFLG",
@@ -113,7 +143,8 @@
    "text": "TAF LLIB 161706Z 1618/1718 33010KT 9999 FEW035 TX34/1712Z TN23/1703Z BECMG 1619/1621 VRB04KT SCT025",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   },
   {
    "id": "TAFLG",
@@ -122,7 +153,8 @@
    "text": "TAF LLHZ 161705Z 1618/1718 35005KT 9999 SCT025 TX30/1712Z TN25/1703Z BECMG 1619/1621 VRB04KT",
    "truncated": true,
    "valid_from": null,
-   "valid_to": null
+   "valid_to": null,
+   "area": null
   }
  ]
 }
