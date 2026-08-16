@@ -1,11 +1,144 @@
 {
- "generated_at": null,
- "last_success": null,
+ "generated_at": "2026-08-16T19:39:31Z",
+ "last_success": "2026-08-16T19:39:31Z",
  "last_error": null,
- "stale": true,
+ "stale": false,
  "fir": "LLLL",
- "airports": ["LLBG", "LLHA", "LLIB", "LLRD", "LLHZ"],
- "sources": [],
+ "airports": [
+  "LLBG",
+  "LLHA",
+  "LLIB",
+  "LLRD",
+  "LLHZ"
+ ],
+ "sources": [
+  {
+   "source": "notams.online",
+   "icao": "LLLL",
+   "ok": true,
+   "count": 0,
+   "url": "https://notams.online/icao/LLLL"
+  },
+  {
+   "source": "notams.online",
+   "icao": "LLBG",
+   "ok": true,
+   "count": 0,
+   "url": "https://notams.online/icao/LLBG"
+  },
+  {
+   "source": "notams.online",
+   "icao": "LLHA",
+   "ok": true,
+   "count": 0,
+   "url": "https://notams.online/icao/LLHA"
+  },
+  {
+   "source": "notams.online",
+   "icao": "LLIB",
+   "ok": true,
+   "count": 0,
+   "url": "https://notams.online/icao/LLIB"
+  },
+  {
+   "source": "notams.online",
+   "icao": "LLRD",
+   "ok": true,
+   "count": 0,
+   "url": "https://notams.online/icao/LLRD"
+  },
+  {
+   "source": "notams.online",
+   "icao": "LLHZ",
+   "ok": true,
+   "count": 0,
+   "url": "https://notams.online/icao/LLHZ"
+  },
+  {
+   "source": "autorouter",
+   "icao": "LLLL",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://api.autorouter.aero/v1.0/notam?itemas=[\"LLLL\"]&offset=0&limit=200 — HTTP Error 400: Bad Request"
+  },
+  {
+   "source": "autorouter",
+   "icao": "LLBG",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://api.autorouter.aero/v1.0/notam?itemas=[\"LLBG\"]&offset=0&limit=200 — HTTP Error 400: Bad Request"
+  },
+  {
+   "source": "autorouter",
+   "icao": "LLHA",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://api.autorouter.aero/v1.0/notam?itemas=[\"LLHA\"]&offset=0&limit=200 — HTTP Error 400: Bad Request"
+  },
+  {
+   "source": "autorouter",
+   "icao": "LLIB",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://api.autorouter.aero/v1.0/notam?itemas=[\"LLIB\"]&offset=0&limit=200 — HTTP Error 400: Bad Request"
+  },
+  {
+   "source": "autorouter",
+   "icao": "LLRD",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://api.autorouter.aero/v1.0/notam?itemas=[\"LLRD\"]&offset=0&limit=200 — HTTP Error 400: Bad Request"
+  },
+  {
+   "source": "autorouter",
+   "icao": "LLHZ",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://api.autorouter.aero/v1.0/notam?itemas=[\"LLHZ\"]&offset=0&limit=200 — HTTP Error 400: Bad Request"
+  },
+  {
+   "source": "faa-dins",
+   "icao": "LLLL",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP Error 403: Forbidden"
+  },
+  {
+   "source": "faa-dins",
+   "icao": "LLBG",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLBG&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP Error 403: Forbidden"
+  },
+  {
+   "source": "faa-dins",
+   "icao": "LLHA",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLHA&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP Error 403: Forbidden"
+  },
+  {
+   "source": "faa-dins",
+   "icao": "LLIB",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLIB&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP Error 403: Forbidden"
+  },
+  {
+   "source": "faa-dins",
+   "icao": "LLRD",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLRD&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP Error 403: Forbidden"
+  },
+  {
+   "source": "faa-dins",
+   "icao": "LLHZ",
+   "ok": false,
+   "count": 0,
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLHZ&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP Error 403: Forbidden"
+  }
+ ],
  "counts": {
   "total": 0,
   "mapped": 0,
@@ -14,6 +147,5 @@
   "low_altitude": 0,
   "administrative": 0
  },
- "notams": [],
- "_comment": "קובץ זרע. יידרס בריצה הראשונה של .github/workflows/fetch-notams.yml"
+ "notams": []
 }
