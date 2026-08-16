@@ -161,12 +161,17 @@ def probe_iaa() -> None:
         req = urllib.request.Request(url, headers=hdrs, data=data)
         try:
             with opener.open(req, timeout=60) as resp:
-                return resp.read().decode("utf-8", errors="replace"), resp.status, resp.headers.get("Content-Type", "")
+                raw, status, ctype = resp.read(), resp.status, resp.headers.get("Content-Type", "")
         except urllib.error.HTTPError as exc:
-            return exc.read().decode("utf-8", errors="replace"), exc.code, ""
+            raw, status, ctype = exc.read(), exc.code, ""
         except Exception as exc:
             print(f"  נכשל: {type(exc).__name__}: {exc}")
             return None, None, None
+        # הכותרת מצהירה utf-8 אבל התג במסמך אומר windows-1255. הולכים
+        # אחרי התג — פענוח שגוי הופך את העברית לג'יבריש.
+        head = raw[:2000].decode("latin-1", errors="replace").lower()
+        encoding = "cp1255" if "windows-1255" in head else "utf-8"
+        return raw.decode(encoding, errors="replace"), status, ctype
 
     html, status, ctype = fetch(IAA_URL)
     if html is None:
@@ -203,6 +208,27 @@ def probe_iaa() -> None:
     frames = re.findall(r'<iframe[^>]+src="([^"]+)"', html, re.I)
     if frames:
         print(f"  --- iframes: {frames[:10]}")
+
+    # איפה התוכן באמת יושב בדף
+    for label, pattern in (
+        ("מזהי נוטאם", r"\b[A-Z]\d{1,4}/\d{2}\b"),
+        ("שורות Q", r"Q\)\s*\w{4}/"),
+        ("המילה NOTAM", r"NOTAM"),
+        ("METAR", r"METAR"),
+        ("TAF", r"\bTAF\b"),
+    ):
+        hits = list(re.finditer(pattern, html))
+        print(f"  --- {label}: {len(hits)} מופעים")
+        for m in hits[:2]:
+            excerpt = html[max(0, m.start() - 200): m.start() + 400]
+            excerpt = re.sub(r"<[^>]+>", " ", excerpt)
+            excerpt = re.sub(r"\s+", " ", excerpt).strip()
+            print(f"      …{excerpt[:400]}…")
+
+    options = re.findall(r"<option[^>]*value=\"([^\"]*)\"[^>]*>([^<]*)</option>", html, re.I)
+    print(f"  --- {len(options)} אפשרויות ברשימות נפתחות (20 ראשונות):")
+    for value, text in options[:20]:
+        print(f"      {value!r} = {text.strip()!r}")
 
     print("  --- 1,200 התווים הראשונים:")
     print("  " + html[:1200].replace("\n", "\n  "))
