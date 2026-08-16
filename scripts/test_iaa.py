@@ -13,10 +13,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import iaa  # noqa: E402
 
+# מבנה אמיתי מהדף החי. ה-`<tr>` עטוף ב-`divMainInfo_<msgNum>`, וממנו
+# — ולא מ-`MoreImg_0` — נלקח מספר ההודעה: ה-onclick עושה `.substr(12)`
+# על מזהה האב, ו-"divMainInfo_" הוא בדיוק 12 תווים.
 ROW = '''
+<div id="divMainInfo_2046996" style="display: inline;">
+<table id="tblMainInfo_2046996" class="tblMainInfo">
 <tr class="tblBody">
     <td class="ImgField">
-        <img id="DataList1_MoreImg_0" onclick="javascript:f_getMoreInfo(this.id,&#39;more&#39;);" src="Images/plus.gif" />
+        <img id="DataList1_MoreImg_0" onclick="javascript:f_getMoreInfo(this.parentNode.parentNode.parentNode.parentNode.parentNode.id.substr(12),&#39;more&#39;);" src="Images/plus.gif" />
     </td>
     <td class="NotamID">
         C1760/26
@@ -28,6 +33,8 @@ ROW = '''
         E) AN AREA AT TLALIM WI 0.3NM RADIUS CENTERED ON PSN 3055N03446E IS CLSD
     </td>
 </tr>
+</table>
+</div>
 '''
 
 
@@ -47,7 +54,8 @@ class TestRows(unittest.TestCase):
         self.assertEqual(len(rows), 1)
         self.assertEqual(rows[0]["id"], "C1760/26")
         self.assertEqual(rows[0]["location"], "LLLL")
-        self.assertEqual(rows[0]["msg_num"], "0")
+        # מזהה ההודעה, לא האינדקס של השורה ב-DataList.
+        self.assertEqual(rows[0]["msg_num"], "2046996")
         self.assertIn("TLALIM", rows[0]["text"])
 
     def test_whitespace_collapsed(self):
@@ -119,10 +127,17 @@ class TestContinuationRows(unittest.TestCase):
 
 
 class TestTruncation(unittest.TestCase):
-    """הטקסט בדף הרשימה חתוך; שורה עם כפתור הרחבה מסומנת."""
+    """שורה שאפשר להרחיב מסומנת, ואיתה מספר ההודעה לבקשה."""
 
     def test_row_with_expand_button(self):
         self.assertTrue(iaa.parse_rows(ROW)[0]["expandable"])
+
+    def test_each_row_gets_its_own_message_number(self):
+        """שתי שורות, שני עוטפים — כל שורה חייבת לקבל את המספר שלה
+        ולא את זה של קודמתה."""
+        page = ROW + ROW.replace("2046996", "2047001").replace("C1760/26", "C1761/26")
+        rows = iaa.parse_rows(page)
+        self.assertEqual([r["msg_num"] for r in rows], ["2046996", "2047001"])
 
     def test_row_without_expand_button(self):
         page = ('<tr class="tblBody"><td class="MsgType">METAR</td>'
@@ -188,6 +203,51 @@ class TestWeather(unittest.TestCase):
         page = ('<tr class="tblBody"><td class="MsgType">X</td>'
                 '<td class="weatherLocation">Y</td><td class="MsgText"></td></tr>')
         self.assertEqual(iaa.parse_weather_page(page), [])
+
+
+class WeatherAreaTests(unittest.TestCase):
+    """סעיף ה-WI של AIRMET/SIGMET — הגיאומטריה היחידה שיש למזג אוויר."""
+
+    AIRMET = (
+        "LLLL AIRMET 4 VALID 161900/162300 LLBD- LLLL TEL AVIV FIR MT OBSC "
+        "FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 "
+        "- N3321 E03548 STNR INTSF="
+    )
+
+    def test_extracts_closed_ring(self):
+        ring = iaa.extract_area(self.AIRMET)
+        # ארבעה קודקודים ייחודיים, והטבעת נסגרת חזרה על הראשון.
+        self.assertEqual(len(ring), 5)
+        self.assertEqual(ring[0], ring[-1])
+        self.assertEqual(ring[0], [35.8, 33.35])
+
+    def test_stops_at_movement_word(self):
+        """בלי העצירה ב-STNR/MOV, מספרי המשך היו נבלעים כקודקודים."""
+        ring = iaa.extract_area(self.AIRMET + " N9999 E09999")
+        self.assertEqual(len(ring), 5)
+
+    def test_seconds_form(self):
+        ring = iaa.extract_area(
+            "SIGMET WI N332130 E0354830 - N330000 E0353000 - N301800 E0343500 MOV E="
+        )
+        self.assertEqual(len(ring), 4)
+        self.assertAlmostEqual(ring[0][1], 33.358333, places=5)
+
+    def test_metar_has_no_area(self):
+        self.assertIsNone(iaa.extract_area(
+            "METAR LLBG 162220Z VRB02KT 9999 SCT025 28/22 Q1009 NOSIG="))
+
+    def test_two_points_are_not_an_area(self):
+        """שתי נקודות אינן פוליגון. עדיף בלי אזור מאשר אזור מומצא."""
+        self.assertIsNone(iaa.extract_area("AIRMET WI N3321 E03548 - N3257 E03555 STNR="))
+
+    def test_report_carries_area(self):
+        page = ('<tr class="tblBody"><td class="MsgType">AIRMET</td>'
+                '<td class="weatherLocation">LLLL</td>'
+                f'<td class="MsgText">{self.AIRMET}</td></tr>')
+        report = iaa.parse_weather_page(page)[0]
+        self.assertEqual(report["kind"], "AIRMET")
+        self.assertEqual(len(report["area"]), 5)
 
 
 if __name__ == "__main__":

@@ -61,7 +61,17 @@ _TD_RE = re.compile(r'<td[^>]*class="([^"]+)"[^>]*>(.*?)</td>', re.S | re.I)
 _ID_CLASSES = ("NotamID", "MsgType")
 _LOCATION_CLASSES = ("Location", "weatherLocation")
 
-_MSGNUM_RE = re.compile(r'MoreImg_(\d+)')
+# מספר ההודעה לכפתור ההרחבה. ה-onclick של התמונה הוא:
+#
+#     f_getMoreInfo(this.parentNode…(x5).id.substr(12), 'more')
+#
+# והאב החמישי הוא `<div id="divMainInfo_2046996">`. ל-"divMainInfo_"
+# יש בדיוק 12 תווים, כלומר msgNum = 2046996 — **מזהה הודעה אמיתי**.
+#
+# הניסיון הראשון קרא `MoreImg_(\d+)` והחזיר 0,1,2… — האינדקס של השורה
+# ב-DataList, שאין לו שום קשר. עם המספר הזה ה-postback חזר עם הדף
+# ההתחלתי בדיוק, בלי שום הרחבה, וזה נראה כאילו המנגנון לא עובד.
+_MAININFO_RE = re.compile(r'id="(?:div|tbl)MainInfo_(\d+)"')
 _TAG_RE = re.compile(r"<[^>]+>")
 
 # קואורדינטה בתוך טקסט ההודעה, בפורמט הנוטאמי הרגיל: 3155N03518E
@@ -84,7 +94,21 @@ def _text(fragment: str) -> str:
 
 
 def parse_rows(page: str) -> list[dict]:
-    """מחזיר [{id, location, text, msg_num, expandable}] לכל שורה בטבלה."""
+    """מחזיר [{id, location, text, msg_num, expandable}] לכל שורה בטבלה.
+
+    `msg_num` נלקח מ-`divMainInfo_<n>` **העוטף** את השורה, ולכן הוא
+    נמצא לפי מיקום בטקסט ולא בתוך ה-`<tr>` עצמו.
+    """
+    anchors = [(m.start(), m.group(1)) for m in _MAININFO_RE.finditer(page)]
+
+    def msg_num_before(position: int) -> str | None:
+        found = None
+        for start, number in anchors:
+            if start > position:
+                break
+            found = number
+        return found
+
     rows = []
     for match in _TR_RE.finditer(page):
         block = match.group(1)
@@ -98,14 +122,14 @@ def parse_rows(page: str) -> list[dict]:
         if not identifier and not text:
             continue
 
-        number = _MSGNUM_RE.search(block)
+        number = msg_num_before(match.start())
         rows.append({
             "id": identifier,
             "location": location,
             "text": text,
-            "msg_num": number.group(1) if number else None,
-            # כפתור ההרחבה מוביל לפרטים נוספים באתר (שורת Q, זמני תוקף).
-            # הטקסט עצמו שלם אחרי איחוד שורות ההמשך.
+            "msg_num": number,
+            # כפתור ההרחבה מוביל לפרטים נוספים באתר (זמני תוקף, שדה
+            # תעופה). הטקסט עצמו שלם אחרי איחוד שורות ההמשך.
             "expandable": bool(number),
         })
     return rows
@@ -185,12 +209,87 @@ def parse_notam_page(page: str) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
+# ההרחבה — הכפתור `+`, ולמה היא לא נמשכת
+# ---------------------------------------------------------------------------
+#
+# דף הרשימה לא נותן זמני תוקף. הם נפתחים בלחיצה על ה-`+`, ולכן נבדק
+# לעומק אם אפשר לפתוח אותם אוטומטית. **התשובה היא לא**, ומתועד כאן
+# למה, כדי שאיש לא ינסה שוב מאפס.
+#
+# מה הכפתור עושה, לפי `MoreInfo.js`:
+#
+#     document.getElementById('hidMsgNum').value = msgNum;
+#     document.getElementById('hidMode').value = mode;
+#     document.getElementById('hidCurOrHist').value = CurrOrHist;
+#     document.getElementById('hidTblClientId').value = "";
+#     document.getElementById('btnMoreInfo').click();
+#
+# כלומר postback של WebForms. באותו קובץ יש גם נתיב ישן דרך
+# `AeroInfo.asmx?op=getMoreMsgInfo` — כל שורה בו מסומנת כהערה, וה-`?WSDL`
+# שלו מחזיר `Unauthorized Request Blocked` מ-Radware.
+#
+# מה שנבדק בפועל, מול השרת החי, עם עוגיות סשן ועם כל שדות הטופס:
+#
+#   postback מלא        → HTTP 200, הדף חוזר **זהה**. שום הרחבה לא נפתחת.
+#   postback אסינכרוני  → HTTP 200 עם `Error 100` — דף חסימה של זיהוי
+#                         בוטים (stormcaster.js, validate.perfdrive.com).
+#
+# החסימה השנייה היא הגנה מכוונת מפני אוטומציה. לא עוקפים אותה. ההשלכה:
+# **זמני התוקף אינם זמינים לכלי הזה**, והכרטיסים מציגים "לא צוין" —
+# וזו האמת, לא תקלה. מי שצריך אותם ילחץ על ה-`+` באתר עצמו.
+#
+# מה שכן נשמר מהחקירה: `msg_num`. הוא מזהה ההודעה באתר, והוא זה שמסמן
+# אילו שורות ניתנות להרחבה שם.
+
+# ---------------------------------------------------------------------------
 # מזג אוויר
 # ---------------------------------------------------------------------------
 
-_WX_KIND_RE = re.compile(r"\b(METAR|SPECI|TAF)\b", re.I)
+_WX_KIND_RE = re.compile(r"\b(METAR|SPECI|TAF|AIRMET|SIGMET)\b", re.I)
 # "VALID FROM 161800 TILL 171800" — DDHHMM
 _VALID_RE = re.compile(r"VALID\s+FROM\s+(\d{6})\s+TILL\s+(\d{6})", re.I)
+
+# AIRMET ו-SIGMET הם היחידים מבין הודעות מזג האוויר שנושאים **גיאומטריה
+# מפורשת**. METAR ו-TAF מדווחים על תחנה — נקודה — ומיקום התחנה אינו
+# מופיע בשום מקום בדף, ולכן הם לא מסומנים על המפה. אבל אזור ה-AIRMET
+# רשום בטקסט עצמו כרשימת קודקודים:
+#
+#   LLLL AIRMET 4 VALID 161900/162300 LLBD- LLLL TEL AVIV FIR MT OBSC
+#   FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426
+#   - N3321 E03548 STNR INTSF=
+#
+# זה פוליגון סגור, מהמקור הרשמי, בלי שום ניחוש. הוא נעצר בסימן `=` או
+# במילת מצב כמו STNR/MOV/NC — ולכן חותכים שם ולא ממשיכים לבלוע מספרים.
+_WX_AREA_RE = re.compile(r"\bWI\b(.*?)(?:\b(?:STNR|MOV|NC|INTSF|WKN|NO\s+SIG)\b|=|$)", re.I | re.S)
+_WX_POINT_RE = re.compile(r"\b([NS])(\d{2})(\d{2})(\d{2})?\s+([EW])(\d{3})(\d{2})(\d{2})?\b")
+
+
+def _dms(degrees: str, minutes: str, seconds: str | None, hemisphere: str) -> float:
+    value = int(degrees) + int(minutes) / 60.0 + (int(seconds) / 3600.0 if seconds else 0.0)
+    return -value if hemisphere in ("S", "W") else value
+
+
+def extract_area(text: str) -> list[list[float]] | None:
+    """טבעת [lon, lat] מתוך סעיף ה-WI של AIRMET/SIGMET.
+
+    מחזיר None אם אין מספיק קודקודים לשטח. פחות משלוש נקודות אינו
+    פוליגון, ואזור מזג אוויר שגוי מטעה בדיוק כמו אזור מגבלה שגוי.
+    """
+    section = _WX_AREA_RE.search(text or "")
+    if not section:
+        return None
+    ring = []
+    for ns, lat_d, lat_m, lat_s, ew, lon_d, lon_m, lon_s in _WX_POINT_RE.findall(section.group(1)):
+        ring.append([
+            round(_dms(lon_d, lon_m, lon_s, ew), 6),
+            round(_dms(lat_d, lat_m, lat_s, ns), 6),
+        ])
+    # המקור סוגר את הטבעת בעצמו; אם לא — סוגרים.
+    if len(ring) >= 2 and ring[0] == ring[-1]:
+        ring = ring[:-1]
+    if len(ring) < 3:
+        return None
+    return ring + [ring[0]]
 
 
 def parse_weather_page(page: str) -> list[dict]:
@@ -211,5 +310,7 @@ def parse_weather_page(page: str) -> list[dict]:
             "truncated": row.get("expandable", False),
             "valid_from": valid.group(1) if valid else None,
             "valid_to": valid.group(2) if valid else None,
+            # רק ל-AIRMET/SIGMET. אצל השאר זה None, וכך גם צריך להיות.
+            "area": extract_area(text),
         })
     return [r for r in reports if r["text"]]

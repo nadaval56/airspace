@@ -241,6 +241,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   gap: 8px 14px;
 }
 
+/* פער ידוע במפה. לא אזהרה אדומה — אזהרה שלישית ברציפות מאבדת את כוחה —
+   אבל גם לא הערת שוליים אפורה שאיש לא קורא. */
+.gap-note {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper-2);
+  border-inline-start: 6px solid var(--amber);
+  border-radius: 6px;
+}
+
 .legend__item {
   display: flex;
   align-items: center;
@@ -528,6 +541,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 
 .wx-card--taf { border-inline-start-color: #7c3aed; }
 
+/* דיווח שיש לו אזור מצויר על המפה — אותו גוון כמו הפוליגון. */
+.wx-card--area { border-inline-start-color: #0f766e; }
+.wx-card__kind--area { color: #0f766e; background: #e0f2f0; }
+
 .wx-card__head {
   display: flex;
   flex-wrap: wrap;
@@ -603,6 +620,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .popup__jump:hover { background: var(--navy-2); }
 
 /* הבהוב קצר על הכרטיס שאליו קפצנו, כדי שהעין תמצא אותו */
+/* הבהוב הכרטיס שקפצנו אליו — נוטאם או דיווח מזג אוויר, אותו סימון. */
 .notam-card--found {
   outline: 4px solid var(--amber);
   outline-offset: 3px;

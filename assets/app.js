@@ -24,6 +24,16 @@ const ZONE_STYLES = {
 const NOTAM_LOW = '#d1006e';
 const NOTAM_HIGH = '#0f6fa8';
 const LOW_ALTITUDE_FT = 3000;
+// מזג אוויר בגוון שלישי, שאינו אדום ואינו כחול — כדי שלא ייקרא כמגבלה.
+const WEATHER_COLOR = '#0f766e';
+
+/**
+ * "לא צוין" הוא ניסוח שמזמין אי־הבנה: הוא נשמע כאילו לנוטאם אין תוקף
+ * מוגדר, בזמן שהאמת היא שהמקור פשוט לא נותן אותו ברשימה. זמני התוקף
+ * והגבהים נפתחים באתר עצמו בלחיצה על ה-`+`, ואי אפשר למשוך אותם —
+ * הבקשה שפותחת אותם נחסמת בזיהוי בוטים (ההסבר המלא ב-scripts/iaa.py).
+ */
+const NO_VALIDITY = 'לא פורסם ברשימה';
 
 const el = (id) => document.getElementById(id);
 
@@ -71,7 +81,9 @@ function altitudeText(n) {
   const upper = n.upper_limit && n.upper_limit.raw;
   if (lower || upper) return `${lower || '—'} עד ${upper || '—'}`;
   const alt = n.altitude;
-  if (!alt) return 'לא צוין';
+  // אותה סיבה כמו בזמני התוקף: פריטי F)/G) נפתחים רק בכפתור ההרחבה
+  // באתר, ולא מגיעים לרשימה.
+  if (!alt) return NO_VALIDITY;
   if (alt.unlimited) return 'ללא הגבלת גובה';
   return `${alt.lower_ft.toLocaleString('he-IL')} עד ${alt.upper_ft.toLocaleString('he-IL')} רגל`;
 }
@@ -87,6 +99,7 @@ function subjectText(n) {
 let map = null;
 let aipLayer = null;
 let notamLayer = null;
+let weatherLayer = null;
 const notamShapes = new Map();   // מזהה נוטאם -> שכבה, לכפתור "הצג במפה"
 
 /**
@@ -113,11 +126,14 @@ function initMap() {
   });
 
   // פאנלים נפרדים כדי שעיגולי הנוטאם יהיו תמיד מעל פוליגוני הפמ"ת.
+  map.createPane('weather').style.zIndex = 405;   // מתחת למגבלות — הן החשובות
   map.createPane('aip').style.zIndex = 410;
   map.createPane('notam').style.zIndex = 420;
 
   aipLayer = L.layerGroup().addTo(map);
   notamLayer = L.layerGroup().addTo(map);
+  // לא נוסף למפה כאן: שכבת מזג האוויר כבויה עד שהמתג נדלק.
+  weatherLayer = L.layerGroup();
 
   // הכיסוי הורחב לכל הארץ, אבל ברירת המחדל נשארת מטה בנימין — שם
   // המשתמש עומד בשטח. שני כפתורים מחליפים בין המבטים.
@@ -303,8 +319,8 @@ function badges(n) {
 function notamCard(n, opts) {
   opts = opts || {};
   const rows = [
-    ['תוקף מ־', fmtStamp(n.valid_from, 'לא צוין')],
-    ['תוקף עד', fmtStamp(n.valid_to, 'לא צוין')],
+    ['תוקף מ־', fmtStamp(n.valid_from, NO_VALIDITY)],
+    ['תוקף עד', fmtStamp(n.valid_to, NO_VALIDITY)],
     ['גבהים', altitudeText(n)]
   ];
   if (n.schedule) rows.push(['לוח זמנים', n.schedule]);
@@ -419,26 +435,75 @@ function renderWeather(payload) {
     list.innerHTML = '<li class="empty">אין דיווחי מזג אוויר בקובץ.</li>';
   }
 
-  reports.forEach((report) => {
+  reports.forEach((report, index) => {
     const li = document.createElement('li');
     const kind = (report.kind || '').toUpperCase();
     li.className = 'wx-card' + (kind === 'TAF' ? ' wx-card--taf' : '');
+    if (report.area) li.className += ' wx-card--area';
+    li.id = 'wx-' + index;
     li.innerHTML = `
       <div class="wx-card__head">
         <span class="wx-card__station">${esc(report.station || report.id || '—')}</span>
         ${kind ? `<span class="wx-card__kind">${esc(kind)}</span>` : ''}
+        ${report.area ? '<span class="wx-card__kind wx-card__kind--area">אזור על המפה</span>' : ''}
       </div>
       <p class="wx-card__text">${esc(report.text || '')}</p>
 `;
     list.appendChild(li);
   });
 
+  const drawn = renderWeatherAreas(reports);
+
   const stamp = fmtTime(payload && (payload.last_success || payload.generated_at));
   const parts = [`${reports.length} דיווחים`];
+  parts.push(drawn ? `${drawn} אזורים על המפה` : 'ללא אזורים על המפה');
   if (payload && payload.source_name) parts.push(`מקור: ${payload.source_name}`);
   if (stamp) parts.push(`עדכון ${stamp}`);
   if (payload && payload.stale) parts.push('הנתונים אינם עדכניים');
   el('weather-sub').textContent = parts.join(' · ');
+}
+
+/**
+ * מזג אוויר על המפה — רק AIRMET ו-SIGMET.
+ *
+ * METAR ו-TAF מדווחים על **תחנה**, כלומר נקודה, ומיקומה של התחנה אינו
+ * מופיע בשום מקום במקור: לא בדף, לא ב-Locations.js ולא בפמ"ת הפנים־ארצי.
+ * לסמן אותם על המפה היה מחייב להמציא קואורדינטות, וזה בדיוק מה שאסור
+ * בשכבה שאמורה להיות אמינה. לכן הם נשארים ברשימה בלבד.
+ *
+ * AIRMET ו-SIGMET, לעומת זאת, נושאים את האזור בתוך הטקסט עצמו:
+ *
+ *   ... FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426
+ *
+ * זה פוליגון סגור מהמקור הרשמי, ואותו כן מציירים.
+ */
+function renderWeatherAreas(reports) {
+  if (!map || !weatherLayer) return 0;
+  weatherLayer.clearLayers();
+
+  let drawn = 0;
+  reports.forEach((report, index) => {
+    if (!report.area) return;
+    const ring = report.area.map(([lon, lat]) => [lat, lon]);
+    L.polygon(ring, {
+      pane: 'weather',
+      color: WEATHER_COLOR, weight: 2, opacity: 0.9, dashArray: '2 5',
+      fillColor: WEATHER_COLOR, fillOpacity: 0.08
+    })
+      .bindPopup(weatherPopup(report, index), { maxWidth: 260, minWidth: 200 })
+      .addTo(weatherLayer);
+    drawn += 1;
+  });
+  return drawn;
+}
+
+function weatherPopup(report, index) {
+  return `
+    <div class="popup">
+      <div class="card__id">${esc(report.kind || 'מזג אוויר')}</div>
+      <p class="popup__subject">${esc(report.station || report.id || '')}</p>
+      <button type="button" class="popup__jump" data-jump="wx-${index}">הדיווח המלא ↓</button>
+    </div>`;
 }
 
 /* --- חותמת זמן והתראות ------------------------------------------------ */
@@ -560,6 +625,11 @@ async function init() {
   const weatherSection = el('weather-section');
   weatherToggle.addEventListener('change', (e) => {
     weatherSection.hidden = !e.target.checked;
+    // אותו מתג מדליק גם את הרשימה וגם את האזורים על המפה — המשתמש
+    // ביקש מתג אחד למזג אוויר, לא שניים.
+    if (map && weatherLayer) {
+      e.target.checked ? map.addLayer(weatherLayer) : map.removeLayer(weatherLayer);
+    }
     if (e.target.checked) weatherSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
   if (!weather) {
