@@ -150,37 +150,6 @@ def main() -> int:
         chunk = re.sub(r"\s+", " ", page[start: hit.start() + 300])
         print(f"  --- 2,500 תווים לפני MoreImg_0 (מזהי האבות):\n  {chunk}")
 
-    # `f_getMoreInfo` קיימת וחיה, אבל אין בקובץ שום שורת `.open(` שאינה
-    # הערה. כלומר הבקשה נבנית במקום אחר — צריך לקרוא את הגוף המלא.
-    # אין בכל MoreInfo.js אף שורת `.open(` שאינה הערה — כל בניית הבקשה
-    # מסומנת כהערה. השערה: אין בקשה. הדף שוקל 1.4MB ל-127 נוטאמים, הרבה
-    # מעבר לטקסט הנראה, ולכן ייתכן שתוכן ההרחבה כבר מוטמע בו ו-JS רק
-    # מחליף display. אם זה נכון — זמני התוקף כבר אצלנו.
-    head("האם ההרחבה כבר בדף?")
-    for needle in ("divMoreInfo_", "tblMoreInfo1_", "Valid From", "FromDate", "ToDate", "getMoreMsgInfo"):
-        print(f"  {needle!r}: {page.count(needle)} מופעים")
-    spot = page.find("divMoreInfo_0")
-    if spot != -1:
-        print("  --- HTML סביב divMoreInfo_0:")
-        print("  " + page[spot - 200: spot + 1400].replace("\n", "\n  "))
-
-    js, status = fetch(f"{iaa.BASE}/JS/MoreInfo.js")
-    print(f"\n  --- MoreInfo.js ({status}, {len(js):,} bytes)")
-    # החצי השני של הקובץ — `f_buildMoreMsgInfo(xml)` — כבר נקרא, והוא
-    # מראה בדיוק מה חוזר: XML עם NotamID, Location, Airfield, CreateDate,
-    # FromDate ו-ToDate, ואחריו רשימת MsgText. חסר רק החצי הראשון:
-    # איך הבקשה נשלחת. חותכים משם ועד תחילת הבנייה.
-    start = js.find("function f_getMoreInfo")
-    end = js.find("function f_buildMoreMsgInfo")
-    if start == -1:
-        print("      אין f_getMoreInfo בקובץ.")
-    else:
-        section = js[start: end if end > start else start + 4000]
-        live = [ln for ln in section.splitlines() if ln.strip() and not ln.strip().startswith("//")]
-        print(f"      --- f_getMoreInfo: {len(section):,} תווים, {len(live)} שורות שאינן הערה:")
-        for line in live:
-            print(f"      {line.strip()[:170]}")
-
     # (2) ההרחבה היא postback של WebForms, לא שירות. `f_getMoreInfo`
     # ממלאת ארבעה שדות מוסתרים ולוחצת על כפתור:
     #
