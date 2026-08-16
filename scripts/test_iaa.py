@@ -77,6 +77,47 @@ class TestPosition(unittest.TestCase):
         self.assertIsNone(iaa.extract_position(""))
 
 
+class TestContinuationRows(unittest.TestCase):
+    """הודעה ארוכה נשברת על פני שורות; רק לראשונה יש מזהה."""
+
+    WRAPPED = '''
+    <tr class="tblBody">
+        <td class="NotamID">C1760/26</td>
+        <td class="Location">LLLL</td>
+        <td class="MsgText">AN AREA AT TLALIM WI 0.3NM RADIUS CENTERED ON PSN</td>
+    </tr>
+    <tr class="tblBody">
+        <td class="NotamID">&nbsp;</td>
+        <td class="Location">&nbsp;</td>
+        <td class="MsgText">3055N03446E IS CLSD</td>
+    </tr>
+    '''
+
+    def test_continuation_is_merged_not_dropped(self):
+        rows = iaa.parse_notam_page(self.WRAPPED)
+        self.assertEqual(len(rows), 1)
+        self.assertIn("3055N03446E", rows[0]["text"])
+
+    def test_coordinates_recovered_after_merge(self):
+        """הבאג שהיה: שורות ההמשך סוננו, ואיתן נזרקו הקואורדינטות."""
+        row = iaa.parse_notam_page(self.WRAPPED)[0]
+        geo = iaa.extract_position(row["text"])
+        self.assertIsNotNone(geo)
+        self.assertAlmostEqual(geo["lat"], 30 + 55 / 60, places=4)
+        self.assertEqual(geo["radius_nm"], 0.3)
+
+    def test_weather_taf_across_rows(self):
+        page = ('<tr class="tblBody"><td class="MsgType">TAF</td>'
+                '<td class="weatherLocation">LLBG</td>'
+                '<td class="MsgText">TAF BEN GURION, WIND 330 DEGREES, 7</td></tr>'
+                '<tr class="tblBody"><td class="MsgType">&nbsp;</td>'
+                '<td class="weatherLocation">&nbsp;</td>'
+                '<td class="MsgText">KNOTS, VISIBILITY 10 KILOMETERS</td></tr>')
+        reports = iaa.parse_weather_page(page)
+        self.assertEqual(len(reports), 1)
+        self.assertIn("KNOTS, VISIBILITY", reports[0]["text"])
+
+
 class TestTruncation(unittest.TestCase):
     """הטקסט בדף הרשימה חתוך; שורה עם כפתור הרחבה מסומנת."""
 
@@ -90,6 +131,13 @@ class TestTruncation(unittest.TestCase):
 
     def test_weather_report_carries_the_flag(self):
         self.assertIn("truncated", iaa.parse_weather_page(TestWeather.PAGE)[0])
+
+    def test_complete_metar_is_not_flagged(self):
+        """METAR מגיע שלם ומסתיים ב-'=' — אין לו המשך."""
+        page = ('<tr class="tblBody"><td class="MsgType">METAR</td>'
+                '<td class="weatherLocation">LLBG</td>'
+                '<td class="MsgText">METAR LLBG 162120Z VRB03KT 9999 Q1010 NOSIG=</td></tr>')
+        self.assertFalse(iaa.parse_weather_page(page)[0]["truncated"])
 
 
 class TestRawNotam(unittest.TestCase):

@@ -252,7 +252,6 @@ function badges(n) {
   if (n.valid_to && n.valid_to.estimated) out.push(['est', 'זמן סיום משוער']);
   if (n.cancellation) out.push(['cancel', 'הודעת ביטול']);
   if (n.administrative && !n.cancellation) out.push(['admin', 'מנהלתי']);
-  if (n.text_truncated) out.push(['trunc', 'טקסט חלקי']);
   return out.map(([kind, text]) =>
     `<span class="badge badge--${kind}">${esc(text)}</span>`).join('');
 }
@@ -285,7 +284,6 @@ function notamCard(n, opts) {
       <div class="badges">${badges(n)}</div>
       <dl class="kv">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
       ${n.text ? `<p class="card__text">${esc(n.text)}</p>` : ''}
-      ${n.text_truncated ? '<p class="alert alert--warn" style="margin-top:8px">המקור מציג כאן טקסט חלקי בלבד. ההודעה המלאה נמצאת באתר רשות שדות התעופה.</p>' : ''}
       ${errors}
       <details class="raw">
         <summary>הנוטאם הגולמי</summary>
@@ -387,7 +385,7 @@ function renderWeather(payload) {
         ${kind ? `<span class="wx-card__kind">${esc(kind)}</span>` : ''}
       </div>
       <p class="wx-card__text">${esc(report.text || '')}</p>
-      ${report.truncated ? '<p class="alert alert--warn" style="margin-top:8px">דיווח חלקי — המקור קוטע את הטקסט בתצוגת הרשימה.</p>' : ''}`;
+`;
     list.appendChild(li);
   });
 
