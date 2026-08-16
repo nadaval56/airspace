@@ -138,17 +138,11 @@ def main() -> int:
         start = page.rfind("<td", 0, hit.start())
         print("  " + page[max(0, start): hit.start() + 700].replace("\n", "\n  ")[:1600])
 
-    # הפונקציות שהכפתור קורא להן — בקובץ שמטפל בהרחבה.
-    for name in ("MoreInfo.js", "general.js"):
-        js, status = fetch(f"{iaa.BASE}/JS/{name}")
-        live = [
-            line.strip() for line in js.splitlines()
-            if re.search(r"(?:function\s+\w*(?:More|Expand|Detail)|requestURL|\.open\s*\(|__doPostBack|\.send\s*\()", line)
-            and not line.strip().startswith("//")
-        ]
-        print(f"\n  --- {name} ({status}, {len(js):,} bytes) — {len(live)} שורות חיות:")
-        for line in live[:25]:
-            print(f"      {line[:170]}")
+    # `f_getMoreInfo` קיימת וחיה, אבל אין בקובץ שום שורת `.open(` שאינה
+    # הערה. כלומר הבקשה נבנית במקום אחר — צריך לקרוא את הגוף המלא.
+    js, status = fetch(f"{iaa.BASE}/JS/MoreInfo.js")
+    print(f"\n  --- MoreInfo.js ({status}, {len(js):,} bytes) — הקובץ המלא:")
+    print("      " + js.replace("\n", "\n      "))
 
     # אם הכפתור הוא __doPostBack, ההרחבה נבנית בשרת ומגיעה בדף עצמו —
     # אין שום שירות לקרוא לו, רק לשחזר את ה-POST של WebForms.
@@ -179,15 +173,16 @@ def main() -> int:
             if has_q:
                 print(f"    {(has_q[0].get('text') or '')[:700]!r}")
 
-    # (2) החוזה עצמו.
+    # (2) החוזה עצמו. `?WSDL` חסום על ידי Radware ("Unauthorized Request
+    # Blocked") — חסימה מכוונת של נקודת המטא־דאטה. לא עוקפים אותה;
+    # בודקים רק אם הקריאה הרגילה, זו שהדף עצמו עושה, עוברת.
     head("WSDL")
     wsdl, status = fetch(f"{ASMX}?WSDL")
-    print(f"  HTTP {status} · {len(wsdl):,} bytes")
-    if status != 200 or "operation" not in wsdl.lower():
-        # 2.4KB בלי פעולות אינו WSDL — כנראה דף שגיאה או חסימה.
-        print("  --- הגוף כמו שהוא:")
-        print("  " + wsdl[:1800].replace("\n", "\n  "))
-        return 1
+    blocked = "Unauthorized" in wsdl
+    print(f"  HTTP {status} · {len(wsdl):,} bytes · {'חסום (Radware)' if blocked else 'עבר'}")
+    if blocked or "operation" not in wsdl.lower():
+        print("  אין חוזה. ממשיכים לפי מה שקוד הלקוח מראה בלבד.")
+        return 0
     namespace, params = read_contract(wsdl)
     operations = sorted(set(_OP_RE.findall(wsdl)))
     print(f"  מרחב שמות: {namespace}")
