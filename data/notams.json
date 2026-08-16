@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-16T21:14:14Z",
- "last_success": "2026-08-16T21:14:14Z",
+ "generated_at": "2026-08-16T21:25:32Z",
+ "last_success": "2026-08-16T21:25:32Z",
  "last_error": {
   "at": "2026-08-16T20:37:12Z",
   "message": "faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; notams.online/LLLL: החזיר 200 אך ללא נוטאמים; notams.online/LLBG: החזיר 200 אך ללא נוטאמים; notams.online/LLHA: החזיר 200 אך ללא נוטאמים; notams.online/LLIB: החזיר 200 אך ללא נוטאמים; notams.online/LLRD: החזיר 200 אך ללא נוטאמים; notams.online/LLHZ: החזיר 200 אך ללא נוטאמים; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrieva"
@@ -270,7 +270,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1757/26",
@@ -295,7 +296,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1756/26",
@@ -320,7 +322,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1755/26",
@@ -345,7 +348,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1754/26",
@@ -370,7 +374,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1753/26",
@@ -395,7 +400,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1752/26",
@@ -420,7 +426,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1751/26",
@@ -445,7 +452,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1750/26",
@@ -470,7 +478,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1749/26",
@@ -495,7 +504,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1748/26",
@@ -520,7 +530,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1747/26",
@@ -545,7 +556,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1746/26",
@@ -570,7 +582,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1745/26",
@@ -595,7 +608,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1744/26",
@@ -620,7 +634,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1743/26",
@@ -645,7 +660,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1742/26",
@@ -670,7 +686,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1741/26",
@@ -695,7 +712,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1740/26",
@@ -720,7 +738,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1738/26",
@@ -745,7 +764,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1737/26",
@@ -770,7 +790,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1735/26",
@@ -795,7 +816,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1734/26",
@@ -820,7 +842,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1730/26",
@@ -845,7 +868,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1729/26",
@@ -870,7 +894,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1727/26",
@@ -895,7 +920,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1726/26",
@@ -920,7 +946,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1725/26",
@@ -945,7 +972,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1723/26",
@@ -970,7 +998,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1719/26",
@@ -995,7 +1024,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1718/26",
@@ -1020,7 +1050,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1708/26",
@@ -1045,7 +1076,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1698/26",
@@ -1070,7 +1102,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1679/26",
@@ -1095,7 +1128,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1656/26",
@@ -1120,7 +1154,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1630/26",
@@ -1145,7 +1180,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1626/26",
@@ -1170,7 +1206,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1616/26",
@@ -1195,7 +1232,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1608/26",
@@ -1220,7 +1258,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1596/26",
@@ -1245,7 +1284,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1595/26",
@@ -1270,7 +1310,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1592/26",
@@ -1295,7 +1336,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1591/26",
@@ -1320,7 +1362,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1590/26",
@@ -1345,7 +1388,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1589/26",
@@ -1370,7 +1414,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1588/26",
@@ -1395,7 +1440,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1587/26",
@@ -1420,7 +1466,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1584/26",
@@ -1445,7 +1492,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1583/26",
@@ -1470,7 +1518,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1581/26",
@@ -1495,7 +1544,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1580/26",
@@ -1520,7 +1570,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1579/26",
@@ -1545,7 +1596,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1578/26",
@@ -1570,7 +1622,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1577/26",
@@ -1595,7 +1648,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1576/26",
@@ -1620,7 +1674,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1575/26",
@@ -1645,7 +1700,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1574/26",
@@ -1670,7 +1726,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1562/26",
@@ -1695,7 +1752,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1558/26",
@@ -1720,7 +1778,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1556/26",
@@ -1745,7 +1804,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1541/26",
@@ -1770,7 +1830,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1529/26",
@@ -1795,7 +1856,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1361/26",
@@ -1820,7 +1882,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1281/26",
@@ -1845,7 +1908,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1244/26",
@@ -1870,7 +1934,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C0431/26",
@@ -1895,7 +1960,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C0037/26",
@@ -1920,7 +1986,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C0032/26",
@@ -1945,7 +2012,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C0010/26",
@@ -1970,7 +2038,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C0005/26",
@@ -1995,7 +2064,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0657/26",
@@ -2020,7 +2090,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0656/26",
@@ -2045,7 +2116,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0655/26",
@@ -2070,7 +2142,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0654/26",
@@ -2095,7 +2168,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0646/26",
@@ -2120,7 +2194,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0645/26",
@@ -2145,7 +2220,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0644/26",
@@ -2170,7 +2246,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0643/26",
@@ -2195,7 +2272,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0622/26",
@@ -2220,7 +2298,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0616/26",
@@ -2245,7 +2324,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0613/26",
@@ -2270,7 +2350,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0612/26",
@@ -2295,7 +2376,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0600/26",
@@ -2320,7 +2402,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0599/26",
@@ -2345,7 +2428,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0598/26",
@@ -2370,7 +2454,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0596/26",
@@ -2395,7 +2480,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0595/26",
@@ -2420,7 +2506,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0592/26",
@@ -2445,7 +2532,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0575/26",
@@ -2470,7 +2558,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0572/26",
@@ -2495,7 +2584,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0571/26",
@@ -2520,7 +2610,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0561/26",
@@ -2545,7 +2636,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0501/26",
@@ -2570,7 +2662,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0500/26",
@@ -2595,7 +2688,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0499/26",
@@ -2620,7 +2714,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0498/26",
@@ -2645,7 +2740,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0497/26",
@@ -2670,7 +2766,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0475/26",
@@ -2695,7 +2792,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0467/26",
@@ -2720,7 +2818,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0457/26",
@@ -2745,7 +2844,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0434/26",
@@ -2770,7 +2870,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0433/26",
@@ -2795,7 +2896,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0409/26",
@@ -2820,7 +2922,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0354/26",
@@ -2845,7 +2948,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0353/26",
@@ -2870,7 +2974,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0281/26",
@@ -2895,7 +3000,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0117/26",
@@ -2920,7 +3026,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0116/26",
@@ -2945,7 +3052,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0056/26",
@@ -2970,7 +3078,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1678/26",
@@ -2995,7 +3104,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1647/26",
@@ -3020,7 +3130,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1467/26",
@@ -3045,7 +3156,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1466/26",
@@ -3070,7 +3182,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1465/26",
@@ -3095,7 +3208,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1464/26",
@@ -3120,7 +3234,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1463/26",
@@ -3145,7 +3260,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1462/26",
@@ -3170,7 +3286,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1461/26",
@@ -3195,7 +3312,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1460/26",
@@ -3220,7 +3338,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1459/26",
@@ -3245,7 +3364,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "C1458/26",
@@ -3270,7 +3390,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0630/26",
@@ -3295,7 +3416,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0610/26",
@@ -3320,7 +3442,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0537/26",
@@ -3345,7 +3468,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0536/26",
@@ -3370,7 +3494,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0535/26",
@@ -3395,7 +3520,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   },
   {
    "id": "A0534/26",
@@ -3420,7 +3546,8 @@
     "שורת Q חסרה"
    ],
    "floor_ft": null,
-   "low_altitude": false
+   "low_altitude": false,
+   "text_truncated": true
   }
  ]
 }
