@@ -29,6 +29,9 @@ OUTPUT_PATH = os.path.join(REPO_ROOT, "data", "aip-permanent.geojson")
 
 AIP_URL = "https://www.gov.il/BlobFolder/guide/aip/he/aip_%D7%90'-17.pdf"
 
+# עותק ידני של ה-PDF, אם הונח במאגר. גובר על ההורדה מהרשת.
+VENDORED_PDF = os.path.join(REPO_ROOT, "data", "aip-a17.pdf")
+
 # חיתוך לתיבה של מטה בנימין. כל הארץ תהפוך את המפה לבלתי קריאה.
 BBOX = {"min_lon": 35.0, "min_lat": 31.7, "max_lon": 35.4, "max_lat": 32.1}
 
@@ -183,7 +186,11 @@ def _url_variants(url: str) -> list[str]:
     if "%27" in url:
         variants.append(url.replace("%27", "'"))
     if "%D7%90" in url:
-        variants.append(url.replace("%D7%90", "א"))
+        # תווים לא-ASCII חייבים קידוד לפני שהם מגיעים ל-urllib, אחרת
+        # הבקשה קורסת על 'ascii' codec ולא נבדקת כלל.
+        variants.append(
+            urllib.parse.quote(url.replace("%D7%90", "א"), safe=":/?&=%'")
+        )
     seen: list[str] = []
     for v in variants:
         if v not in seen:
@@ -384,6 +391,11 @@ def main() -> int:
     args = ap.parse_args()
 
     path = args.pdf
+    if not path and os.path.exists(VENDORED_PDF):
+        # gov.il חוסם הורדה אוטומטית (403 לדפים, 404 לקישור הישיר), אז
+        # עותק שהונח ידנית במאגר הוא המסלול המהימן.
+        path = VENDORED_PDF
+        print(f"משתמש בעותק שבמאגר: {VENDORED_PDF}", file=sys.stderr)
     if not path:
         path = os.path.join(REPO_ROOT, "aip-a17.pdf")
         print(f"מוריד {args.url}", file=sys.stderr)

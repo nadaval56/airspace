@@ -89,6 +89,51 @@ def find_api_urls(html: str) -> None:
             print(f"  נמצא {marker} בדף — התוכן עשוי להיות מוטמע ב-JSON.")
 
 
+def inspect_scripts(html: str) -> None:
+    """מוריד את קבצי ה-JS של הדף ומחפש בהם את הכתובת שממנה נמשכים הנתונים.
+
+    זה הצעד המכריע: התוכן נטען דינמית, אז מקור האמת נמצא בקוד הלקוח.
+    """
+    scripts = re.findall(r'<script[^>]+src=["\']([^"\']+)["\']', html, re.I)
+    own = [s for s in scripts if "notams.online" in s or s.startswith("/")]
+
+    for src in own:
+        url = src if src.startswith("http") else "https://notams.online" + src
+        print(f"\n{'─' * 72}\n▶ קוד לקוח: {url}")
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": BROWSER_UA})
+            with urllib.request.urlopen(req, timeout=45) as resp:
+                js = resp.read().decode("utf-8", errors="replace")
+        except Exception as exc:
+            print(f"  נכשל: {exc}")
+            continue
+
+        print(f"  {len(js):,} bytes")
+
+        calls = re.findall(r'(?:fetch|axios(?:\.\w+)?)\s*\(\s*([^;\n]{0,200})', js)
+        if calls:
+            print(f"  --- {len(calls)} קריאות רשת:")
+            for c in calls[:20]:
+                print(f"    {c.strip()[:180]}")
+
+        urls = re.findall(r'["\'`](https?://[^"\'`\s]{6,160}|/[a-z0-9_\-./]{3,120})["\'`]', js, re.I)
+        interesting = [
+            u for u in dict.fromkeys(urls)
+            if not re.search(r'\.(png|jpg|svg|css|ico|woff2?)$', u, re.I)
+            and not re.search(r'googletagmanager|googlesyndication|doubleclick|effectivegatecpm|highperformanceformat', u, re.I)
+        ]
+        print(f"  --- {len(interesting)} כתובות:")
+        for u in interesting[:45]:
+            print(f"    {u}")
+
+        # תבניות שנבנות דינמית, למשל `${base}/notams/${icao}`
+        templates = re.findall(r'`([^`\n]{4,160}\$\{[^`\n]{0,120})`', js)
+        if templates:
+            print(f"  --- {len(templates)} תבניות כתובת:")
+            for t in dict.fromkeys(templates):
+                print(f"    {t[:170]}")
+
+
 def main() -> int:
     print("=" * 72)
     print("אבחון מקורות נוטאמים")
@@ -101,6 +146,7 @@ def main() -> int:
     )
     if html:
         find_api_urls(html)
+        inspect_scripts(html)
         for path in (
             f"/api/icao/{ICAO}",
             f"/api/notams/{ICAO}",
