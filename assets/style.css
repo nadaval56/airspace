@@ -564,3 +564,5 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   direction: ltr;
   text-align: left;
 }
+
+.badge--trunc { color: #92400e; background: #fef3c7; }

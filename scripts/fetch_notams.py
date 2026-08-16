@@ -324,12 +324,17 @@ def source_iaa(icao: str) -> tuple[list[str], str]:
         with urllib.request.urlopen(req, timeout=max(5, min(TIMEOUT, _time_left()))) as resp:
             page = iaa.decode(resp.read())
         rows = iaa.parse_notam_page(page)
+        # הטקסט בדף הרשימה חתוך בכ-70 תווים. מסמנים כדי שהדף יוכל לומר
+        # זאת — טקסט חלקי שמוצג כמלא הוא בדיוק מה שהכלי הזה נועד למנוע.
+        global _iaa_truncated
+        _iaa_truncated = {row["id"] for row in rows if row.get("expandable")}
         _iaa_blocks = [iaa.to_raw_notam(row) for row in rows]
         print(f"  רשות שדות התעופה: {len(_iaa_blocks)} הודעות", file=sys.stderr)
     return _iaa_blocks, iaa.NOTAM_URL
 
 
 _iaa_blocks: list[str] | None = None
+_iaa_truncated: set[str] = set()
 
 
 def source_notams_online(icao: str) -> tuple[list[str], str]:
@@ -398,6 +403,8 @@ def collect(icaos: list[str]) -> tuple[list[dict], list[dict]]:
                     if record["geo"] is None and record.get("text"):
                         # אין שורת Q במקור הישראלי; מנסים מטקסט ההודעה.
                         record["geo"] = iaa.extract_position(record["text"])
+                    if record.get("id") in _iaa_truncated:
+                        record["text_truncated"] = True
                     records.append(record)
             except SourceUnconfigured as exc:
                 # לא כשל — פשוט אין אישורים. מדלגים על שאר ה-ICAO של המקור.
