@@ -24,6 +24,16 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+from aip_annexes import (  # noqa: E402
+    BBOX,
+    feature_extent,
+    find_annex_pages,
+    intersects_bbox,
+    parse_annex_rows,
+)
+
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_PATH = os.path.join(REPO_ROOT, "data", "aip-permanent.geojson")
 
@@ -32,122 +42,8 @@ AIP_URL = "https://www.gov.il/BlobFolder/guide/aip/he/aip_%D7%90'-17.pdf"
 # עותק ידני של ה-PDF, אם הונח במאגר. גובר על ההורדה מהרשת.
 VENDORED_PDF = os.path.join(REPO_ROOT, "data", "aip-a17.pdf")
 
-# חיתוך לתיבה של מטה בנימין. כל הארץ תהפוך את המפה לבלתי קריאה.
-BBOX = {"min_lon": 35.0, "min_lat": 31.7, "max_lon": 35.4, "max_lat": 32.1}
 
 USER_AGENT = "binyamin-airspace/1.0 (+https://github.com/nadaval56/airspace)"
-
-# ---------------------------------------------------------------------------
-# קואורדינטות
-# ---------------------------------------------------------------------------
-# הפמ"ת מנוסח בכמה וריאציות. מכסים DDMMSS ו-DDMM, עם ובלי סימני מעלות.
-
-_LAT_LON_RE = re.compile(
-    r"""
-    (?P<lat_d>\d{2}) \s*[°\s]?\s*
-    (?P<lat_m>\d{2}) \s*['′\s]?\s*
-    (?:(?P<lat_s>\d{2}(?:\.\d+)?) \s*["″\s]?\s*)?
-    (?P<ns>[NS]) \s*[,/]?\s*
-    (?P<lon_d>\d{3}) \s*[°\s]?\s*
-    (?P<lon_m>\d{2}) \s*['′\s]?\s*
-    (?:(?P<lon_s>\d{2}(?:\.\d+)?) \s*["″\s]?\s*)?
-    (?P<ew>[EW])
-    """,
-    re.X,
-)
-
-_CIRCLE_RE = re.compile(
-    r"(?:circle|רדיוס|radius)[^\n]{0,60}?(\d+(?:\.\d+)?)\s*(NM|KM|מייל|ק\"מ)",
-    re.I,
-)
-
-
-def parse_coordinates(text: str) -> list[tuple[float, float]]:
-    """מלקט את כל צמדי הקואורדינטות בטקסט, לפי סדר הופעתם.
-
-    מחזיר [(lon, lat), ...] — סדר GeoJSON.
-    """
-    points: list[tuple[float, float]] = []
-    for m in _LAT_LON_RE.finditer(text):
-        lat = int(m.group("lat_d")) + int(m.group("lat_m")) / 60.0
-        if m.group("lat_s"):
-            lat += float(m.group("lat_s")) / 3600.0
-        lon = int(m.group("lon_d")) + int(m.group("lon_m")) / 60.0
-        if m.group("lon_s"):
-            lon += float(m.group("lon_s")) / 3600.0
-        if m.group("ns") == "S":
-            lat = -lat
-        if m.group("ew") == "W":
-            lon = -lon
-        if -90 <= lat <= 90 and -180 <= lon <= 180:
-            points.append((round(lon, 6), round(lat, 6)))
-    return points
-
-
-def circle_to_polygon(lon: float, lat: float, radius_nm: float, steps: int = 64) -> list:
-    """מקרב עיגול לפוליגון. GeoJSON לא יודע עיגולים."""
-    radius_km = radius_nm * 1.852
-    ring = []
-    for i in range(steps + 1):
-        bearing = 2 * math.pi * i / steps
-        d = radius_km / 6371.0
-        lat1, lon1 = math.radians(lat), math.radians(lon)
-        lat2 = math.asin(
-            math.sin(lat1) * math.cos(d) + math.cos(lat1) * math.sin(d) * math.cos(bearing)
-        )
-        lon2 = lon1 + math.atan2(
-            math.sin(bearing) * math.sin(d) * math.cos(lat1),
-            math.cos(d) - math.sin(lat1) * math.sin(lat2),
-        )
-        ring.append((round(math.degrees(lon2), 6), round(math.degrees(lat2), 6)))
-    return [ring]
-
-
-# ---------------------------------------------------------------------------
-# סיווג אזורים
-# ---------------------------------------------------------------------------
-
-_DESIGNATOR_RE = re.compile(r"\bLL\s*[\(\-]?\s*([PRD])\s*[\)\-]?\s*[- ]?\s*(\d{1,3}[A-Z]?)\b")
-
-
-def classify(designator: str, context: str) -> str:
-    letter = ""
-    m = _DESIGNATOR_RE.search(designator or "")
-    if m:
-        letter = m.group(1).upper()
-    haystack = (designator or "") + " " + (context or "")
-    if re.search(r"כטב|כטבם|UAV|RPAS|מזלט|רחפן", haystack, re.I):
-        return "כטב\"ם"
-    if letter == "P" or "אסור" in haystack:
-        return "אסור"
-    if letter == "R" or "מוגבל" in haystack:
-        return "מוגבל"
-    if letter == "D" or "מסוכן" in haystack:
-        return "מסוכן"
-    return "לא מסווג"
-
-
-# ---------------------------------------------------------------------------
-# חיתוך לתיבה
-# ---------------------------------------------------------------------------
-
-
-def intersects_bbox(coords: list) -> bool:
-    """האם לפוליגון יש חפיפה כלשהי לתיבת מטה בנימין.
-
-    בדיקת חפיפת מלבנים חוסמים — מספיקה כאן, ולא מסתכנת בקיצוץ גיאומטריה.
-    פוליגון שנוגע בתיבה נשמר בשלמותו, לא נחתך.
-    """
-    lons = [pt[0] for ring in coords for pt in ring]
-    lats = [pt[1] for ring in coords for pt in ring]
-    if not lons or not lats:
-        return False
-    return not (
-        max(lons) < BBOX["min_lon"]
-        or min(lons) > BBOX["max_lon"]
-        or max(lats) < BBOX["min_lat"]
-        or min(lats) > BBOX["max_lat"]
-    )
 
 
 # ---------------------------------------------------------------------------
@@ -253,6 +149,34 @@ def download_pdf(url: str, dest: str) -> str:
     )
 
 
+def pdf_from_zip() -> str | None:
+    """מחלץ את א'-17 מארכיון הפמ"ת אם הוא נמצא במאגר.
+
+    gov.il חוסם הורדה אוטומטית, אז הארכיון מגיע ידנית. קריאה ישירה
+    ממנו חוסכת צעד נוסף.
+    """
+    import glob
+    import zipfile
+
+    for archive in sorted(glob.glob(os.path.join(REPO_ROOT, "*.zip"))):
+        try:
+            with zipfile.ZipFile(archive) as zf:
+                members = [
+                    n for n in zf.namelist()
+                    if n.lower().endswith(".pdf") and "17" in n and "נספח" not in n
+                ]
+                if not members:
+                    continue
+                dest = os.path.join(REPO_ROOT, "aip-a17.pdf")
+                with open(dest, "wb") as fh:
+                    fh.write(zf.read(members[0]))
+                print(f"חולץ {members[0]} מתוך {os.path.basename(archive)}", file=sys.stderr)
+                return dest
+        except zipfile.BadZipFile:
+            continue
+    return None
+
+
 def pdf_pages(path: str) -> list[str]:
     """מחזיר טקסט לכל עמוד. דורש pdfplumber (ראו requirements.txt)."""
     try:
@@ -283,98 +207,51 @@ def parse_page_range(spec: str | None, total: int) -> range:
 # ---------------------------------------------------------------------------
 
 
-def extract_features(pages: list[str], page_range: range) -> tuple[list[dict], list[str]]:
-    """חילוץ אזורים. מחזיר (features, אזהרות).
+def extract_features(path: str, pages: list[str]) -> tuple[list[dict], list[str]]:
+    """מחלץ את נספחים ב' ו-ג' וחותך לתיבת מטה בנימין.
 
-    כל בלוק שמתחיל במזהה אזור (LL(P)-nn וכדומה) ונמשך עד המזהה הבא נחשב
-    לרשומה אחת. בלוק עם פחות מ-3 נקודות ובלי הגדרת עיגול מדווח כאזהרה
-    ולא נכנס לפלט — עדיף חוסר מאשר צורה מומצאת.
+    הטבלה נקראת דרך extract_tables ולא כטקסט שטוח — ראו ההסבר
+    ב-scripts/aip_annexes.py.
     """
+    import pdfplumber  # type: ignore
+
+    ranges = find_annex_pages(pages)
     features: list[dict] = []
     warnings: list[str] = []
 
-    text = "\n".join(pages[i] for i in page_range)
-    matches = list(_DESIGNATOR_RE.finditer(text))
-    if not matches:
-        warnings.append(
-            "לא נמצא אף מזהה אזור בתבנית LL(P/R/D)-nn. "
-            "הריצו עם --dump-text כדי לראות את מבנה המסמך בפועל."
-        )
-        return features, warnings
+    with pdfplumber.open(path) as pdf:
+        for key, label in (("b", "נספח ב'"), ("c", "נספח ג'")):
+            if key not in ranges:
+                warnings.append(f"{label} לא אותר במסמך.")
+                continue
+            start, stop = ranges[key]
+            rows: list[list] = []
+            for page in pdf.pages[start:stop]:
+                for table in page.extract_tables():
+                    rows.extend(table)
 
-    for idx, m in enumerate(matches):
-        stop = matches[idx + 1].start() if idx + 1 < len(matches) else len(text)
-        block = text[m.start():stop]
-        designator = f"LL({m.group(1).upper()})-{m.group(2)}"
-
-        points = parse_coordinates(block)
-        geometry = None
-
-        circle = _CIRCLE_RE.search(block)
-        if circle and len(points) >= 1:
-            radius = float(circle.group(1))
-            if circle.group(2).upper() in ("KM", 'ק"מ'):
-                radius /= 1.852
-            geometry = {
-                "type": "Polygon",
-                "coordinates": circle_to_polygon(points[0][0], points[0][1], radius),
-            }
-        elif len(points) >= 3:
-            ring = list(points)
-            if ring[0] != ring[-1]:
-                ring.append(ring[0])
-            geometry = {"type": "Polygon", "coordinates": [ring]}
-        else:
-            warnings.append(
-                f"{designator}: {len(points)} נקודות בלבד ואין הגדרת עיגול — דולג."
+            source = f"פמ\"ת א-17, {label}"
+            found, warns = parse_annex_rows(rows, source)
+            inside = [f for f in found if intersects_bbox(f)]
+            print(
+                f"  {label}: עמודים {start + 1}-{stop}, {len(rows)} שורות טבלה, "
+                f"{len(found)} אזורים, {len(inside)} בתוך התיבה",
+                file=sys.stderr,
             )
-            continue
+            features.extend(inside)
+            warnings.extend(f"{label} — {w}" for w in warns)
 
-        if not intersects_bbox(geometry["coordinates"]):
-            continue
-
-        features.append({
-            "type": "Feature",
-            "properties": {
-                "id": designator,
-                "name": _guess_name(block),
-                "type": classify(designator, block),
-                "lower_limit": _find_limit(block, lower=True),
-                "upper_limit": _find_limit(block, lower=False),
-                "notes": _tidy_block(block),
-                "source": "פמ\"ת א-17",
-            },
-            "geometry": geometry,
-        })
+    # בדיקת שפיות אחרונה: אזור מגבלה שנמתח על יותר ממעלה אחת (כ-110 ק"מ)
+    # כמעט תמיד סימן לקיבוץ שגוי. מדווחים בקול ולא בולעים בשקט.
+    for feature in features:
+        width, height = feature_extent(feature)
+        if width > 1.0 or height > 1.0:
+            warnings.append(
+                f"{feature['properties']['id']}: מידות חריגות "
+                f"({width:.2f}° × {height:.2f}°) — בדקו מול המקור."
+            )
 
     return features, warnings
-
-
-def _guess_name(block: str) -> str | None:
-    for line in block.split("\n"):
-        line = line.strip()
-        # שורה עם מילים בעברית ובלי קואורדינטות — סביר שזה השם.
-        if re.search(r"[֐-׿]{3,}", line) and not _LAT_LON_RE.search(line):
-            return line[:120]
-    return None
-
-
-def _find_limit(block: str, lower: bool) -> str | None:
-    pattern = (
-        r"(SFC|GND|קרקע|\d{1,3},?\d{0,3}\s*(?:FT|רגל|M|מ')|FL\s*\d{2,3}|UNL|ללא הגבלה)"
-    )
-    found = re.findall(pattern, block, re.I)
-    if not found:
-        return None
-    return found[0] if lower else found[-1]
-
-
-def _tidy_block(block: str) -> str:
-    lines = [re.sub(r"\s+", " ", line).strip() for line in block.split("\n")]
-    return " | ".join(line for line in lines if line)[:600]
-
-
-# ---------------------------------------------------------------------------
 
 
 def now_iso() -> str:
@@ -391,6 +268,8 @@ def main() -> int:
     args = ap.parse_args()
 
     path = args.pdf
+    if not path:
+        path = pdf_from_zip()
     if not path and os.path.exists(VENDORED_PDF):
         # gov.il חוסם הורדה אוטומטית (403 לדפים, 404 לקישור הישיר), אז
         # עותק שהונח ידנית במאגר הוא המסלול המהימן.
@@ -411,7 +290,7 @@ def main() -> int:
             print(pages[i])
         return 0
 
-    features, warnings = extract_features(pages, page_range)
+    features, warnings = extract_features(path, pages)
 
     for w in warnings:
         print(f"אזהרה: {w}", file=sys.stderr)
