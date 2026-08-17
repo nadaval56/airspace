@@ -14,6 +14,7 @@ on:
           - expand   # כפתור ההרחבה של רשות שדות התעופה
           - sources  # סקירת כל מקורות הנוטאמים
           - govil   # מאגר data.gov.il
+          - cvfr    # הורדת ה-shapefile של נתיבי CVFR
 
 permissions:
   contents: read
