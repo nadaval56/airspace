@@ -205,6 +205,83 @@ class TestWeather(unittest.TestCase):
         self.assertEqual(iaa.parse_weather_page(page), [])
 
 
+class MoreInfoTests(unittest.TestCase):
+    """ההרחבה חוזרת כ-XML מוזרק, לא כשורות טבלה."""
+
+    RESPONSE = (
+        '<a href="javascript:f_buildMoreMsgInfo(\'<Msg MsgNumber="2046996" '
+        'NotamID="C1760/26" Location="LLLL" Airfield="Tel-Aviv FIR" '
+        'FromDate="202608160800" ToDate="202608201000" '
+        'CreateDate="2026-08-13-15.13.46.000000" MsgType="" ToShowMoreLink="0">'
+        "<MsgText>(C1760/26 NOTAMN</MsgText>"
+        "<MsgText>Q) LLLL/QAELC/IV/NBO/E /000/019/3059N03445E001</MsgText>"
+        "<MsgText>A) LLLL B) 2608160800 C) 2608201000</MsgText>"
+        "<MsgText>D) 16 0800-1500 1600-2059</MsgText>"
+        "<MsgText>E) AN AREA AT TLALIM WI 0.3NM RADIUS</MsgText>"
+        "</Msg>')\">x</a>"
+    )
+
+    def test_reads_attributes(self):
+        detail = iaa.parse_more_info(self.RESPONSE, "2046996")
+        self.assertEqual(detail["id"], "C1760/26")
+        self.assertEqual(detail["airfield"], "Tel-Aviv FIR")
+        self.assertEqual(detail["valid_from"], "2026-08-16T08:00:00Z")
+        self.assertEqual(detail["valid_to"], "2026-08-20T10:00:00Z")
+        self.assertEqual(detail["created"], "2026-08-13T15:13:00Z")
+
+    def test_raw_carries_the_q_line(self):
+        raw = iaa.parse_more_info(self.RESPONSE, "2046996")["raw"]
+        self.assertIn("Q) LLLL/QAELC/IV/NBO/E /000/019/3059N03445E001", raw)
+        self.assertIn("B) 2608160800", raw)
+        self.assertEqual(len(raw.splitlines()), 5)
+
+    def test_wrong_message_number_returns_nothing(self):
+        """בלי הבדיקה הזאת פרטים של הודעה אחת היו נדבקים לנוטאם אחר."""
+        self.assertEqual(iaa.parse_more_info(self.RESPONSE, "9999999"), {})
+
+    def test_missing_block_returns_nothing(self):
+        self.assertEqual(iaa.parse_more_info("<html>אין כאן כלום</html>", "1"), {})
+
+    def test_unknown_date_format_is_dropped_not_guessed(self):
+        response = self.RESPONSE.replace('FromDate="202608160800"', 'FromDate="בקרוב"')
+        detail = iaa.parse_more_info(response, "2046996")
+        self.assertNotIn("valid_from", detail)
+        self.assertEqual(detail["valid_to"], "2026-08-20T10:00:00Z")
+
+
+class FormFieldTests(unittest.TestCase):
+    """דפדפן שולח כפתור submit אחד — זה שנלחץ."""
+
+    FORM = (
+        '<input type="hidden" name="__VIEWSTATE" value="abc&amp;d" />'
+        '<input type="submit" name="btnSearch" value="Search" />'
+        '<input type="submit" name="btnMoreInfo" value="" />'
+        '<input type="image" name="imgNotam" />'
+        '<input type="checkbox" name="chkNorth" value="on" />'
+        '<input type="text" name="txtLocation" value="" />'
+    )
+
+    def test_only_the_named_button_survives(self):
+        fields = iaa.form_fields(self.FORM, submitter="btnMoreInfo")
+        self.assertIn("btnMoreInfo", fields)
+        self.assertNotIn("btnSearch", fields)
+        self.assertNotIn("imgNotam", fields)
+
+    def test_viewstate_is_unescaped(self):
+        self.assertEqual(iaa.form_fields(self.FORM)["__VIEWSTATE"], "abc&d")
+
+    def test_unchecked_boxes_are_not_sent(self):
+        self.assertNotIn("chkNorth", iaa.form_fields(self.FORM))
+
+    def test_payload_sets_the_expand_fields(self):
+        payload = iaa.more_info_payload(self.FORM, "2046996")
+        self.assertEqual(payload["hidMsgNum"], "2046996")
+        self.assertEqual(payload["hidMode"], "more")
+        self.assertEqual(payload["hidCurOrHist"], "Current")
+        self.assertEqual([k for k in payload if k.startswith(("btn", "img"))],
+                         ["btnMoreInfo"])
+
+
 class WeatherAreaTests(unittest.TestCase):
     """סעיף ה-WI של AIRMET/SIGMET — הגיאומטריה היחידה שיש למזג אוויר."""
 

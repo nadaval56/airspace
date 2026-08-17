@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import argparse
+import http.cookiejar
 import json
 import os
 import re
@@ -304,34 +305,137 @@ def source_autorouter(icao: str) -> tuple[list[str], str]:
     return extract_from_response(body, ctype), url
 
 
+# ---------------------------------------------------------------------------
+# רשות שדות התעופה: הרשימה, ואחריה ההרחבות
+# ---------------------------------------------------------------------------
+#
+# דף הרשימה נותן מזהה, מיקום וטקסט. שורת Q, זמני התוקף, הגבהים ולוח
+# הזמנים נפתחים בלחיצה על ה-`+`, וזה postback של WebForms שמחזיר את
+# ההודעה כ-XML מוזרק (ראו `iaa.parse_more_info`).
+#
+# **המטמון הוא העיקר כאן.** ההרחבה עולה בקשה שלמה של ~1.4MB, ומשיכה של
+# 127 הודעות בכל שעה הייתה מעמיסה על שרת של רשות ציבורית בלי הצדקה.
+# הפרטים של נוטאם אינם משתנים אחרי הפרסום, ולכן הם נשמרים לפי מזהה
+# בקובץ `data/notam-details.json`. בפועל: בריצה הראשונה כמה עשרות
+# בקשות, ואחר כך רק ההודעות החדשות של אותה שעה.
+DETAILS_PATH = os.path.join(REPO_ROOT, "data", "notam-details.json")
+# תקרה לריצה. גם אם נוספו 60 הודעות בבת אחת, לא נשלחות 60 בקשות —
+# השאר ימשכו בריצה הבאה, והרשומות בינתיים יופיעו בלי זמני תוקף.
+MAX_EXPANSIONS_PER_RUN = 25
+# הפוגה בין בקשות, כדי לא להיראות כמו סריקה.
+EXPANSION_DELAY = 1.0
+
+_iaa_blocks: list[str] | None = None
+_iaa_jar = http.cookiejar.CookieJar()
+_iaa_opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(_iaa_jar))
+
+
+def load_details() -> dict:
+    try:
+        with open(DETAILS_PATH, encoding="utf-8") as fh:
+            data = json.load(fh)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def save_details(details: dict) -> None:
+    os.makedirs(os.path.dirname(DETAILS_PATH), exist_ok=True)
+    with open(DETAILS_PATH, "w", encoding="utf-8") as fh:
+        json.dump(details, fh, ensure_ascii=False, indent=1, sort_keys=True)
+        fh.write("\n")
+
+
+def _iaa_get(url: str, data: bytes | None = None, extra: dict | None = None) -> str:
+    """בקשה עם עוגיות — WebForms שומר את מצב הדף בסשן."""
+    headers = {
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html",
+        "Accept-Language": "he-IL,he;q=0.9",
+        "Referer": iaa.NOTAM_URL,
+    }
+    headers.update(extra or {})
+    req = urllib.request.Request(url, data=data, headers=headers)
+    with _iaa_opener.open(req, timeout=max(5, min(TIMEOUT, _time_left()))) as resp:
+        return iaa.decode(resp.read())
+
+
+def expand_missing(page: str, rows: list[dict], details: dict) -> int:
+    """פותח את ההודעות שאינן במטמון. מחזיר כמה נוספו.
+
+    כישלון בהודעה בודדת אינו מפיל את הריצה: הרשומה פשוט תישאר בלי
+    פרטים, ותנוסה שוב בשעה הבאה.
+    """
+    pending = [
+        row for row in rows
+        if row.get("id") and row.get("msg_num") and row["id"] not in details
+    ]
+    if not pending:
+        return 0
+
+    print(f"  הרחבה: {len(pending)} הודעות חדשות", file=sys.stderr)
+    added = 0
+    for row in pending[:MAX_EXPANSIONS_PER_RUN]:
+        if _time_left() < 30:
+            print("  הרחבה: נגמר הזמן, השאר בריצה הבאה", file=sys.stderr)
+            break
+        try:
+            body = _iaa_get(
+                iaa.NOTAM_URL,
+                urllib.parse.urlencode(iaa.more_info_payload(page, row["msg_num"])).encode(),
+                {"Content-Type": "application/x-www-form-urlencoded"},
+            )
+            detail = iaa.parse_more_info(body, row["msg_num"])
+        except Exception as exc:  # noqa: BLE001 — הודעה אחת, לא כל הריצה
+            print(f"  הרחבה נכשלה ל-{row['id']}: {type(exc).__name__}", file=sys.stderr)
+            continue
+        if detail.get("raw"):
+            details[row["id"]] = detail
+            added += 1
+        time.sleep(EXPANSION_DELAY)
+
+    left = len(pending) - added
+    print(f"  הרחבה: {added} נוספו" + (f", {left} נותרו לריצה הבאה" if left > 0 else ""),
+          file=sys.stderr)
+    return added
+
+
 def source_iaa(icao: str) -> tuple[list[str], str]:
     """רשות שדות התעופה — המקור הרשמי הישראלי.
 
     נמשך פעם אחת בלבד: הדף מגיש את כל ההודעות יחד ואינו מסונן לפי ICAO,
     אז משיכה לכל שדה בנפרד הייתה מביאה את אותו תוכן שוב ושוב.
 
-    הדף לא מגיש שורות Q. רשומה שאין בטקסט שלה קואורדינטה מפורשת תגיע
-    בלי גיאומטריה ותופיע ברשימה בלבד — וזה בסדר, זה מה שהמקור נותן.
+    לכל הודעה שכבר הורחבה משתמשים בגוש הגולמי המלא — עם שורת Q, זמני
+    תוקף וגבהים. השאר נבנות מטקסט הרשימה בלבד, כמו קודם.
     """
     global _iaa_blocks
     if icao != FIR:
         return [], iaa.NOTAM_URL
     if _iaa_blocks is None:
-        req = urllib.request.Request(
-            iaa.NOTAM_URL,
-            headers={"User-Agent": USER_AGENT, "Accept": "text/html", "Accept-Language": "he-IL,he;q=0.9"},
-        )
-        with urllib.request.urlopen(req, timeout=max(5, min(TIMEOUT, _time_left()))) as resp:
-            page = iaa.decode(resp.read())
+        page = _iaa_get(iaa.NOTAM_URL)
         # parse_notam_page מאחד שורות המשך, אחרת הטקסט נקטע בדיוק היכן
         # שהקואורדינטות יושבות.
         rows = iaa.parse_notam_page(page)
-        _iaa_blocks = [iaa.to_raw_notam(row) for row in rows]
-        print(f"  רשות שדות התעופה: {len(_iaa_blocks)} הודעות", file=sys.stderr)
+
+        stored = load_details()
+        details = dict(stored)
+        expand_missing(page, rows, details)
+        # ניקוי: הודעות שכבר אינן ברשימה יוצאות מהמטמון, אחרת הקובץ
+        # תופח לנצח.
+        live = {row["id"] for row in rows if row.get("id")}
+        details = {k: v for k, v in details.items() if k in live}
+        if details != stored:
+            save_details(details)
+
+        _iaa_blocks = [
+            details[row["id"]]["raw"] if row.get("id") in details else iaa.to_raw_notam(row)
+            for row in rows
+        ]
+        expanded = sum(1 for row in rows if row.get("id") in details)
+        print(f"  רשות שדות התעופה: {len(_iaa_blocks)} הודעות, "
+              f"{expanded} עם פרטים מלאים", file=sys.stderr)
     return _iaa_blocks, iaa.NOTAM_URL
-
-
-_iaa_blocks: list[str] | None = None
 
 
 def source_notams_online(icao: str) -> tuple[list[str], str]:

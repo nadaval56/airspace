@@ -279,73 +279,69 @@ def more_info_payload(page: str, msg_num: str) -> dict[str, str]:
     return fields
 
 
-# הבלוק שנפתח מסומן במחלקות משלו:
+# תשובת ה-postback אינה מרנדרת את הפרטים כ-HTML — הטבלאות
+# `tblMoreInfo1_<n>` חוזרות ריקות, והדף מזריק במקומן קריאה ל-JavaScript
+# עם **XML** שמכיל את הכול:
 #
-#   more_NotamID    "Notam NO: C1760/26"
-#   more_NotamInfo  "Valid From : 16/08/2026  08:00"
-#   more_MsgText    שורות הנוטאם עצמו — Q), A), B), C), D), E)
-_MORE_CELL_RE = re.compile(
-    r'<td[^>]*class="(more_NotamID|more_NotamInfo|more_MsgText)"[^>]*>(.*?)</td>',
-    re.S | re.I,
-)
-_MORE_LABEL_RE = re.compile(
-    r"(Valid From|Valid To|Created|Location Indicator|Location Description|Notam NO)"
-    r"\s*:?\s*(.*)", re.I,
-)
-# "16/08/2026  08:00" — יום/חודש/שנה ושעה, כפי שהשרת מרכיב אותם.
-_MORE_STAMP_RE = re.compile(r"(\d{2})/(\d{2})/(\d{4})\s+(\d{2}):(\d{2})")
+#   f_buildMoreMsgInfo('<Msg MsgNumber="2046996" NotamID="C1760/26"
+#     Location="LLLL" Airfield="Tel-Aviv FIR" FromDate="202608160800"
+#     ToDate="202608201000" CreateDate="2026-08-13-15.13.46.000000" ...>
+#     <MsgText>(C1760/26 NOTAMN</MsgText>
+#     <MsgText>Q) LLLL/QAELC/IV/NBO/E /000/019/3059N03445E001</MsgText>
+#     <MsgText>A) LLLL B) 2608160800 C) 2608201000</MsgText>
+#     <MsgText>D) 16 0800-1500 ...</MsgText>
+#     <MsgText>E) AN AREA AT TLALIM ...</MsgText></Msg>')
+#
+# חיפוש תאי טבלה החזיר אפס והוביל למסקנה שגויה שההרחבה חסומה. המטרה
+# הנכונה היא ה-XML.
+_MSG_BLOCK_RE = re.compile(r"<Msg\b([^>]*)>(.*?)</Msg>", re.S | re.I)
+_MSG_ATTR_RE = re.compile(r'(\w+)\s*=\s*"([^"]*)"')
+_MSG_TEXT_RE = re.compile(r"<MsgText>(.*?)</MsgText>", re.S | re.I)
+
+# "202608160800" — שנה, חודש, יום, שעה, דקה.
+_MSG_STAMP_RE = re.compile(r"^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})$")
+# "2026-08-13-15.13.46.000000" — הפורמט של DB2, שבו נשמר זמן היצירה.
+_MSG_CREATED_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})-(\d{2})\.(\d{2})")
 
 
-def _iso_from_more(value: str) -> str | None:
-    m = _MORE_STAMP_RE.search(value or "")
+def _iso_from_stamp(value: str) -> str | None:
+    """מחזיר ISO, או None כשהפורמט אינו מוכר — לא מנחשים זמנים."""
+    value = (value or "").strip()
+    m = _MSG_STAMP_RE.match(value) or _MSG_CREATED_RE.match(value)
     if not m:
         return None
-    day, month, year, hour, minute = m.groups()
+    year, month, day, hour, minute = m.groups()
     return f"{year}-{month}-{day}T{hour}:{minute}:00Z"
 
 
 def parse_more_info(page: str, msg_num: str) -> dict:
-    """קורא את הבלוק שנפתח עבור הודעה אחת.
+    """קורא את פרטי ההודעה `msg_num` מתשובת ה-postback.
 
-    מחזיר `{id, airfield, created, valid_from, valid_to, raw}` — ורק מה
-    שנמצא בפועל. `raw` הוא גוש הנוטאם המלא, כולל שורת Q, ולכן הוא נכנס
-    ישירות ל-`parse_qline.parse_notam` בלי שום הרכבה מחדש.
+    מחזיר `{id, location, airfield, created, valid_from, valid_to, raw}`.
+    `raw` הוא גוש הנוטאם המלא — כולל שורת Q, פריטי B)/C)/D) — ולכן הוא
+    נכנס ישירות ל-`parse_qline.parse_notam` בלי שום הרכבה מחדש.
 
-    התשובה ל-postback מכילה את **כל** הדף, ולכן חותכים תחילה לבלוק של
-    ההודעה המבוקשת. בלי החיתוך היינו בולעים שורות של הודעות שכנות.
+    התשובה מכילה את כל הדף, אבל רק בלוק `<Msg>` אחד: זה של ההודעה
+    שנפתחה. בכל זאת מוודאים התאמה של `MsgNumber`, כדי שלא נדביק פרטים
+    של הודעה אחת לנוטאם אחר.
     """
-    start = page.find(f'divMoreInfo_{msg_num}"')
-    if start == -1:
-        return {}
-    end = page.find("divMainInfo_", start)
-    block = page[start: end if end > start else len(page)]
+    for attrs_raw, inner in _MSG_BLOCK_RE.findall(page):
+        attrs = dict(_MSG_ATTR_RE.findall(attrs_raw))
+        if str(attrs.get("MsgNumber", "")) != str(msg_num):
+            continue
 
-    found: dict[str, str] = {}
-    lines: list[str] = []
-    for kind, raw in _MORE_CELL_RE.findall(block):
-        value = _text(raw)
-        if not value:
-            continue
-        if kind == "more_MsgText":
-            lines.append(value)
-            continue
-        label = _MORE_LABEL_RE.match(value)
-        if not label:
-            continue
-        key, rest = label.group(1).lower(), label.group(2).strip()
-        if key == "valid from":
-            found["valid_from"] = _iso_from_more(rest) or rest
-        elif key == "valid to":
-            found["valid_to"] = _iso_from_more(rest) or rest
-        elif key == "created":
-            found["created"] = _iso_from_more(rest) or rest
-        elif key == "location description":
-            found["airfield"] = rest
-        elif key == "notam no":
-            found["id"] = rest
-    if lines:
-        found["raw"] = "\n".join(lines)
-    return found
+        lines = [_text(t) for t in _MSG_TEXT_RE.findall(inner)]
+        detail = {
+            "id": attrs.get("NotamID") or None,
+            "location": attrs.get("Location") or None,
+            "airfield": attrs.get("Airfield") or None,
+            "created": _iso_from_stamp(attrs.get("CreateDate", "")),
+            "valid_from": _iso_from_stamp(attrs.get("FromDate", "")),
+            "valid_to": _iso_from_stamp(attrs.get("ToDate", "")),
+            "raw": "\n".join(line for line in lines if line),
+        }
+        return {k: v for k, v in detail.items() if v}
+    return {}
 
 
 # ---------------------------------------------------------------------------
