@@ -690,3 +690,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   outline: 4px solid var(--amber);
   outline-offset: 3px;
 }
+
+/* ייחוס ותנאי שימוש בתוך חלונית — קטן, אבל תמיד נוכח. סעיף 7 ברשימת
+   הכללים של רט"ג מחייב שהתנאים יתלוו למידע, לא שיהיו קבורים ב-README. */
+.popup__terms {
+  margin: 8px 0 0;
+  padding-top: 7px;
+  border-top: 1px solid var(--rule);
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}

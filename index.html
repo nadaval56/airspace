@@ -61,6 +61,15 @@
           <span class="switch__text">מזג אוויר (METAR / TAF / AIRMET)</span>
           <span class="switch__count" id="count-weather">—</span>
         </label>
+        <!--
+          8.6MB של גיאומטריה בלי פישוט — נטען רק בלחיצה, ולא בטעינת
+          הדף. כלי שדה לא מוריד 8MB למי שלא ביקש.
+        -->
+        <label class="switch">
+          <input type="checkbox" id="toggle-ratag">
+          <span class="switch__text">שמורות טבע וגנים לאומיים</span>
+          <span class="switch__count" id="count-ratag">טעינה בלחיצה</span>
+        </label>
       </fieldset>
 
       <div class="legend" id="legend" aria-label="מקרא"></div>
@@ -74,10 +83,11 @@
         שהם חסרים.
       -->
       <p class="gap-note">
-        המפה אינה כוללת שמורות טבע וגנים לאומיים. נספח ה' לפמ"ת מונה
-        <strong>542 אזורים כאלה בשמם בלבד, בלי קואורדינטות</strong>,
-        ומפנה לשכבות נפרדות של רט"ג ורת"א. השוו מול האפליקציה של רת"א
-        לפני טיסה.
+        שכבת שמורות הטבע והגנים היא של <strong>רשות הטבע והגנים</strong>,
+        ומוצגת להתמצאות בלבד — היא אינה רשימת המגבלות של הפמ"ת, ותנאי
+        השימוש שלה קובעים מפורשות שאין להסתמך עליה.
+        <a href="data/ratag-terms.md">רשימת הכללים המלאה של רט"ג</a>.
+        השוו מול האפליקציה של רת"א לפני טיסה.
       </p>
     </div>
   </section>

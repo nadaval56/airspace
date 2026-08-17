@@ -26,6 +26,9 @@ const NOTAM_HIGH = '#0f6fa8';
 const LOW_ALTITUDE_FT = 3000;
 // מזג אוויר בגוון שלישי, שאינו אדום ואינו כחול — כדי שלא ייקרא כמגבלה.
 const WEATHER_COLOR = '#0f766e';
+// שמורות טבע — ירוק, ובכוונה החלש מכולם. השכבה הזאת היא רקע להתמצאות
+// ולא מגבלה, ואסור לה להתחרות ויזואלית באזורים שכן אוסרים טיסה.
+const RATAG_COLOR = '#15803d';
 
 /**
  * "לא צוין" נשמע כאילו לנוטאם אין תוקף מוגדר, וזה לא נכון: יש לו תוקף,
@@ -139,6 +142,7 @@ function initMap() {
   });
 
   // פאנלים נפרדים כדי שעיגולי הנוטאם יהיו תמיד מעל פוליגוני הפמ"ת.
+  map.createPane('ratag').style.zIndex = 400;     // הכי מתחת — רקע להתמצאות
   map.createPane('weather').style.zIndex = 405;   // מתחת למגבלות — הן החשובות
   map.createPane('aip').style.zIndex = 410;
   map.createPane('notam').style.zIndex = 420;
@@ -163,8 +167,14 @@ function initMap() {
       if (view === 'country') {
         // מתאימים לגבולות השכבה עצמה כשהיא קיימת — היא צרה וגבוהה,
         // ותיבה קבועה משאירה שוליים מיותרים.
-        const bounds = aipLayer.getLayers().length
-          ? L.featureGroup(aipLayer.getLayers()).getBounds()
+        //
+        // `aipLayer` מכיל קבוצות־משנה לפי קטגוריה, לא צורות. ל-LayerGroup
+        // אין `getBounds` ואין `getLatLng`, ולכן `featureGroup` עליו נופל.
+        // צריך לשטח שכבה אחת פנימה.
+        const shapes = aipLayer.getLayers()
+          .flatMap((layer) => (layer.getLayers ? layer.getLayers() : [layer]));
+        const bounds = shapes.length
+          ? L.featureGroup(shapes).getBounds()
           : L.latLngBounds(COUNTRY_BOUNDS);
         map.fitBounds(bounds, { padding: [20, 20] });
       }
@@ -592,6 +602,65 @@ function renderWeatherAreas(reports) {
   return drawn;
 }
 
+/* --- שמורות טבע וגנים לאומיים (רט"ג) ---------------------------------- */
+
+/**
+ * השכבה הזאת שוקלת 8.6MB, כי אסור לפשט את הגיאומטריה שלה — כך קובעים
+ * תנאי השימוש של רט"ג. לכן היא **לא** נטענת עם הדף אלא רק כשמדליקים
+ * אותה, ורק פעם אחת. מי שנכנס לראות מה מוגבל לא צריך לשלם על זה.
+ */
+let ratagLayer = null;
+let ratagState = 'idle';   // idle | loading | ready | failed
+
+async function loadRatag(toggle, label) {
+  if (ratagState === 'loading') return;
+  ratagState = 'loading';
+  label.textContent = 'טוען…';
+
+  try {
+    const data = await loadJson('data/ratag-reserves.geojson');
+    ratagLayer = L.geoJSON(data, {
+      pane: 'ratag',
+      style: {
+        color: RATAG_COLOR, weight: 1.5, opacity: 0.85,
+        fillColor: RATAG_COLOR, fillOpacity: 0.12
+      },
+      onEachFeature: (feature, layer) => {
+        layer.bindPopup(ratagPopup(feature.properties || {}), { maxWidth: 280 });
+      }
+    });
+    ratagState = 'ready';
+    label.textContent = String((data.features || []).length);
+    if (toggle.checked) map.addLayer(ratagLayer);
+  } catch (err) {
+    ratagState = 'failed';
+    label.textContent = 'נכשל';
+    toggle.checked = false;
+    addAlert('<strong>שכבת שמורות הטבע לא נטענה.</strong> ' + esc(err.message), 'warn');
+  }
+}
+
+function ratagPopup(p) {
+  const rows = [];
+  if (p.kind) rows.push(['סוג', p.kind]);
+  if (p.status) rows.push(['סטטוס', p.status]);
+  if (p.plan) rows.push(['תכנית', p.plan]);
+  if (p.dunam) rows.push(['שטח', `${p.dunam.toLocaleString('he-IL')} דונם`]);
+
+  return `
+    <div class="card">
+      <div class="card__id">${esc(p.name || p.name_en || 'שמורה')}</div>
+      ${p.name_full && p.name_full !== p.name
+        ? `<p class="card__title">${esc(p.name_full)}</p>` : ''}
+      <dl class="kv kv--tight">${rows.map(([k, v]) =>
+        `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      <p class="popup__terms">
+        מקור: ${esc(p.source || 'רט"ג')} · להתמצאות בלבד, לא רשימת מגבלות.
+        <a href="data/ratag-terms.md">תנאי השימוש</a>
+      </p>
+    </div>`;
+}
+
 function weatherPopup(report, index) {
   return `
     <div class="popup">
@@ -737,6 +806,18 @@ async function init() {
     document.querySelector('.layers').style.display = 'none';
     return;
   }
+
+  // שמורות רט"ג — נטענות רק בהדלקה הראשונה, ואז נשמרות בזיכרון.
+  const ratagToggle = el('toggle-ratag');
+  const ratagLabel = el('count-ratag');
+  ratagToggle.addEventListener('change', (e) => {
+    if (!e.target.checked) {
+      if (ratagLayer) map.removeLayer(ratagLayer);
+      return;
+    }
+    if (ratagState === 'ready') map.addLayer(ratagLayer);
+    else loadRatag(e.target, ratagLabel);
+  });
 
   el('toggle-aip').addEventListener('change', (e) => {
     e.target.checked ? map.addLayer(aipLayer) : map.removeLayer(aipLayer);

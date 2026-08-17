@@ -5,3 +5,8 @@ beautifulsoup4>=4.12
 
 # נדרש רק ל-scripts/build_aip_geojson.py (חילוץ נספחי הפמ"ת מה-PDF).
 pdfplumber>=0.11
+
+# המרת שכבת רט"ג: קריאת shapefile והמרת Israel TM Grid ל-WGS84.
+# נדרשות רק ל-build_ratag_geojson.py, שרץ ידנית ולא בכל שעה.
+pyshp>=2.3
+pyproj>=3.6
