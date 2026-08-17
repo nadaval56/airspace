@@ -17,6 +17,10 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    # רשת אמורה לזרום או להיכשל, לא לזחול. ריצה אחת נתקעה 12 דקות כי
+    # השרת האט עד שה-timeout של השקע לא נורה אף פעם. הגבול הזה הוא
+    # רשת ביטחון: עדיף ריצה שנקטעת מאשר runner תפוס.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 

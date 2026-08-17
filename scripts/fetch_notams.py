@@ -319,11 +319,24 @@ def source_autorouter(icao: str) -> tuple[list[str], str]:
 # בקובץ `data/notam-details.json`. בפועל: בריצה הראשונה כמה עשרות
 # בקשות, ואחר כך רק ההודעות החדשות של אותה שעה.
 DETAILS_PATH = os.path.join(REPO_ROOT, "data", "notam-details.json")
-# תקרה לריצה. גם אם נוספו 60 הודעות בבת אחת, לא נשלחות 60 בקשות —
-# השאר ימשכו בריצה הבאה, והרשומות בינתיים יופיעו בלי זמני תוקף.
-MAX_EXPANSIONS_PER_RUN = 25
-# הפוגה בין בקשות, כדי לא להיראות כמו סריקה.
-EXPANSION_DELAY = 1.0
+
+# הניסיון הראשון הרשה 25 הרחבות בריצה, ותקע את ה-job ל-12 דקות: השרת
+# האט עד כדי כך שהתשובות זלגו לאט יותר מה-timeout של השקע, ולכן הוא
+# מעולם לא נורה. שלוש מסקנות, וכולן מיושמות כאן:
+#
+#   1. תקרה נמוכה — שמונה בריצה. במטמון של 127 הודעות זה מתמלא תוך
+#      שעות ספורות, ואחר כך יש רק הודעות חדשות, כמה בשעה.
+#   2. תקציב זמן משלו לשלב ההרחבה, שנבדק גם *אחרי* כל בקשה. מספיק
+#      שהשרת יאט, וההרחבה נעצרת — במקום להיתקע.
+#   3. תקרת בתים לקריאה. תשובה תקינה היא ~1.4MB; כל דבר מעבר לזה
+#      אינו מה שציפינו לו, ואין סיבה לבלוע אותו.
+#
+# האטה מצד השרת היא מסר. הכלי הזה מושך משרת של רשות ציבורית ומתנהג
+# בהתאם: לאט, מעט, ועם מטמון.
+MAX_EXPANSIONS_PER_RUN = 8
+EXPANSION_BUDGET_SECONDS = 90
+EXPANSION_DELAY = 1.5
+MAX_RESPONSE_BYTES = 8 * 1024 * 1024
 
 _iaa_blocks: list[str] | None = None
 _iaa_jar = http.cookiejar.CookieJar()
@@ -357,7 +370,7 @@ def _iaa_get(url: str, data: bytes | None = None, extra: dict | None = None) -> 
     headers.update(extra or {})
     req = urllib.request.Request(url, data=data, headers=headers)
     with _iaa_opener.open(req, timeout=max(5, min(TIMEOUT, _time_left()))) as resp:
-        return iaa.decode(resp.read())
+        return iaa.decode(resp.read(MAX_RESPONSE_BYTES))
 
 
 def expand_missing(page: str, rows: list[dict], details: dict) -> int:
@@ -373,11 +386,14 @@ def expand_missing(page: str, rows: list[dict], details: dict) -> int:
     if not pending:
         return 0
 
-    print(f"  הרחבה: {len(pending)} הודעות חדשות", file=sys.stderr)
+    print(f"  הרחבה: {len(pending)} הודעות חסרות במטמון", file=sys.stderr)
     added = 0
+    phase_started = time.monotonic()
     for row in pending[:MAX_EXPANSIONS_PER_RUN]:
-        if _time_left() < 30:
-            print("  הרחבה: נגמר הזמן, השאר בריצה הבאה", file=sys.stderr)
+        spent = time.monotonic() - phase_started
+        if spent > EXPANSION_BUDGET_SECONDS or _time_left() < 40:
+            print(f"  הרחבה: נעצר אחרי {spent:.0f} שניות, השאר בריצה הבאה",
+                  file=sys.stderr)
             break
         try:
             body = _iaa_get(
@@ -395,8 +411,8 @@ def expand_missing(page: str, rows: list[dict], details: dict) -> int:
         time.sleep(EXPANSION_DELAY)
 
     left = len(pending) - added
-    print(f"  הרחבה: {added} נוספו" + (f", {left} נותרו לריצה הבאה" if left > 0 else ""),
-          file=sys.stderr)
+    print(f"  הרחבה: {added} נוספו ב-{time.monotonic() - phase_started:.0f} שניות"
+          + (f", {left} נותרו לריצה הבאה" if left > 0 else ""), file=sys.stderr)
     return added
 
 
