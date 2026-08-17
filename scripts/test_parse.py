@@ -417,3 +417,42 @@ class ExtractAreaTest(unittest.TestCase):
         record = parse_notam(raw)
         self.assertIsNotNone(record["area"])
         self.assertEqual(len(record["area"]), 4)   # שלוש נקודות + סגירה
+
+
+class QSubjectTableTest(unittest.TestCase):
+    """התוויות אומתו מול טקסט הנוטאמים. הבדיקות נועלות את התיקונים."""
+
+    def subject(self, code):
+        from parse_qline import Q_SUBJECT
+        return Q_SUBJECT.get(code)
+
+    def test_ae_is_control_area_not_terminal_area(self):
+        """AE הוא CTA. TMA הוא AT. הבלבול הזה היה בקוד ותויק 19 פעם."""
+        self.assertIn("CTA", self.subject("AE"))
+        self.assertNotIn("TMA", self.subject("AE"))
+
+    def test_at_is_the_terminal_area(self):
+        self.assertIn("TMA", self.subject("AT"))
+
+    def test_control_zone_and_control_area_are_distinct(self):
+        self.assertNotEqual(self.subject("AC"), self.subject("AE"))
+        self.assertIn("CTR", self.subject("AC"))
+
+    def test_wc_is_a_captive_balloon(self):
+        """כל ההודעות עם WC פותחות ב-CAPTIVE BALLOON."""
+        self.assertIn("כדור פורח", self.subject("WC"))
+
+    def test_ca_is_a_communications_facility(self):
+        """ההודעות עם CA הן שינויי תדר, לא הגדרת מרחב אווירי."""
+        self.assertIn("קשר", self.subject("CA"))
+
+    def test_unresolved_code_stays_unlabelled(self):
+        """תווית שהטקסט אינו מכריע לגביה גרועה מקוד גולמי."""
+        self.assertIsNone(self.subject("SE"))
+        self.assertIsNone(self.subject("ZZ"))
+
+    def test_labels_are_unique_where_they_must_be(self):
+        """שני קודי מרחב אווירי שונים לא יישאו את אותה תווית."""
+        from parse_qline import Q_SUBJECT
+        airspace = {c: v for c, v in Q_SUBJECT.items() if c.startswith("A")}
+        self.assertEqual(len(set(airspace.values())), len(airspace))
