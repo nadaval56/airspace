@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-17T02:54:00Z",
- "last_success": "2026-08-17T02:54:00Z",
+ "generated_at": "2026-08-17T03:10:00Z",
+ "last_success": "2026-08-17T03:10:00Z",
  "last_error": {
   "at": "2026-08-16T21:14:20Z",
   "message": "המקור הוחזר בלי דיווחים"
@@ -20,11 +20,52 @@
  ],
  "counts": {
   "total": 11,
-  "METAR": 4,
   "TAF": 6,
-  "AIRMET": 1
+  "AIRMET": 1,
+  "METAR": 4
  },
  "reports": [
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 170000 TILL 180000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
+   "truncated": true,
+   "valid_from": "170000",
+   "valid_to": "180000",
+   "area": null
+  },
+  {
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 1 VALID 170300/170700 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR WKN=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": [
+    [
+     35.8,
+     33.35
+    ],
+    [
+     35.916667,
+     32.95
+    ],
+    [
+     34.583333,
+     30.3
+    ],
+    [
+     34.433333,
+     30.7
+    ],
+    [
+     35.8,
+     33.35
+    ]
+   ]
+  },
   {
    "id": "METAR",
    "station": "LLBG",
@@ -63,16 +104,6 @@
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 170000 TILL 180000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
-   "truncated": true,
-   "valid_from": "170000",
-   "valid_to": "180000",
    "area": null
   },
   {
@@ -124,37 +155,6 @@
    "valid_from": null,
    "valid_to": null,
    "area": null
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 5 VALID 162300/170300 LLBD- LLLL TEL AVIV FIR MT OBSC OBS WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR NC=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.8,
-     33.35
-    ],
-    [
-     35.916667,
-     32.95
-    ],
-    [
-     34.583333,
-     30.3
-    ],
-    [
-     34.433333,
-     30.7
-    ],
-    [
-     35.8,
-     33.35
-    ]
-   ]
   }
  ]
 }
