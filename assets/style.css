@@ -276,12 +276,38 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   שמעליהן. הקו האנכי מחזק את זה — ב-RTL הוא יושב בצד ההתחלה, כלומר
   מימין, והרשימה נדחפת ממנו שמאלה.
 */
-.sub__title {
-  margin: 12px 0 4px;
-  font-size: 0.74rem;
+/*
+  הרמה האמצעית — הציר. הוא תיבת סימון ולא כותרת, ולכן הוא צריך
+  להיראות כמו הורה: מעט מוזח מהשכבה, ומעט פחות מוזח מהערכים שתחתיו.
+*/
+.axis { margin-top: 12px; }
+
+.axis__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  cursor: pointer;
+  padding-inline-start: 4px;
+}
+
+.axis__head input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--navy);
+  flex: none;
+  cursor: pointer;
+}
+
+.axis__label {
+  font-size: 0.8rem;
   font-weight: 800;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   color: var(--ink-soft);
+}
+
+.axis__head:has(input:not(:checked):not(:indeterminate)) .axis__label {
+  text-decoration: line-through;
 }
 
 .sub {
@@ -290,7 +316,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   padding: 0;
   padding-inline-start: 14px;
   border-inline-start: 2px solid var(--rule);
-  margin-inline-start: 8px;
+  margin-inline-start: 16px;
 }
 
 .sub__item {

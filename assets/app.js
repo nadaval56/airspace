@@ -709,13 +709,9 @@ function renderList(notams) {
         // מדליקים את כל הבנים של שכבת הנוטאם ומציירים מחדש.
         if (!notamLayer.hasLayer(shape)) {
           const panel = el('toggle-notam').closest('.ctl');
-          panel.querySelectorAll('.ctl__body input[data-layer]').forEach((kid) => {
-            kid.checked = true;
-            const entry = sublayers.get(kid.getAttribute('data-layer'));
-            if (entry) setFilterValue(entry, true);
-          });
+          cascade(panel.querySelector('.ctl__body'), true);
           applyFilters();
-          syncParent(panel);
+          syncPanel(panel);
         }
         map.flyTo(shape.getLatLng ? shape.getLatLng() : shape.getBounds().getCenter(), 12);
         shape.openPopup();
@@ -751,7 +747,7 @@ const PANELS = [
     on: true,
     axes: [
       {
-        title: 'לפי סוג',
+        title: 'כל הסוגים',
         prefix: 'aip',
         entries: ['prohibited', 'restricted', 'danger', 'uav', 'obstacle']
           .map((k) => [k, { label: ZONE_STYLES[k].label, color: ZONE_STYLES[k].color }])
@@ -759,12 +755,12 @@ const PANELS = [
       {
         // הציר שהמשתמש ביקש: אזור שרצפתו גבוהה פחות מעניין את מי
         // שטס נמוך, ואפשר לכבות אותו ולנקות את המפה.
-        title: 'לפי רצפת גובה',
+        title: 'כל רצפות הגובה',
         prefix: 'floor',
         entries: Object.entries(AIP_FLOORS)
       },
       {
-        title: 'לפי נושא',
+        title: 'כל הנושאים',
         prefix: 'theme',
         entries: Object.entries(AIP_THEMES)
       }
@@ -777,9 +773,9 @@ const PANELS = [
     open: true,
     on: true,
     axes: [
-      { title: 'לפי נושא', prefix: 'notam', dashed: true,
+      { title: 'כל הנושאים', prefix: 'notam', dashed: true,
         entries: Object.entries(NOTAM_FAMILIES) },
-      { title: 'לפי מצב תוקף', prefix: 'state', dashed: true,
+      { title: 'כל מצבי התוקף', prefix: 'state', dashed: true,
         entries: Object.entries(NOTAM_STATES) }
     ]
   },
@@ -825,9 +821,17 @@ function axisHtml(axis, fallbackColor) {
     .filter(Boolean)
     .join('');
   if (!items) return '';
+  // הציר עצמו הוא תיבת סימון, לא כותרת. זו הרמה האמצעית: "כל
+  // הסוגים" מדליק ומכבה את כל הסוגים שמתחתיו, בדיוק כמו שהשכבה
+  // מדליקה ומכבה את כל הצירים שלה.
   return `
-    <p class="sub__title">${esc(axis.title)}</p>
-    <ul class="sub">${items}</ul>`;
+    <div class="axis">
+      <label class="axis__head">
+        <input type="checkbox" class="axis__toggle" checked>
+        <span class="axis__label">${esc(axis.title)}</span>
+      </label>
+      <ul class="sub">${items}</ul>
+    </div>`;
 }
 
 function renderControls() {
@@ -876,28 +880,53 @@ function setFilterValue(entry, on) {
   filters.set(entry.axis, off);
 }
 
-/** כל תיבות הבנים שבתוך קופסת שכבה. */
-function childInputs(panel) {
-  return [...panel.querySelectorAll('.ctl__body input[data-layer]')];
+/** כל תיבות העלים שבתוך אלמנט — ציר, או קופסת שכבה שלמה. */
+function leafInputs(scope) {
+  return [...scope.querySelectorAll('input[data-layer]')];
 }
 
 /**
- * מסנכרן את תיבת האב למצב הבנים.
+ * מסמן תיבת הורה לפי מצב העלים שתחתיה.
  *
  * שלושה מצבים ולא שניים: הכול דלוק, הכול כבוי, וחלק. ה"חלק" מקבל
- * `indeterminate` — הקו האופקי של הדפדפן — ולא וי. זה בדיוק מה
- * שצריך להיאמר: הסימון של האב ירד כי **זה כבר לא הכל**, אבל השכבה
- * לא כבויה.
+ * `indeterminate` — הקו האופקי של הדפדפן — ולא וי. זה בדיוק מה שצריך
+ * להיאמר: הסימון ירד כי **זה כבר לא הכל**, אבל לא הכול כבוי.
  */
-function syncParent(panel) {
-  const parent = panel.querySelector('.ctl__switch input');
-  const kids = childInputs(panel);
-  if (!parent || !kids.length) return;
-  const on = kids.filter((input) => input.checked).length;
-  parent.checked = on === kids.length;
-  parent.indeterminate = on > 0 && on < kids.length;
+function reflect(input, scope) {
+  if (!input) return;
+  const kids = leafInputs(scope);
+  if (!kids.length) return;
+  const on = kids.filter((kid) => kid.checked).length;
+  input.checked = on === kids.length;
+  input.indeterminate = on > 0 && on < kids.length;
 }
 
+/** מוריש מצב לכל העלים שתחת אלמנט, ומעדכן את הסינון בהתאם. */
+function cascade(scope, on) {
+  leafInputs(scope).forEach((kid) => {
+    kid.checked = on;
+    const entry = sublayers.get(kid.getAttribute('data-layer'));
+    if (entry) setFilterValue(entry, on);
+  });
+  scope.querySelectorAll('.axis__toggle').forEach((axis) => {
+    axis.checked = on;
+    axis.indeterminate = false;
+  });
+}
+
+/** מסנכרן את כל רמות העץ בקופסת שכבה אחת, מלמטה למעלה. */
+function syncPanel(panel) {
+  panel.querySelectorAll('.axis').forEach((axis) => {
+    reflect(axis.querySelector('.axis__toggle'), axis);
+  });
+  const body = panel.querySelector('.ctl__body');
+  if (body) reflect(panel.querySelector('.ctl__switch input'), body);
+}
+
+/**
+ * שלוש רמות, אותו כלל בכל אחת: הורה מוריש כלפי מטה, ילד מדווח כלפי
+ * מעלה. שכבה ← ציר ← ערך.
+ */
 function wireControls() {
   const box = el('controls');
 
@@ -908,25 +937,22 @@ function wireControls() {
     if (!panel) return;
 
     if (input.hasAttribute('data-layer')) {
-      // בן: מעדכן את עצמו, ואז את האב.
+      // עלה: מעדכן את עצמו, והעץ מעליו מסתנכרן.
       const entry = sublayers.get(input.getAttribute('data-layer'));
       if (!entry) return;
       setFilterValue(entry, input.checked);
-      applyFilters();
-      syncParent(panel);
-      return;
+    } else if (input.classList.contains('axis__toggle')) {
+      // ציר: מוריש לערכים שתחתיו בלבד.
+      cascade(input.closest('.axis'), input.checked);
+    } else {
+      // שכבה: מורישה לכל הצירים ולכל הערכים.
+      const body = panel.querySelector('.ctl__body');
+      if (!body) return;   // שכבה בלי סינון — המתג שלה מטופל בנפרד
+      cascade(body, input.checked);
     }
 
-    // אב: מוריש את מצבו לכל הבנים בבת אחת.
-    const kids = childInputs(panel);
-    if (!kids.length) return;   // שכבה בלי סינון — המתג שלה מטופל בנפרד
-    input.indeterminate = false;
-    kids.forEach((kid) => {
-      kid.checked = input.checked;
-      const entry = sublayers.get(kid.getAttribute('data-layer'));
-      if (entry) setFilterValue(entry, input.checked);
-    });
     applyFilters();
+    syncPanel(panel);
   });
 
   // תיבת הסימון יושבת בתוך <summary>. בלי זה כל לחיצה עליה הייתה
@@ -935,8 +961,8 @@ function wireControls() {
     node.addEventListener('click', (event) => event.stopPropagation());
   });
 
-  // מצב פתיחה: ייתכן שערך כלשהו כבר כבוי, ותיבת האב צריכה לשקף את זה.
-  box.querySelectorAll('.ctl').forEach(syncParent);
+  // מצב פתיחה: ייתכן שערך כלשהו כבר כבוי, וההורים צריכים לשקף זאת.
+  box.querySelectorAll('.ctl').forEach(syncPanel);
 }
 
 /* --- מזג אוויר --------------------------------------------------------- */
