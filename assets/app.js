@@ -274,7 +274,8 @@ const NOTAM_FAMILIES = {
   aerodrome:  { label: 'שדות תעופה ומנחתים', letters: 'FMLS' },
   hazard:     { label: 'הגבלות ואזהרות', letters: 'RW' },
   navigation: { label: 'ניווט ומכשולים', letters: 'CINOP' },
-  unknown:    { label: 'טרם הורחב', letters: '' }
+  unknown:    { label: 'טרם הורחב', letters: '' },
+  route:      { label: 'נתיבי טיסה', letters: '' }
 };
 
 function notamFamily(n) {
@@ -292,6 +293,17 @@ function renderNotams(notams) {
   if (!map) return drawn;
 
   notams.forEach((n) => {
+    // נתיבים — גם לנוטאם בלי גיאומטריה משורת Q.
+    routeLines(n).forEach((route) => {
+      L.polyline(route.latlngs, {
+        pane: 'notam',
+        color: notamColor(n), weight: 4, opacity: 0.95, dashArray: '10 6'
+      })
+        .bindPopup(notamPopup(n, route.codes.join(' → ')), { maxWidth: 260, minWidth: 200 })
+        .addTo(sublayer('notam:route', notamLayer));
+      drawn += 1;
+    });
+
     const geo = n.geo;
     // רדיוס 999 = כל ה-FIR. לא מציירים — היה בולע את המפה. תג ברשימה בלבד.
     if (!geo || geo.fir_wide) return;
@@ -319,14 +331,48 @@ function renderNotams(notams) {
 }
 
 /**
+ * נתיב שנוטאם סוגר, מצויר כקו.
+ *
+ * לפמ"ת אין טבלת נתיבים — המפה שם היא גרפיקה, לא נתונים. אבל הנוטאם
+ * עצמו מנסח את הנתיב כרצף נקודות דיווח:
+ *
+ *     E) ULTRALIGHT AND HEL RTE CLSD EIRON-ZMGID-AFULA-TAVOR
+ *
+ * וכל נקודה כזאת נמצאת בטבלת נקודות הדיווח שחולצה מהפמ"ת. חיבור
+ * השניים נותן את הקו האמיתי, בלי לנחש דבר.
+ *
+ * **הכול או כלום.** אם נקודה אחת ברצף אינה מוכרת, הנתיב אינו מצויר
+ * כלל. קו שמדלג על נקודת ביניים עובר במסלול אחר לגמרי מזה שנסגר —
+ * וזו טעות מסוכנת יותר מקו חסר. הכלל הזה גם מסנן לבד תפיסות שווא
+ * כמו `NOTAM-AIRAC`, שאינן נתיב.
+ */
+const ROUTE_RE = /\b[A-Z]{5}(?:\s*-\s*[A-Z]{5})+\b/g;
+
+function routeLines(n) {
+  const text = `${n.text || ''} ${n.raw || ''}`;
+  const seen = new Set();
+  const lines = [];
+  (text.match(ROUTE_RE) || []).forEach((match) => {
+    const codes = match.split('-').map((c) => c.trim());
+    const key = codes.join('-');
+    if (seen.has(key)) return;
+    seen.add(key);
+    const latlngs = codes.map((code) => reportingPoints[code]);
+    if (latlngs.some((p) => !p)) return;
+    lines.push({ codes, latlngs: latlngs.map((p) => [p.lat, p.lon]) });
+  });
+  return lines;
+}
+
+/**
  * חלונית מפה — מכוונת להיות קטנה.
  *
  * הגרסה הראשונה הציגה כאן את הכרטיס המלא, והוא חנק את המפה: בדיוק
  * ברגע שרוצים לראות היכן האזור יושב ביחס לסביבה, החלונית מכסה אותה.
  * לכן כאן רק מה שמזהה את הנוטאם, וכפתור שקופץ לכרטיס המלא ברשימה.
  */
-function notamPopup(n) {
-  const subject = subjectText(n);
+function notamPopup(n, routeLabel) {
+  const subject = routeLabel || subjectText(n);
   const rows = [];
   const from = fmtStamp(n.valid_from, null);
   if (from) rows.push(['מ־', from]);
@@ -650,6 +696,9 @@ let ratagState = 'idle';   // idle | loading | ready | failed
  */
 let aerodromes = {};
 
+/** כל נקודות הדיווח לפי קוד, לציור נתיבים שנוטאם סוגר. */
+let reportingPoints = {};
+
 async function loadRatag(toggle, label) {
   if (ratagState === 'loading') return;
   ratagState = 'loading';
@@ -786,6 +835,14 @@ async function init() {
   } else {
     addAlert('<strong>לא נטענו נתוני נוטאם.</strong> קובץ <code>data/notams.json</code> חסר או פגום. המפה מציגה את שכבת הפמ"ת בלבד.');
   }
+  // הנקודות חייבות להיטען **לפני** ציור הנוטאמים — בלעדיהן אין נתיבים,
+  // וגם לפני מזג האוויר, בלעדיהן אין מיקום לתחנות.
+  if (pointsResult.status === 'fulfilled') {
+    aerodromes = (pointsResult.value && pointsResult.value.aerodromes) || {};
+    ((pointsResult.value && pointsResult.value.points) || []).forEach((point) => {
+      reportingPoints[point.code] = point;
+    });
+  }
   if (aipResult.status === 'fulfilled') {
     geojson = aipResult.value;
   }
@@ -844,9 +901,6 @@ async function init() {
   wireJumpButtons();
 
   // מזג אוויר — שכבה עצמאית עם מתג משלה, כבויה כברירת מחדל.
-  if (pointsResult.status === 'fulfilled') {
-    aerodromes = (pointsResult.value && pointsResult.value.aerodromes) || {};
-  }
   const weather = weatherResult.status === 'fulfilled' ? weatherResult.value : null;
   renderWeather(weather);
   const weatherToggle = el('toggle-weather');
