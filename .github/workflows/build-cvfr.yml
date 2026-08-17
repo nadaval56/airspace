@@ -1,0 +1,35 @@
+name: בניית נתיבי CVFR
+
+# מריצים כשמשרד התחבורה מפרסם עדכון למאגר "נתיבי טיסה".
+# ההורדה מ-data.gov.il עוברת מ-Actions אבל לא מכל רשת.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: התקנת תלויות
+        run: pip install --disable-pip-version-check -r requirements.txt
+      - name: המרה
+        run: python scripts/build_cvfr_geojson.py
+      - name: קומיט אם השתנה
+        run: |
+          if git diff --quiet -- data/cvfr-routes.geojson; then
+            echo "אין שינוי."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/cvfr-routes.geojson
+          git commit -m "עדכון נתיבי CVFR — $(date -u '+%Y-%m-%d')"
+          git push
