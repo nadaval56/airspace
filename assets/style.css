@@ -940,6 +940,61 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   color: #78350f;
 }
 
+/* --- סמלי שדות תעופה, מנחתים ומשטחי מסוקים ---------------------------- */
+
+/*
+  תג עגול עם צללית: מטוס למסלול, מסוק למשטח מסוקים. הצבע הוא דיו הדף
+  ולא אחד מצבעי המגבלות — שדה תעופה אינו הגבלה, והוא לא צריך להיקרא
+  כמו אזור אסור.
+
+  מלא = שדה תעופה או משטח מסוקים מוסדר; חלול = מנחת. ההבדל הוא
+  בעובי הנוכחות הוויזואלית, שמקבילה לסדר הגודל של השדה.
+*/
+.field-pin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--pin);
+  border-radius: 50%;
+  background: var(--paper-2);
+  color: var(--pin);
+  box-shadow: 0 1px 3px rgb(16 22 29 / 35%);
+}
+
+.field-pin svg {
+  width: 68%;
+  height: 68%;
+  fill: currentColor;
+  stroke: none;
+}
+
+/*
+  צורה שהצהירה על עובי קו היא **קו** ולא שטח מלא. בלי החוק הזה ה-fill
+  שב-CSS גובר על fill="none" שבתוך ה-SVG (כלל CSS גובר על תכונת
+  מצגת), והכנפיים של המסוק נמלאו — סמל שנראה כמו כתם.
+*/
+.field-pin svg [stroke-width] {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+}
+
+.field-pin--solid {
+  background: var(--pin);
+  color: var(--paper-2);
+}
+
+/* מנחת חקלאי ונקודת ייחוס — תג קטן יותר וקו דק יותר. הם קיימים
+   במקור, אבל מסלול עפר או קוד בלי שם אינם שדה תעופה. */
+.field-pin--agricultural,
+.field-pin--reference {
+  border-width: 1.5px;
+}
+
+.field-pin--reference svg { width: 78%; height: 78%; }
+
 /* תווית תחנת מזג אוויר — קטנה, קבועה, ולא חוסמת. */
 .wx-tip {
   background: var(--paper);

@@ -1,0 +1,42 @@
+name: בניית שכבת השדות והמנחתים
+
+# חד־פעמי ברובו, כמו שאר שכבות הפמ"ת. מריצים כשעולה עדכון לפמ"ת המלא
+# ב-Release. הריצה איטית: 440 עמודים, וחילוץ הטקסט הוא רוב הזמן.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: התקנת תלויות
+        run: pip install --disable-pip-version-check -r requirements.txt
+
+      - name: חילוץ פרקים ד', ה' ו-ו'
+        run: python scripts/build_aerodromes.py
+
+      # הבדיקות קוראות את הקובץ שנוצר: נקודה מחוץ לתיבת ישראל, מזהה
+      # כפול או גובה בלתי סביר נופלים כאן ולא מגיעים לקומיט.
+      - name: בדיקות
+        run: python -m unittest scripts.test_aerodromes -v
+
+      - name: קומיט אם השתנה
+        run: |
+          if git diff --quiet -- data/aip-aerodromes.geojson; then
+            echo "אין שינוי בשכבה."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/aip-aerodromes.geojson
+          git commit -m "עדכון שכבת השדות והמנחתים מפרקי ד', ה' ו-ו'"
+          git push

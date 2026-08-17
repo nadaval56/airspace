@@ -105,6 +105,54 @@ const AIP_THEMES = {
 };
 
 /**
+ * שדות תעופה, מנחתים ומשטחי מסוקים — פרקים ד', ה' ו-ו' של הפמ"ת.
+ *
+ * הסוג מגיע **מהפרק** שבו השדה יושב ולא מניתוח השם; ראו
+ * scripts/aip_aerodromes.py. `reference` הוא היחיד שאינו משם: אלה
+ * שדות שיש להם נקודת ייחוס בטבלת נתיבי התובלה הנמוכים ואין להם פרק
+ * בפמ"ת — נתב"ג, רמת דוד וחבריהם — ולכן יש להם מיקום וקוד, ולא שם.
+ *
+ * **סימון ולא פוליגון.** מה שהמקור נותן לכל שדה הוא נקודה אחת (ARP);
+ * אזור השדה (ATZ) מתואר בפרקים במילים — "בצפון שדרות משה דיין, במערב
+ * גבול שטח אש 24" — ולא בקואורדינטות. לגזור ממנו מצולע זה להמציא
+ * גבול. בשבעה מנחתים המקור **כן** נותן רדיוס מפורש ("אזור השדה של
+ * המנחת מתוחם ברדיוס 3 ק"מ"), ורק שם מצויר גם עיגול.
+ */
+const FIELD_KINDS = {
+  // רק שדה תעופה מלא. 44 תגים כהים על מפה אחת היו כובשים אותה, והיא
+  // שייכת לאזורים האסורים — הם התשובה לשאלה שבכותרת. תג לבן עם צללית
+  // כהה נראה בבירור ואינו מתחרה על תשומת הלב.
+  airport:      { label: 'שדות תעופה', glyph: 'plane', solid: true },
+  airstrip:     { label: 'מנחתים', glyph: 'plane' },
+  agricultural: { label: 'מנחתים חקלאיים', glyph: 'plane', small: true },
+  helipad:      { label: 'משטחי מסוקים', glyph: 'heli' },
+  reference:    { label: 'שדות נוספים (נ"צ בלבד)', glyph: 'dot', small: true }
+};
+
+// כחול־כהה, צבע הדיו של הדף. שדה תעופה אינו מגבלה, ואסור לו להיקרא
+// כאדום של אזור אסור או ככחול של נוטאם — הוא תשתית, ולכן ניטרלי.
+const FIELD_COLOR = '#1c2b3a';
+
+/**
+ * ציור הסמלים. מטוס למסלול, מסוק למשטח מסוקים — כמו שביקשת.
+ *
+ * SVG בתוך `divIcon` ולא תמונה: הוא נשאר חד בכל זום, נצבע מ-CSS,
+ * ואינו בקשת רשת נוספת. הצורות פשוטות בכוונה — ב-18 פיקסלים על מפה
+ * מוארת, צללית מזוהה מנצחת ציור מפורט.
+ */
+const FIELD_GLYPHS = {
+  plane: '<path d="M12 2.2c.7 0 1.1.9 1.1 2.4v3.2l7.2 4.1v2l-7.2-2v4.3l2.6 1.9v1.6L12 18.6l-3.7 1.1v-1.6l2.6-1.9v-4.3l-7.2 2v-2l7.2-4.1V4.6c0-1.5.4-2.4 1.1-2.4z"/>',
+  heli: '<path d="M2.6 4.4h18.8" stroke-width="1.9"/>'
+      + '<path d="M12 4.4v3.4" stroke-width="1.7"/>'
+      + '<ellipse cx="9.6" cy="12.4" rx="5.2" ry="4.1"/>'
+      + '<path d="M14.6 12.4h6.8" stroke-width="1.9"/>'
+      + '<path d="M20.6 9.7v5.4" stroke-width="1.7"/>'
+      + '<path d="M5.2 19.1h8.8" stroke-width="1.7"/>'
+      + '<path d="M9.6 16.5v2.6" stroke-width="1.5"/>',
+  dot: '<circle cx="12" cy="12" r="4.6" stroke-width="2.4" fill="none"/>'
+};
+
+/**
  * "לא צוין" נשמע כאילו לנוטאם אין תוקף מוגדר, וזה לא נכון: יש לו תוקף,
  * הוא פשוט עוד לא נמשך. זמני התוקף נפתחים בכפתור ה-`+` באתר של רש"ת,
  * וזו בקשה נפרדת לכל הודעה — המשיכה עושה אותן בקצב מרוסן ושומרת
@@ -239,6 +287,7 @@ let map = null;
 let aipLayer = null;
 let notamLayer = null;
 let weatherLayer = null;
+let fieldLayer = null;
 
 /**
  * תת־שכבות לפי קטגוריה.
@@ -297,9 +346,14 @@ function initMap() {
   map.createPane('weather').style.zIndex = 405;   // מתחת למגבלות — הן החשובות
   map.createPane('aip').style.zIndex = 410;
   map.createPane('notam').style.zIndex = 420;
+  // עיגולי אזור השדה — נמוך, כמו הרקע. הסמל עצמו יושב ב-markerPane
+  // של Leaflet (600) וממילא מעל הכול, וזה נכון: הוא זעיר, וצריך
+  // להישאר לחיץ מעל כל פוליגון שנופל עליו.
+  map.createPane('field').style.zIndex = 404;
 
   aipLayer = L.layerGroup().addTo(map);
   notamLayer = L.layerGroup().addTo(map);
+  fieldLayer = L.layerGroup().addTo(map);
   // לא נוסף למפה כאן: שכבת מזג האוויר כבויה עד שהמתג נדלק.
   weatherLayer = L.layerGroup();
 
@@ -469,6 +523,134 @@ function aipPopup(p) {
       <dl class="kv">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
       ${coordination}
       ${p.notes ? `<p class="card__text" style="direction:rtl;text-align:right">${esc(p.notes)}</p>` : ''}
+    </div>`;
+}
+
+/* --- שכבת השדות, המנחתים ומשטחי המסוקים ------------------------------- */
+
+/** סמל השדה — תג עם צללית, ב-`divIcon`. */
+function fieldIcon(kind) {
+  const meta = FIELD_KINDS[kind] || FIELD_KINDS.airstrip;
+  const size = meta.small ? 18 : 23;
+  const classes = [
+    'field-pin',
+    `field-pin--${kind}`,
+    meta.solid ? 'field-pin--solid' : 'field-pin--hollow'
+  ].join(' ');
+  return L.divIcon({
+    className: '',   // ריק בכוונה: Leaflet מוסיף רקע לבן לברירת המחדל
+    html: `<span class="${classes}" style="--pin:${FIELD_COLOR}">
+             <svg viewBox="0 0 24 24" aria-hidden="true">${FIELD_GLYPHS[meta.glyph]}</svg>
+           </span>`,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2]
+  });
+}
+
+/**
+ * נקודות הייחוס שאין להן פרק בפמ"ת, כ-Features.
+ *
+ * `data/aip-points.json` נטען ממילא (בלעדיו אין איפה לסמן METAR/TAF),
+ * ובו 24 קודי ICAO עם נ"צ. מי שיש לו פרק מגיע משם עם שם וסוג; מי שאין
+ * לו — נתב"ג, רמת דוד, פלמחים — היה נעלם מהמפה לגמרי, וזו תמונה חסרה
+ * של "איפה שדות התעופה". השם אינו זמין בטבלה ההיא: הגופן שם מחזיר
+ * `(cid:17)` במקום אותיות, ולכן מוצג הקוד בלבד.
+ */
+function referenceFields(points, covered) {
+  const table = (points && points.aerodromes) || {};
+  return Object.entries(table)
+    .filter(([icao]) => !covered.has(icao))
+    .map(([icao, at]) => ({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [at.lon, at.lat] },
+      properties: {
+        id: icao,
+        icao,
+        kind: 'reference',
+        kind_label: FIELD_KINDS.reference.label,
+        source: (points && points.source) || 'פמ"ת — מפת נתיבי תובלה נמוכים'
+      }
+    }));
+}
+
+function renderAerodromes(geojson, points) {
+  const chapters = (geojson && geojson.features) || [];
+  const covered = new Set(
+    chapters.map((f) => (f.properties || {}).icao).filter(Boolean)
+  );
+  const features = [...chapters, ...referenceFields(points, covered)];
+
+  setCount('field', features.length);
+  if (!features.length || !map) return features.length;
+
+  features.forEach((feature) => {
+    const p = feature.properties || {};
+    const [lon, lat] = feature.geometry.coordinates;
+    const kind = FIELD_KINDS[p.kind] ? p.kind : 'airstrip';
+
+    const marker = L.marker([lat, lon], {
+      icon: fieldIcon(kind),
+      // כשסמל יושב על אזור אסור, הכיתוב צריך להסביר את עצמו בלי לחיצה.
+      title: p.name || p.icao || ''
+    });
+    marker.bindTooltip(p.name || p.icao || '', { direction: 'top', offset: [0, -6] });
+
+    // עיגול אזור השדה — רק למי שהמקור נותן לו רדיוס מפורש.
+    let shape = marker;
+    if (p.atz_radius_nm) {
+      const ring = L.circle([lat, lon], {
+        pane: 'field',
+        radius: p.atz_radius_nm * NM_TO_M,
+        color: FIELD_COLOR, weight: 1.5, opacity: 0.7, dashArray: '5 5',
+        fillColor: FIELD_COLOR, fillOpacity: 0.05
+      });
+      shape = L.featureGroup([ring, marker]);
+    }
+
+    shape.bindPopup(aerodromePopup(p), { maxWidth: 300 });
+    register(shape, fieldLayer, { field: kind });
+  });
+
+  return features.length;
+}
+
+function aerodromePopup(p) {
+  const rows = [];
+  if (p.icao) rows.push(['קוד ICAO', p.icao]);
+  rows.push(['סוג', p.kind_label || FIELD_KINDS[p.kind].label]);
+  if (typeof p.elevation_ft === 'number') {
+    rows.push(['גובה', `${p.elevation_ft.toLocaleString('he-IL')} רגל`]);
+  }
+  if (p.atz_radius_nm) {
+    const km = (p.atz_radius_nm * NM_TO_M) / 1000;
+    rows.push(['אזור השדה', `רדיוס ${km.toFixed(1)} ק"מ מנקודת הייחוס`]);
+  }
+  if (p.operator) rows.push(['מפעיל', p.operator]);
+  if (p.contact) rows.push(['תיאום', p.contact]);
+  if (p.source) rows.push(['מקור', p.source]);
+
+  // מה שאין, ולמה. שדה בלי גובה אינו שדה שגובהו אפס, ונקודת ייחוס
+  // בלי שם אינה שדה בלי שם — הפמ"ת פשוט אינו מוסר את הנתון בצורה
+  // שאפשר לקרוא בלי לנחש.
+  const gaps = [];
+  if (p.kind === 'reference') {
+    gaps.push('אין לשדה הזה פרק בפמ"ת — מוצגים הקוד והמיקום בלבד.');
+  } else if (typeof p.elevation_ft !== 'number') {
+    gaps.push('הגובה אינו קריא במקור ולכן אינו מוצג. ראו את הפרק עצמו.');
+  }
+  if (!p.atz_radius_nm && p.kind !== 'reference') {
+    gaps.push('אזור השדה מתואר בפמ"ת במילים ולא בקואורדינטות, ולכן אינו מצויר.');
+  }
+
+  return `
+    <div class="card">
+      <div class="card__id">${esc(p.name || p.icao || 'שדה')}</div>
+      ${p.title && p.title !== p.name
+        ? `<p class="card__title">${esc(p.title)}</p>` : ''}
+      <dl class="kv kv--tight">${rows.map(([k, v]) =>
+        `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      ${gaps.length ? `<p class="popup__terms">${esc(gaps.join(' '))}</p>` : ''}
     </div>`;
 }
 
@@ -839,6 +1021,17 @@ const PANELS = [
         entries: Object.entries(NOTAM_STATES) }
     ]
   },
+  {
+    id: 'field',
+    toggle: 'toggle-field',
+    label: 'שדות תעופה ומנחתים (פמ"ת)',
+    open: false,
+    on: true,
+    axes: [
+      { title: 'כל הסוגים', prefix: 'field',
+        entries: Object.entries(FIELD_KINDS) }
+    ]
+  },
   { id: 'weather', toggle: 'toggle-weather', label: 'מזג אוויר (METAR / TAF / AIRMET)' },
   { id: 'cvfr', toggle: 'toggle-cvfr', label: 'נתיבי טיסה (CVFR)' },
   { id: 'ratag', toggle: 'toggle-ratag', label: 'שמורות טבע וגנים לאומיים',
@@ -894,10 +1087,16 @@ function axisHtml(axis, fallbackColor) {
     </div>`;
 }
 
+// צבע ברירת המחדל של הדגימות בכל קופסה. ערך שיש לו צבע משלו גובר.
+const PANEL_SWATCHES = {
+  notam: NOTAM_HIGH,
+  field: FIELD_COLOR
+};
+
 function renderControls() {
   const boxes = PANELS.map((panel) => {
     const body = (panel.axes || [])
-      .map((axis) => axisHtml(axis, panel.id === 'notam' ? NOTAM_HIGH : 'var(--z-other)'))
+      .map((axis) => axisHtml(axis, PANEL_SWATCHES[panel.id] || 'var(--z-other)'))
       .filter(Boolean)
       .join('');
 
@@ -1363,16 +1562,21 @@ async function init() {
     addAlert('<strong>המפה לא נטענה.</strong> ספריית המפות לא עלתה. כל הנוטאמים מופיעים ברשימה שמתחת, כולל טווחי הגובה והמיקומים.', 'warn');
   }
 
-  const [notamResult, aipResult, weatherResult, obstacleResult, pointsResult] =
-    await Promise.allSettled([
+  const [
+    notamResult, aipResult, weatherResult, obstacleResult, pointsResult,
+    aerodromeResult
+  ] = await Promise.allSettled([
     loadJson('data/notams.json'),
     loadJson('data/aip-permanent.geojson'),
     loadJson('data/weather.json'),
     // מכשולים קבועים — נספח ד'. שמונה רשומות, שקולות כמעט כלום,
     // ולכן נטענות תמיד ולא בבקשה כמו שכבת רט"ג.
     loadJson('data/aip-obstacles.geojson'),
-    // נקודות ייחוס של שדות תעופה — בלעדיהן אין איפה לסמן METAR/TAF.
-    loadJson('data/aip-points.json')
+    // נקודות ייחוס של שדות תעופה — בלעדיהן אין איפה לסמן METAR/TAF,
+    // והן גם השדות שאין להם פרק בפמ"ת.
+    loadJson('data/aip-points.json'),
+    // שדות תעופה, מנחתים ומשטחי מסוקים — פרקים ד', ה' ו-ו'.
+    loadJson('data/aip-aerodromes.geojson')
   ]);
 
   if (notamResult.status === 'fulfilled') {
@@ -1408,6 +1612,14 @@ async function init() {
       ' עד שתיטען, המפה מציגה נוטאמים בלבד — וזו תמונה חלקית בהרבה.'
     );
   }
+
+  // --- שדות תעופה, מנחתים ומשטחי מסוקים. חסרונם אינו מוכרז בהתראה
+  //     אדומה: זו שכבת התמצאות ולא שכבת מגבלות, והמתג פשוט יראה 0.
+  const fields = renderAerodromes(
+    aerodromeResult.status === 'fulfilled' ? aerodromeResult.value : null,
+    pointsResult.status === 'fulfilled' ? pointsResult.value : null
+  );
+  if (!fields) setCount('field', '—');
 
   // --- שכבת הנוטאמים
   const notams = (payload && payload.notams) || [];
