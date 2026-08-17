@@ -264,12 +264,84 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .ctl__label { flex: 1; font-weight: 700; }
 
 .ctl__body {
-  padding: 2px 12px 12px;
+  padding: 2px 12px 10px;
   border-top: 1px solid var(--rule);
   margin-top: 2px;
 }
 
-.ctl__body .legend__group { margin-top: 10px; }
+/*
+  הרשימה המוזחת.
+
+  ההזחה אינה קישוט: היא מה שאומר לעין שהתיבות האלה שייכות לתיבה
+  שמעליהן. הקו האנכי מחזק את זה — ב-RTL הוא יושב בצד ההתחלה, כלומר
+  מימין, והרשימה נדחפת ממנו שמאלה.
+*/
+.sub__title {
+  margin: 12px 0 4px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.sub {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 14px;
+  border-inline-start: 2px solid var(--rule);
+  margin-inline-start: 8px;
+}
+
+.sub__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 34px;
+  cursor: pointer;
+  font-size: 0.92rem;
+}
+
+.sub__item input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--navy);
+  flex: none;
+  cursor: pointer;
+}
+
+/* אותו ריבוע צבע שהיה בתגית — הוא מה שמקשר בין השורה לבין מה
+   שמצויר על המפה, ובלעדיו הרשימה היא טקסט בלבד. */
+.sub__swatch {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  border-radius: 3px;
+  border: 2px solid var(--swatch);
+  background: color-mix(in srgb, var(--swatch) 18%, transparent);
+}
+
+.sub__swatch--dashed { border-style: dashed; }
+
+.sub__label { flex: 1; min-width: 0; }
+
+/* שורה מכובה נשארת קריאה — קו חוצה, כי בשמש הבדלי בהירות נעלמים. */
+.sub__item:has(input:not(:checked)) .sub__label {
+  color: var(--ink-soft);
+  text-decoration: line-through;
+}
+
+.sub__item:has(input:not(:checked)) .sub__swatch { background: transparent; }
+
+.sub__count {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #e9e4d8;
+  color: var(--ink);
+}
 
 .legend {
   display: flex;

@@ -781,21 +781,34 @@ const PANELS = [
     hint: 'טעינה בלחיצה' }
 ];
 
-function chipHtml(key, label, color, dashed) {
+/**
+ * שורת סינון — תיבת סימון, לא תגית.
+ *
+ * הגרסה הקודמת השתמשה בכפתורי־גלולה. הם נראו טוב אבל לא אמרו מה הם:
+ * כפתור עגול שנדלק ונכבה אינו קורא כמו "מסונן/לא מסונן", וכשיש שלושה
+ * צירים אחד מתחת לשני זה נהיה שדה של כפתורים בלי היררכיה.
+ *
+ * תיבת סימון אומרת בדיוק מה היא עושה, נגישה בלי ARIA נוסף, ומרוכזת
+ * ברשימה מוזחת מתחת לתיבה הראשית — כך שרואים בעין מי הבן של מי.
+ */
+function subItemHtml(key, label, color, dashed) {
   const entry = sublayers.get(key);
   if (!entry) return '';
   return `
-    <button type="button" class="legend__item" data-layer="${esc(key)}"
-            aria-pressed="${entry.on}" style="--swatch:${color}">
-      <span class="legend__swatch${dashed ? ' legend__swatch--dashed' : ''}"></span>
-      <span class="legend__label">${esc(label)}</span>
-      <span class="legend__count">${entry.count}</span>
-    </button>`;
+    <li>
+      <label class="sub__item">
+        <input type="checkbox" data-layer="${esc(key)}"${entry.on ? ' checked' : ''}>
+        <span class="sub__swatch${dashed ? ' sub__swatch--dashed' : ''}"
+              style="--swatch:${color}"></span>
+        <span class="sub__label">${esc(label)}</span>
+        <span class="sub__count">${entry.count}</span>
+      </label>
+    </li>`;
 }
 
 function axisHtml(axis, fallbackColor) {
-  const chips = axis.entries
-    .map(([key, meta]) => chipHtml(
+  const items = axis.entries
+    .map(([key, meta]) => subItemHtml(
       axis.prefix + ':' + key,
       meta.label,
       meta.color || fallbackColor,
@@ -803,12 +816,10 @@ function axisHtml(axis, fallbackColor) {
     ))
     .filter(Boolean)
     .join('');
-  if (!chips) return '';
+  if (!items) return '';
   return `
-    <div class="legend__group">
-      <span class="legend__title">${esc(axis.title)}</span>
-      ${chips}
-    </div>`;
+    <p class="sub__title">${esc(axis.title)}</p>
+    <ul class="sub">${items}</ul>`;
 }
 
 function renderControls() {
@@ -852,18 +863,16 @@ function renderControls() {
 function wireControls() {
   const box = el('controls');
 
-  box.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-layer]');
-    if (!button) return;
-    const key = button.getAttribute('data-layer');
-    const entry = sublayers.get(key);
+  box.addEventListener('change', (event) => {
+    const input = event.target.closest('input[data-layer]');
+    if (!input) return;
+    const entry = sublayers.get(input.getAttribute('data-layer'));
     if (!entry) return;
 
-    entry.on = !entry.on;
+    entry.on = input.checked;
     const off = filters.get(entry.axis) || new Set();
     entry.on ? off.delete(entry.value) : off.add(entry.value);
     filters.set(entry.axis, off);
-    button.setAttribute('aria-pressed', String(entry.on));
     applyFilters();
   });
 
