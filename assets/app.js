@@ -581,8 +581,10 @@ function wireJumpButtons() {
     const target = document.getElementById(button.getAttribute('data-jump'));
     if (!target) return;
     if (map) map.closePopup();
-    // הכרטיסים מקופלים. קפיצה אל כרטיס סגור הייתה נוחתת על שורה
-    // אחת ונראית כאילו לא קרה כלום — אז פותחים אותו לפני הגלילה.
+    // שני קיפולים בדרך: הרשימה כולה, והכרטיס עצמו. פותחים את
+    // שניהם, אחרת הקפיצה נוחתת על כפתור סגור ונראית ככלום.
+    const listFold = target.closest('.fold');
+    if (listFold) listFold.open = true;
     const fold = target.querySelector('details');
     if (fold) fold.open = true;
     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -835,7 +837,7 @@ function axisHtml(axis, fallbackColor) {
 }
 
 function renderControls() {
-  const html = PANELS.map((panel) => {
+  const boxes = PANELS.map((panel) => {
     const body = (panel.axes || [])
       .map((axis) => axisHtml(axis, panel.id === 'notam' ? NOTAM_HIGH : 'var(--z-other)'))
       .filter(Boolean)
@@ -849,15 +851,27 @@ function renderControls() {
         <span class="switch__count" id="count-${panel.id}">${esc(panel.hint || '—')}</span>
       </span>`;
 
-    if (!body) return `<div class="ctl ctl--flat">${head}</div>`;
-    return `
+    if (!body) return { id: panel.id, html: `<div class="ctl ctl--flat">${head}</div>` };
+    return {
+      id: panel.id,
+      html: `
       <details class="ctl"${panel.open ? ' open' : ''}>
         <summary class="ctl__head">${head}</summary>
         <div class="ctl__body">${body}</div>
-      </details>`;
-  }).join('');
+      </details>`
+    };
+  });
 
-  el('controls').innerHTML = html + `
+  // שני טורים בדסקטופ: הפמ"ת לבדה מצד אחד, וכל השאר מצטבר בשני.
+  // קופסת הפמ"ת גבוהה פי כמה מהאחרות, ובפריסה אוטומטית היא גררה
+  // אחריה טור מרוסק — קופסה אחת גבוהה מול ארבע נמוכות שנדחסות
+  // סביבה. חלוקה מפורשת מאזנת את שני הצדדים.
+  const primary = boxes.filter((box) => box.id === 'aip').map((box) => box.html).join('');
+  const secondary = boxes.filter((box) => box.id !== 'aip').map((box) => box.html).join('');
+
+  el('controls').innerHTML = `
+    <div class="controls__col">${primary}</div>
+    <div class="controls__col">${secondary}</div>` + `
     <p class="legend__note">
       קו מלא — מגבלה קבועה · קו מקווקו — נוטאם ·
       <span style="color:${CVFR_COLOR}">סגול</span> = פרוזדור CVFR פתוח ·
@@ -975,6 +989,7 @@ function wireControls() {
 function renderWeather(payload) {
   const reports = (payload && payload.reports) || [];
   setCount('weather', reports.length);
+  el('weather-fold').textContent = `הצג את כל ${reports.length} הדיווחים`;
   const list = el('weather-list');
   list.innerHTML = '';
 
@@ -1340,6 +1355,8 @@ async function init() {
   const notams = (payload && payload.notams) || [];
   const drawn = renderNotams(notams);
   setCount('notam', notams.length);
+  // המספר המלא על הכפתור, כדי שברור כמה מסתתר מאחוריו.
+  el('notam-fold').textContent = `הצג את כל ${notams.length} הנוטאמים`;
 
   if (payload) {
     renderFreshness(payload);

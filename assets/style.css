@@ -211,8 +211,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   gap: 12px;
 }
 
+.controls__col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
 @media (min-width: 800px) {
-  .controls { grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); align-items: start; }
+  .controls { grid-template-columns: 1fr 1fr; align-items: start; }
 }
 
 /* המקרא מתאר את כל השכבות, ולכן הוא שורה שלמה ולא תא לצד קופסה. */
@@ -988,3 +995,36 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 }
 
 .limits li + li { margin-top: 7px; }
+
+
+/* --- קיפול רשימה ------------------------------------------------------ */
+
+/*
+  הרשימות המלאות מקופלות מאחורי כפתור אחד. הן עדיין מלאות תמיד —
+  שום דבר כאן אינו מסנן — אבל 129 כרטיסים דחפו את כל השאר אל מחוץ
+  למסך, וכדי לראות את הערת השוליים היה צריך לגלול על פני כולם.
+*/
+.fold { margin-top: 12px; }
+
+.fold__button {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  padding: 12px 16px;
+  border: 2px solid var(--navy);
+  border-radius: 8px;
+  background: var(--navy);
+  color: var(--paper-2);
+  font-weight: 800;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.fold__button::-webkit-details-marker { display: none; }
+
+.fold__button::after { content: " ↓"; }
+.fold[open] > .fold__button::after { content: " ↑"; }
+
+.fold__button:hover { background: var(--navy-2); }
+
+.fold[open] > .fold__button { margin-bottom: 12px; }
