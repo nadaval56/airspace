@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
-   מגבלות מרחב אווירי — מטה בנימין
+   מגבלות מרחב אווירי — ישראל
    הדף קורא שני קבצים סטטיים מתוך המאגר. אין קריאה למקור חיצוני בזמן טעינה
    (מקורות הנוטאמים חוסמים CORS), ואין שום לוגיקת סינון — רק סימון ויזואלי.
 --------------------------------------------------------------------------- */
@@ -200,18 +200,16 @@ function initMap() {
   // לא נוסף למפה כאן: שכבת מזג האוויר כבויה עד שהמתג נדלק.
   weatherLayer = L.layerGroup();
 
-  // הכיסוי הורחב לכל הארץ, אבל ברירת המחדל נשארת מטה בנימין — שם
-  // המשתמש עומד בשטח. שני כפתורים מחליפים בין המבטים.
+  // הכלי התחיל כמפה של מטה בנימין והפך לארצי. כפתור "בית" שמצביע
+  // על אזור אחד כבר אינו מייצג את מה שהדף מראה, ולכן נשאר כפתור
+  // אחד: החזרה לתצוגה הארצית אחרי שהתקרבו למקום מסוים.
   const views = L.control({ position: 'topright' });
   views.onAdd = () => {
     const box = L.DomUtil.create('div', 'view-switch');
-    box.innerHTML =
-      '<button type="button" data-view="home">מטה בנימין</button>' +
-      '<button type="button" data-view="country">כל הארץ</button>';
+    box.innerHTML = '<button type="button" data-view="country">כל הארץ</button>';
     L.DomEvent.disableClickPropagation(box);
     box.addEventListener('click', (e) => {
       const view = e.target.getAttribute('data-view');
-      if (view === 'home') map.setView(CENTER, ZOOM);
       if (view === 'country') {
         // מתאימים לגבולות השכבה עצמה כשהיא קיימת — היא צרה וגבוהה,
         // ותיבה קבועה משאירה שוליים מיותרים.
@@ -523,6 +521,10 @@ function wireJumpButtons() {
     const target = document.getElementById(button.getAttribute('data-jump'));
     if (!target) return;
     if (map) map.closePopup();
+    // הכרטיסים מקופלים. קפיצה אל כרטיס סגור הייתה נוחתת על שורה
+    // אחת ונראית כאילו לא קרה כלום — אז פותחים אותו לפני הגלילה.
+    const fold = target.querySelector('details');
+    if (fold) fold.open = true;
     target.scrollIntoView({ behavior: 'smooth', block: 'center' });
     target.classList.add('notam-card--found');
     setTimeout(() => target.classList.remove('notam-card--found'), 2200);
@@ -586,8 +588,10 @@ function notamCard(n, opts) {
   return `
     <div class="card">
       ${header}
-      ${subject ? `<p class="card__title">${esc(subject)}</p>` : ''}
-      <div class="badges">${badges(n)}</div>
+      ${subject && !opts.omitTitle ? `<p class="card__title">${esc(subject)}</p>` : ''}
+      ${n.q && n.q.subject_note
+        ? `<p class="card__gloss">${esc(n.q.subject_note)}</p>` : ''}
+      ${opts.omitBadges ? '' : `<div class="badges">${badges(n)}</div>`}
       <dl class="kv">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
       ${n.text ? `<p class="card__text">${esc(n.text)}</p>` : ''}
       ${errors}
@@ -619,12 +623,23 @@ function renderList(notams) {
     if (n.id) li.id = 'notam-' + n.id.replace(/[^A-Za-z0-9]/g, '-');
 
     const canLocate = n.id && notamShapes.has(n.id);
+    // הכרטיס מקופל. 128 כרטיסים פתוחים הפכו את הדף לגלילה אינסופית,
+    // וכדי למצוא הודעה אחת היה צריך לעבור על כולן. הכותרת נשארת
+    // גלויה תמיד — מזהה, נושא ותגיות — וזה מספיק כדי לסרוק ולהחליט.
+    //
+    // **זה אינו סינון.** כל 128 הפריטים כאן, בסדר מלא; רק הגוף מקופל.
     li.innerHTML = `
-      <div class="notam-card__head">
-        <div class="card__id">${esc(n.id || 'ללא מזהה')}</div>
+      <details class="notam-card__fold">
+        <summary class="notam-card__head">
+          <div class="notam-card__lead">
+            <span class="card__id">${esc(n.id || 'ללא מזהה')}</span>
+            ${subjectText(n) ? `<span class="notam-card__subject">${esc(subjectText(n))}</span>` : ''}
+          </div>
+          <div class="badges badges--summary">${badges(n)}</div>
+        </summary>
         ${canLocate ? '<button type="button" class="locate">הצג במפה</button>' : ''}
-      </div>
-      ${notamCard(n, { omitId: true })}
+        ${notamCard(n, { omitId: true, omitBadges: true, omitTitle: true })}
+      </details>
     `;
 
     if (canLocate) {
@@ -757,13 +772,17 @@ function renderWeather(payload) {
     li.className = 'wx-card' + (kind === 'TAF' ? ' wx-card--taf' : '');
     if (report.area) li.className += ' wx-card--area';
     li.id = 'wx-' + index;
+    // מקופל כמו כרטיס נוטאם, ומאותה סיבה: דיווח METAR גולמי הוא שורה
+    // ארוכה של קודים, ועשרות כאלה פתוחים הם קיר. התחנה והסוג גלויים.
     li.innerHTML = `
-      <div class="wx-card__head">
-        <span class="wx-card__station">${esc(report.station || report.id || '—')}</span>
-        ${kind ? `<span class="wx-card__kind">${esc(kind)}</span>` : ''}
-        ${report.area ? '<span class="wx-card__kind wx-card__kind--area">אזור על המפה</span>' : ''}
-      </div>
-      <p class="wx-card__text">${esc(report.text || '')}</p>
+      <details class="wx-card__fold">
+        <summary class="wx-card__head">
+          <span class="wx-card__station">${esc(report.station || report.id || '—')}</span>
+          ${kind ? `<span class="wx-card__kind">${esc(kind)}</span>` : ''}
+          ${report.area ? '<span class="wx-card__kind wx-card__kind--area">אזור על המפה</span>' : ''}
+        </summary>
+        <p class="wx-card__text">${esc(report.text || '')}</p>
+      </details>
 `;
     list.appendChild(li);
   });

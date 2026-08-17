@@ -1,5 +1,5 @@
 /* ---------------------------------------------------------------------------
-   מגבלות מרחב אווירי — מטה בנימין
+   מגבלות מרחב אווירי — ישראל
    כיוון עיצובי: מפה אווירית בשמש. ניגודיות גבוהה, מסגרות עבות במקום צללים
    עדינים, טיפוגרפיה כבדה. שום טקסט אפור־בהיר, שום גוון פסטל — הדף נקרא
    בטלפון בחוץ באמצע היום.
@@ -493,12 +493,74 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .notam-card--high  { border-inline-start-color: var(--n-high); }
 .notam-card--admin { border-inline-start-color: #9ca3af; background: #f2f0ea; }
 
+/*
+  כרטיס מקופל.
+
+  128 כרטיסים פתוחים הפכו את הדף לגלילה בלי סוף, ובשביל למצוא הודעה
+  אחת היה צריך לעבור על כולן. הקיפול הוא ויזואלי בלבד — כל הפריטים
+  ברשימה, בסדר מלא — ומה שנשאר גלוי מספיק כדי לסרוק: מזהה, נושא,
+  ותגיות המצב.
+
+  `<details>` מקורי ולא ג'אווהסקריפט: עובד בלי טעינה, נגיש למקלדת
+  ולקורא מסך, ו-Ctrl+F של הדפדפן מוצא גם בתוך כרטיס סגור.
+*/
 .notam-card__head {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   justify-content: space-between;
-  gap: 6px;
+  gap: 6px 10px;
+  cursor: pointer;
+  /* המשולש של הדפדפן קטן מכדי להיות מטרה באצבע; החץ שלנו במקומו. */
+  list-style: none;
+  padding-inline-end: 26px;
+  position: relative;
+  min-height: var(--tap);
+}
+
+.notam-card__head::-webkit-details-marker { display: none; }
+
+.notam-card__head::after {
+  content: "▾";
+  position: absolute;
+  inset-inline-end: 0;
+  top: 2px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  transition: transform 0.15s ease;
+}
+
+.notam-card__fold[open] > .notam-card__head::after { transform: rotate(180deg); }
+
+.notam-card__lead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  min-width: 0;
+}
+
+.notam-card__subject {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+
+/* בכותרת מוצגות התגיות בלבד, קטנות יותר — הן הסימן שמאפשר להחליט
+   בלי לפתוח. הגוף מציג אותן שוב בגודל מלא? לא: הוא מדלג עליהן. */
+.badges--summary {
+  margin: 0;
+  gap: 4px;
+}
+
+.badges--summary .badge { font-size: 0.7rem; }
+
+/* הסבר בשפה רגילה למונח המקצועי שמעליו. */
+.card__gloss {
+  margin: -4px 0 8px;
+  font-size: 0.86rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
 }
 
 .locate {
@@ -559,7 +621,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   * { animation: none !important; transition: none !important; }
 }
 
-/* --- מחליף מבט (מטה בנימין / כל הארץ) ------------------------------- */
+/* --- כפתור חזרה לתצוגה הארצית --------------------------------------- */
 
 .view-switch {
   display: flex;
@@ -619,8 +681,28 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   flex-wrap: wrap;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 6px;
+  cursor: pointer;
+  list-style: none;
+  padding-inline-end: 26px;
+  position: relative;
+  min-height: 34px;
 }
+
+.wx-card__head::-webkit-details-marker { display: none; }
+
+.wx-card__head::after {
+  content: "▾";
+  position: absolute;
+  inset-inline-end: 0;
+  top: 2px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  transition: transform 0.15s ease;
+}
+
+.wx-card__fold[open] > .wx-card__head::after { transform: rotate(180deg); }
+
+.wx-card__fold > .wx-card__text { margin-top: 6px; }
 
 .wx-card__station {
   font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
