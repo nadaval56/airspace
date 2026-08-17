@@ -1,0 +1,1494 @@
+{
+ "generated_at": "2026-08-17T04:24:02Z",
+ "source": "פמ\"ת — מפת נתיבי תובלה נמוכים",
+ "counts": {
+  "total": 198,
+  "aerodromes": 24
+ },
+ "aerodromes": {
+  "LLBG": {
+   "lat": 32.00944,
+   "lon": 34.88556
+  },
+  "LLBO": {
+   "lat": 32.65,
+   "lon": 34.93278
+  },
+  "LLBS": {
+   "lat": 31.28694,
+   "lon": 34.72278
+  },
+  "LLEK": {
+   "lat": 31.83667,
+   "lon": 34.81833
+  },
+  "LLER": {
+   "lat": 29.72722,
+   "lon": 35.01417
+  },
+  "LLES": {
+   "lat": 32.44139,
+   "lon": 35.00333
+  },
+  "LLEV": {
+   "lat": 32.265,
+   "lon": 34.95167
+  },
+  "LLEY": {
+   "lat": 30.62167,
+   "lon": 35.20306
+  },
+  "LLFK": {
+   "lat": 32.78528,
+   "lon": 35.71722
+  },
+  "LLHA": {
+   "lat": 32.80833,
+   "lon": 35.04278
+  },
+  "LLHB": {
+   "lat": 31.24333,
+   "lon": 34.655
+  },
+  "LLHS": {
+   "lat": 31.75778,
+   "lon": 34.72306
+  },
+  "LLHZ": {
+   "lat": 32.17944,
+   "lon": 34.83444
+  },
+  "LLIB": {
+   "lat": 32.98056,
+   "lon": 35.57083
+  },
+  "LLKS": {
+   "lat": 33.21167,
+   "lon": 35.59639
+  },
+  "LLKZ": {
+   "lat": 30.85889,
+   "lon": 34.44361
+  },
+  "LLMG": {
+   "lat": 32.59722,
+   "lon": 35.23472
+  },
+  "LLMZ": {
+   "lat": 31.32917,
+   "lon": 35.38833
+  },
+  "LLNV": {
+   "lat": 31.21333,
+   "lon": 35.01833
+  },
+  "LLOV": {
+   "lat": 29.935,
+   "lon": 34.94083
+  },
+  "LLPL": {
+   "lat": 31.89833,
+   "lon": 34.69
+  },
+  "LLRD": {
+   "lat": 32.66667,
+   "lon": 35.18333
+  },
+  "LLRM": {
+   "lat": 30.775,
+   "lon": 34.66667
+  },
+  "LLRS": {
+   "lat": 31.9675,
+   "lon": 34.75361
+  }
+ },
+ "points": [
+  {
+   "code": "AAKKO",
+   "lat": 32.91861,
+   "lon": 35.09639,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "AFFEK",
+   "lat": 32.84028,
+   "lon": 35.12778,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "AFULA",
+   "lat": 32.60361,
+   "lon": 35.28194,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "AHIUD",
+   "lat": 32.91194,
+   "lon": 35.18111,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ALLON",
+   "lat": 32.04139,
+   "lon": 35.36667,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ALMOG",
+   "lat": 31.78972,
+   "lon": 35.45639,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ALUMT",
+   "lat": 32.71417,
+   "lon": 35.54639,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "AMIOZ",
+   "lat": 31.25667,
+   "lon": 34.40278,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "AMNON",
+   "lat": 32.90556,
+   "lon": 35.56667,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ANATA",
+   "lat": 31.82111,
+   "lon": 35.27139,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "APOLN",
+   "lat": 32.19111,
+   "lon": 34.79722,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ARAVA",
+   "lat": 30.98944,
+   "lon": 35.30917,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ARENA",
+   "lat": 32.16472,
+   "lon": 34.78556,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ARGMN",
+   "lat": 32.17306,
+   "lon": 35.5325,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ARRAD",
+   "lat": 31.25444,
+   "lon": 35.20972,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ASKLN",
+   "lat": 31.66639,
+   "lon": 34.53917,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "AYLON",
+   "lat": 31.87167,
+   "lon": 34.94361,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "AZOOZ",
+   "lat": 30.8,
+   "lon": 34.47028,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "BASAN",
+   "lat": 33.14611,
+   "lon": 35.63806,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "BAZRA",
+   "lat": 32.21861,
+   "lon": 34.8825,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "BEREC",
+   "lat": 29.79306,
+   "lon": 34.91028,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "BEZRA",
+   "lat": 31.74139,
+   "lon": 34.64583,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "BHAIL",
+   "lat": 31.55778,
+   "lon": 34.6325,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "BKAMA",
+   "lat": 31.44167,
+   "lon": 34.76556,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "BMNUH",
+   "lat": 30.30333,
+   "lon": 35.13417,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "BOKER",
+   "lat": 30.875,
+   "lon": 34.78583,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "BOREN",
+   "lat": 32.71444,
+   "lon": 34.97083,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "BOVED",
+   "lat": 31.92028,
+   "lon": 34.77,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "BRORA",
+   "lat": 29.70806,
+   "lon": 34.99722,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "BSEMS",
+   "lat": 31.75472,
+   "lon": 34.98139,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "CLORE",
+   "lat": 32.05306,
+   "lon": 34.73583,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "DALIA",
+   "lat": 32.59694,
+   "lon": 35.08333,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "DAROM",
+   "lat": 32.79611,
+   "lon": 34.94333,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "DEENA",
+   "lat": 32.02389,
+   "lon": 34.64056,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "DEROR",
+   "lat": 32.25722,
+   "lon": 34.89111,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "DESHE",
+   "lat": 32.87,
+   "lon": 35.5325,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "DIMON",
+   "lat": 31.06778,
+   "lon": 35.00583,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "DUGIT",
+   "lat": 32.8525,
+   "lon": 35.05167,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "DUMIM",
+   "lat": 31.80389,
+   "lon": 35.32472,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "EILAT",
+   "lat": 29.55833,
+   "lon": 34.95889,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "EIRON",
+   "lat": 32.48083,
+   "lon": 35.02444,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "EITAN",
+   "lat": 32.49556,
+   "lon": 35.53361,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "EMMEK",
+   "lat": 32.615,
+   "lon": 35.14167,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ENGDI",
+   "lat": 31.46417,
+   "lon": 35.39472,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ESTOL",
+   "lat": 31.77944,
+   "lon": 35.01139,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "EVLYM",
+   "lat": 32.82389,
+   "lon": 35.15139,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "FAZEL",
+   "lat": 32.04806,
+   "lon": 35.46306,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "FRDIS",
+   "lat": 32.59194,
+   "lon": 34.94639,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "GALIM",
+   "lat": 32.84111,
+   "lon": 34.98111,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "GILAM",
+   "lat": 32.82139,
+   "lon": 35.1325,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "GILAT",
+   "lat": 31.33722,
+   "lon": 34.65306,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "GNYAM",
+   "lat": 32.15028,
+   "lon": 34.89417,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "GOVRN",
+   "lat": 31.60611,
+   "lon": 34.89278,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "GVARM",
+   "lat": 31.59333,
+   "lon": 34.61028,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "GVULT",
+   "lat": 31.2275,
+   "lon": 34.46028,
+   "kind": "שדה תעופה",
+   "icao": null
+  },
+  {
+   "code": "HADRA",
+   "lat": 32.46472,
+   "lon": 34.91222,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "HAREL",
+   "lat": 31.79861,
+   "lon": 35.14611,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "HAROV",
+   "lat": 32.75917,
+   "lon": 35.66833,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "HASID",
+   "lat": 32.74667,
+   "lon": 35.07778,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "HATRU",
+   "lat": 31.21889,
+   "lon": 35.24833,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "HAZVA",
+   "lat": 30.77333,
+   "lon": 35.23639,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "HNINA",
+   "lat": 31.83028,
+   "lon": 35.2075,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "HODYA",
+   "lat": 31.68278,
+   "lon": 34.6525,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "HOLOT",
+   "lat": 30.99417,
+   "lon": 34.36028,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "HOTRM",
+   "lat": 32.75389,
+   "lon": 34.93694,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "HOVAV",
+   "lat": 31.13556,
+   "lon": 34.805,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "HRGVS",
+   "lat": 30.62278,
+   "lon": 34.95,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "HTZUK",
+   "lat": 32.14556,
+   "lon": 34.77833,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "HULAT",
+   "lat": 33.04361,
+   "lon": 35.62944,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "IKKEA",
+   "lat": 31.95139,
+   "lon": 34.77028,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "KANOT",
+   "lat": 31.80417,
+   "lon": 34.76333,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "KKDEM",
+   "lat": 31.26278,
+   "lon": 34.65028,
+   "kind": "שדה תעופה",
+   "icao": null
+  },
+  {
+   "code": "KNTRY",
+   "lat": 32.14083,
+   "lon": 34.80139,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "KOYAR",
+   "lat": 32.5975,
+   "lon": 35.54361,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "KRYON",
+   "lat": 32.84333,
+   "lon": 35.08889,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "KTORA",
+   "lat": 29.98944,
+   "lon": 35.07639,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "KUVSH",
+   "lat": 31.25861,
+   "lon": 34.76361,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "LAHAV",
+   "lat": 31.3825,
+   "lon": 34.82694,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "LIAAD",
+   "lat": 31.95833,
+   "lon": 34.515,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "LLBG",
+   "lat": 32.00944,
+   "lon": 34.88556,
+   "kind": "שדה תעופה",
+   "icao": "LLBG"
+  },
+  {
+   "code": "LLBO",
+   "lat": 32.65,
+   "lon": 34.93278,
+   "kind": "שדה תעופה",
+   "icao": "LLBO"
+  },
+  {
+   "code": "LLBS",
+   "lat": 31.28694,
+   "lon": 34.72278,
+   "kind": "שדה תעופה",
+   "icao": "LLBS"
+  },
+  {
+   "code": "LLEK",
+   "lat": 31.83667,
+   "lon": 34.81833,
+   "kind": "שדה תעופה",
+   "icao": "LLEK"
+  },
+  {
+   "code": "LLER",
+   "lat": 29.72722,
+   "lon": 35.01417,
+   "kind": "שדה תעופה",
+   "icao": "LLER"
+  },
+  {
+   "code": "LLES",
+   "lat": 32.44139,
+   "lon": 35.00333,
+   "kind": "שדה תעופה",
+   "icao": "LLES"
+  },
+  {
+   "code": "LLEV",
+   "lat": 32.265,
+   "lon": 34.95167,
+   "kind": "שדה תעופה",
+   "icao": "LLEV"
+  },
+  {
+   "code": "LLEY",
+   "lat": 30.62167,
+   "lon": 35.20306,
+   "kind": "שדה תעופה",
+   "icao": "LLEY"
+  },
+  {
+   "code": "LLFK",
+   "lat": 32.78528,
+   "lon": 35.71722,
+   "kind": "שדה תעופה",
+   "icao": "LLFK"
+  },
+  {
+   "code": "LLHA",
+   "lat": 32.80833,
+   "lon": 35.04278,
+   "kind": "שדה תעופה",
+   "icao": "LLHA"
+  },
+  {
+   "code": "LLHB",
+   "lat": 31.24333,
+   "lon": 34.655,
+   "kind": "שדה תעופה",
+   "icao": "LLHB"
+  },
+  {
+   "code": "LLHS",
+   "lat": 31.75778,
+   "lon": 34.72306,
+   "kind": "שדה תעופה",
+   "icao": "LLHS"
+  },
+  {
+   "code": "LLHZ",
+   "lat": 32.17944,
+   "lon": 34.83444,
+   "kind": "שדה תעופה",
+   "icao": "LLHZ"
+  },
+  {
+   "code": "LLIB",
+   "lat": 32.98056,
+   "lon": 35.57083,
+   "kind": "שדה תעופה",
+   "icao": "LLIB"
+  },
+  {
+   "code": "LLKS",
+   "lat": 33.21167,
+   "lon": 35.59639,
+   "kind": "שדה תעופה",
+   "icao": "LLKS"
+  },
+  {
+   "code": "LLKZ",
+   "lat": 30.85889,
+   "lon": 34.44361,
+   "kind": "שדה תעופה",
+   "icao": "LLKZ"
+  },
+  {
+   "code": "LLMG",
+   "lat": 32.59722,
+   "lon": 35.23472,
+   "kind": "שדה תעופה",
+   "icao": "LLMG"
+  },
+  {
+   "code": "LLMZ",
+   "lat": 31.32917,
+   "lon": 35.38833,
+   "kind": "דיווח חובה",
+   "icao": "LLMZ"
+  },
+  {
+   "code": "LLNV",
+   "lat": 31.21333,
+   "lon": 35.01833,
+   "kind": "שדה תעופה",
+   "icao": "LLNV"
+  },
+  {
+   "code": "LLOV",
+   "lat": 29.935,
+   "lon": 34.94083,
+   "kind": "שדה תעופה",
+   "icao": "LLOV"
+  },
+  {
+   "code": "LLPL",
+   "lat": 31.89833,
+   "lon": 34.69,
+   "kind": "שדה תעופה",
+   "icao": "LLPL"
+  },
+  {
+   "code": "LLRD",
+   "lat": 32.66667,
+   "lon": 35.18333,
+   "kind": "שדה תעופה",
+   "icao": "LLRD"
+  },
+  {
+   "code": "LLRM",
+   "lat": 30.775,
+   "lon": 34.66667,
+   "kind": "שדה תעופה",
+   "icao": "LLRM"
+  },
+  {
+   "code": "LLRS",
+   "lat": 31.9675,
+   "lon": 34.75361,
+   "kind": "שדה תעופה",
+   "icao": "LLRS"
+  },
+  {
+   "code": "LTRUN",
+   "lat": 31.83861,
+   "lon": 34.98667,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "MEHOL",
+   "lat": 31.96083,
+   "lon": 34.76417,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "MESAR",
+   "lat": 30.50167,
+   "lon": 34.94361,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "MESEK",
+   "lat": 31.26472,
+   "lon": 34.69972,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "METAH",
+   "lat": 31.22556,
+   "lon": 34.755,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "MIHMS",
+   "lat": 31.85444,
+   "lon": 35.32944,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "MINGV",
+   "lat": 31.36889,
+   "lon": 34.71278,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "MMORR",
+   "lat": 31.25444,
+   "lon": 35.36833,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "MOVIL",
+   "lat": 32.75917,
+   "lon": 35.23333,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "MRISN",
+   "lat": 31.97694,
+   "lon": 34.79194,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "MYTAR",
+   "lat": 31.31472,
+   "lon": 34.93806,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "MZDOT",
+   "lat": 31.35639,
+   "lon": 35.1075,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NAAMA",
+   "lat": 31.90861,
+   "lon": 35.4625,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "NAGID",
+   "lat": 31.88972,
+   "lon": 34.75583,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "NAHEM",
+   "lat": 31.74528,
+   "lon": 34.82222,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "NAHLA",
+   "lat": 31.65639,
+   "lon": 34.80917,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "NASIH",
+   "lat": 31.33028,
+   "lon": 34.69833,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NCITY",
+   "lat": 31.2875,
+   "lon": 34.79139,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NCSHN",
+   "lat": 31.81556,
+   "lon": 34.91694,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NEGEV",
+   "lat": 31.06611,
+   "lon": 34.83806,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "NITZA",
+   "lat": 31.72417,
+   "lon": 34.57056,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NIZAN",
+   "lat": 30.75444,
+   "lon": 34.565,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NMASD",
+   "lat": 31.83333,
+   "lon": 34.62528,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NOAAM",
+   "lat": 31.57139,
+   "lon": 34.77583,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NSHRM",
+   "lat": 31.90917,
+   "lon": 34.89167,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NTAIM",
+   "lat": 31.94361,
+   "lon": 34.78083,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "NTVOT",
+   "lat": 31.42917,
+   "lon": 34.59917,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "OFKIM",
+   "lat": 31.32222,
+   "lon": 34.61889,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "OHLIM",
+   "lat": 31.19111,
+   "lon": 34.80472,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "OLGAH",
+   "lat": 32.43139,
+   "lon": 34.86583,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "OMMER",
+   "lat": 31.27472,
+   "lon": 34.82833,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "OSNAT",
+   "lat": 31.83278,
+   "lon": 34.52333,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "OVDAT",
+   "lat": 30.80278,
+   "lon": 34.79333,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "PARDS",
+   "lat": 32.10278,
+   "lon": 34.84778,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "PELEG",
+   "lat": 32.33,
+   "lon": 34.83722,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "RANNO",
+   "lat": 32.19083,
+   "lon": 34.88833,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "REVAH",
+   "lat": 31.64444,
+   "lon": 34.73028,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "RIDNG",
+   "lat": 32.11028,
+   "lon": 34.7625,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ROKCH",
+   "lat": 32.1025,
+   "lon": 34.80361,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "RUHOT",
+   "lat": 30.66,
+   "lon": 34.80889,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SAHAR",
+   "lat": 32.29583,
+   "lon": 34.75278,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SAMAR",
+   "lat": 29.83139,
+   "lon": 35.02861,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SDROT",
+   "lat": 31.50667,
+   "lon": 34.58556,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SDTYM",
+   "lat": 32.49667,
+   "lon": 34.885,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SEGEV",
+   "lat": 32.86111,
+   "lon": 35.2625,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SFAIM",
+   "lat": 32.21056,
+   "lon": 34.80722,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SHAHR",
+   "lat": 31.9575,
+   "lon": 35.33694,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SHALM",
+   "lat": 31.55861,
+   "lon": 35.4025,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SHARG",
+   "lat": 31.81972,
+   "lon": 35.02111,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SHARO",
+   "lat": 32.32306,
+   "lon": 34.90389,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SHRUT",
+   "lat": 29.90778,
+   "lon": 35.00333,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SIGAL",
+   "lat": 31.195,
+   "lon": 34.29278,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SIRNI",
+   "lat": 31.92806,
+   "lon": 34.83,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SITIM",
+   "lat": 30.17583,
+   "lon": 35.01444,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SIZFN",
+   "lat": 30.0475,
+   "lon": 35.01444,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SMRAT",
+   "lat": 32.95167,
+   "lon": 35.09,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "SOKET",
+   "lat": 31.3075,
+   "lon": 34.90111,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SORES",
+   "lat": 31.79972,
+   "lon": 35.07611,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SOVAL",
+   "lat": 31.41139,
+   "lon": 34.74639,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SUPER",
+   "lat": 31.97639,
+   "lon": 34.74167,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "SZION",
+   "lat": 32.97944,
+   "lon": 35.09333,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "TARAD",
+   "lat": 31.2775,
+   "lon": 35.12556,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "TAVOR",
+   "lat": 32.69028,
+   "lon": 35.42,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "TIRAT",
+   "lat": 32.42444,
+   "lon": 35.52667,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "TLLIM",
+   "lat": 30.99056,
+   "lon": 34.76222,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "TYONA",
+   "lat": 32.00472,
+   "lon": 34.72722,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "TZHOT",
+   "lat": 31.30778,
+   "lon": 34.52972,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "VINGT",
+   "lat": 32.25556,
+   "lon": 34.81694,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "YAHEL",
+   "lat": 30.08222,
+   "lon": 35.13333,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "YAHOL",
+   "lat": 32.0225,
+   "lon": 34.46056,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "YAPAL",
+   "lat": 31.915,
+   "lon": 34.45833,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "YASDD",
+   "lat": 31.81028,
+   "lon": 34.45639,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "YASFA",
+   "lat": 32.21861,
+   "lon": 34.62472,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "YATED",
+   "lat": 31.20472,
+   "lon": 34.33444,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "YAVNE",
+   "lat": 31.87194,
+   "lon": 34.75694,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "YOTVT",
+   "lat": 29.90083,
+   "lon": 35.06722,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "YRIHO",
+   "lat": 31.81944,
+   "lon": 35.3875,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "YRUHM",
+   "lat": 30.98972,
+   "lon": 34.91083,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ZAFIT",
+   "lat": 31.0425,
+   "lon": 35.19972,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ZALMN",
+   "lat": 32.85333,
+   "lon": 35.41167,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ZASHD",
+   "lat": 31.82611,
+   "lon": 34.70833,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZDAFA",
+   "lat": 31.78167,
+   "lon": 34.59972,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZGOAL",
+   "lat": 31.31278,
+   "lon": 34.78778,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZHRYA",
+   "lat": 31.69972,
+   "lon": 34.945,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ZLHAV",
+   "lat": 31.3725,
+   "lon": 34.79333,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZMGEN",
+   "lat": 31.29389,
+   "lon": 34.43222,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZMGID",
+   "lat": 32.57278,
+   "lon": 35.19111,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZOFAR",
+   "lat": 30.55972,
+   "lon": 35.18667,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZOHAR",
+   "lat": 31.15083,
+   "lon": 35.3725,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZOREA",
+   "lat": 32.64806,
+   "lon": 35.11889,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  },
+  {
+   "code": "ZRANA",
+   "lat": 32.17722,
+   "lon": 34.88778,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZUKIM",
+   "lat": 31.71611,
+   "lon": 35.44972,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZURIM",
+   "lat": 31.70167,
+   "lon": 34.715,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZYAAR",
+   "lat": 32.40972,
+   "lon": 34.90361,
+   "kind": "דיווח חובה",
+   "icao": null
+  },
+  {
+   "code": "ZZHOR",
+   "lat": 30.27667,
+   "lon": 35.02,
+   "kind": "דיווח לפי דרישה",
+   "icao": null
+  }
+ ]
+}

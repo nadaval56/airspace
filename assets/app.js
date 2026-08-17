@@ -565,7 +565,7 @@ function renderWeather(payload) {
 
   const stamp = fmtTime(payload && (payload.last_success || payload.generated_at));
   const parts = [`${reports.length} דיווחים`];
-  parts.push(drawn ? `${drawn} אזורים על המפה` : 'ללא אזורים על המפה');
+  parts.push(drawn ? `${drawn} מסומנים על המפה` : 'ללא סימון על המפה');
   if (payload && payload.source_name) parts.push(`מקור: ${payload.source_name}`);
   if (stamp) parts.push(`עדכון ${stamp}`);
   if (payload && payload.stale) parts.push('הנתונים אינם עדכניים');
@@ -591,6 +591,34 @@ function renderWeatherAreas(reports) {
   weatherLayer.clearLayers();
 
   let drawn = 0;
+
+  // תחנות METAR/TAF — נקודה לכל שדה תעופה שיש לו נקודת ייחוס בפמ"ת.
+  // תחנה בלי מיקום פשוט לא מסומנת; זה עדיף על סימון במקום מנוחש.
+  const stations = new Map();
+  reports.forEach((report, index) => {
+    const at = aerodromes[report.station];
+    if (!at || report.area) return;
+    if (!stations.has(report.station)) stations.set(report.station, { at, kinds: [], index });
+    const entry = stations.get(report.station);
+    if (report.kind && !entry.kinds.includes(report.kind)) entry.kinds.push(report.kind);
+  });
+
+  stations.forEach((entry, code) => {
+    L.circleMarker([entry.at.lat, entry.at.lon], {
+      pane: 'weather', radius: 7, weight: 2,
+      color: WEATHER_COLOR, fillColor: '#ffffff', fillOpacity: 1
+    })
+      .bindTooltip(code, { permanent: true, direction: 'top', className: 'wx-tip' })
+      .bindPopup(`
+        <div class="popup">
+          <div class="card__id">${esc(code)}</div>
+          <p class="popup__subject">${esc(entry.kinds.join(' · ') || 'דיווח')}</p>
+          <button type="button" class="popup__jump" data-jump="wx-${entry.index}">הדיווח המלא ↓</button>
+        </div>`, { maxWidth: 240 })
+      .addTo(weatherLayer);
+    drawn += 1;
+  });
+
   reports.forEach((report, index) => {
     if (!report.area) return;
     const ring = report.area.map(([lon, lat]) => [lat, lon]);
@@ -615,6 +643,12 @@ function renderWeatherAreas(reports) {
  */
 let ratagLayer = null;
 let ratagState = 'idle';   // idle | loading | ready | failed
+
+/**
+ * נקודות ייחוס של שדות תעופה, לפי ICAO. מגיעות מהפמ"ת ולא מהזיכרון —
+ * זו הסיבה ש-METAR ו-TAF הופיעו עד היום ברשימה בלבד.
+ */
+let aerodromes = {};
 
 async function loadRatag(toggle, label) {
   if (ratagState === 'loading') return;
@@ -735,13 +769,16 @@ async function init() {
     addAlert('<strong>המפה לא נטענה.</strong> ספריית המפות לא עלתה. כל הנוטאמים מופיעים ברשימה שמתחת, כולל טווחי הגובה והמיקומים.', 'warn');
   }
 
-  const [notamResult, aipResult, weatherResult, obstacleResult] = await Promise.allSettled([
+  const [notamResult, aipResult, weatherResult, obstacleResult, pointsResult] =
+    await Promise.allSettled([
     loadJson('data/notams.json'),
     loadJson('data/aip-permanent.geojson'),
     loadJson('data/weather.json'),
     // מכשולים קבועים — נספח ד'. שמונה רשומות, שקולות כמעט כלום,
     // ולכן נטענות תמיד ולא בבקשה כמו שכבת רט"ג.
-    loadJson('data/aip-obstacles.geojson')
+    loadJson('data/aip-obstacles.geojson'),
+    // נקודות ייחוס של שדות תעופה — בלעדיהן אין איפה לסמן METAR/TAF.
+    loadJson('data/aip-points.json')
   ]);
 
   if (notamResult.status === 'fulfilled') {
@@ -807,6 +844,9 @@ async function init() {
   wireJumpButtons();
 
   // מזג אוויר — שכבה עצמאית עם מתג משלה, כבויה כברירת מחדל.
+  if (pointsResult.status === 'fulfilled') {
+    aerodromes = (pointsResult.value && pointsResult.value.aerodromes) || {};
+  }
   const weather = weatherResult.status === 'fulfilled' ? weatherResult.value : null;
   renderWeather(weather);
   const weatherToggle = el('toggle-weather');
