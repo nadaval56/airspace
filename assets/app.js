@@ -32,6 +32,10 @@ const WEATHER_COLOR = '#0f766e';
 // שמורות טבע — ירוק, ובכוונה החלש מכולם. השכבה הזאת היא רקע להתמצאות
 // ולא מגבלה, ואסור לה להתחרות ויזואלית באזורים שכן אוסרים טיסה.
 const RATAG_COLOR = '#15803d';
+// נתיבי CVFR — סגול. הרשת הזאת אינה מגבלה אלא **היכן מותר לטוס**,
+// והיא צריכה גוון משלה שלא ייקרא לא כאיסור (אדום), לא כנוטאם (כחול)
+// ולא כרקע (ירוק). קו דק, כי נתיב הוא ציר ולא שטח.
+const CVFR_COLOR = '#7c3aed';
 
 /**
  * "לא צוין" נשמע כאילו לנוטאם אין תוקף מוגדר, וזה לא נכון: יש לו תוקף,
@@ -159,6 +163,9 @@ function initMap() {
   map.createPane('ratag').style.zIndex = 400;     // הכי מתחת — רקע להתמצאות
   map.createPane('weather').style.zIndex = 405;   // מתחת למגבלות — הן החשובות
   map.createPane('aip').style.zIndex = 410;
+  // הרשת הפתוחה מתחת לנוטאם בכוונה: נתיב שנוטאם סוגר צריך להיראות
+  // **מעל** אותו נתיב עצמו ברשת, אחרת הסגירה נעלמת מתחת לקו הפתוח.
+  map.createPane('cvfr').style.zIndex = 415;
   map.createPane('notam').style.zIndex = 420;
 
   aipLayer = L.layerGroup().addTo(map);
@@ -635,6 +642,7 @@ function renderLegend() {
     </div>`).join('') + `
     <p class="legend__note">
       קו מלא — מגבלה קבועה · קו מקווקו — נוטאם ·
+      <span style="color:${CVFR_COLOR}">סגול</span> = נתיב CVFR פתוח ·
       <span style="color:${NOTAM_LOW}">ורוד</span> = רצפה מתחת
       ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל.
       נוטאם עתידי מצויר דהוי. "פעיל עכשיו" לפי תוקף כללי בלבד —
@@ -787,6 +795,19 @@ let aerodromes = {};
 /** כל נקודות הדיווח לפי קוד, לציור נתיבים שנוטאם סוגר. */
 let reportingPoints = {};
 
+/**
+ * רשת נתיבי ה-CVFR של משרד התחבורה.
+ *
+ * עד עכשיו הנתיבים על המפה הגיעו **מהנוטאמים בלבד** — כלומר רק
+ * נתיבים *סגורים*. הרשת הפתוחה, זו שטסים בה כשהכול תקין, לא הייתה
+ * שם בכלל: בפמ"ת היא מפה מצוירת ולא נתונים.
+ *
+ * הקובץ עשוי לא להיות קיים — הוא נבנה מארכיון שמועלה ידנית, כי
+ * ההורדה האוטומטית מ-data.gov.il מחזירה דף אתגר במקום ארכיון. היעדר
+ * הקובץ אינו תקלה ואינו מצדיק אזהרה אדומה; המתג פשוט נשאר כבוי.
+ */
+let cvfrLayer = null;
+
 async function loadRatag(toggle, label) {
   if (ratagState === 'loading') return;
   ratagState = 'loading';
@@ -813,6 +834,55 @@ async function loadRatag(toggle, label) {
     toggle.checked = false;
     addAlert('<strong>שכבת שמורות הטבע לא נטענה.</strong> ' + esc(err.message), 'warn');
   }
+}
+
+/**
+ * טוען את רשת ה-CVFR אם היא קיימת, ומחזיר את מספר הנתיבים.
+ *
+ * מחזיר 0 בשקט כשהקובץ חסר. זה מצב צפוי ולא כשל: הקובץ נבנה מארכיון
+ * שמועלה ידנית, ועד שהוא מועלה אין מה להציג.
+ */
+async function loadCvfr() {
+  let data;
+  try {
+    data = await loadJson('data/cvfr-routes.geojson');
+  } catch (err) {
+    return 0;
+  }
+  const features = data.features || [];
+  if (!features.length) return 0;
+
+  cvfrLayer = L.geoJSON(data, {
+    pane: 'cvfr',
+    style: { color: CVFR_COLOR, weight: 2, opacity: 0.8 },
+    onEachFeature: (feature, layer) => {
+      layer.bindPopup(cvfrPopup(feature.properties || {}), { maxWidth: 260, minWidth: 200 });
+    }
+  });
+  return features.length;
+}
+
+/**
+ * חלונית נתיב.
+ *
+ * שמות השדות במאגר של משרד התחבורה משתנים בין גרסאות, ולכן ההמרה
+ * שומרת כל שדה טקסטואלי שיש בו תוכן והחלונית מציגה את מה שיש. עדיף
+ * להראות שדה בשם שאינו מובן מאשר להחביא מידע כי לא ציפיתי לו.
+ */
+function cvfrPopup(p) {
+  const rows = Object.entries(p).filter(([key]) => key !== 'source');
+  const title = p.NAME || p.Name || p.name || p.ROUTE || 'נתיב CVFR';
+
+  return `
+    <div class="card">
+      <div class="card__id">${esc(title)}</div>
+      <dl class="kv kv--tight">${rows.map(([k, v]) =>
+        `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      <p class="popup__terms">
+        ${esc(p.source || 'משרד התחבורה')} · להתמצאות בלבד.
+        המקור המחייב הוא הפמ"ת והנוטאם.
+      </p>
+    </div>`;
 }
 
 function ratagPopup(p) {
@@ -1010,6 +1080,24 @@ async function init() {
   if (!hasMap) {
     document.querySelector('.layers').style.display = 'none';
     return;
+  }
+
+  // --- רשת נתיבי ה-CVFR. דולקת כברירת מחדל כשהיא קיימת: זו התשובה
+  //     לשאלה "איפה מותר לטוס", והיא הייתה חסרה מהמפה לגמרי.
+  const cvfrToggle = el('toggle-cvfr');
+  const cvfrCount = await loadCvfr();
+  el('count-cvfr').textContent = cvfrCount || '—';
+  if (cvfrCount) {
+    map.addLayer(cvfrLayer);
+    cvfrToggle.checked = true;
+    cvfrToggle.addEventListener('change', (e) => {
+      e.target.checked ? map.addLayer(cvfrLayer) : map.removeLayer(cvfrLayer);
+    });
+  } else {
+    // הקובץ טרם נבנה. מתג מושבת אומר את האמת; אזהרה אדומה הייתה
+    // מתארת מצב צפוי ככשל.
+    cvfrToggle.checked = false;
+    cvfrToggle.disabled = true;
   }
 
   // שמורות רט"ג — נטענות רק בהדלקה הראשונה, ואז נשמרות בזיכרון.
