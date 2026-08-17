@@ -64,6 +64,37 @@ const CVFR_COLOR = '#7c3aed';
 const ENVELOPE_NM = 20;
 
 /**
+ * תוויות הסיווג המשני של הפמ"ת. המפתחות נקבעים ב-scripts/aip_classify.py,
+ * וכאן רק השמות והסדר שבו הם מוצגים.
+ *
+ * הנושא נגזר ממילים שכתובות **בשם הרשמי של האזור** — "שטח אש 209"
+ * נושא את המילים "שטח אש". זו קריאה של הכתוב ולא ניחוש לפי היכרות
+ * עם המקום. אזור בלי מילת מפתח נופל ל-`other`.
+ *
+ * מה שאין: סוג המתקן. שתי הטבלאות בפמ"ת מוסרות קואורדינטות, גבהים,
+ * שם וקוד — ואין בהן עמודת ייעוד. לכן אי אפשר להפריד בית כלא ממתקן
+ * משטרה בלי לנחש, ולא ננחש.
+ */
+const AIP_FLOORS = {
+  ground:  { label: 'מהקרקע' },
+  low:     { label: 'עד 4,000 רגל' },
+  high:    { label: 'מעל 4,000 רגל' },
+  unknown: { label: 'ללא רצפה מוגדרת' }
+};
+
+const AIP_THEMES = {
+  firing:   { label: 'שטחי אש ומטווחים' },
+  judea:    { label: 'יהודה ושומרון' },
+  offshore: { label: 'אסדות ומתקנים ימיים' },
+  balloon:  { label: 'בלונים' },
+  drop:     { label: 'גלילי הצנחה' },
+  model:    { label: 'אתרי רחפנים וטיסנים' },
+  police:   { label: 'מתקני משטרה' },
+  transit:  { label: 'מרחבים ומעברים' },
+  other:    { label: 'ללא מילת סיווג בשם' }
+};
+
+/**
  * "לא צוין" נשמע כאילו לנוטאם אין תוקף מוגדר, וזה לא נכון: יש לו תוקף,
  * הוא פשוט עוד לא נמשך. זמני התוקף נפתחים בכפתור ה-`+` באתר של רש"ת,
  * וזו בקשה נפרדת לכל הודעה — המשיכה עושה אותן בקצב מרוסן ושומרת
@@ -72,6 +103,28 @@ const ENVELOPE_NM = 20;
 const NO_VALIDITY = 'טרם נמשך';
 
 const el = (id) => document.getElementById(id);
+
+/**
+ * מונה שכבה. נשמר גם כשהאלמנט עדיין לא קיים.
+ *
+ * לוח הבקרה נבנה מהנתונים — הוא צריך את הספירות של תת־השכבות — ולכן
+ * הוא נוצר **אחרי** שהשכבות צוירו. הכתיבה למונה קורית לפני כן, וללא
+ * החיץ הזה היא הייתה נופלת על אלמנט שאינו קיים.
+ */
+const layerCounts = new Map();
+
+function setCount(id, value) {
+  layerCounts.set(id, value);
+  const node = el('count-' + id);
+  if (node) node.textContent = value;
+}
+
+function flushCounts() {
+  layerCounts.forEach((value, id) => {
+    const node = el('count-' + id);
+    if (node) node.textContent = value;
+  });
+}
 
 /* --- עזרי טקסט -------------------------------------------------------- */
 
@@ -315,7 +368,7 @@ function applyFilters() {
 
 function renderAip(geojson) {
   const features = (geojson && geojson.features) || [];
-  el('count-aip').textContent = features.length;
+  setCount('aip', features.length);
   if (!features.length || !map) return features.length;
 
   features.forEach((feature) => {
@@ -328,7 +381,14 @@ function renderAip(geojson) {
         layer.bindPopup(aipPopup(f.properties || {}), { maxWidth: 340 });
       }
     });
-    register(shape, aipLayer, { aip: kind });
+    // שלושה צירים חוצים: סוג ההגבלה, רצפת הגובה, ונושא האזור.
+    // הסיווג מגיע מהקובץ ולא מחושב כאן — ראו scripts/aip_classify.py.
+    const props = feature.properties || {};
+    register(shape, aipLayer, {
+      aip: kind,
+      floor: props.floor_band || 'unknown',
+      theme: props.theme || 'other'
+    });
   });
 
   return features.length;
@@ -662,60 +722,119 @@ function renderList(notams) {
 /* --- מקרא ------------------------------------------------------------- */
 
 /**
- * המקרא הוא גם לוח הבקרה.
+ * לוח הבקרה — שתי רמות.
  *
- * הגרסה הראשונה הציגה מקרא סטטי ליד מתגי שכבה — שני אזורים שמדברים על
- * אותו דבר. כאן פריט המקרא **הוא** המתג: הצבע מסביר, המספר מכמת,
- * והלחיצה מכבה. פחות ממשק, יותר שליטה.
+ * הגרסה הקודמת שמה את מתגי השכבות בקופסה אחת ואת תגיות הסינון בשנייה,
+ * ושתיהן דיברו על אותם נתונים בלי לומר מי שייך למי. עם חמש שכבות וכמה
+ * צירי סינון זה הפך לשורת תגיות ארוכה בלי היררכיה.
+ *
+ * כאן כל שכבה היא קופסה שמכילה את הסינון שלה. הכותרת מכבה את השכבה
+ * כולה; מי שרוצה לדייק פותח ונכנס. שכבה שאין לה סינון היא כותרת בלבד.
+ *
+ * **שום דבר כאן אינו מסתיר מידע** — רק את ציורו על המפה. הרשימה
+ * שמתחת מלאה תמיד.
  */
-function renderLegend() {
-  const groups = [];
+const PANELS = [
+  {
+    id: 'aip',
+    toggle: 'toggle-aip',
+    label: 'מגבלות קבועות (פמ"ת)',
+    open: true,
+    on: true,
+    axes: [
+      {
+        title: 'לפי סוג',
+        prefix: 'aip',
+        entries: ['prohibited', 'restricted', 'danger', 'uav', 'obstacle']
+          .map((k) => [k, { label: ZONE_STYLES[k].label, color: ZONE_STYLES[k].color }])
+      },
+      {
+        // הציר שהמשתמש ביקש: אזור שרצפתו גבוהה פחות מעניין את מי
+        // שטס נמוך, ואפשר לכבות אותו ולנקות את המפה.
+        title: 'לפי רצפת גובה',
+        prefix: 'floor',
+        entries: Object.entries(AIP_FLOORS)
+      },
+      {
+        title: 'לפי נושא',
+        prefix: 'theme',
+        entries: Object.entries(AIP_THEMES)
+      }
+    ]
+  },
+  {
+    id: 'notam',
+    toggle: 'toggle-notam',
+    label: 'מגבלות זמניות (נוטאם)',
+    open: true,
+    on: true,
+    axes: [
+      { title: 'לפי נושא', prefix: 'notam', dashed: true,
+        entries: Object.entries(NOTAM_FAMILIES) },
+      { title: 'לפי מצב תוקף', prefix: 'state', dashed: true,
+        entries: Object.entries(NOTAM_STATES) }
+    ]
+  },
+  { id: 'weather', toggle: 'toggle-weather', label: 'מזג אוויר (METAR / TAF / AIRMET)' },
+  { id: 'cvfr', toggle: 'toggle-cvfr', label: 'נתיבי טיסה (CVFR)' },
+  { id: 'ratag', toggle: 'toggle-ratag', label: 'שמורות טבע וגנים לאומיים',
+    hint: 'טעינה בלחיצה' }
+];
 
-  const aipItems = ['prohibited', 'restricted', 'danger', 'uav', 'obstacle']
-    .map((kind) => ({
-      key: 'aip:' + kind,
-      label: ZONE_STYLES[kind].label,
-      color: ZONE_STYLES[kind].color,
-      dashed: false
-    }))
-    .filter((item) => sublayers.has(item.key));
-  if (aipItems.length) groups.push({ title: 'מגבלות קבועות', items: aipItems });
+function chipHtml(key, label, color, dashed) {
+  const entry = sublayers.get(key);
+  if (!entry) return '';
+  return `
+    <button type="button" class="legend__item" data-layer="${esc(key)}"
+            aria-pressed="${entry.on}" style="--swatch:${color}">
+      <span class="legend__swatch${dashed ? ' legend__swatch--dashed' : ''}"></span>
+      <span class="legend__label">${esc(label)}</span>
+      <span class="legend__count">${entry.count}</span>
+    </button>`;
+}
 
-  const notamItems = Object.entries(NOTAM_FAMILIES)
-    .map(([key, family]) => ({
-      key: 'notam:' + key,
-      label: family.label,
-      color: NOTAM_HIGH,
-      dashed: true
-    }))
-    .filter((item) => sublayers.has(item.key));
-  if (notamItems.length) groups.push({ title: 'נוטאמים לפי נושא', items: notamItems });
-
-  // ציר שני, חוצה נושאים: מה תקף ברגע הזה.
-  const stateItems = Object.entries(NOTAM_STATES)
-    .map(([key, state]) => ({
-      key: 'state:' + key,
-      label: state.label,
-      color: key === 'future' ? 'var(--ink-soft)' : NOTAM_HIGH,
-      dashed: true
-    }))
-    .filter((item) => sublayers.has(item.key));
-  if (stateItems.length) groups.push({ title: 'נוטאמים לפי מצב תוקף', items: stateItems });
-
-  el('legend').innerHTML = groups.map((group) => `
+function axisHtml(axis, fallbackColor) {
+  const chips = axis.entries
+    .map(([key, meta]) => chipHtml(
+      axis.prefix + ':' + key,
+      meta.label,
+      meta.color || fallbackColor,
+      axis.dashed
+    ))
+    .filter(Boolean)
+    .join('');
+  if (!chips) return '';
+  return `
     <div class="legend__group">
-      <span class="legend__title">${esc(group.title)}</span>
-      ${group.items.map((item) => {
-        const entry = sublayers.get(item.key);
-        return `
-        <button type="button" class="legend__item" data-layer="${esc(item.key)}"
-                aria-pressed="${entry.on}" style="--swatch:${item.color}">
-          <span class="legend__swatch${item.dashed ? ' legend__swatch--dashed' : ''}"></span>
-          <span class="legend__label">${esc(item.label)}</span>
-          <span class="legend__count">${entry.count}</span>
-        </button>`;
-      }).join('')}
-    </div>`).join('') + `
+      <span class="legend__title">${esc(axis.title)}</span>
+      ${chips}
+    </div>`;
+}
+
+function renderControls() {
+  const html = PANELS.map((panel) => {
+    const body = (panel.axes || [])
+      .map((axis) => axisHtml(axis, panel.id === 'notam' ? NOTAM_HIGH : 'var(--z-other)'))
+      .filter(Boolean)
+      .join('');
+
+    // שכבה בלי צירי סינון אינה נפתחת — קופסה ריקה רק מבלבלת.
+    const head = `
+      <span class="ctl__switch">
+        <input type="checkbox" id="${panel.toggle}"${panel.on ? ' checked' : ''}>
+        <span class="ctl__label">${esc(panel.label)}</span>
+        <span class="switch__count" id="count-${panel.id}">${esc(panel.hint || '—')}</span>
+      </span>`;
+
+    if (!body) return `<div class="ctl ctl--flat">${head}</div>`;
+    return `
+      <details class="ctl"${panel.open ? ' open' : ''}>
+        <summary class="ctl__head">${head}</summary>
+        <div class="ctl__body">${body}</div>
+      </details>`;
+  }).join('');
+
+  el('controls').innerHTML = html + `
     <p class="legend__note">
       קו מלא — מגבלה קבועה · קו מקווקו — נוטאם ·
       <span style="color:${CVFR_COLOR}">סגול</span> = פרוזדור CVFR פתוח ·
@@ -723,17 +842,17 @@ function renderLegend() {
       ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל.
       נוטאם שגבולו מפורט בגוף ההודעה מצויר כאזור אמיתי; נוטאם שכל
       שיש לו הוא מעטפת מ-${ENVELOPE_NM} מייל ימי ומעלה
-      <strong>אינו מצויר</strong> ומופיע ברשימה בלבד — עיגול כזה מקיף
-      את אזור ההשפעה ואינו צורתו.
-      נוטאם עתידי מצויר דהוי. "פעיל עכשיו" לפי תוקף כללי בלבד —
-      לוח הזמנים היומי מופיע בכרטיס. כיבוי משפיע על המפה בלבד;
+      <strong>אינו מצויר</strong> ומופיע ברשימה בלבד.
+      נוטאם עתידי מצויר דהוי. כיבוי כאן משפיע על המפה בלבד;
       הרשימה למטה תמיד מלאה.
     </p>`;
 }
 
-/** לחיצה על פריט מקרא מכבה או מדליקה את התת־שכבה שלו. */
-function wireLegend() {
-  el('legend').addEventListener('click', (event) => {
+/** לחיצה על תגית מכבה או מדליקה את הערך שלה בציר שלה. */
+function wireControls() {
+  const box = el('controls');
+
+  box.addEventListener('click', (event) => {
     const button = event.target.closest('[data-layer]');
     if (!button) return;
     const key = button.getAttribute('data-layer');
@@ -747,6 +866,12 @@ function wireLegend() {
     button.setAttribute('aria-pressed', String(entry.on));
     applyFilters();
   });
+
+  // תיבת הסימון יושבת בתוך <summary>. בלי זה כל לחיצה עליה הייתה
+  // גם מקפלת את הקופסה, וזו בדיוק הפעולה ההפוכה ממה שהתכוונו אליה.
+  box.querySelectorAll('.ctl__switch').forEach((node) => {
+    node.addEventListener('click', (event) => event.stopPropagation());
+  });
 }
 
 /* --- מזג אוויר --------------------------------------------------------- */
@@ -758,7 +883,7 @@ function wireLegend() {
  */
 function renderWeather(payload) {
   const reports = (payload && payload.reports) || [];
-  el('count-weather').textContent = reports.length;
+  setCount('weather', reports.length);
   const list = el('weather-list');
   list.innerHTML = '';
 
@@ -1112,7 +1237,7 @@ async function init() {
   const aipCount = renderAip(geojson);
   const aipMeta = (geojson && geojson.metadata) || {};
   if (!aipCount) {
-    el('count-aip').textContent = '0';
+    setCount('aip', '0');
     addAlert(
       '<strong>שכבת המגבלות הקבועות (פמ"ת) אינה טעונה.</strong> ' +
       esc(aipMeta.status_he || 'הקובץ data/aip-permanent.geojson ריק. נספחי ב\' ו-ג\' טרם חולצו.') +
@@ -1123,7 +1248,7 @@ async function init() {
   // --- שכבת הנוטאמים
   const notams = (payload && payload.notams) || [];
   const drawn = renderNotams(notams);
-  el('count-notam').textContent = notams.length;
+  setCount('notam', notams.length);
 
   if (payload) {
     renderFreshness(payload);
@@ -1152,8 +1277,9 @@ async function init() {
     el('freshness-note').textContent = 'קובץ הנתונים לא נקרא.';
   }
 
-  renderLegend();
-  wireLegend();
+  renderControls();
+  wireControls();
+  flushCounts();
   renderList(notams);
   wireJumpButtons();
   // הסדר נקבע פעם אחת אחרי הציור הראשון, ולא רק בסינון: בלי זה
@@ -1178,11 +1304,11 @@ async function init() {
   });
   if (!weather) {
     weatherToggle.disabled = true;
-    el('count-weather').textContent = '—';
+    setCount('weather', '—');
   }
 
   if (!hasMap) {
-    document.querySelector('.layers').style.display = 'none';
+    el('controls').style.display = 'none';
     return;
   }
 
@@ -1190,7 +1316,7 @@ async function init() {
   //     לשאלה "איפה מותר לטוס", והיא הייתה חסרה מהמפה לגמרי.
   const cvfrToggle = el('toggle-cvfr');
   const cvfrReady = await loadCvfr();
-  el('count-cvfr').textContent = cvfrReady ? '' : '—';
+  setCount('cvfr', cvfrReady ? '' : '—');
   if (cvfrReady) {
     map.addLayer(cvfrLayer);
     cvfrToggle.checked = true;
