@@ -16,13 +16,26 @@
 `Shape_Length` ו-`Shape_Area` בלבד. הייצוא לטבלה איבד את הגיאומטריה,
 כי קו אינו נכנס לתא. ה-SHP הוא המשאב היחיד עם הקווים עצמם.
 
+## למה לא מורידים ישירות מ-data.gov.il
+
+ניסינו, ותיעדנו. `e.data.gov.il` ו-`data.gov.il` כאחד מחזירים לכל
+כתובת הורדה **בדיוק** את אותם 42,766 בתים: HTTP 200, `text/html`,
+דף אתגר JavaScript מעורפל — לא ארכיון. שינוי כותרות לא עוזר, ושני
+המארחים מתנהגים זהה. במקביל `data.gov.il/api` מחזיר JSON תקין,
+כלומר החסימה היא של נתיב ההורדה בלבד.
+
+פתרון האתגר הוא עקיפה של הגנת בוטים, ואנחנו לא עושים את זה. במקום
+זה אותו מסלול שכבר עובד לרט"ג ולפמ"ת: מורידים את הקובץ בדפדפן —
+שם האתגר נפתר מעצמו כרגיל — ומעלים אותו כנכס ל-release. משם ההורדה
+חופשית, גם מ-Actions וגם מכל רשת.
+
 ## מערכת קואורדינטות
 
 המקור ב-Israel TM Grid, כמו שכבת רט"ג. אותה המרה ל-WGS84, ומאותה
 סיבה: בלעדיה אי אפשר להציג על מפת רשת. שבע ספרות עשרוניות ≈ סנטימטר.
 
 שימוש:
-    python3 scripts/build_cvfr_geojson.py               # מוריד
+    python3 scripts/build_cvfr_geojson.py               # מה-release
     python3 scripts/build_cvfr_geojson.py --zip a.zip   # מקובץ מקומי
 """
 
@@ -34,6 +47,7 @@ import json
 import os
 import sys
 import tempfile
+import urllib.error
 import urllib.request
 import zipfile
 from datetime import datetime, timezone
@@ -41,7 +55,11 @@ from datetime import datetime, timezone
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_PATH = os.path.join(REPO_ROOT, "data", "cvfr-routes.geojson")
 
-SOURCE_URL = (
+SOURCE_URL = "https://github.com/nadaval56/airspace/releases/download/aip-source/cvfr_mot.zip"
+
+# הכתובת המקורית במאגר. נשמרת כתיעוד של המקור ושל מה שצריך להוריד
+# כשמשרד התחבורה מפרסם עדכון — לא כתובת שהסקריפט מושך ממנה.
+UPSTREAM_URL = (
     "https://e.data.gov.il/dataset/360fb8b4-ea71-4485-b80b-c5b996d25cae"
     "/resource/e5436712-2829-4079-982f-576195277766/download/cvfr_mot.zip"
 )
@@ -64,9 +82,23 @@ def fetch_zip(path: str | None) -> zipfile.ZipFile:
         return zipfile.ZipFile(path)
     print(f"מוריד {SOURCE_URL}", file=sys.stderr)
     request = urllib.request.Request(SOURCE_URL, headers={"User-Agent": BROWSER_UA})
-    with urllib.request.urlopen(request, timeout=180) as resp:
-        blob = resp.read()
+    try:
+        with urllib.request.urlopen(request, timeout=180) as resp:
+            blob = resp.read()
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            raise SystemExit(
+                "הנכס cvfr_mot.zip אינו קיים ב-release.\n"
+                f"יש להוריד אותו בדפדפן מ-{UPSTREAM_URL}\n"
+                "ולהעלות אותו כנכס ל-release בשם aip-source, כמו ratag.zip."
+            ) from exc
+        raise
     print(f"  {len(blob):,} bytes", file=sys.stderr)
+    if not blob.startswith(b"PK"):
+        raise SystemExit(
+            f"מה שירד אינו ארכיון ({len(blob):,} בתים, מתחיל ב-{blob[:16]!r}). "
+            "לא ממשיכים על סמך ניחוש."
+        )
     return zipfile.ZipFile(io.BytesIO(blob))
 
 
