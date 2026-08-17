@@ -18,7 +18,7 @@
 <header class="masthead">
   <div class="wrap">
     <p class="eyebrow">מגבלות מרחב אווירי — ישראל</p>
-    <h1>מה מוגבל עכשיו</h1>
+    <h1>איפה אפשר לטוס?</h1>
 
     <!-- חותמת הזמן היא הדבר הראשון שצריך להיקלט. אם היא ישנה, כל השאר חשוד. -->
     <div id="freshness" class="freshness freshness--loading" role="status" aria-live="polite">
@@ -87,7 +87,10 @@
       <h2 id="weather-heading">מזג אוויר</h2>
       <p class="list-sub" id="weather-sub"></p>
     </div>
-    <ul class="wx-list" id="weather-list"></ul>
+    <details class="fold">
+      <summary class="fold__button" id="weather-fold">הצג את כל הדיווחים</summary>
+      <ul class="wx-list" id="weather-list"></ul>
+    </details>
   </section>
 
   <section class="list-section wrap" aria-labelledby="list-heading">
@@ -105,7 +108,19 @@
         חדשה עשויה להופיע תחילה בלי הזמנים, והם יתווספו בעדכון הבא.
       </p>
     </div>
-    <ol class="notam-list" id="notam-list"></ol>
+    <!--
+      הרשימה מקופלת מאחורי כפתור אחד. היא עדיין **מלאה תמיד** — שום
+      דבר כאן אינו מסנן — אבל 129 כרטיסים פתוחים דחפו את כל השאר
+      אל מחוץ למסך.
+
+      הכפתור נושא את המספר המלא בכוונה. "הצג עוד" לא היה אומר כמה
+      יש, ומי שרואה שניים־שלושה עלול להסיק שזה הכול. במפת בטיחות
+      זו בדיוק ההנחה המסוכנת.
+    -->
+    <details class="fold">
+      <summary class="fold__button" id="notam-fold">הצג את כל הנוטאמים</summary>
+      <ol class="notam-list" id="notam-list"></ol>
+    </details>
   </section>
 </main>
 
