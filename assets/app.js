@@ -18,6 +18,9 @@ const ZONE_STYLES = {
   restricted: { color: '#c2410c', label: 'מוגבל לטיסה' },
   danger:     { color: '#a16207', label: 'מסוכן לטיסה' },
   uav:        { color: '#6b21a8', label: 'אסור לכטב"ם' },
+  // מכשול קבוע — בלון מעוגן. שחור, כי כבל בגובה 3,400 רגל אינו
+  // "אזור מוגבל" אלא דבר פיזי שמתנגשים בו.
+  obstacle:   { color: '#111827', label: 'מכשול קבוע' },
   other:      { color: '#334155', label: 'מגבלה קבועה' }
 };
 
@@ -194,6 +197,7 @@ function zoneKind(props) {
   if (raw.includes('prohib') || hebrew.includes('אסור')) return 'prohibited';
   if (raw.includes('restrict') || hebrew.includes('מוגבל')) return 'restricted';
   if (raw.includes('danger') || hebrew.includes('מסוכן')) return 'danger';
+  if (hebrew.includes('מכשול')) return 'obstacle';
   return 'other';
 }
 
@@ -468,7 +472,7 @@ function renderList(notams) {
 function renderLegend() {
   const groups = [];
 
-  const aipItems = ['prohibited', 'restricted', 'danger', 'uav']
+  const aipItems = ['prohibited', 'restricted', 'danger', 'uav', 'obstacle']
     .map((kind) => ({
       key: 'aip:' + kind,
       label: ZONE_STYLES[kind].label,
@@ -646,6 +650,12 @@ function ratagPopup(p) {
   if (p.status) rows.push(['סטטוס', p.status]);
   if (p.plan) rows.push(['תכנית', p.plan]);
   if (p.dunam) rows.push(['שטח', `${p.dunam.toLocaleString('he-IL')} דונם`]);
+  // הגובה מגיע מנספח ה' לפמ"ת, לא מרט"ג. מוצג רק כשהשם התאים בדיוק —
+  // גובה מהתאמה מנוחשת מסוכן יותר מגובה חסר.
+  if (p.aip_upper_ft) {
+    rows.push(['גובה מרבי (פמ"ת)',
+      `${p.aip_upper_ft.toLocaleString('he-IL')} רגל · ${p.aip_id}`]);
+  }
 
   return `
     <div class="card">
@@ -655,7 +665,9 @@ function ratagPopup(p) {
       <dl class="kv kv--tight">${rows.map(([k, v]) =>
         `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
       <p class="popup__terms">
-        מקור: ${esc(p.source || 'רט"ג')} · להתמצאות בלבד, לא רשימת מגבלות.
+        הגבול: ${esc(p.source || 'רט"ג')}${p.aip_upper_ft
+          ? ' · הגובה: פמ"ת א-17 נספח ה\'.'
+          : ' · אין לאזור הזה גובה בנספח ה\', להתמצאות בלבד.'}
         <a href="data/ratag-terms.md">תנאי השימוש</a>
       </p>
     </div>`;
@@ -723,10 +735,13 @@ async function init() {
     addAlert('<strong>המפה לא נטענה.</strong> ספריית המפות לא עלתה. כל הנוטאמים מופיעים ברשימה שמתחת, כולל טווחי הגובה והמיקומים.', 'warn');
   }
 
-  const [notamResult, aipResult, weatherResult] = await Promise.allSettled([
+  const [notamResult, aipResult, weatherResult, obstacleResult] = await Promise.allSettled([
     loadJson('data/notams.json'),
     loadJson('data/aip-permanent.geojson'),
-    loadJson('data/weather.json')
+    loadJson('data/weather.json'),
+    // מכשולים קבועים — נספח ד'. שמונה רשומות, שקולות כמעט כלום,
+    // ולכן נטענות תמיד ולא בבקשה כמו שכבת רט"ג.
+    loadJson('data/aip-obstacles.geojson')
   ]);
 
   if (notamResult.status === 'fulfilled') {
@@ -736,6 +751,14 @@ async function init() {
   }
   if (aipResult.status === 'fulfilled') {
     geojson = aipResult.value;
+  }
+  // המכשולים נוספים לאותה שכבה — הם באים מאותו פרק בפמ"ת, ומקבלים
+  // קטגוריה משלהם במקרא.
+  if (obstacleResult.status === 'fulfilled' && geojson) {
+    geojson = {
+      ...geojson,
+      features: [...(geojson.features || []), ...(obstacleResult.value.features || [])]
+    };
   }
 
   // --- שכבת הפמ"ת. זו השכבה החשובה מבין השתיים, אז חוסר בה מוכרז בקול.
