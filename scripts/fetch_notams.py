@@ -328,8 +328,10 @@ DETAILS_PATH = os.path.join(REPO_ROOT, "data", "notam-details.json")
 #      כך נשארות רק ההודעות החדשות — כמה בשעה.
 #   2. תקציב זמן משלו לשלב ההרחבה, שנבדק גם *אחרי* כל בקשה. מספיק
 #      שהשרת יאט, וההרחבה נעצרת — במקום להיתקע.
-#   3. תקרת בתים לקריאה. תשובה תקינה היא ~1.4MB; כל דבר מעבר לזה
-#      אינו מה שציפינו לו, ואין סיבה לבלוע אותו.
+#   3. תקרת בתים **ותקרת זמן** לקריאת הגוף. `timeout` של שקע נמדד לכל
+#      `recv` בנפרד, ולכן שרת ששולח מעט בייטים כל כמה שניות לעולם לא
+#      מפעיל אותו. `_read_capped` קורא בנתחים עם שעון קיר, וזה הדבר
+#      היחיד שבאמת עוצר זחילה.
 #
 # האטה מצד השרת היא מסר. הכלי הזה מושך משרת של רשות ציבורית ומתנהג
 # בהתאם: לאט, מעט, ועם מטמון.
@@ -337,6 +339,9 @@ MAX_EXPANSIONS_PER_RUN = 15
 EXPANSION_BUDGET_SECONDS = 90
 EXPANSION_DELAY = 1.5
 MAX_RESPONSE_BYTES = 8 * 1024 * 1024
+# תקרת זמן לגוף של תשובה בודדת. תשובה תקינה מגיעה תוך שניות ספורות;
+# מעבר לזה השרת מאט אותנו, וזה סימן להפסיק ולא להתעקש.
+RESPONSE_BUDGET_SECONDS = 25
 
 _iaa_blocks: list[str] | None = None
 _iaa_jar = http.cookiejar.CookieJar()
@@ -359,7 +364,30 @@ def save_details(details: dict) -> None:
         fh.write("\n")
 
 
-def _iaa_get(url: str, data: bytes | None = None, extra: dict | None = None) -> str:
+def _read_capped(resp, budget: float) -> bytes:
+    """קורא את הגוף עם **תקרת זמן משלו**, לא רק timeout של שקע.
+
+    `timeout` של שקע נמדד לכל קריאת `recv` בנפרד. כששרת מאט ושולח
+    מעט בייטים כל כמה שניות, אף קריאה בודדת לא חורגת מה-timeout —
+    והקריאה כולה נמשכת דקות. כך ריצה אחת נתקעה ל-12 דקות. קריאה
+    בנתחים עם שעון קיר היא הדבר היחיד שבאמת עוצר זחילה כזאת.
+    """
+    deadline = time.monotonic() + budget
+    chunks: list[bytes] = []
+    size = 0
+    while size < MAX_RESPONSE_BYTES:
+        if time.monotonic() > deadline:
+            raise TimeoutError(f"הגוף לא הושלם תוך {budget:.0f} שניות")
+        chunk = resp.read(65536)
+        if not chunk:
+            break
+        chunks.append(chunk)
+        size += len(chunk)
+    return b"".join(chunks)
+
+
+def _iaa_get(url: str, data: bytes | None = None, extra: dict | None = None,
+             budget: float | None = None) -> str:
     """בקשה עם עוגיות — WebForms שומר את מצב הדף בסשן."""
     headers = {
         "User-Agent": USER_AGENT,
@@ -370,7 +398,8 @@ def _iaa_get(url: str, data: bytes | None = None, extra: dict | None = None) -> 
     headers.update(extra or {})
     req = urllib.request.Request(url, data=data, headers=headers)
     with _iaa_opener.open(req, timeout=max(5, min(TIMEOUT, _time_left()))) as resp:
-        return iaa.decode(resp.read(MAX_RESPONSE_BYTES))
+        raw = _read_capped(resp, budget if budget is not None else RESPONSE_BUDGET_SECONDS)
+    return iaa.decode(raw)
 
 
 def expand_missing(page: str, rows: list[dict], details: dict) -> int:
