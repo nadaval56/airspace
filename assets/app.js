@@ -705,9 +705,17 @@ function renderList(notams) {
     if (canLocate) {
       li.querySelector('.locate').addEventListener('click', () => {
         const shape = notamShapes.get(n.id);
-        if (!el('toggle-notam').checked) {
-          el('toggle-notam').checked = true;
-          map.addLayer(notamLayer);
+        // אם הנוטאם מסונן החוצה, אין טעם לעוף אל צורה בלתי נראית.
+        // מדליקים את כל הבנים של שכבת הנוטאם ומציירים מחדש.
+        if (!notamLayer.hasLayer(shape)) {
+          const panel = el('toggle-notam').closest('.ctl');
+          panel.querySelectorAll('.ctl__body input[data-layer]').forEach((kid) => {
+            kid.checked = true;
+            const entry = sublayers.get(kid.getAttribute('data-layer'));
+            if (entry) setFilterValue(entry, true);
+          });
+          applyFilters();
+          syncParent(panel);
         }
         map.flyTo(shape.getLatLng ? shape.getLatLng() : shape.getBounds().getCenter(), 12);
         shape.openPopup();
@@ -860,19 +868,64 @@ function renderControls() {
 }
 
 /** לחיצה על תגית מכבה או מדליקה את הערך שלה בציר שלה. */
+/** משנה ערך בודד בציר הסינון, בלי לצייר מחדש. */
+function setFilterValue(entry, on) {
+  entry.on = on;
+  const off = filters.get(entry.axis) || new Set();
+  on ? off.delete(entry.value) : off.add(entry.value);
+  filters.set(entry.axis, off);
+}
+
+/** כל תיבות הבנים שבתוך קופסת שכבה. */
+function childInputs(panel) {
+  return [...panel.querySelectorAll('.ctl__body input[data-layer]')];
+}
+
+/**
+ * מסנכרן את תיבת האב למצב הבנים.
+ *
+ * שלושה מצבים ולא שניים: הכול דלוק, הכול כבוי, וחלק. ה"חלק" מקבל
+ * `indeterminate` — הקו האופקי של הדפדפן — ולא וי. זה בדיוק מה
+ * שצריך להיאמר: הסימון של האב ירד כי **זה כבר לא הכל**, אבל השכבה
+ * לא כבויה.
+ */
+function syncParent(panel) {
+  const parent = panel.querySelector('.ctl__switch input');
+  const kids = childInputs(panel);
+  if (!parent || !kids.length) return;
+  const on = kids.filter((input) => input.checked).length;
+  parent.checked = on === kids.length;
+  parent.indeterminate = on > 0 && on < kids.length;
+}
+
 function wireControls() {
   const box = el('controls');
 
   box.addEventListener('change', (event) => {
-    const input = event.target.closest('input[data-layer]');
-    if (!input) return;
-    const entry = sublayers.get(input.getAttribute('data-layer'));
-    if (!entry) return;
+    const input = event.target;
+    if (!(input instanceof HTMLInputElement)) return;
+    const panel = input.closest('.ctl');
+    if (!panel) return;
 
-    entry.on = input.checked;
-    const off = filters.get(entry.axis) || new Set();
-    entry.on ? off.delete(entry.value) : off.add(entry.value);
-    filters.set(entry.axis, off);
+    if (input.hasAttribute('data-layer')) {
+      // בן: מעדכן את עצמו, ואז את האב.
+      const entry = sublayers.get(input.getAttribute('data-layer'));
+      if (!entry) return;
+      setFilterValue(entry, input.checked);
+      applyFilters();
+      syncParent(panel);
+      return;
+    }
+
+    // אב: מוריש את מצבו לכל הבנים בבת אחת.
+    const kids = childInputs(panel);
+    if (!kids.length) return;   // שכבה בלי סינון — המתג שלה מטופל בנפרד
+    input.indeterminate = false;
+    kids.forEach((kid) => {
+      kid.checked = input.checked;
+      const entry = sublayers.get(kid.getAttribute('data-layer'));
+      if (entry) setFilterValue(entry, input.checked);
+    });
     applyFilters();
   });
 
@@ -881,6 +934,9 @@ function wireControls() {
   box.querySelectorAll('.ctl__switch').forEach((node) => {
     node.addEventListener('click', (event) => event.stopPropagation());
   });
+
+  // מצב פתיחה: ייתכן שערך כלשהו כבר כבוי, ותיבת האב צריכה לשקף את זה.
+  box.querySelectorAll('.ctl').forEach(syncParent);
 }
 
 /* --- מזג אוויר --------------------------------------------------------- */
@@ -1351,12 +1407,9 @@ async function init() {
     else loadRatag(e.target, ratagLabel);
   });
 
-  el('toggle-aip').addEventListener('change', (e) => {
-    e.target.checked ? map.addLayer(aipLayer) : map.removeLayer(aipLayer);
-  });
-  el('toggle-notam').addEventListener('change', (e) => {
-    e.target.checked ? map.addLayer(notamLayer) : map.removeLayer(notamLayer);
-  });
+  // אין כאן יותר מאזין לפמ"ת ולנוטאם. תיבת האב שלהם אינה מתג שכבה
+  // אלא "כל הבנים", והציור נגזר מהסינון — כיבוי כל הבנים מרוקן את
+  // השכבה ממילא, וזו אותה תוצאה בלי שני מנגנונים שמתחרים זה בזה.
 }
 
 init().catch((err) => {
