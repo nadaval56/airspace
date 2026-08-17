@@ -209,14 +209,17 @@ def parse_notam_page(page: str) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# ההרחבה — הכפתור `+`, ולמה היא לא נמשכת
+# ההרחבה — הכפתור `+`
 # ---------------------------------------------------------------------------
 #
-# דף הרשימה לא נותן זמני תוקף. הם נפתחים בלחיצה על ה-`+`, ולכן נבדק
-# לעומק אם אפשר לפתוח אותם אוטומטית. **התשובה היא לא**, ומתועד כאן
-# למה, כדי שאיש לא ינסה שוב מאפס.
+# דף הרשימה לא נותן שורת Q, זמני תוקף או גבהים. כל אלה נפתחים בלחיצה
+# על ה-`+`, ואז מוצג הנוטאם המלא:
 #
-# מה הכפתור עושה, לפי `MoreInfo.js`:
+#     Q) LLLL/QAELC/IV/NBO/E /000/019/3059N03445E001
+#     A) LLLL B) 2608160800 C) 2608201000
+#     D) 16 0800-1500 1600-2059, 17 0600-0900 ...
+#
+# `MoreInfo.js` מראה איך זה נשלח — postback רגיל של WebForms:
 #
 #     document.getElementById('hidMsgNum').value = msgNum;
 #     document.getElementById('hidMode').value = mode;
@@ -224,22 +227,126 @@ def parse_notam_page(page: str) -> list[dict]:
 #     document.getElementById('hidTblClientId').value = "";
 #     document.getElementById('btnMoreInfo').click();
 #
-# כלומר postback של WebForms. באותו קובץ יש גם נתיב ישן דרך
-# `AeroInfo.asmx?op=getMoreMsgInfo` — כל שורה בו מסומנת כהערה, וה-`?WSDL`
-# שלו מחזיר `Unauthorized Request Blocked` מ-Radware.
+# **הטעות שעלתה ביוקר:** הניסיון הראשון שלח את *כל* שדות הטופס, ובהם
+# ששת כפתורי ה-submit — `btnSearch`, `btnTextChange`, `imgNotam` ועוד.
+# דפדפן שולח כפתור אחד בלבד, זה שנלחץ. ASP.NET בוחר את המטפל לפי
+# הכפתור שנמצא במטען, ולכן רץ החיפוש במקום ההרחבה, והדף חזר זהה — מה
+# שנראה כאילו המנגנון חסום. `form_fields` מקבל עכשיו `submitter`
+# ומשמיט את שאר הכפתורים, בדיוק כמו דפדפן.
 #
-# מה שנבדק בפועל, מול השרת החי, עם עוגיות סשן ועם כל שדות הטופס:
+# מה שכן חסום: `AeroInfo.asmx?WSDL` מחזיר `Unauthorized Request Blocked`
+# מ-Radware, ובקשת ASP.NET AJAX אסינכרונית מחזירה `Error 100` של זיהוי
+# בוטים. את שניהם לא עוקפים — וגם אין צורך: ה-postback המלא הוא הנתיב
+# שהדפדפן עצמו הולך בו.
+
+_INPUT_RE = re.compile(r"<input\b([^>]*)>", re.I)
+_ATTR_RE = re.compile(r'(\w+)\s*=\s*"([^"]*)"', re.I)
+
+# כפתורים. רק המבוקש נשלח; השאר מושמטים.
+_BUTTON_TYPES = ("submit", "button", "image", "reset")
+
+
+def form_fields(page: str, submitter: str | None = None) -> dict[str, str]:
+    """שדות ה-input של הטופס, לשחזור ה-postback.
+
+    כולל `__VIEWSTATE` ו-`__EVENTVALIDATION` — בלעדיהם WebForms דוחה
+    את הבקשה. משמיט כפתורים שאינם `submitter`, כי דפדפן שולח רק את
+    הכפתור שנלחץ, ו-ASP.NET בוחר את המטפל לפי מה שהגיע.
+    """
+    fields: dict[str, str] = {}
+    for raw in _INPUT_RE.findall(page):
+        attrs = {k.lower(): v for k, v in _ATTR_RE.findall(raw)}
+        name = attrs.get("name")
+        if not name:
+            continue
+        kind = attrs.get("type", "").lower()
+        if kind in _BUTTON_TYPES and name != submitter:
+            continue
+        if kind in ("checkbox", "radio") and "checked" not in raw.lower():
+            continue
+        fields[name] = _html.unescape(attrs.get("value", ""))
+    return fields
+
+
+def more_info_payload(page: str, msg_num: str) -> dict[str, str]:
+    """שדות ה-POST שפותחים את ההודעה `msg_num`, כמו לחיצה על ה-`+`."""
+    fields = form_fields(page, submitter="btnMoreInfo")
+    fields.update({
+        "hidMsgNum": str(msg_num), "hidMode": "more",
+        "hidCurOrHist": "Current", "hidTblClientId": "",
+        "btnMoreInfo": "",
+    })
+    return fields
+
+
+# הבלוק שנפתח מסומן במחלקות משלו:
 #
-#   postback מלא        → HTTP 200, הדף חוזר **זהה**. שום הרחבה לא נפתחת.
-#   postback אסינכרוני  → HTTP 200 עם `Error 100` — דף חסימה של זיהוי
-#                         בוטים (stormcaster.js, validate.perfdrive.com).
-#
-# החסימה השנייה היא הגנה מכוונת מפני אוטומציה. לא עוקפים אותה. ההשלכה:
-# **זמני התוקף אינם זמינים לכלי הזה**, והכרטיסים מציגים "לא צוין" —
-# וזו האמת, לא תקלה. מי שצריך אותם ילחץ על ה-`+` באתר עצמו.
-#
-# מה שכן נשמר מהחקירה: `msg_num`. הוא מזהה ההודעה באתר, והוא זה שמסמן
-# אילו שורות ניתנות להרחבה שם.
+#   more_NotamID    "Notam NO: C1760/26"
+#   more_NotamInfo  "Valid From : 16/08/2026  08:00"
+#   more_MsgText    שורות הנוטאם עצמו — Q), A), B), C), D), E)
+_MORE_CELL_RE = re.compile(
+    r'<td[^>]*class="(more_NotamID|more_NotamInfo|more_MsgText)"[^>]*>(.*?)</td>',
+    re.S | re.I,
+)
+_MORE_LABEL_RE = re.compile(
+    r"(Valid From|Valid To|Created|Location Indicator|Location Description|Notam NO)"
+    r"\s*:?\s*(.*)", re.I,
+)
+# "16/08/2026  08:00" — יום/חודש/שנה ושעה, כפי שהשרת מרכיב אותם.
+_MORE_STAMP_RE = re.compile(r"(\d{2})/(\d{2})/(\d{4})\s+(\d{2}):(\d{2})")
+
+
+def _iso_from_more(value: str) -> str | None:
+    m = _MORE_STAMP_RE.search(value or "")
+    if not m:
+        return None
+    day, month, year, hour, minute = m.groups()
+    return f"{year}-{month}-{day}T{hour}:{minute}:00Z"
+
+
+def parse_more_info(page: str, msg_num: str) -> dict:
+    """קורא את הבלוק שנפתח עבור הודעה אחת.
+
+    מחזיר `{id, airfield, created, valid_from, valid_to, raw}` — ורק מה
+    שנמצא בפועל. `raw` הוא גוש הנוטאם המלא, כולל שורת Q, ולכן הוא נכנס
+    ישירות ל-`parse_qline.parse_notam` בלי שום הרכבה מחדש.
+
+    התשובה ל-postback מכילה את **כל** הדף, ולכן חותכים תחילה לבלוק של
+    ההודעה המבוקשת. בלי החיתוך היינו בולעים שורות של הודעות שכנות.
+    """
+    start = page.find(f'divMoreInfo_{msg_num}"')
+    if start == -1:
+        return {}
+    end = page.find("divMainInfo_", start)
+    block = page[start: end if end > start else len(page)]
+
+    found: dict[str, str] = {}
+    lines: list[str] = []
+    for kind, raw in _MORE_CELL_RE.findall(block):
+        value = _text(raw)
+        if not value:
+            continue
+        if kind == "more_MsgText":
+            lines.append(value)
+            continue
+        label = _MORE_LABEL_RE.match(value)
+        if not label:
+            continue
+        key, rest = label.group(1).lower(), label.group(2).strip()
+        if key == "valid from":
+            found["valid_from"] = _iso_from_more(rest) or rest
+        elif key == "valid to":
+            found["valid_to"] = _iso_from_more(rest) or rest
+        elif key == "created":
+            found["created"] = _iso_from_more(rest) or rest
+        elif key == "location description":
+            found["airfield"] = rest
+        elif key == "notam no":
+            found["id"] = rest
+    if lines:
+        found["raw"] = "\n".join(lines)
+    return found
+
 
 # ---------------------------------------------------------------------------
 # מזג אוויר

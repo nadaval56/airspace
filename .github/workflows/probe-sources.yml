@@ -5,6 +5,14 @@ name: אבחון מקורות
 
 on:
   workflow_dispatch:
+    inputs:
+      target:
+        description: איזה אבחון להריץ
+        type: choice
+        default: expand
+        options:
+          - expand   # כפתור ההרחבה של רשות שדות התעופה
+          - sources  # סקירת כל מקורות הנוטאמים
 
 permissions:
   contents: read
@@ -20,4 +28,4 @@ jobs:
       - name: התקנת תלויות
         run: pip install --disable-pip-version-check -r requirements.txt
       - name: אבחון
-        run: python scripts/probe_sources.py
+        run: python scripts/probe_${{ inputs.target == 'sources' && 'sources' || 'expand' }}.py
