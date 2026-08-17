@@ -104,10 +104,26 @@ def _unmirror_line(line: str) -> str:
     return re.sub(r"\s+", " ", "".join(out)).strip()
 
 
+# סוגריים שהתהפכו בהיפוך. "(" ו-")" הם תווים **ניטרליים** בבידי: הכיוון
+# שלהם נקבע מהטקסט שסביבם, וכשהופכים את סדר הרצפים הם נשארים כמו
+# שהם — ואז ")LLHA(" יושב במקום "(LLHA)". במסמך זה נראה כמו שגיאת
+# הקלדה, ובדף זה נראה כמו באג.
+_MIRRORED_BRACKETS_RE = re.compile(r"\)([^()]*)\(")
+
+
+def unmirror_brackets(text: str) -> str:
+    """מחזיר סוגריים הפוכים לכיוונם: ")LLHA(" → "(LLHA)"."""
+    previous = None
+    while previous != text:
+        previous = text
+        text = _MIRRORED_BRACKETS_RE.sub(r"(\1)", text, count=1)
+    return text
+
+
 def reverse_hebrew(text: str) -> str:
     """מיישר טקסט שחולץ הפוך. תא יכול להשתרע על כמה שורות."""
     parts = [_unmirror_line(line) for line in text.split("\n") if line.strip()]
-    return " ".join(p for p in parts if p).strip()
+    return unmirror_brackets(" ".join(p for p in parts if p).strip())
 
 
 def parse_dms_pairs(text: str) -> list[tuple[float, float]]:

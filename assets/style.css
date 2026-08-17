@@ -237,19 +237,41 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   list-style: none;
   cursor: pointer;
   padding: 6px 12px;
+  /* מקום לעיגול הקיפול, שיושב בקצה השורה ולא בזרימה שלה. */
+  padding-inline-end: 56px;
   border-radius: 6px;
+  position: relative;
 }
 
 .ctl__head::-webkit-details-marker { display: none; }
 
-/* חץ הקיפול בקצה השורה, נפרד מתיבת הסימון כדי שלא יתחרו על האצבע. */
+/*
+  חץ הקיפול בקצה השורה, נפרד מתיבת הסימון כדי שלא יתחרו על האצבע.
+
+  הוא היה משולש של 0.85rem שצף בקצה — במובייל זה נקרא כמו פיקסל שרוף,
+  ואנשים לא ידעו שיש מה לפתוח. עכשיו הוא עיגול בגודל אצבע עם מסגרת:
+  אותה פעולה בדיוק, אבל הוא **נראה** כמו כפתור.
+*/
 .ctl__head::after {
   content: "▾";
-  float: inline-end;
-  font-size: 0.85rem;
-  color: var(--ink-soft);
-  line-height: var(--tap);
+  /* מיקום מוחלט ולא float: ב-float הוא נדחק לשורה הבאה ברגע שהוא
+     גדול מגובה השורה, ואז הוא יושב מתחת לכותרת במקום בקצה שלה. */
+  position: absolute;
+  inset-inline-end: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  font-size: 1.35rem;
+  line-height: 31px;
+  text-align: center;
+  color: var(--navy);
+  background: var(--paper);
+  border: 2px solid var(--rule);
+  border-radius: 50%;
 }
+
+.ctl__head:hover::after { border-color: var(--navy); }
 
 .ctl[open] > .ctl__head::after { content: "▴"; }
 
@@ -994,6 +1016,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 }
 
 .field-pin--reference svg { width: 78%; height: 78%; }
+
+/* תווית קבועה לנקודת ייחוס — הקוד הוא כל מה שהמקור נותן לה. */
+.field-tip {
+  background: var(--paper);
+  border: 1.5px solid var(--navy);
+  border-radius: 5px;
+  padding: 0 3px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  color: var(--navy);
+  box-shadow: none;
+}
+.field-tip::before { display: none; }
 
 /* תווית תחנת מזג אוויר — קטנה, קבועה, ולא חוסמת. */
 .wx-tip {

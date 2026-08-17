@@ -66,6 +66,35 @@ class CoordinateTest(unittest.TestCase):
         self.assertEqual(fields.parse_compact_pair("311339/0342737"), (31.22750, 34.46028))
 
 
+class TitleTest(unittest.TestCase):
+    """הסוגריים בכותרות — התהפכו בהיפוך הדו־כיווני, וכאן הם חוזרים."""
+
+    def test_mirrored_brackets_are_flipped_back(self):
+        self.assertEqual(
+            fields._clean_title("נמל התעופה חיפה )LLHA("), "נמל התעופה חיפה"
+        )
+
+    def test_code_leaves_no_dangling_bracket(self):
+        """אסותא: ")LLAA)" — שני סוגרים סוגרים, בלי פותח בכלל."""
+        self.assertEqual(
+            fields._clean_title("מנחת מסוקים אסותא אשדוד )LLAA)"),
+            "מנחת מסוקים אסותא אשדוד",
+        )
+
+    def test_a_second_name_in_brackets_survives(self):
+        """תפן: הקוד יושב בתוך הסוגריים של השם השני, והם נסגרים."""
+        self.assertEqual(
+            fields._clean_title("מנחת מסוקים תפן (ישקר – )LLIS"),
+            "מנחת מסוקים תפן (ישקר)",
+        )
+
+    def test_code_without_brackets(self):
+        self.assertEqual(fields._clean_title("מנחת קציעות - LLKZ"), "מנחת קציעות")
+
+    def test_empty_brackets_from_a_symbol_font(self):
+        self.assertEqual(fields._clean_title("מנחת עין שמר ( )"), "מנחת עין שמר")
+
+
 class ElevationTest(unittest.TestCase):
     def test_single_run_is_read(self):
         lines = [".3 גובה השדה", "884 רגל מעל פני הים."]
@@ -218,6 +247,43 @@ class ChapterTest(unittest.TestCase):
         self.assertIn("מסוקים", records[1]["name"])
         self.assertNotEqual(records[0]["lon"], records[1]["lon"])
 
+    def test_a_second_surface_too_far_away_is_not_drawn(self):
+        """הדסה: הגג יושב במקור 1.4 ק"מ מהמשטח הקרקעי, בשטח אורה.
+
+        שני משטחים של אותו בית חולים אינם רחוקים קילומטר וחצי, ולכן
+        אחד המספרים שגוי — ואי אפשר לדעת איזה. מסומן הראשון בלבד,
+        והחוסר נאמר גם באזהרה וגם בהערה שנשמרת על הנקודה.
+        """
+        lines = [
+            "מנחת מסוקים הדסה עין כרם (LLHD)",
+            ".1 נקודת התייחסות המנחת (HRP)",
+            "א. מנחת קרקעי, ברשת 1984 :WGS 035°08'50\"E 31°45'52\"N",
+            "ב. מנחת מוגבה על גג בניין, ברשת 1984 :WGS 035°08'57\"E 31°45'08\"N",
+            ".3 גובה המנחת",
+            "א. מנחת קרקעי: 2,088 רגל.",
+            "ב. מנחת מוגבה: 2,379 רגל.",
+        ]
+        records, warnings = fields.parse_field(
+            "הדסה עין כרם", lines, "helipad", [414]
+        )
+        self.assertEqual(len(records), 1)
+        self.assertIn("קרקעי", records[0]["name"])
+        self.assertTrue(records[0]["note"])
+        self.assertTrue(any("רחוק" in w for w in warnings), warnings)
+
+    def test_two_surfaces_on_the_same_site_are_both_drawn(self):
+        """ראשון לציון: 135 מטר בין המסלול למשטח. אותו מתקן, שתי נקודות."""
+        lines = [
+            "מנחת ראשון לציון )LLRS(",
+            "א. מנחת מז\"מ",
+            "ברשת :WGS-84 034˚45'13''E 31˚58'03''N",
+            "ב. משטח הנחיתה - מסוקים",
+            "ברשת :WGS-84 034˚45'07.92''E 31˚58'02.2''N",
+        ]
+        records, warnings = fields.parse_field("ראשון לציון", lines, "airstrip", [377])
+        self.assertEqual(len(records), 2)
+        self.assertEqual(warnings, [])
+
     def test_chart_overrides_a_mangled_text_elevation(self):
         """קציעות: במלל 'כ- 099 רגל', בתרשים 'ELEV 900 ft'."""
         lines = [
@@ -335,6 +401,19 @@ class LiveDataTest(unittest.TestCase):
             if f["properties"]["kind"] == "airport"
         }
         self.assertEqual(airports, {"LLHZ", "LLHA", "LLIB"})
+
+    def test_no_label_carries_a_mirrored_bracket(self):
+        """סוגר סוגר שפותח מחרוזת הוא סימן ההיפוך. אין כזה בקובץ."""
+        import re
+
+        for feature in self.data["features"]:
+            for key in ("name", "title"):
+                value = feature["properties"].get(key)
+                if value:
+                    self.assertIsNone(
+                        re.search(r"\)[^()]*\(", value),
+                        f"{feature['properties']['id']} · {key}: {value}",
+                    )
 
     def test_elevations_are_plausible(self):
         """מהשפל (-1,300) ועד הרמה (3,000). מספר הפוך יוצא מהטווח."""

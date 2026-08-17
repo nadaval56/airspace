@@ -594,7 +594,15 @@ function renderAerodromes(geojson, points) {
       // כשסמל יושב על אזור אסור, הכיתוב צריך להסביר את עצמו בלי לחיצה.
       title: p.name || p.icao || ''
     });
-    marker.bindTooltip(p.name || p.icao || '', { direction: 'top', offset: [0, -6] });
+    // נקודת ייחוס אין לה שם ואין לה צללית מזוהה — טבעת קטנה על המפה
+    // אינה אומרת "נמל התעופה רמון". הקוד שלה נכתב לידה בקביעות, כי הוא
+    // כל מה שיש, והוא גם מה שטייס מחפש. השאר מזוהים בצללית ובלחיצה.
+    marker.bindTooltip(p.name || p.icao || '', {
+      direction: 'top',
+      offset: [0, kind === 'reference' ? -11 : -6],
+      permanent: kind === 'reference',
+      className: kind === 'reference' ? 'field-tip' : ''
+    });
 
     // עיגול אזור השדה — רק למי שהמקור נותן לו רדיוס מפורש.
     let shape = marker;
@@ -634,6 +642,9 @@ function aerodromePopup(p) {
   // בלי שם אינה שדה בלי שם — הפמ"ת פשוט אינו מוסר את הנתון בצורה
   // שאפשר לקרוא בלי לנחש.
   const gaps = [];
+  // הערה שנולדה בפרסור — משטח שני שהמקור ממקם רחוק מדי מהראשון ולכן
+  // אינו מסומן. מי שמסתכל על המפה צריך לדעת שהוא קיים במקור.
+  if (p.note) gaps.push(p.note);
   if (p.kind === 'reference') {
     gaps.push('אין לשדה הזה פרק בפמ"ת — מוצגים הקוד והמיקום בלבד.');
   } else if (typeof p.elevation_ft !== 'number') {

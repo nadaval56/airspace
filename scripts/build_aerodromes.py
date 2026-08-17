@@ -262,7 +262,8 @@ def feature(record: dict) -> dict:
         "kind_label": fields.VOLUME_LABELS[record["kind"]],
         "source": SOURCE_LABELS[record["kind"]],
     }
-    for key in ("title", "icao", "elevation_ft", "atz_radius_nm", "operator", "contact"):
+    for key in ("title", "icao", "elevation_ft", "atz_radius_nm", "operator",
+                "contact", "note"):
         value = record.get(key)
         if value not in (None, ""):
             properties[key] = value
