@@ -701,3 +701,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   line-height: 1.45;
   color: var(--ink-soft);
 }
+
+/* תווית תחנת מזג אוויר — קטנה, קבועה, ולא חוסמת. */
+.wx-tip {
+  background: var(--paper);
+  border: 2px solid #0f766e;
+  border-radius: 5px;
+  padding: 1px 5px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  color: #0f766e;
+  box-shadow: none;
+}
+.wx-tip::before { display: none; }

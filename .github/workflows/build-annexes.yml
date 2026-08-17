@@ -20,16 +20,18 @@ jobs:
           python-version: '3.11'
       - name: התקנת תלויות
         run: pip install --disable-pip-version-check -r requirements.txt
-      - name: חילוץ
+      - name: חילוץ נספחים ד' ו-ה'
         run: python scripts/build_annexes_de.py
+      - name: חילוץ נקודות דיווח ושדות תעופה
+        run: python scripts/build_points.py
       - name: קומיט אם השתנה
         run: |
-          if git diff --quiet -- data/aip-obstacles.geojson data/ratag-reserves.geojson; then
+          if git diff --quiet -- data/aip-obstacles.geojson data/ratag-reserves.geojson data/aip-points.json; then
             echo "אין שינוי."
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/aip-obstacles.geojson data/ratag-reserves.geojson
+          git add data/aip-obstacles.geojson data/ratag-reserves.geojson data/aip-points.json data/aip-points.json
           git commit -m "עדכון נספחים ד' ו-ה' — $(date -u '+%Y-%m-%d')"
           git push
