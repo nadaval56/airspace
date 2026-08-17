@@ -80,14 +80,26 @@ def main() -> int:
         if not detail:
             # התשובה גדלה, כלומר משהו נפתח — רק שהפרסר לא מזהה אותו.
             # מדפיסים את ה-HTML כמו שהוא במקום לנחש שמות מחלקות.
+            import difflib
             import re as _re
-            spot = body.find(f"divMoreInfo_{msg_num}")
-            print(f"  לא נפתח לפי הפרסר. divMoreInfo_{msg_num} במיקום {spot}.")
-            if spot != -1:
-                print("  --- 3,000 תווים משם:")
-                print("  " + _re.sub(r"\s+", " ", body[spot: spot + 3000]))
-            classes = sorted(set(_re.findall(r'class="(more_[^"]+)"', body)))
-            print(f"  מחלקות more_ בגוף: {classes}")
+            print("  הטבלאות חוזרות ריקות. מחפשים מה כן נוסף לתשובה.")
+            # הפרש של כמה מאות בתים חייב להיות איפשהו. משווים שורה־שורה
+            # ומדפיסים רק את מה שנוסף, בלי ה-VIEWSTATE שמשתנה תמיד.
+            added = [
+                line.strip() for line in difflib.unified_diff(
+                    page.splitlines(), body.splitlines(), n=0, lineterm="")
+                if line.startswith("+") and not line.startswith("+++")
+            ]
+            interesting = [
+                line for line in added
+                if "__VIEWSTATE" not in line and "__EVENTVALIDATION" not in line
+            ]
+            print(f"  {len(added)} שורות נוספו, מהן {len(interesting)} שאינן VIEWSTATE:")
+            for line in interesting[:25]:
+                flat = _re.sub(r"\s+", " ", line)
+                print(f"    {flat[:400]}")
+            for needle in ("NOTAMN", "Q) LL", "f_buildMoreMsgInfo", "MsgText", "Valid From"):
+                print(f"  {needle!r}: בדף {page.count(needle)} · בתשובה {body.count(needle)}")
             continue
         for key in ("id", "airfield", "created", "valid_from", "valid_to"):
             if detail.get(key):
