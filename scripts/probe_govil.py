@@ -73,6 +73,7 @@ def main() -> int:
                 print(f"  משאבים נוספים באותו מאגר:")
                 for res in p.get("resources", [])[:12]:
                     print(f"    {res.get('format'):>8}  {res.get('name')}")
+                    print(f"             {res.get('url')}")
     return 0
 
 
