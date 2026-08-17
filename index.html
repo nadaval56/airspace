@@ -41,7 +41,7 @@
       וכדורים פורחים. אזהרה שמתארת מצב שאינו קיים שוחקת את האמון בשאר.
       מה שנשאר נכון כתוב למטה, והמשפט האחרון חשוב מכולם.
     -->
-    <p class="nfou__sub">המידע נמשך אוטומטית מאתר המידע התעופתי של רשות שדות התעופה, אחת לשעה, וכולל גם הודעות מקומיות. זו קריאה ממוכנת של דף אינטרנט ולא שירות תדריך מוסמך: הודעה שפורסמה זה עתה טרם הגיעה לכאן, חלק מההודעות עדיין בלי זמנים וגבהים, ולא כל מגבלה בשטח מתפרסמת כנוטאם — <strong>היעדר נוטאם כאן אינו ראיה להיעדר מגבלה.</strong></p>
+    <p class="nfou__sub">משיכה ממוכנת מאתר רש"ת, אחת לשעה. <strong>היעדר נוטאם כאן אינו ראיה להיעדר מגבלה.</strong> <a href="#limits">מה עוד חסר</a></p>
   </div>
 </aside>
 
@@ -52,45 +52,16 @@
     <div id="map"></div>
 
     <div class="map-tools wrap">
-      <fieldset class="layers">
-        <legend>שכבות</legend>
-        <label class="switch">
-          <input type="checkbox" id="toggle-aip" checked>
-          <span class="switch__text">מגבלות קבועות (פמ"ת)</span>
-          <span class="switch__count" id="count-aip">—</span>
-        </label>
-        <label class="switch">
-          <input type="checkbox" id="toggle-notam" checked>
-          <span class="switch__text">מגבלות זמניות (נוטאם)</span>
-          <span class="switch__count" id="count-notam">—</span>
-        </label>
-        <label class="switch">
-          <input type="checkbox" id="toggle-weather">
-          <span class="switch__text">מזג אוויר (METAR / TAF / AIRMET)</span>
-          <span class="switch__count" id="count-weather">—</span>
-        </label>
-        <!--
-          רשת נתיבי ה-CVFR של משרד התחבורה. פרוזדורים עם רוחב, לא קווי
-          מרכז — כך המאגר מוסר אותם. המונה מציג שטח ולא ספירה, כי כל
-          הרשת היא רשומה אחת: פוליגון מחובר עם 84 חורים.
-        -->
-        <label class="switch">
-          <input type="checkbox" id="toggle-cvfr">
-          <span class="switch__text">נתיבי טיסה (CVFR)</span>
-          <span class="switch__count" id="count-cvfr">—</span>
-        </label>
-        <!--
-          8.6MB של גיאומטריה בלי פישוט — נטען רק בלחיצה, ולא בטעינת
-          הדף. כלי שדה לא מוריד 8MB למי שלא ביקש.
-        -->
-        <label class="switch">
-          <input type="checkbox" id="toggle-ratag">
-          <span class="switch__text">שמורות טבע וגנים לאומיים</span>
-          <span class="switch__count" id="count-ratag">טעינה בלחיצה</span>
-        </label>
-      </fieldset>
+      <!--
+        לוח בקרה בשתי רמות. הגרסה הקודמת שמה את מתגי השכבות בצד אחד
+        ואת תגיות הסינון בצד שני, ושתיהן דיברו על אותם נתונים בלי
+        לומר מי שייך למי. כאן כל שכבה היא קופסה שמכילה את הסינון
+        שלה: מכבים שכבה שלמה בשורת הכותרת, או נכנסים פנימה ומדייקים.
 
-      <div class="legend" id="legend" aria-label="מקרא"></div>
+        **הרשימה שמתחת למפה אינה מסוננת לעולם** — שום דבר כאן אינו
+        מסתיר מידע, רק את ציורו על המפה.
+      -->
+      <div class="controls" id="controls" aria-label="שכבות וסינון"></div>
 
       <!--
         פער ידוע, ובכוונה כתוב על הדף ולא רק ב-README: האפליקציה של רת"א
@@ -137,6 +108,25 @@
     <ol class="notam-list" id="notam-list"></ol>
   </section>
 </main>
+
+<!--
+  הפירוט המלא של מגבלות הכלי. היה בבאנר עצמו והיה ארוך מדי — פסקה
+  שאיש לא קורא אינה אזהרה. הבאנר נושא עכשיו את המשפט האחד שאסור
+  לפספס, וכל השאר כאן, במרחק לחיצה.
+-->
+<section class="limits wrap" id="limits" aria-labelledby="limits-heading">
+  <details>
+    <summary id="limits-heading">מה הכלי הזה לא יודע</summary>
+    <ul>
+      <li><strong>המקור.</strong> אתר המידע התעופתי של רשות שדות התעופה. משיכה ממוכנת של דף אינטרנט, לא ממשק נתונים מוסמך ולא שירות תדריך.</li>
+      <li><strong>הקצב.</strong> אחת לשעה. הודעה שפורסמה זה עתה עוד לא כאן.</li>
+      <li><strong>שלמות ההודעה.</strong> זמני התוקף והגבהים נפתחים בבקשה נפרדת לכל הודעה ונמשכים בקצב מרוסן, ולכן הודעה חדשה עשויה להופיע תחילה בלי הזמנים.</li>
+      <li><strong>מה שאינו נוטאם.</strong> לא כל מגבלה בשטח מתפרסמת כנוטאם — יש תיאומים מקומיים, פעילות צבאית והסדרים זמניים שאינם עוברים בערוץ הזה כלל.</li>
+      <li><strong>מה שאינו מצויר.</strong> נוטאם שיש לו רק מעטפת רחבה, ונוטאם שחל על כל המרחב, אינם מצוירים על המפה. הם מופיעים ברשימה שמתחת, והיא מלאה תמיד.</li>
+      <li><strong>שכבת הפמ"ת.</strong> תצלום של פרק א-17 בגרסה שחולצה, לא הזנה חיה.</li>
+    </ul>
+  </details>
+</section>
 
 <footer class="site-footer">
   <div class="wrap">

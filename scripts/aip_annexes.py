@@ -25,6 +25,8 @@ from __future__ import annotations
 import math
 import re
 
+import aip_classify
+
 # תיבת מטה בנימין — נשמרת כדי לסמן בדף מה נמצא באזור הבית.
 HOME_BBOX = {"min_lon": 35.0, "min_lat": 31.7, "max_lon": 35.4, "max_lat": 32.1}
 
@@ -253,17 +255,21 @@ def _build(area: dict, source: str) -> tuple[dict | None, str | None]:
 def _feature(area: dict, coordinates: list, source: str) -> dict:
     code = area["code"]
     alts = area["altitudes"]
+    properties = {
+        "id": code,
+        "name": area["name"],
+        "type": SERIES.get(code[:3], "לא מסווג"),
+        "lower_limit": alts[0] if alts else None,
+        "upper_limit": alts[1] if len(alts) > 1 else None,
+        "radius_m": area["radius_m"],
+        "source": source,
+    }
+    # סיווג משני — נושא ורצפת גובה — לסינון בדף. נגזר ממה שכבר כאן
+    # ולא ממקור נוסף; ראו את ההסבר ב-aip_classify.
+    properties.update(aip_classify.classify(properties))
     return {
         "type": "Feature",
-        "properties": {
-            "id": code,
-            "name": area["name"],
-            "type": SERIES.get(code[:3], "לא מסווג"),
-            "lower_limit": alts[0] if alts else None,
-            "upper_limit": alts[1] if len(alts) > 1 else None,
-            "radius_m": area["radius_m"],
-            "source": source,
-        },
+        "properties": properties,
         "geometry": {"type": "Polygon", "coordinates": coordinates},
     }
 
