@@ -67,13 +67,14 @@ const ENVELOPE_NM = 20;
  * תוויות הסיווג המשני של הפמ"ת. המפתחות נקבעים ב-scripts/aip_classify.py,
  * וכאן רק השמות והסדר שבו הם מוצגים.
  *
- * הנושא נגזר ממילים שכתובות **בשם הרשמי של האזור** — "שטח אש 209"
- * נושא את המילים "שטח אש". זו קריאה של הכתוב ולא ניחוש לפי היכרות
- * עם המקום. אזור בלי מילת מפתח נופל ל-`other`.
+ * הנושא נגזר ממילים שכתובות **במקור** — בשם הרשמי, ובמלל של פרק א-17
+ * שמתאר את האזור ("האזור האסור מעל **שמורת הטבע** 'החולה'"). זו קריאה
+ * של הכתוב ולא ניחוש לפי היכרות עם המקום.
  *
- * מה שאין: סוג המתקן. שתי הטבלאות בפמ"ת מוסרות קואורדינטות, גבהים,
- * שם וקוד — ואין בהן עמודת ייעוד. לכן אי אפשר להפריד בית כלא ממתקן
- * משטרה בלי לנחש, ולא ננחש.
+ * שתי הקטגוריות האחרונות אינן סוג מתקן אלא **הוראת התיאום** של המקור:
+ * סעיף 1א מחלק את אזורי הכטב"ם למי שמצוין תחתיו גורם תיאום, ולכל
+ * השאר — שהתיאום עליהם מול שב"ס. מה שהמקור לא אומר הוא מה המתקן
+ * *הוא*, ולכן התווית מדברת על תיאום ולא על כליאה.
  */
 const AIP_FLOORS = {
   ground:  { label: 'מהקרקע' },
@@ -83,15 +84,24 @@ const AIP_FLOORS = {
 };
 
 const AIP_THEMES = {
-  firing:   { label: 'שטחי אש ומטווחים' },
-  judea:    { label: 'יהודה ושומרון' },
-  offshore: { label: 'אסדות ומתקנים ימיים' },
-  balloon:  { label: 'בלונים' },
-  drop:     { label: 'גלילי הצנחה' },
-  model:    { label: 'אתרי רחפנים וטיסנים' },
-  police:   { label: 'מתקני משטרה' },
-  transit:  { label: 'מרחבים ומעברים' },
-  other:    { label: 'ללא מילת סיווג בשם' }
+  firing:     { label: 'שטחי אש ומטווחים' },
+  judea:      { label: 'יהודה ושומרון' },
+  offshore:   { label: 'אסדות ומתקנים ימיים' },
+  balloon:    { label: 'בלונים' },
+  drop:       { label: 'גלילי הצנחה' },
+  model:      { label: 'אתרי רחפנים וטיסנים' },
+  nature:     { label: 'שמורות טבע וגנים לאומיים' },
+  energy:     { label: 'תשתיות אנרגיה' },
+  industry:   { label: 'מפעלים, מחצבות ותעשייה' },
+  research:   { label: 'מכונים ומתקני מחקר' },
+  police:     { label: 'מתקני משטרה ומג"ב' },
+  military:   { label: 'מחנות ומתקנים צבאיים' },
+  government: { label: 'מוסדות שלטון' },
+  airport:    { label: 'נמלי תעופה' },
+  transit:    { label: 'מרחבים ומעברים' },
+  ips:        { label: 'מתקנים בתיאום שב"ס' },
+  contact:    { label: 'מתקנים בתיאום גורם ייעודי' },
+  other:      { label: 'ללא סימן סיווג במקור' }
 };
 
 /**
@@ -445,11 +455,19 @@ function aipPopup(p) {
   if (p.authority) rows.push(['גורם מוסמך', p.authority]);
   if (p.source) rows.push(['מקור', p.source]);
 
+  // הוראת התיאום כלשונה במלל הפרק. זה מה שטייס באמת צריך כשהוא רואה
+  // סגירה מעל היעד שלו — למי מתקשרים — ולכן היא מוצגת במלואה, עם
+  // הטלפונים, ולא מסוכמת.
+  const coordination = p.coordination
+    ? `<p class="card__text" style="direction:rtl;text-align:right">${esc(p.coordination)}</p>`
+    : '';
+
   return `
     <div class="card">
       <div class="card__id">${esc(p.id || p.designator || 'אזור')}</div>
       <p class="card__title">${esc(ZONE_STYLES[kind].label)}</p>
       <dl class="kv">${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      ${coordination}
       ${p.notes ? `<p class="card__text" style="direction:rtl;text-align:right">${esc(p.notes)}</p>` : ''}
     </div>`;
 }

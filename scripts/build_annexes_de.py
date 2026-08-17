@@ -42,6 +42,7 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import aip_annexes_de as annexes  # noqa: E402
+import aip_classify  # noqa: E402
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OBSTACLES_PATH = os.path.join(REPO_ROOT, "data", "aip-obstacles.geojson")
@@ -107,18 +108,24 @@ def build_obstacles(pdf) -> dict:
             # בלי רדיוס אין גיאומטריה, ולא ממציאים אחד.
             skipped += 1
             continue
+        properties = {
+            "id": row["id"],
+            "name": row["name"],
+            "type": "מכשול קבוע",
+            "lower_limit": "GND",
+            "upper_limit": str(row["upper_ft"]) if row["upper_ft"] else None,
+            "radius_nm": row["radius_nm"],
+            "source": SOURCE_LABEL,
+        }
+        # אותו סיווג משני שנספחים ב' ו-ג' מקבלים. בלעדיו שמונה
+        # מכשולים שכולם "בלון מעוגן" נפלו לקטגוריית "ללא סיווג"
+        # בעוד שני הבלונים מנספח ב' יושבים ב"בלונים" — אותו דבר
+        # בעצמו, בשתי קטגוריות שונות, לפי הנספח שבו הוא נמצא.
+        properties.update(aip_classify.classify(properties))
         features.append({
             "type": "Feature",
             "geometry": {"type": "Polygon", "coordinates": [circle(row["lat"], row["lon"], row["radius_nm"])]},
-            "properties": {
-                "id": row["id"],
-                "name": row["name"],
-                "type": "מכשול קבוע",
-                "lower_limit": "GND",
-                "upper_limit": str(row["upper_ft"]) if row["upper_ft"] else None,
-                "radius_nm": row["radius_nm"],
-                "source": SOURCE_LABEL,
-            },
+            "properties": properties,
         })
     if skipped:
         print(f"  {skipped} מכשולים דולגו (בלי רדיוס)", file=sys.stderr)
