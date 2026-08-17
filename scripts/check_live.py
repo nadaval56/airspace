@@ -24,6 +24,9 @@ from playwright.sync_api import sync_playwright
 MIN_AIP_SHAPES = 100
 MIN_NOTAMS = 20
 MIN_CHIPS = 15
+# 36 שדות מפרקי ד'/ה'/ו' ועוד נקודות הייחוס שאין להן פרק. הרף נמוך
+# מהמספר האמיתי בכוונה — הוא נועד לתפוס שכבה שנעלמה, לא לנעול מספר.
+MIN_FIELDS = 30
 
 PROBE = """() => {
   const q = (s) => document.querySelector(s);
@@ -40,6 +43,8 @@ PROBE = """() => {
     listCollapsed: !q('#notam-fold').closest('details').open,
     foldLabel: (q('#notam-fold') || {}).textContent,
     chips: all('input[data-layer]').length,
+    fieldCount: (q('#count-field') || {}).textContent,
+    fieldPins: all('.field-pin').length,
     axisToggles: all('.axis__toggle').length,
     columns: all('.controls__col').length,
     panelsPerColumn: all('.controls__col').map((c) => c.querySelectorAll('.ctl').length),
@@ -99,6 +104,8 @@ def main() -> int:
             fail(f"כותרת לא צפויה: {state['title']}")
         if state["limitsHeading"] != "מגבלות האפליקציה":
             fail(f"כותרת המגבלות: {state['limitsHeading']}")
+        if state["fieldPins"] < MIN_FIELDS:
+            fail(f"רק {state['fieldPins']} סמלי שדות תעופה על המפה")
         if not state["cvfrEnabled"]:
             fail("שכבת ה-CVFR מושבתת — הקובץ חסר?")
         if "טוען" in (state["freshness"] or "") or "לא נטען" in (state["freshness"] or ""):
@@ -130,6 +137,20 @@ def main() -> int:
         print(f"הדלקה חוזרת: {after} → {restored} צורות")
         if restored != before:
             fail(f"ההדלקה לא החזירה את המצב: {before} → {restored}")
+
+        # שכבת השדות — סמל הוא marker ולא path, ולכן היא נבדקת בנפרד
+        # מהצורות: כיבוי חייב להוריד את התגים מהמפה.
+        page.evaluate("document.getElementById('toggle-field').click()")
+        page.wait_for_timeout(700)
+        pins_off = page.evaluate("document.querySelectorAll('.field-pin').length")
+        print(f"כיבוי שכבת השדות: {state['fieldPins']} → {pins_off} סמלים")
+        if pins_off:
+            fail(f"{pins_off} סמלי שדות נשארו אחרי כיבוי השכבה")
+        page.evaluate("document.getElementById('toggle-field').click()")
+        page.wait_for_timeout(700)
+        pins_back = page.evaluate("document.querySelectorAll('.field-pin').length")
+        if pins_back != state["fieldPins"]:
+            fail(f"ההדלקה לא החזירה את הסמלים: {state['fieldPins']} → {pins_back}")
 
         # קיפול הרשימה
         page.evaluate("document.getElementById('notam-fold').click()")
