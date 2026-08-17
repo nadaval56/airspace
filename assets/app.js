@@ -119,6 +119,46 @@ function setCount(id, value) {
   if (node) node.textContent = value;
 }
 
+/**
+ * תווית כפתור הקיפול — הפועל מתחלף, המספר מגיע מהנתונים.
+ *
+ * שני הערכים חיים במקום אחד בכוונה. אם הפועל היה ב-CSS והמספר
+ * ב-JS, כל שינוי באחד היה יכול להשאיר את השני מאחור — וכפתור שאומר
+ * "הצג את כל 129" בזמן שהרשימה פתוחה גרוע מכפתור בלי מספר.
+ *
+ * המספר נלקח מאורך הרשימה בכל טעינה, ולכן הוא זז עם הנתונים: אחרי
+ * משיכה שעתית שמוסיפה נוטאם, הכפתור יאמר 130.
+ */
+function setFoldLabel(id, count, noun) {
+  const summary = el(id);
+  if (!summary) return;
+  const fold = summary.closest('details');
+  if (!fold) return;
+
+  summary.dataset.count = count;
+  summary.dataset.noun = noun;
+
+  const paint = () => {
+    const n = Number(summary.dataset.count);
+    const word = summary.dataset.noun;
+    // בלי הנושא: "אין הנוטאמים להצגה" אינו עברית. הרשימה עצמה
+    // מסבירה למטה למה היא ריקה, וכאן די במשפט קצר ותקין.
+    if (!n) {
+      summary.textContent = 'הרשימה ריקה';
+      return;
+    }
+    summary.textContent = fold.open
+      ? `הסתר את ${n} ${word}`
+      : `הצג את כל ${n} ${word}`;
+  };
+
+  if (!fold.dataset.wired) {
+    fold.addEventListener('toggle', paint);
+    fold.dataset.wired = '1';
+  }
+  paint();
+}
+
 function flushCounts() {
   layerCounts.forEach((value, id) => {
     const node = el('count-' + id);
@@ -989,7 +1029,7 @@ function wireControls() {
 function renderWeather(payload) {
   const reports = (payload && payload.reports) || [];
   setCount('weather', reports.length);
-  el('weather-fold').textContent = `הצג את כל ${reports.length} הדיווחים`;
+  setFoldLabel('weather-fold', reports.length, 'הדיווחים');
   const list = el('weather-list');
   list.innerHTML = '';
 
@@ -1356,7 +1396,7 @@ async function init() {
   const drawn = renderNotams(notams);
   setCount('notam', notams.length);
   // המספר המלא על הכפתור, כדי שברור כמה מסתתר מאחוריו.
-  el('notam-fold').textContent = `הצג את כל ${notams.length} הנוטאמים`;
+  setFoldLabel('notam-fold', notams.length, 'הנוטאמים');
 
   if (payload) {
     renderFreshness(payload);
