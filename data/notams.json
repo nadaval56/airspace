@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-17T02:45:58Z",
- "last_success": "2026-08-17T02:45:58Z",
+ "generated_at": "2026-08-17T02:53:02Z",
+ "last_success": "2026-08-17T02:53:02Z",
  "last_error": {
   "at": "2026-08-16T20:37:12Z",
   "message": "faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; notams.online/LLLL: החזיר 200 אך ללא נוטאמים; notams.online/LLBG: החזיר 200 אך ללא נוטאמים; notams.online/LLHA: החזיר 200 אך ללא נוטאמים; notams.online/LLIB: החזיר 200 אך ללא נוטאמים; notams.online/LLRD: החזיר 200 אך ללא נוטאמים; notams.online/LLHZ: החזיר 200 אך ללא נוטאמים; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrieva"
@@ -198,10 +198,10 @@
  ],
  "counts": {
   "total": 127,
-  "mapped": 30,
+  "mapped": 45,
   "fir_wide": 0,
-  "no_geo": 97,
-  "low_altitude": 8,
+  "no_geo": 82,
+  "low_altitude": 19,
   "administrative": 18
  },
  "notams": [
@@ -690,6 +690,1026 @@
    "low_altitude": true
   },
   {
+   "id": "C1750/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1750/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3253N03507E005\nA) LLLL B) 2608190650 C) 2608191050\nD) 0650-0740 1000-1050\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 15,
+     "upper_fl": 20,
+     "lower_ft": 1500,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.88333333333333,
+     "lon": 35.11666666666667,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.88333333333333,
+    "lon": 35.11666666666667,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 15,
+    "upper_fl": 20,
+    "lower_ft": 1500,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608190650",
+    "iso": "2026-08-19T06:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608191050",
+    "iso": "2026-08-19T10:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0650-0740 1000-1050",
+   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 1500,
+   "low_altitude": true
+  },
+  {
+   "id": "C1747/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1747/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3035N03504E007\nA) LLLL B) 2608181650 C) 2608181810\nE) CVFR RTE CLSD ZOFAR-HRGVS.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 35,
+     "upper_fl": 45,
+     "lower_ft": 3500,
+     "upper_ft": 4500,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 30.583333333333332,
+     "lon": 35.06666666666667,
+     "radius_nm": 7,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 30.583333333333332,
+    "lon": 35.06666666666667,
+    "radius_nm": 7,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 35,
+    "upper_fl": 45,
+    "lower_ft": 3500,
+    "upper_ft": 4500,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608181650",
+    "iso": "2026-08-18T16:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181810",
+    "iso": "2026-08-18T18:10:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD ZOFAR-HRGVS.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 3500,
+   "low_altitude": false
+  },
+  {
+   "id": "C1742/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1742/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/040/3051N03515E054\nA) LLLL B) 2608181650 C) 2608181810\nE) CVFR RTE CLSD\nYAHEL-BMNUH-ZOFAR-HAZVA-ARAVA-ZOHAR-MMORR-LLMZ-ZUKIM.\nMMORR-ARRAD-LLMZ.\nARRAD-HATRU-ZOHAR.\nTARAD-ARRAD.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 25,
+     "upper_fl": 40,
+     "lower_ft": 2500,
+     "upper_ft": 4000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 30.85,
+     "lon": 35.25,
+     "radius_nm": 54,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 30.85,
+    "lon": 35.25,
+    "radius_nm": 54,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 25,
+    "upper_fl": 40,
+    "lower_ft": 2500,
+    "upper_ft": 4000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608181650",
+    "iso": "2026-08-18T16:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181810",
+    "iso": "2026-08-18T18:10:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD\nYAHEL-BMNUH-ZOFAR-HAZVA-ARAVA-ZOHAR-MMORR-LLMZ-ZUKIM.\nMMORR-ARRAD-LLMZ.\nARRAD-HATRU-ZOHAR.\nTARAD-ARRAD.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 2500,
+   "low_altitude": true
+  },
+  {
+   "id": "C1749/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1749/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /005/015/3230N03429E033\nA) LLLL B) 2608181330 C) 2608181400\nE) HEL RTE CLSD\nGALIM-SUVAS.\nGALIM-KONFO.\nGALIM-DAFNA.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 5,
+     "upper_fl": 15,
+     "lower_ft": 500,
+     "upper_ft": 1500,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.5,
+     "lon": 34.483333333333334,
+     "radius_nm": 33,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.5,
+    "lon": 34.483333333333334,
+    "radius_nm": 33,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 5,
+    "upper_fl": 15,
+    "lower_ft": 500,
+    "upper_ft": 1500,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608181330",
+    "iso": "2026-08-18T13:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181400",
+    "iso": "2026-08-18T14:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "HEL RTE CLSD\nGALIM-SUVAS.\nGALIM-KONFO.\nGALIM-DAFNA.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 500,
+   "low_altitude": true
+  },
+  {
+   "id": "C1748/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1748/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /005/020/3241N03457E006\nA) LLLL B) 2608181310 C) 2608181400\nE) CVFR RTE CLSD FRDIS-BOREN-HOTRM.\nHEL RTE CLSD FOMMA-HOTRM.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 5,
+     "upper_fl": 20,
+     "lower_ft": 500,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.68333333333333,
+     "lon": 34.95,
+     "radius_nm": 6,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.68333333333333,
+    "lon": 34.95,
+    "radius_nm": 6,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 5,
+    "upper_fl": 20,
+    "lower_ft": 500,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608181310",
+    "iso": "2026-08-18T13:10:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181400",
+    "iso": "2026-08-18T14:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD FRDIS-BOREN-HOTRM.\nHEL RTE CLSD FOMMA-HOTRM.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 500,
+   "low_altitude": true
+  },
+  {
+   "id": "C1745/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1745/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/030/3233N03524E008\nA) LLLL B) 2608181230 C) 2608181310\nE) CVFR RTE CLSD AFULA-EITAN.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 25,
+     "upper_fl": 30,
+     "lower_ft": 2500,
+     "upper_ft": 3000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.55,
+     "lon": 35.4,
+     "radius_nm": 8,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.55,
+    "lon": 35.4,
+    "radius_nm": 8,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 25,
+    "upper_fl": 30,
+    "lower_ft": 2500,
+    "upper_ft": 3000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608181230",
+    "iso": "2026-08-18T12:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181310",
+    "iso": "2026-08-18T13:10:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD AFULA-EITAN.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 2500,
+   "low_altitude": true
+  },
+  {
+   "id": "C1744/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1744/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /030/035/3214N03531E012\nA) LLLL B) 2608181230 C) 2608181310\nE) CVFR RTE CLSD FAZEL-ARGMN-TIRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 30,
+     "upper_fl": 35,
+     "lower_ft": 3000,
+     "upper_ft": 3500,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.233333333333334,
+     "lon": 35.516666666666666,
+     "radius_nm": 12,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.233333333333334,
+    "lon": 35.516666666666666,
+    "radius_nm": 12,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 30,
+    "upper_fl": 35,
+    "lower_ft": 3000,
+    "upper_ft": 3500,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608181230",
+    "iso": "2026-08-18T12:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181310",
+    "iso": "2026-08-18T13:10:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD FAZEL-ARGMN-TIRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 3000,
+   "low_altitude": false
+  },
+  {
+   "id": "C1746/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1746/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /045/050/3150N03512E004\nA) LLLL B) 2608181220 C) 2608181240\nE) CVFR RTE CLSD HAREL-HNINA-ANATA.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 45,
+     "upper_fl": 50,
+     "lower_ft": 4500,
+     "upper_ft": 5000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.833333333333332,
+     "lon": 35.2,
+     "radius_nm": 4,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.833333333333332,
+    "lon": 35.2,
+    "radius_nm": 4,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 45,
+    "upper_fl": 50,
+    "lower_ft": 4500,
+    "upper_ft": 5000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608181220",
+    "iso": "2026-08-18T12:20:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181240",
+    "iso": "2026-08-18T12:40:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD HAREL-HNINA-ANATA.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 4500,
+   "low_altitude": false
+  },
+  {
+   "id": "C1743/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1743/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/040/3157N03524E008\nA) LLLL B) 2608181220 C) 2608181250\nE) CVFR RTE CLSD\nMIHMS-SHAHR-ALLON-FAZEL.\nNAAMA-FAZEL.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 35,
+     "upper_fl": 40,
+     "lower_ft": 3500,
+     "upper_ft": 4000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.95,
+     "lon": 35.4,
+     "radius_nm": 8,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.95,
+    "lon": 35.4,
+    "radius_nm": 8,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 35,
+    "upper_fl": 40,
+    "lower_ft": 3500,
+    "upper_ft": 4000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608181220",
+    "iso": "2026-08-18T12:20:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181250",
+    "iso": "2026-08-18T12:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD\nMIHMS-SHAHR-ALLON-FAZEL.\nNAAMA-FAZEL.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 3500,
+   "low_altitude": false
+  },
+  {
+   "id": "C1741/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1741/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/040/3254N03507E006\nA) LLLL B) 2608180920 C) 2608181730\nD) 0920-1000 1230-1345 1630-1730\nE) ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)\nCLSD TO ALL FLT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה מסוף (TMA)",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 40,
+     "lower_ft": 0,
+     "upper_ft": 4000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.9,
+     "lon": 35.11666666666667,
+     "radius_nm": 6,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.9,
+    "lon": 35.11666666666667,
+    "radius_nm": 6,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 40,
+    "lower_ft": 0,
+    "upper_ft": 4000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608180920",
+    "iso": "2026-08-18T09:20:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181730",
+    "iso": "2026-08-18T17:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0920-1000 1230-1345 1630-1730",
+   "text": "ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)\nCLSD TO ALL FLT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1738/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1738/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3257N03506E005\nA) LLSO B) 2608180920 C) 2608181730\nD) 0920-1000 1230-1320 1630-1730\nE) AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLSO"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QFALC",
+    "subject_code": "FA",
+    "subject": "שדה תעופה",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.95,
+     "lon": 35.1,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.95,
+    "lon": 35.1,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2608180920",
+    "iso": "2026-08-18T09:20:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181730",
+    "iso": "2026-08-18T17:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0920-1000 1230-1320 1630-1730",
+   "text": "AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1735/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1735/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3253N03507E005\nA) LLLL B) 2608180920 C) 2608181730\nD) 0920-1000 1230-1345 1630-1730\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 15,
+     "upper_fl": 20,
+     "lower_ft": 1500,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.88333333333333,
+     "lon": 35.11666666666667,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.88333333333333,
+    "lon": 35.11666666666667,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 15,
+    "upper_fl": 20,
+    "lower_ft": 1500,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608180920",
+    "iso": "2026-08-18T09:20:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608181730",
+    "iso": "2026-08-18T17:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0920-1000 1230-1345 1630-1730",
+   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 1500,
+   "low_altitude": true
+  },
+  {
+   "id": "C1740/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1740/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/040/3254N03507E006\nA) LLLL B) 2608170600 C) 2608171000\nD) 0600-0645 0920-1000\nE) ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)\nCLSD TO ALL FLT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה מסוף (TMA)",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 40,
+     "lower_ft": 0,
+     "upper_ft": 4000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.9,
+     "lon": 35.11666666666667,
+     "radius_nm": 6,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.9,
+    "lon": 35.11666666666667,
+    "radius_nm": 6,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 40,
+    "lower_ft": 0,
+    "upper_ft": 4000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608170600",
+    "iso": "2026-08-17T06:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608171000",
+    "iso": "2026-08-17T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0600-0645 0920-1000",
+   "text": "ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)\nCLSD TO ALL FLT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1737/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1737/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3257N03506E005\nA) LLSO B) 2608170600 C) 2608171000\nD) 0600-0645 0920-1000\nE) AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLSO"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QFALC",
+    "subject_code": "FA",
+    "subject": "שדה תעופה",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.95,
+     "lon": 35.1,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.95,
+    "lon": 35.1,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2608170600",
+    "iso": "2026-08-17T06:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608171000",
+    "iso": "2026-08-17T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0600-0645 0920-1000",
+   "text": "AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1734/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1734/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3253N03507E005\nA) LLLL B) 2608170600 C) 2608171000\nD) 0600-0645 0920-1000\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 15,
+     "upper_fl": 20,
+     "lower_ft": 1500,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.88333333333333,
+     "lon": 35.11666666666667,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.88333333333333,
+    "lon": 35.11666666666667,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 15,
+    "upper_fl": 20,
+    "lower_ft": 1500,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608170600",
+    "iso": "2026-08-17T06:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608171000",
+    "iso": "2026-08-17T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0600-0645 0920-1000",
+   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "floor_ft": 1500,
+   "low_altitude": true
+  },
+  {
    "id": "C1760/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -756,381 +1776,6 @@
    "parse_errors": [],
    "floor_ft": 0,
    "low_altitude": true
-  },
-  {
-   "id": "C1750/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1750/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1749/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1749/26 NOTAMN\nA) LLLL\nE) HEL RTE CLSD GALIM-SUVAS. GALIM-KONFO.",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "HEL RTE CLSD GALIM-SUVAS. GALIM-KONFO.",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1748/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1748/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD FRDIS-BOREN-HOTRM. HEL RTE CLSD FOMMA-HOTRM.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD FRDIS-BOREN-HOTRM. HEL RTE CLSD FOMMA-HOTRM.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1747/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1747/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD ZOFAR-HRGVS.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD ZOFAR-HRGVS.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1746/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1746/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD HAREL-HNINA-ANATA.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD HAREL-HNINA-ANATA.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1745/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1745/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD AFULA-EITAN.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD AFULA-EITAN.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1744/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1744/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD FAZEL-ARGMN-TIRAT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD FAZEL-ARGMN-TIRAT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1743/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1743/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD MIHMS-SHAHR-ALLON-FAZEL. NAAMA-FAZEL.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD MIHMS-SHAHR-ALLON-FAZEL. NAAMA-FAZEL.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1742/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1742/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD YAHEL-BMNUH-ZOFAR-HAZVA-ARAVA-ZOHAR-MMORR-LLMZ-ZUKIM. MMORR-ARRAD-LLMZ.",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD YAHEL-BMNUH-ZOFAR-HAZVA-ARAVA-ZOHAR-MMORR-LLMZ-ZUKIM. MMORR-ARRAD-LLMZ.",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1741/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1741/26 NOTAMN\nA) LLLL\nE) ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE) CLSD TO ALL FLT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE) CLSD TO ALL FLT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1740/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1740/26 NOTAMN\nA) LLLL\nE) ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE) CLSD TO ALL FLT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE) CLSD TO ALL FLT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1738/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1738/26 NOTAMN\nA) LLSO\nE) AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLSO"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1737/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1737/26 NOTAMN\nA) LLSO\nE) AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLSO"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1735/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1735/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
-  },
-  {
-   "id": "C1734/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "C1734/26 NOTAMN\nA) LLLL\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": null,
-   "geo": null,
-   "altitude": null,
-   "valid_from": null,
-   "valid_to": null,
-   "schedule": null,
-   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [
-    "שורת Q חסרה"
-   ],
-   "floor_ft": null,
-   "low_altitude": false
   },
   {
    "id": "C1730/26",
