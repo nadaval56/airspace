@@ -45,7 +45,10 @@ ICAO, שנשאבו מטבלת נתיבי התובלה כדי שיהיה איפה
 
 from __future__ import annotations
 
+import math
 import re
+
+from aip_annexes import unmirror_brackets
 
 # כותרות הפרקים בדף התוכן שלהם. המקף הוא en-dash במקור.
 VOLUMES: list[tuple[str, str, str]] = [
@@ -165,6 +168,33 @@ _EMAIL_RE = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
 
 # תיבת ישראל. נקודה שיוצאת ממנה היא שגיאת פרסור ולא שדה תעופה.
 BBOX = {"min_lat": 29.0, "max_lat": 33.5, "min_lon": 34.0, "max_lon": 36.0}
+
+# כמה רחוקים יכולים להיות שני משטחי נחיתה **של אותו מתקן**.
+#
+# פרק אחד מתאר מתקן אחד: "בבית החולים הדסה עין כרם שני משטחי נחיתה,
+# קרקעי ומוגבה על גג בניין". קמפוס של בית חולים אינו נמתח על קילומטר,
+# וגם ראשון לציון — מסלול מטוסים ומשטח מסוקים — מרוחקים 135 מטר.
+#
+# בהדסה המקור נותן למשטח המוגבה 31°45'08"N, שהם 1,371 מטר **דרומה**
+# מהמשטח הקרקעי, בשטח היישוב אורה. המשטח המוגבה יושב על גג בניין
+# באותו בית חולים, ולכן אחד משני המספרים שגוי — ואי אפשר לדעת איזה.
+# נקודה על גג במרחק קילומטר וחצי ממנו אינה "בערך נכונה" אלא פשוט
+# מפנה טייס למקום אחר, ולכן היא אינה מצוירת והחוסר נאמר בקול.
+SAME_SITE_LIMIT_M = 1000
+
+
+def distance_m(first: tuple[float, float], second: tuple[float, float]) -> float:
+    """מרחק בין שתי נקודות במטרים (הברסין)."""
+    lat1, lon1 = first
+    lat2, lon2 = second
+    phi1, phi2 = math.radians(lat1), math.radians(lat2)
+    d_phi = phi2 - phi1
+    d_lambda = math.radians(lon2 - lon1)
+    a = (
+        math.sin(d_phi / 2) ** 2
+        + math.cos(phi1) * math.cos(phi2) * math.sin(d_lambda / 2) ** 2
+    )
+    return 2 * 6371000.0 * math.asin(math.sqrt(a))
 
 
 def in_israel(lat: float, lon: float) -> bool:
@@ -362,17 +392,40 @@ def atz_radius_nm(lines: list[str]) -> tuple[float | None, str | None]:
     return None, None
 
 
-# סוגריים שנשארו ריקים כי הקוד שבתוכם יצא מגופן סימבולי: "מנחת עין
-# שמר ( )". הקוד עצמו נמצא במקום אחר בפרק, והסוגריים הריקים רק
-# נראים כמו תקלה בחלונית.
-_EMPTY_PARENS_RE = re.compile(r"\s*[()]\s*[()]\s*$")
+# הקוד שבכותרת, על הסוגריים שסביבו. הוא מוצג בחלונית בשורה משלו
+# ("קוד ICAO"), ובכותרת הוא רק גורר איתו את הסוגריים המהופכים של
+# ההיפוך הדו־כיווני — ")LLHA(", ")LLAA)", "( )" ריקים כשהקוד עצמו
+# יצא מגופן סימבולי.
+_TITLE_CODE_RE = re.compile(r"[(\)]?\s*(?:LL[A-Z]{2})?\s*[(\)]?\s*$")
+_INLINE_CODE_RE = re.compile(r"\s*[(\)]\s*LL[A-Z]{2}\s*[(\)]\s*")
+
+
+def _clean_title(text: str) -> str | None:
+    """כותרת הפרק בלי הקוד ובלי סוגריים פתוחים.
+
+    "מנחת מסוקים תפן (ישקר – )LLIS" הוא המקרה הקשה: הקוד יושב **בתוך**
+    הסוגריים שפתחו שם נוסף, וכשמסירים אותו נשאר סוגר פתוח. סוגר בלי בן
+    זוג נסגר, וסוגר סוגר בלי פותח נמחק.
+    """
+    text = unmirror_brackets(text)
+    text = _INLINE_CODE_RE.sub(" ", text)
+    text = _TITLE_CODE_RE.sub("", text)
+    text = re.sub(r"\bLL[A-Z]{2}\b", "", text)
+    text = re.sub(r"\s+", " ", text).strip(" -–,:")
+
+    opens, closes = text.count("("), text.count(")")
+    if opens > closes:
+        text = text.rstrip(" -–,:") + ")"
+    elif closes > opens:
+        text = text.replace(")", "", closes - opens)
+    return text.strip(" -–,:") or None
 
 
 def _title(lines: list[str]) -> str | None:
     for line in lines[:12]:
         text = line.strip()
         if _TITLE_RE.match(text):
-            return _EMPTY_PARENS_RE.sub("", text).strip(" -–") or None
+            return _clean_title(text)
     return None
 
 
@@ -482,6 +535,20 @@ def parse_field(
                 f"לא פורסם גובה."
             )
 
+        # משטח שני שרחוק מהראשון יותר מקילומטר אינו יכול להיות באותו
+        # מתקן. ראו SAME_SITE_LIMIT_M — זה בדיוק המקרה של הגג בהדסה.
+        if records:
+            gap = distance_m((records[0]["lat"], records[0]["lon"]), coords)
+            if gap > SAME_SITE_LIMIT_M:
+                note = (
+                    f'הפרק מתאר גם "{label or "משטח נוסף"}", אבל הנ"צ שלו במקור '
+                    f'רחוק {gap / 1000:.1f} ק"מ מזה של {records[0]["surface"] or name} '
+                    f"— רחוק מדי לשני משטחים באותו מתקן, ולכן הוא אינו מסומן."
+                )
+                warnings.append(f"{name}: {note}")
+                records[0]["note"] = note
+                continue
+
         surface_kind = kind
         if label and "מסוק" in label:
             surface_kind = "helipad"
@@ -496,6 +563,7 @@ def parse_field(
             "lon": coords[1],
             "elevation_ft": elevation,
             "atz_radius_nm": radius,
+            "note": None,
             "pages": [min(pages), max(pages)],
         })
     return records, warnings

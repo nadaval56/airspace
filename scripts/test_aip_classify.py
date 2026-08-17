@@ -226,5 +226,26 @@ class LiveDataTest(unittest.TestCase):
             self.assertEqual(props.get("theme"), "balloon", props.get("id"))
 
 
+class BracketTest(unittest.TestCase):
+    """סוגריים מהופכים בשמות — ")Y(" במקום "(Y)"."""
+
+    def test_stored_names_have_no_mirrored_brackets(self):
+        import json
+        import re
+
+        path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "data", "aip-permanent.geojson",
+        )
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+
+        for feature in data.get("features", []):
+            name = feature["properties"].get("name") or ""
+            self.assertIsNone(
+                re.search(r"\)[^()]*\(", name), feature["properties"].get("id")
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
