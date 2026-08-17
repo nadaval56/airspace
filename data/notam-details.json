@@ -413,15 +413,6 @@
   "valid_from": "2026-08-24T15:30:00Z",
   "valid_to": "2026-08-24T17:00:00Z"
  },
- "A0661/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-17T17:34:00Z",
-  "id": "A0661/26",
-  "location": "LLLL",
-  "raw": "(A0661/26 NOTAMN\nQ) LLLL/QANLC/I /NBO/E /050/060/3236N03518E018\nA) LLLL B) 2608180100 C) 2608181700\nD) 0100-0400 1400-1700\nE) ATS RTE J14 CLSD BTN ZACCI-GIMIK.)",
-  "valid_from": "2026-08-18T01:00:00Z",
-  "valid_to": "2026-08-18T17:00:00Z"
- },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
