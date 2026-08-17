@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-17T09:53:18Z",
- "last_success": "2026-08-17T09:53:18Z",
+ "generated_at": "2026-08-17T10:42:58Z",
+ "last_success": "2026-08-17T10:42:58Z",
  "last_error": {
   "at": "2026-08-16T21:14:20Z",
   "message": "המקור הוחזר בלי דיווחים"
@@ -28,7 +28,7 @@
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 170920Z 29011KT 9999 FEW042 31/20 Q1010 NOSIG=",
+   "text": "METAR LLBG 171020Z 30010KT 9999 SCT040 31/20 Q1009 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -46,9 +46,9 @@
   },
   {
    "id": "METAR",
-   "station": "LLER",
+   "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR COR LLER 170850Z AUTO 03013KT CAVOK 34/18 Q1010=",
+   "text": "METAR LLHA 170950Z AUTO 27009KT 240V300 9999 FEW033 30/21 Q1009=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -56,9 +56,9 @@
   },
   {
    "id": "METAR",
-   "station": "LLHA",
+   "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLHA 170850Z AUTO 26010KT 220V300 9999 FEW040 31/19 Q1009=",
+   "text": "METAR LLER 170950Z AUTO 04010KT CAVOK 36/10 Q1009=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -68,7 +68,7 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 170850Z AUTO VRB06KT 9999 SCT030 31/20 Q1010=",
+   "text": "METAR LLIB 170950Z AUTO 20010KT 170V240 9999 FEW030 33/17 Q1010=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
