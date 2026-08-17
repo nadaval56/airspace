@@ -176,11 +176,16 @@ def _new_area(code: str) -> dict:
     }
 
 
-def parse_annex_rows(rows: list[list], source: str) -> tuple[list[dict], list[str]]:
+def parse_annex_rows(
+    rows: list[list], source: str, narrative: dict[str, dict] | None = None
+) -> tuple[list[dict], list[str]]:
     """מפרסר שורות טבלה לאזורים.
 
     אזור מתחיל בשורה שבה עמודת 'קוד זיהוי' מלאה, ונמשך עד המזהה הבא.
     זה כלל מבני ולא ניחוש, ולכן אין כאן היוריסטיקות סגירת טבעת.
+
+    `narrative` — המלל של הפרק לפי קוד אזור, מ-`aip_narrative`. הטבלה
+    נותנת גיאומטריה, המלל נותן ייעוד וגורם תיאום; הסיווג צריך את שניהם.
     """
     areas: list[dict] = []
     current: dict | None = None
@@ -220,7 +225,8 @@ def parse_annex_rows(rows: list[list], source: str) -> tuple[list[dict], list[st
     features: list[dict] = []
     warnings: list[str] = []
     for area in areas:
-        feature, warning = _build(area, source)
+        entry = (narrative or {}).get(area["code"])
+        feature, warning = _build(area, source, entry)
         if warning:
             warnings.append(warning)
         if feature:
@@ -228,7 +234,9 @@ def parse_annex_rows(rows: list[list], source: str) -> tuple[list[dict], list[st
     return features, warnings
 
 
-def _build(area: dict, source: str) -> tuple[dict | None, str | None]:
+def _build(
+    area: dict, source: str, narrative: dict | None = None
+) -> tuple[dict | None, str | None]:
     """בונה גיאומטריה. מה שלא ברור מדווח ומדולג, לא מנוחש —
     אזור מגבלה שגוי מסוכן יותר מאזור חסר."""
     code = area["code"]
@@ -236,7 +244,10 @@ def _build(area: dict, source: str) -> tuple[dict | None, str | None]:
 
     if area["radius_m"] and points:
         lon, lat = points[0]
-        return _feature(area, circle_ring(lon, lat, area["radius_m"]), source), None
+        return (
+            _feature(area, circle_ring(lon, lat, area["radius_m"]), source, narrative),
+            None,
+        )
 
     if area["circle_text"] and not area["radius_m"]:
         return None, f"{code}: הגדרת עיגול בלי רדיוס מספרי — דולג. ({area['circle_text'][:90]})"
@@ -249,10 +260,12 @@ def _build(area: dict, source: str) -> tuple[dict | None, str | None]:
     ring = list(points)
     if ring[0] != ring[-1]:
         ring.append(ring[0])
-    return _feature(area, [ring], source), None
+    return _feature(area, [ring], source, narrative), None
 
 
-def _feature(area: dict, coordinates: list, source: str) -> dict:
+def _feature(
+    area: dict, coordinates: list, source: str, narrative: dict | None = None
+) -> dict:
     code = area["code"]
     alts = area["altitudes"]
     properties = {
@@ -264,9 +277,9 @@ def _feature(area: dict, coordinates: list, source: str) -> dict:
         "radius_m": area["radius_m"],
         "source": source,
     }
-    # סיווג משני — נושא ורצפת גובה — לסינון בדף. נגזר ממה שכבר כאן
-    # ולא ממקור נוסף; ראו את ההסבר ב-aip_classify.
-    properties.update(aip_classify.classify(properties))
+    # סיווג משני — נושא ורצפת גובה — לסינון בדף, ולצידו גורם התיאום
+    # שהמלל נוקב. הכול מהמקור עצמו; ראו את ההסבר ב-aip_classify.
+    properties.update(aip_classify.classify(properties, narrative))
     return {
         "type": "Feature",
         "properties": properties,

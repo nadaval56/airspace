@@ -1,6 +1,6 @@
 {
  "type": "FeatureCollection",
- "generated_at": "2026-08-17T04:07:55Z",
+ "generated_at": "2026-08-17T14:03:39Z",
  "source": "פמ\"ת א-17, נספח ד'",
  "features": [
   {
@@ -215,7 +215,9 @@
     "lower_limit": "GND",
     "upper_limit": "2800",
     "radius_nm": 0.54,
-    "source": "פמ\"ת א-17, נספח ד'"
+    "source": "פמ\"ת א-17, נספח ד'",
+    "theme": "balloon",
+    "floor_band": "ground"
    }
   },
   {
@@ -430,7 +432,9 @@
     "lower_limit": "GND",
     "upper_limit": "3400",
     "radius_nm": 0.54,
-    "source": "פמ\"ת א-17, נספח ד'"
+    "source": "פמ\"ת א-17, נספח ד'",
+    "theme": "balloon",
+    "floor_band": "ground"
    }
   },
   {
@@ -645,7 +649,9 @@
     "lower_limit": "GND",
     "upper_limit": "2700",
     "radius_nm": 0.54,
-    "source": "פמ\"ת א-17, נספח ד'"
+    "source": "פמ\"ת א-17, נספח ד'",
+    "theme": "balloon",
+    "floor_band": "ground"
    }
   },
   {
@@ -860,7 +866,9 @@
     "lower_limit": "GND",
     "upper_limit": "2400",
     "radius_nm": 0.54,
-    "source": "פמ\"ת א-17, נספח ד'"
+    "source": "פמ\"ת א-17, נספח ד'",
+    "theme": "balloon",
+    "floor_band": "ground"
    }
   },
   {
@@ -1075,7 +1083,9 @@
     "lower_limit": "GND",
     "upper_limit": "2800",
     "radius_nm": 0.54,
-    "source": "פמ\"ת א-17, נספח ד'"
+    "source": "פמ\"ת א-17, נספח ד'",
+    "theme": "balloon",
+    "floor_band": "ground"
    }
   },
   {
@@ -1290,7 +1300,9 @@
     "lower_limit": "GND",
     "upper_limit": "2800",
     "radius_nm": 0.54,
-    "source": "פמ\"ת א-17, נספח ד'"
+    "source": "פמ\"ת א-17, נספח ד'",
+    "theme": "balloon",
+    "floor_band": "ground"
    }
   },
   {
@@ -1505,7 +1517,9 @@
     "lower_limit": "GND",
     "upper_limit": "2400",
     "radius_nm": 0.54,
-    "source": "פמ\"ת א-17, נספח ד'"
+    "source": "פמ\"ת א-17, נספח ד'",
+    "theme": "balloon",
+    "floor_band": "ground"
    }
   },
   {
@@ -1720,7 +1734,9 @@
     "lower_limit": "GND",
     "upper_limit": "2500",
     "radius_nm": 0.54,
-    "source": "פמ\"ת א-17, נספח ד'"
+    "source": "פמ\"ת א-17, נספח ד'",
+    "theme": "balloon",
+    "floor_band": "ground"
    }
   }
  ]

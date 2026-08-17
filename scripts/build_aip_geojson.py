@@ -26,12 +26,14 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+import aip_narrative  # noqa: E402
 from aip_annexes import (  # noqa: E402
     BBOX,
     feature_extent,
     find_annex_pages,
     intersects_bbox,
     parse_annex_rows,
+    reverse_hebrew,
 )
 
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -207,6 +209,32 @@ def parse_page_range(spec: str | None, total: int) -> range:
 # ---------------------------------------------------------------------------
 
 
+def read_narrative(pages: list[str], ranges: dict[str, tuple[int, int]]) -> dict[str, dict]:
+    """מפרסר את מלל הפרק — כל מה שלפני הנספח הראשון.
+
+    המלל אינו קישוט: הוא הפרסום הקובע במקרה של סתירה (כתוב בעמוד
+    הראשון של הפרק), והוא אומר על אזורים דברים שהטבלה משמיטה — שמורת
+    טבע, מכון מחקר, ומי גורם התיאום. ראו scripts/aip_narrative.py.
+    """
+    if not ranges:
+        return {}
+    body_end = min(start for start, _ in ranges.values())
+    # היישור נעשה שורה־שורה: פריט ברשימה מזוהה לפי **תחילת השורה**,
+    # ואיחוד שורות לפני הפרסור היה מוחק בדיוק את הסימן הזה.
+    lines = [
+        reverse_hebrew(raw)
+        for text in pages[:body_end]
+        for raw in text.split("\n")
+    ]
+    entries = aip_narrative.parse_body(lines)
+    print(
+        f"  מלל: עמודים 1-{body_end}, {len(entries)} אזורים, "
+        f"{sum(1 for e in entries.values() if e['coordination'])} עם גורם תיאום",
+        file=sys.stderr,
+    )
+    return entries
+
+
 def extract_features(path: str, pages: list[str]) -> tuple[list[dict], list[str]]:
     """מחלץ את נספחים ב' ו-ג' וחותך לתיבת מטה בנימין.
 
@@ -216,6 +244,7 @@ def extract_features(path: str, pages: list[str]) -> tuple[list[dict], list[str]
     import pdfplumber  # type: ignore
 
     ranges = find_annex_pages(pages)
+    narrative = read_narrative(pages, ranges)
     features: list[dict] = []
     warnings: list[str] = []
 
@@ -231,7 +260,7 @@ def extract_features(path: str, pages: list[str]) -> tuple[list[dict], list[str]
                     rows.extend(table)
 
             source = f"פמ\"ת א-17, {label}"
-            found, warns = parse_annex_rows(rows, source)
+            found, warns = parse_annex_rows(rows, source, narrative)
             inside = [f for f in found if intersects_bbox(f)]
             print(
                 f"  {label}: עמודים {start + 1}-{stop}, {len(rows)} שורות טבלה, "
@@ -319,7 +348,10 @@ def main() -> int:
         return 0
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as fh:
-        json.dump(payload, fh, ensure_ascii=False, indent=1)
+        # דחוס, כמו שאר שכבות הגיאומטריה: `indent=1` הכפיל את הקובץ
+        # שהדפדפן מוריד פי 2.2 (186KB → 411KB) בלי להוסיף שום נתון,
+        # וזה קובץ שנטען בכל פתיחה של הדף בשדה.
+        json.dump(payload, fh, ensure_ascii=False, separators=(",", ":"))
         fh.write("\n")
     print(f"נכתב {OUTPUT_PATH}", file=sys.stderr)
     return 0
