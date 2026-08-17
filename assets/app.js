@@ -372,8 +372,7 @@ const NOTAM_FAMILIES = {
   aerodrome:  { label: 'שדות תעופה ומנחתים', letters: 'FMLS' },
   hazard:     { label: 'הגבלות ואזהרות', letters: 'RW' },
   navigation: { label: 'ניווט ומכשולים', letters: 'CINOP' },
-  unknown:    { label: 'טרם הורחב', letters: '' },
-  route:      { label: 'נתיבי טיסה', letters: '' }
+  unknown:    { label: 'טרם הורחב', letters: '' }
 };
 
 /**
@@ -427,18 +426,6 @@ function renderNotams(notams) {
   notams.forEach((n) => {
     const state = notamState(n, now);
 
-    // נתיבים — גם לנוטאם בלי גיאומטריה משורת Q.
-    routeLines(n).forEach((route) => {
-      const line = L.polyline(route.latlngs, {
-        pane: 'notam',
-        color: notamColor(n), weight: 4,
-        opacity: state === 'future' ? 0.45 : 0.95,
-        dashArray: state === 'future' ? '3 7' : '10 6'
-      }).bindPopup(notamPopup(n, route.codes.join(' → ')), { maxWidth: 260, minWidth: 200 });
-      register(line, notamLayer, { notam: 'route', state });
-      drawn += 1;
-    });
-
     const geo = n.geo;
     // רדיוס 999 = כל ה-FIR. לא מציירים — היה בולע את המפה. תג ברשימה בלבד.
     if (!geo || geo.fir_wide) return;
@@ -465,7 +452,7 @@ function renderNotams(notams) {
           fillColor: color, fillOpacity: faded ? 0.15 : 0.35
         });
 
-    shape.bindPopup(notamPopup(n, null, envelope), { maxWidth: 260, minWidth: 200 });
+    shape.bindPopup(notamPopup(n, envelope), { maxWidth: 260, minWidth: 200 });
     register(shape, notamLayer, { notam: notamFamily(n), state });
     if (n.id) notamShapes.set(n.id, shape);
     drawn += 1;
@@ -475,39 +462,6 @@ function renderNotams(notams) {
 }
 
 /**
- * נתיב שנוטאם סוגר, מצויר כקו.
- *
- * לפמ"ת אין טבלת נתיבים — המפה שם היא גרפיקה, לא נתונים. אבל הנוטאם
- * עצמו מנסח את הנתיב כרצף נקודות דיווח:
- *
- *     E) ULTRALIGHT AND HEL RTE CLSD EIRON-ZMGID-AFULA-TAVOR
- *
- * וכל נקודה כזאת נמצאת בטבלת נקודות הדיווח שחולצה מהפמ"ת. חיבור
- * השניים נותן את הקו האמיתי, בלי לנחש דבר.
- *
- * **הכול או כלום.** אם נקודה אחת ברצף אינה מוכרת, הנתיב אינו מצויר
- * כלל. קו שמדלג על נקודת ביניים עובר במסלול אחר לגמרי מזה שנסגר —
- * וזו טעות מסוכנת יותר מקו חסר. הכלל הזה גם מסנן לבד תפיסות שווא
- * כמו `NOTAM-AIRAC`, שאינן נתיב.
- */
-const ROUTE_RE = /\b[A-Z]{5}(?:\s*-\s*[A-Z]{5})+\b/g;
-
-function routeLines(n) {
-  const text = `${n.text || ''} ${n.raw || ''}`;
-  const seen = new Set();
-  const lines = [];
-  (text.match(ROUTE_RE) || []).forEach((match) => {
-    const codes = match.split('-').map((c) => c.trim());
-    const key = codes.join('-');
-    if (seen.has(key)) return;
-    seen.add(key);
-    const latlngs = codes.map((code) => reportingPoints[code]);
-    if (latlngs.some((p) => !p)) return;
-    lines.push({ codes, latlngs: latlngs.map((p) => [p.lat, p.lon]) });
-  });
-  return lines;
-}
-
 /**
  * חלונית מפה — מכוונת להיות קטנה.
  *
@@ -515,8 +469,8 @@ function routeLines(n) {
  * ברגע שרוצים לראות היכן האזור יושב ביחס לסביבה, החלונית מכסה אותה.
  * לכן כאן רק מה שמזהה את הנוטאם, וכפתור שקופץ לכרטיס המלא ברשימה.
  */
-function notamPopup(n, routeLabel, envelope) {
-  const subject = routeLabel || subjectText(n);
+function notamPopup(n, envelope) {
+  const subject = subjectText(n);
   const rows = [];
   const from = fmtStamp(n.valid_from, null);
   if (from) rows.push(['מ־', from]);
@@ -679,7 +633,7 @@ function renderLegend() {
     .filter((item) => sublayers.has(item.key));
   if (aipItems.length) groups.push({ title: 'מגבלות קבועות', items: aipItems });
 
-  const notamItems = Object.entries({ ...NOTAM_FAMILIES, route: { label: 'נתיבי טיסה' } })
+  const notamItems = Object.entries(NOTAM_FAMILIES)
     .map(([key, family]) => ({
       key: 'notam:' + key,
       label: family.label,
@@ -868,9 +822,6 @@ let ratagState = 'idle';   // idle | loading | ready | failed
  */
 let aerodromes = {};
 
-/** כל נקודות הדיווח לפי קוד, לציור נתיבים שנוטאם סוגר. */
-let reportingPoints = {};
-
 /**
  * רשת נתיבי ה-CVFR של משרד התחבורה.
  *
@@ -918,8 +869,9 @@ async function loadRatag(toggle, label) {
  * `null` בשקט כשהקובץ חסר. זה מצב צפוי ולא כשל: הקובץ נבנה מארכיון
  * שמועלה ידנית, ועד שהוא מועלה אין מה להציג.
  *
- * התווית היא **שטח ולא ספירה**. הרשת כולה היא רשומה אחת — פוליגון
- * מחובר עם חורים — ולכן "1" היה נכון וחסר תועלת גם יחד.
+ * אין כאן מונה. הרשת כולה היא רשומה אחת, אז "1" היה נכון וחסר
+ * תועלת; שטח בקמ"ר היה מדויק ולא ענה על שום שאלה שיש לטייס. המתג
+ * הדלוק הוא כל המידע שצריך.
  */
 async function loadCvfr() {
   let data;
@@ -944,26 +896,18 @@ async function loadCvfr() {
     }
   });
 
-  const area = features.reduce(
-    (sum, f) => sum + Number((f.properties || {}).Shape_Area || 0), 0);
-  return area
-    ? `${Math.round(area / 1e6).toLocaleString('he-IL')} קמ"ר`
-    : `${features.length}`;
+  return true;
 }
 
 /**
  * חלונית נתיב.
  *
- * שמות השדות במאגר של משרד התחבורה משתנים בין גרסאות, ולכן ההמרה
- * שומרת כל שדה טקסטואלי שיש בו תוכן והחלונית מציגה את מה שיש. עדיף
- * להראות שדה בשם שאינו מובן מאשר להחביא מידע כי לא ציפיתי לו.
- */
 /**
  * חלונית פרוזדור.
  *
  * המאגר אינו נותן שמות לנתיבים — שלושת השדות היחידים הם אורך, שטח
- * ותאריך הגרסה. אין כאן מה להמציא, אז החלונית אומרת מה שיש: מתי
- * הרשת פורסמה, ומה גודלה.
+ * ותאריך הגרסה. אין כאן מה להמציא, ואין טעם להציג מספרים שאינם עונים
+ * על שאלה של טייס. מה שנשאר הוא הדבר האחד שכן חשוב: מתי הרשת פורסמה.
  */
 function cvfrPopup(p) {
   const rows = [];
@@ -971,11 +915,6 @@ function cvfrPopup(p) {
   if (/^\d{6}$/.test(stamp)) {
     rows.push(['גרסת הרשת', `${stamp.slice(4)}/${stamp.slice(0, 4)}`]);
   }
-  if (p.Shape_Area) {
-    rows.push(['שטח כולל',
-      `${Math.round(Number(p.Shape_Area) / 1e6).toLocaleString('he-IL')} קמ"ר`]);
-  }
-
   return `
     <div class="card">
       <div class="card__id">פרוזדור CVFR</div>
@@ -1098,13 +1037,10 @@ async function init() {
   } else {
     addAlert('<strong>לא נטענו נתוני נוטאם.</strong> קובץ <code>data/notams.json</code> חסר או פגום. המפה מציגה את שכבת הפמ"ת בלבד.');
   }
-  // הנקודות חייבות להיטען **לפני** ציור הנוטאמים — בלעדיהן אין נתיבים,
-  // וגם לפני מזג האוויר, בלעדיהן אין מיקום לתחנות.
+  // נקודות הייחוס חייבות להיטען **לפני** מזג האוויר — בלעדיהן אין
+  // מיקום לתחנות ה-METAR/TAF.
   if (pointsResult.status === 'fulfilled') {
     aerodromes = (pointsResult.value && pointsResult.value.aerodromes) || {};
-    ((pointsResult.value && pointsResult.value.points) || []).forEach((point) => {
-      reportingPoints[point.code] = point;
-    });
   }
   if (aipResult.status === 'fulfilled') {
     geojson = aipResult.value;
@@ -1178,7 +1114,9 @@ async function init() {
     if (map && weatherLayer) {
       e.target.checked ? map.addLayer(weatherLayer) : map.removeLayer(weatherLayer);
     }
-    if (e.target.checked) weatherSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // בלי גלילה אוטומטית. המתג יושב ליד המפה, וקפיצה למטה בלחיצה
+    // עליו זורקת את המשתמש מהמפה בדיוק כשהוא רוצה לראות אותה.
+    // הרשימה נפתחת במקומה; מי שרוצה אותה גולל אליה.
   });
   if (!weather) {
     weatherToggle.disabled = true;
@@ -1193,9 +1131,9 @@ async function init() {
   // --- רשת נתיבי ה-CVFR. דולקת כברירת מחדל כשהיא קיימת: זו התשובה
   //     לשאלה "איפה מותר לטוס", והיא הייתה חסרה מהמפה לגמרי.
   const cvfrToggle = el('toggle-cvfr');
-  const cvfrLabel = await loadCvfr();
-  el('count-cvfr').textContent = cvfrLabel || '—';
-  if (cvfrLabel) {
+  const cvfrReady = await loadCvfr();
+  el('count-cvfr').textContent = cvfrReady ? '' : '—';
+  if (cvfrReady) {
     map.addLayer(cvfrLayer);
     cvfrToggle.checked = true;
     cvfrToggle.addEventListener('change', (e) => {
