@@ -119,6 +119,17 @@ let weatherLayer = null;
  * בשכבה עדיין מופיע ברשימה במלואו, וכל המתגים דולקים כברירת מחדל.
  */
 const sublayers = new Map();   // מפתח קטגוריה -> {group, count, on}
+
+/**
+ * מרשם הצורות, לסינון לפי **שני צירים בו־זמנית**.
+ *
+ * תת־שכבה אחת לכל קטגוריה מספיקה כל עוד יש ציר סינון אחד. ברגע
+ * שרוצים גם "לפי נושא" וגם "לפי מצב תוקף", צורה צריכה להיות שייכת
+ * לשתי קבוצות — ו-Leaflet לא יודע כזה. לכן כל צורה נרשמת כאן עם
+ * התכונות שלה, וההצגה נגזרת מהצטלבות של כל הצירים הפעילים.
+ */
+const registry = [];
+const filters = new Map();     // ציר -> Set של ערכים כבויים
 const notamShapes = new Map();   // מזהה נוטאם -> שכבה, לכפתור "הצג במפה"
 
 /**
@@ -201,16 +212,30 @@ function zoneKind(props) {
   return 'other';
 }
 
-/** מחזיר את קבוצת התת־שכבה, ויוצר אותה בפעם הראשונה. */
-function sublayer(key, parent) {
-  let entry = sublayers.get(key);
-  if (!entry) {
-    entry = { group: L.layerGroup(), count: 0, on: true, parent };
-    entry.group.addTo(parent);
+/** רושם צורה עם כל התכונות שאפשר לסנן לפיהן, ומוסיף אותה למפה. */
+function register(shape, parent, traits) {
+  registry.push({ shape, parent, traits });
+  parent.addLayer(shape);
+  Object.entries(traits).forEach(([axis, value]) => {
+    const key = axis + ':' + value;
+    const entry = sublayers.get(key) || { count: 0, on: true, axis, value };
+    entry.count += 1;
     sublayers.set(key, entry);
-  }
-  entry.count += 1;
-  return entry.group;
+  });
+  return shape;
+}
+
+/** צורה מוצגת רק אם **כל** התכונות שלה דלוקות. */
+function applyFilters() {
+  registry.forEach(({ shape, parent, traits }) => {
+    const visible = Object.entries(traits).every(([axis, value]) => {
+      const off = filters.get(axis);
+      return !off || !off.has(value);
+    });
+    const shown = parent.hasLayer(shape);
+    if (visible && !shown) parent.addLayer(shape);
+    if (!visible && shown) parent.removeLayer(shape);
+  });
 }
 
 function renderAip(geojson) {
@@ -221,13 +246,14 @@ function renderAip(geojson) {
   features.forEach((feature) => {
     const kind = zoneKind(feature.properties || {});
     const color = ZONE_STYLES[kind].color;
-    L.geoJSON(feature, {
+    const shape = L.geoJSON(feature, {
       pane: 'aip',
       style: { color, weight: 2.5, opacity: 1, fillColor: color, fillOpacity: 0.18 },
       onEachFeature: (f, layer) => {
         layer.bindPopup(aipPopup(f.properties || {}), { maxWidth: 340 });
       }
-    }).addTo(sublayer('aip:' + kind, aipLayer));
+    });
+    register(shape, aipLayer, { aip: kind });
   });
 
   return features.length;
@@ -278,6 +304,38 @@ const NOTAM_FAMILIES = {
   route:      { label: 'נתיבי טיסה', letters: '' }
 };
 
+/**
+ * מצב התוקף ביחס לרגע הגלישה.
+ *
+ * נוטאם שנכנס לתוקף אחר הצהריים אינו רלוונטי לטיסה בבוקר, ועד היום
+ * הוא נראה בדיוק כמו נוטאם פעיל. ההבחנה נעשית מול השעון של הדפדפן,
+ * ולכן היא נכונה לרגע הצפייה ולא לרגע המשיכה.
+ *
+ * `unknown` אינו "כנראה פעיל" — הוא בדיוק מה שכתוב: אין זמנים, כי
+ * ההודעה עדיין לא הורחבה. אסור לו להיבלע ב"פעיל".
+ *
+ * **מגבלה שחשוב להכיר:** החישוב מסתמך על פריטי B) ו-C) בלבד, ולא על
+ * לוח הזמנים היומי ב-D). נוטאם שתקף כל היום אבל פעיל רק בין 0650
+ * ל-0830 ייחשב כאן "פעיל עכשיו" גם ב-10:00. הטעות היא לכיוון
+ * המחמיר — עודף אזהרה ולא חוסר — וזה הכיוון היחיד שמותר לטעות בו
+ * בכלי כזה. לוח הזמנים המלא מוצג בכרטיס.
+ */
+const NOTAM_STATES = {
+  active:  { label: 'פעיל עכשיו' },
+  future:  { label: 'עתידי' },
+  unknown: { label: 'ללא זמנים' }
+};
+
+function notamState(n, now) {
+  const from = n.valid_from && n.valid_from.iso ? Date.parse(n.valid_from.iso) : null;
+  if (!from || isNaN(from)) return 'unknown';
+  if (from > now) return 'future';
+  const permanent = n.valid_to && n.valid_to.permanent;
+  const to = n.valid_to && n.valid_to.iso ? Date.parse(n.valid_to.iso) : null;
+  if (!permanent && to && !isNaN(to) && to < now) return 'future';   // הסתיים — מטופל בסינון המקור
+  return 'active';
+}
+
 function notamFamily(n) {
   const code = n.q && n.q.subject_code;
   if (!code) return 'unknown';
@@ -292,15 +350,20 @@ function renderNotams(notams) {
   let drawn = 0;
   if (!map) return drawn;
 
+  const now = Date.now();
+
   notams.forEach((n) => {
+    const state = notamState(n, now);
+
     // נתיבים — גם לנוטאם בלי גיאומטריה משורת Q.
     routeLines(n).forEach((route) => {
-      L.polyline(route.latlngs, {
+      const line = L.polyline(route.latlngs, {
         pane: 'notam',
-        color: notamColor(n), weight: 4, opacity: 0.95, dashArray: '10 6'
-      })
-        .bindPopup(notamPopup(n, route.codes.join(' → ')), { maxWidth: 260, minWidth: 200 })
-        .addTo(sublayer('notam:route', notamLayer));
+        color: notamColor(n), weight: 4,
+        opacity: state === 'future' ? 0.45 : 0.95,
+        dashArray: state === 'future' ? '3 7' : '10 6'
+      }).bindPopup(notamPopup(n, route.codes.join(' → ')), { maxWidth: 260, minWidth: 200 });
+      register(line, notamLayer, { notam: 'route', state });
       drawn += 1;
     });
 
@@ -309,20 +372,25 @@ function renderNotams(notams) {
     if (!geo || geo.fir_wide) return;
 
     const color = notamColor(n);
+    // עתידי נסוג ויזואלית — שקיפות וקו דק — אבל **שומר על הצבע**.
+    // הצבע מסמן גובה, וזה נתון בטיחותי שאסור לו להשתנות לפי שעון.
+    const faded = state === 'future';
     const shape = geo.radius_nm > 0
       ? L.circle([geo.lat, geo.lon], {
           pane: 'notam',
           radius: geo.radius_nm * NM_TO_M,
-          color, weight: 3, opacity: 1, dashArray: '8 6',
-          fillColor: color, fillOpacity: 0.1
+          color, weight: faded ? 2 : 3, opacity: faded ? 0.5 : 1,
+          dashArray: faded ? '3 7' : '8 6',
+          fillColor: color, fillOpacity: faded ? 0.04 : 0.1
         })
       : L.circleMarker([geo.lat, geo.lon], {
-          pane: 'notam', radius: 8,
-          color, weight: 3, fillColor: color, fillOpacity: 0.35
+          pane: 'notam', radius: faded ? 6 : 8,
+          color, weight: faded ? 2 : 3, opacity: faded ? 0.5 : 1,
+          fillColor: color, fillOpacity: faded ? 0.15 : 0.35
         });
 
     shape.bindPopup(notamPopup(n), { maxWidth: 260, minWidth: 200 });
-    shape.addTo(sublayer('notam:' + notamFamily(n), notamLayer));
+    register(shape, notamLayer, { notam: notamFamily(n), state });
     if (n.id) notamShapes.set(n.id, shape);
     drawn += 1;
   });
@@ -412,6 +480,8 @@ function wireJumpButtons() {
 
 function badges(n) {
   const out = [];
+  // מצב התוקף ראשון — זו השאלה הראשונה שמישהו בשטח שואל.
+  if (notamState(n, Date.now()) === 'future') out.push(['future', 'טרם נכנס לתוקף']);
   if (n.geo && n.geo.fir_wide) out.push(['fir', 'חל על כל המרחב']);
   if (!n.geo) out.push(['nogeo', 'ללא מיקום על המפה']);
   if (n.low_altitude) out.push(['low', `רצפה מתחת ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל`]);
@@ -528,7 +598,7 @@ function renderLegend() {
     .filter((item) => sublayers.has(item.key));
   if (aipItems.length) groups.push({ title: 'מגבלות קבועות', items: aipItems });
 
-  const notamItems = Object.entries(NOTAM_FAMILIES)
+  const notamItems = Object.entries({ ...NOTAM_FAMILIES, route: { label: 'נתיבי טיסה' } })
     .map(([key, family]) => ({
       key: 'notam:' + key,
       label: family.label,
@@ -536,7 +606,18 @@ function renderLegend() {
       dashed: true
     }))
     .filter((item) => sublayers.has(item.key));
-  if (notamItems.length) groups.push({ title: 'נוטאמים על המפה', items: notamItems });
+  if (notamItems.length) groups.push({ title: 'נוטאמים לפי נושא', items: notamItems });
+
+  // ציר שני, חוצה נושאים: מה תקף ברגע הזה.
+  const stateItems = Object.entries(NOTAM_STATES)
+    .map(([key, state]) => ({
+      key: 'state:' + key,
+      label: state.label,
+      color: key === 'future' ? 'var(--ink-soft)' : NOTAM_HIGH,
+      dashed: true
+    }))
+    .filter((item) => sublayers.has(item.key));
+  if (stateItems.length) groups.push({ title: 'נוטאמים לפי מצב תוקף', items: stateItems });
 
   el('legend').innerHTML = groups.map((group) => `
     <div class="legend__group">
@@ -556,7 +637,9 @@ function renderLegend() {
       קו מלא — מגבלה קבועה · קו מקווקו — נוטאם ·
       <span style="color:${NOTAM_LOW}">ורוד</span> = רצפה מתחת
       ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל.
-      כיבוי משפיע על המפה בלבד; הרשימה למטה תמיד מלאה.
+      נוטאם עתידי מצויר דהוי. "פעיל עכשיו" לפי תוקף כללי בלבד —
+      לוח הזמנים היומי מופיע בכרטיס. כיבוי משפיע על המפה בלבד;
+      הרשימה למטה תמיד מלאה.
     </p>`;
 }
 
@@ -565,11 +648,16 @@ function wireLegend() {
   el('legend').addEventListener('click', (event) => {
     const button = event.target.closest('[data-layer]');
     if (!button) return;
-    const entry = sublayers.get(button.getAttribute('data-layer'));
+    const key = button.getAttribute('data-layer');
+    const entry = sublayers.get(key);
     if (!entry) return;
+
     entry.on = !entry.on;
-    entry.on ? entry.parent.addLayer(entry.group) : entry.parent.removeLayer(entry.group);
+    const off = filters.get(entry.axis) || new Set();
+    entry.on ? off.delete(entry.value) : off.add(entry.value);
+    filters.set(entry.axis, off);
     button.setAttribute('aria-pressed', String(entry.on));
+    applyFilters();
   });
 }
 

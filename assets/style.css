@@ -544,9 +544,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   body { font-size: 18px; }
   .masthead h1 { font-size: 2.1rem; }
   #map { height: 68vh; }
-  .map-tools { flex-direction: row; align-items: flex-start; justify-content: space-between; }
-  .layers { flex: 0 0 320px; }
-  .legend { flex: 1; align-content: flex-start; padding-top: 8px; }
+  /* שלושה ילדים ב-flex: קופסת השכבות, המקרא, והערת הפער. בלי גלישה
+     ובלי `flex-basis` להערה, היא לוקחת את רוחב הטקסט שלה ומועכת את
+     המקרא לרוחב תגית אחת — משם "מגדל התגיות" בדסקטופ. */
+  .map-tools { flex-direction: row; flex-wrap: wrap; align-items: flex-start; gap: 14px 20px; }
+  .layers { flex: 0 0 300px; }
+  .legend { flex: 1 1 320px; min-width: 0; align-content: flex-start; padding-top: 8px; }
+  .gap-note { flex: 1 0 100%; margin-top: 0; }
   #map { border-radius: 10px; border: 3px solid var(--rule-hard); }
   .map-section { padding-inline: 16px; max-width: 960px; margin-inline: auto; }
 }
@@ -715,3 +719,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   box-shadow: none;
 }
 .wx-tip::before { display: none; }
+
+/* נוטאם שטרם נכנס לתוקף. אפור ולא אדום — הוא אינו סכנה עכשיו,
+   רק מידע שכדאי לדעת שאינו רלוונטי לרגע הזה. */
+.badge--future {
+  color: var(--ink-soft);
+  border-color: var(--ink-soft);
+  background: var(--paper-2);
+}
