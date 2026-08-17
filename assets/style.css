@@ -706,6 +706,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   color: var(--ink-soft);
 }
 
+/*
+  הבהרת מעטפת. העיגול הגדול אינו צורת ההגבלה, וזו אזהרה על **קריאה
+  שגויה של המפה** ולא על סכנה — לכן ענבר ולא אדום.
+*/
+.popup__envelope {
+  margin: 8px 0 0;
+  padding: 6px 8px;
+  border-inline-start: 3px solid #b45309;
+  background: #fffbeb;
+  border-radius: 3px;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: #78350f;
+}
+
 /* תווית תחנת מזג אוויר — קטנה, קבועה, ולא חוסמת. */
 .wx-tip {
   background: var(--paper);

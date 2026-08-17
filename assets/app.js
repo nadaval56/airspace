@@ -38,6 +38,27 @@ const RATAG_COLOR = '#15803d';
 const CVFR_COLOR = '#7c3aed';
 
 /**
+ * מעל כמה מייל ימי עיגול של שורת Q נחשב **מעטפת** ולא אזור.
+ *
+ * שדה 8 בשורת Q אינו צורת ההגבלה. ICAO מגדיר אותו כעיגול שמקיף את
+ * אזור ההשפעה, מעוגל כלפי מעלה — כלומר תיבה חוסמת לצורכי חיפוש
+ * וסינון, לא גיאומטריה. הטקסט עצמו מוכיח את זה:
+ *
+ *   C1579/26 — עיגול 87 מייל (רדיוס ~160 ק"מ), והטקסט אומר
+ *   "FM JORDAN BOUNDARY TO **6KM**". רצועה של 6 ק"מ.
+ *
+ *   C1742/26 — עיגול 54 מייל, והטקסט הוא **רשימת נתיבים**:
+ *   "CVFR RTE CLSD YAHEL-BMNUH-ZOFAR…". קווים, לא דיסקה.
+ *
+ * לצייר את הדיסקה מלאה זה לומר "כל השטח הזה מוגבל" — טענה שגויה,
+ * ובכיוון שגורם לטייס לוותר על מרחב פתוח. לכן מעל הסף מציירים קו
+ * בלבד: הסימון נשאר, הטענה נעלמת, והלחיצות מפסיקות להיבלע.
+ *
+ * הסף עצמו הוא החלטת תצוגה ולא נתון מהמקור, ולכן הוא כתוב כאן במפורש.
+ */
+const ENVELOPE_NM = 20;
+
+/**
  * "לא צוין" נשמע כאילו לנוטאם אין תוקף מוגדר, וזה לא נכון: יש לו תוקף,
  * הוא פשוט עוד לא נמשך. זמני התוקף נפתחים בכפתור ה-`+` באתר של רש"ת,
  * וזו בקשה נפרדת לכל הודעה — המשיכה עושה אותן בקצב מרוסן ושומרת
@@ -161,11 +182,12 @@ function initMap() {
 
   // פאנלים נפרדים כדי שעיגולי הנוטאם יהיו תמיד מעל פוליגוני הפמ"ת.
   map.createPane('ratag').style.zIndex = 400;     // הכי מתחת — רקע להתמצאות
+  // רשת ה-CVFR היא פוליגון אחד בגודל המדינה. היא יושבת נמוך בכוונה:
+  // מעליה היא הייתה בולעת כל לחיצה על אזור פמ"ת או נוטאם שבתוכה,
+  // וממילא היא מציינת **היכן מותר**, כלומר רקע למגבלות ולא מגבלה.
+  map.createPane('cvfr').style.zIndex = 402;
   map.createPane('weather').style.zIndex = 405;   // מתחת למגבלות — הן החשובות
   map.createPane('aip').style.zIndex = 410;
-  // הרשת הפתוחה מתחת לנוטאם בכוונה: נתיב שנוטאם סוגר צריך להיראות
-  // **מעל** אותו נתיב עצמו ברשת, אחרת הסגירה נעלמת מתחת לקו הפתוח.
-  map.createPane('cvfr').style.zIndex = 415;
   map.createPane('notam').style.zIndex = 420;
 
   aipLayer = L.layerGroup().addTo(map);
@@ -232,6 +254,47 @@ function register(shape, parent, traits) {
   return shape;
 }
 
+/**
+ * שטח מקורב של צורה, במעלות רבועות. משמש **רק** לסדר הלחיצה.
+ *
+ * תיבה חוסמת ולא השטח האמיתי — ההבדל לא משנה כאן, כי כל מה שנדרש
+ * הוא להשוות "מי גדול ממי". נקודה מקבלת אפס, ולכן היא תמיד העליונה.
+ */
+function hitArea(shape) {
+  if (typeof shape.getBounds !== 'function') return 0;
+  let bounds;
+  try {
+    bounds = shape.getBounds();
+  } catch (err) {
+    return 0;
+  }
+  if (!bounds || !bounds.isValid()) return 0;
+  return Math.abs(bounds.getNorth() - bounds.getSouth())
+       * Math.abs(bounds.getEast() - bounds.getWest());
+}
+
+/**
+ * מסדר את הצורות כך שהקטנה מביניהן תמיד למעלה.
+ *
+ * הבעיה: SVG מכריע לחיצה לפי סדר ה-DOM, והסדר עד עכשיו היה סדר
+ * הקריאה מהקובץ. נוטאם ענק שנקרא אחרון ישב מעל אזור קטן שבתוכו,
+ * ואי אפשר היה ללחוץ על הקטן בכלל.
+ *
+ * הפתרון: מיון לפי שטח בסדר יורד, ואז `bringToFront` על כל אחד לפי
+ * התור. הגדולה נדחפת קדימה ראשונה, הקטנה אחרונה — ולכן הקטנה נשארת
+ * למעלה. הכלל נכון בתוך פאנל; בין פאנלים ה-z-index עדיין קובע, וזו
+ * הסיבה שהעיגולים הענקיים גם מאבדים מילוי.
+ */
+function orderByHitPriority() {
+  registry
+    .filter(({ shape, parent }) => parent.hasLayer(shape))
+    .map(({ shape }) => ({ shape, area: hitArea(shape) }))
+    .sort((a, b) => b.area - a.area)
+    .forEach(({ shape }) => {
+      if (typeof shape.bringToFront === 'function') shape.bringToFront();
+    });
+}
+
 /** צורה מוצגת רק אם **כל** התכונות שלה דלוקות. */
 function applyFilters() {
   registry.forEach(({ shape, parent, traits }) => {
@@ -243,6 +306,8 @@ function applyFilters() {
     if (visible && !shown) parent.addLayer(shape);
     if (!visible && shown) parent.removeLayer(shape);
   });
+  // הוספה מחדש דוחפת לסוף ה-DOM, ולכן הסדר נבנה שוב אחרי כל סינון.
+  orderByHitPriority();
 }
 
 function renderAip(geojson) {
@@ -382,12 +447,16 @@ function renderNotams(notams) {
     // עתידי נסוג ויזואלית — שקיפות וקו דק — אבל **שומר על הצבע**.
     // הצבע מסמן גובה, וזה נתון בטיחותי שאסור לו להשתנות לפי שעון.
     const faded = state === 'future';
+    const envelope = geo.radius_nm >= ENVELOPE_NM;
     const shape = geo.radius_nm > 0
       ? L.circle([geo.lat, geo.lon], {
           pane: 'notam',
           radius: geo.radius_nm * NM_TO_M,
           color, weight: faded ? 2 : 3, opacity: faded ? 0.5 : 1,
           dashArray: faded ? '3 7' : '8 6',
+          // מעטפת מצוירת בקו בלבד. המילוי היה אומר "כל השטח הזה
+          // מוגבל", וזה פשוט לא נכון — ובנוסף הוא בלע כל לחיצה בתוכו.
+          fill: !envelope,
           fillColor: color, fillOpacity: faded ? 0.04 : 0.1
         })
       : L.circleMarker([geo.lat, geo.lon], {
@@ -396,7 +465,7 @@ function renderNotams(notams) {
           fillColor: color, fillOpacity: faded ? 0.15 : 0.35
         });
 
-    shape.bindPopup(notamPopup(n), { maxWidth: 260, minWidth: 200 });
+    shape.bindPopup(notamPopup(n, null, envelope), { maxWidth: 260, minWidth: 200 });
     register(shape, notamLayer, { notam: notamFamily(n), state });
     if (n.id) notamShapes.set(n.id, shape);
     drawn += 1;
@@ -446,7 +515,7 @@ function routeLines(n) {
  * ברגע שרוצים לראות היכן האזור יושב ביחס לסביבה, החלונית מכסה אותה.
  * לכן כאן רק מה שמזהה את הנוטאם, וכפתור שקופץ לכרטיס המלא ברשימה.
  */
-function notamPopup(n, routeLabel) {
+function notamPopup(n, routeLabel, envelope) {
   const subject = routeLabel || subjectText(n);
   const rows = [];
   const from = fmtStamp(n.valid_from, null);
@@ -462,6 +531,11 @@ function notamPopup(n, routeLabel) {
       ${subject ? `<p class="popup__subject">${esc(subject)}</p>` : ''}
       <dl class="kv kv--tight">${rows.map(([k, v]) =>
         `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
+      ${envelope ? `<p class="popup__envelope">
+        מעטפת של ${n.geo.radius_nm} מייל ימי, לא צורת ההגבלה. שורת Q
+        מוסרת עיגול שמקיף את אזור ההשפעה, והשטח האמיתי קטן ממנו —
+        לרוב בהרבה. <strong>הנוסח המלא הוא הקובע.</strong>
+      </p>` : ''}
       ${anchor ? `<button type="button" class="popup__jump" data-jump="${esc(anchor)}">פרטים מלאים ↓</button>` : ''}
     </div>`;
 }
@@ -642,9 +716,11 @@ function renderLegend() {
     </div>`).join('') + `
     <p class="legend__note">
       קו מלא — מגבלה קבועה · קו מקווקו — נוטאם ·
-      <span style="color:${CVFR_COLOR}">סגול</span> = נתיב CVFR פתוח ·
+      <span style="color:${CVFR_COLOR}">סגול</span> = פרוזדור CVFR פתוח ·
       <span style="color:${NOTAM_LOW}">ורוד</span> = רצפה מתחת
       ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל.
+      עיגול נוטאם מ-${ENVELOPE_NM} מייל ימי ומעלה מצויר <strong>בקו בלבד</strong>:
+      שורת Q נותנת מעטפת שמקיפה את אזור ההשפעה, לא את צורתו.
       נוטאם עתידי מצויר דהוי. "פעיל עכשיו" לפי תוקף כללי בלבד —
       לוח הזמנים היומי מופיע בכרטיס. כיבוי משפיע על המפה בלבד;
       הרשימה למטה תמיד מלאה.
@@ -837,29 +913,42 @@ async function loadRatag(toggle, label) {
 }
 
 /**
- * טוען את רשת ה-CVFR אם היא קיימת, ומחזיר את מספר הנתיבים.
+ * טוען את רשת ה-CVFR אם היא קיימת. מחזיר תווית למתג, או null.
  *
- * מחזיר 0 בשקט כשהקובץ חסר. זה מצב צפוי ולא כשל: הקובץ נבנה מארכיון
+ * `null` בשקט כשהקובץ חסר. זה מצב צפוי ולא כשל: הקובץ נבנה מארכיון
  * שמועלה ידנית, ועד שהוא מועלה אין מה להציג.
+ *
+ * התווית היא **שטח ולא ספירה**. הרשת כולה היא רשומה אחת — פוליגון
+ * מחובר עם חורים — ולכן "1" היה נכון וחסר תועלת גם יחד.
  */
 async function loadCvfr() {
   let data;
   try {
     data = await loadJson('data/cvfr-routes.geojson');
   } catch (err) {
-    return 0;
+    return null;
   }
   const features = data.features || [];
-  if (!features.length) return 0;
+  if (!features.length) return null;
 
   cvfrLayer = L.geoJSON(data, {
     pane: 'cvfr',
-    style: { color: CVFR_COLOR, weight: 2, opacity: 0.8 },
+    // מילוי חלש מאוד. הפרוזדורים הם שטח ולא קו, אבל הם רקע למגבלות
+    // ואסור להם להתחרות בהן ויזואלית.
+    style: {
+      color: CVFR_COLOR, weight: 1, opacity: 0.55,
+      fillColor: CVFR_COLOR, fillOpacity: 0.1
+    },
     onEachFeature: (feature, layer) => {
       layer.bindPopup(cvfrPopup(feature.properties || {}), { maxWidth: 260, minWidth: 200 });
     }
   });
-  return features.length;
+
+  const area = features.reduce(
+    (sum, f) => sum + Number((f.properties || {}).Shape_Area || 0), 0);
+  return area
+    ? `${Math.round(area / 1e6).toLocaleString('he-IL')} קמ"ר`
+    : `${features.length}`;
 }
 
 /**
@@ -869,17 +958,33 @@ async function loadCvfr() {
  * שומרת כל שדה טקסטואלי שיש בו תוכן והחלונית מציגה את מה שיש. עדיף
  * להראות שדה בשם שאינו מובן מאשר להחביא מידע כי לא ציפיתי לו.
  */
+/**
+ * חלונית פרוזדור.
+ *
+ * המאגר אינו נותן שמות לנתיבים — שלושת השדות היחידים הם אורך, שטח
+ * ותאריך הגרסה. אין כאן מה להמציא, אז החלונית אומרת מה שיש: מתי
+ * הרשת פורסמה, ומה גודלה.
+ */
 function cvfrPopup(p) {
-  const rows = Object.entries(p).filter(([key]) => key !== 'source');
-  const title = p.NAME || p.Name || p.name || p.ROUTE || 'נתיב CVFR';
+  const rows = [];
+  const stamp = String(p.YEARMONTH || '');
+  if (/^\d{6}$/.test(stamp)) {
+    rows.push(['גרסת הרשת', `${stamp.slice(4)}/${stamp.slice(0, 4)}`]);
+  }
+  if (p.Shape_Area) {
+    rows.push(['שטח כולל',
+      `${Math.round(Number(p.Shape_Area) / 1e6).toLocaleString('he-IL')} קמ"ר`]);
+  }
 
   return `
     <div class="card">
-      <div class="card__id">${esc(title)}</div>
+      <div class="card__id">פרוזדור CVFR</div>
+      <p class="popup__subject">רשת נתיבי הטיסה של משרד התחבורה</p>
       <dl class="kv kv--tight">${rows.map(([k, v]) =>
         `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
       <p class="popup__terms">
         ${esc(p.source || 'משרד התחבורה')} · להתמצאות בלבד.
+        המאגר אינו נותן שמות לנתיבים.
         המקור המחייב הוא הפמ"ת והנוטאם.
       </p>
     </div>`;
@@ -1057,6 +1162,9 @@ async function init() {
   wireLegend();
   renderList(notams);
   wireJumpButtons();
+  // הסדר נקבע פעם אחת אחרי הציור הראשון, ולא רק בסינון: בלי זה
+  // הסדר הוא סדר הקריאה מהקובץ, והאזור הגדול שנקרא אחרון חוסם.
+  orderByHitPriority();
 
   // מזג אוויר — שכבה עצמאית עם מתג משלה, כבויה כברירת מחדל.
   const weather = weatherResult.status === 'fulfilled' ? weatherResult.value : null;
@@ -1085,9 +1193,9 @@ async function init() {
   // --- רשת נתיבי ה-CVFR. דולקת כברירת מחדל כשהיא קיימת: זו התשובה
   //     לשאלה "איפה מותר לטוס", והיא הייתה חסרה מהמפה לגמרי.
   const cvfrToggle = el('toggle-cvfr');
-  const cvfrCount = await loadCvfr();
-  el('count-cvfr').textContent = cvfrCount || '—';
-  if (cvfrCount) {
+  const cvfrLabel = await loadCvfr();
+  el('count-cvfr').textContent = cvfrLabel || '—';
+  if (cvfrLabel) {
     map.addLayer(cvfrLayer);
     cvfrToggle.checked = true;
     cvfrToggle.addEventListener('change', (e) => {

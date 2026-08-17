@@ -10,11 +10,27 @@
 
 המאגר "נתיבי טיסה" של משרד התחבורה מפרסם את הרשת כ-shapefile.
 
+## הנתיבים הם **שטחים**, לא קווים
+
+זה לא מה שהנחתי כשכתבתי את הגרסה הראשונה, וטוב שבדקתי: `shapeType`
+של הקובץ הוא 5, כלומר POLYGON. נתיב CVFR אינו קו מרכז אלא **פרוזדור
+עם רוחב**, והמאגר מוסר אותו ככזה. ציור קו מרכז היה מציג נתיב צר
+פי כמה ממה שהוא, וטייס שסומך על זה חושב שהוא בתוך הנתיב כשהוא לא.
+
+המבנה: רשומה אחת, 85 טבעות — טבעת חיצונית אחת של 21,570 קמ"ר
+ו-84 חורים. זו רשת מחוברת של פרוזדורים, והחורים הם השטחים הכלואים
+*בין* הפרוזדורים. ההפרש מאמת את עצמו מול ה-DBF:
+
+    21,570 − 17,360 = 4,210 קמ"ר  =  Shape_Area שבקובץ, בדיוק
+
+בלי הפרדת החורים היינו מציירים 21,570 קמ"ר של "מותר לטוס" במקום
+4,210 — טעות פי חמישה, בכיוון המסוכן.
+
 ## למה לא ה-CSV
 
 באותו מאגר יש גם `CVFR_csv`, והוא **חסר ערך**: רשומה אחת עם
 `Shape_Length` ו-`Shape_Area` בלבד. הייצוא לטבלה איבד את הגיאומטריה,
-כי קו אינו נכנס לתא. ה-SHP הוא המשאב היחיד עם הקווים עצמם.
+כי פוליגון אינו נכנס לתא. ה-SHP הוא המשאב היחיד עם הצורות עצמן.
 
 ## למה לא מורידים ישירות מ-data.gov.il
 
@@ -55,7 +71,7 @@ from datetime import datetime, timezone
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_PATH = os.path.join(REPO_ROOT, "data", "cvfr-routes.geojson")
 
-SOURCE_URL = "https://github.com/nadaval56/airspace/releases/download/aip-source/cvfr_mot.zip"
+SOURCE_URL = "https://github.com/nadaval56/airspace/releases/download/cvfr/cvfr_mot.zip"
 
 # הכתובת המקורית במאגר. נשמרת כתיעוד של המקור ושל מה שצריך להוריד
 # כשמשרד התחבורה מפרסם עדכון — לא כתובת שהסקריפט מושך ממנה.
@@ -88,9 +104,9 @@ def fetch_zip(path: str | None) -> zipfile.ZipFile:
     except urllib.error.HTTPError as exc:
         if exc.code == 404:
             raise SystemExit(
-                "הנכס cvfr_mot.zip אינו קיים ב-release.\n"
-                f"יש להוריד אותו בדפדפן מ-{UPSTREAM_URL}\n"
-                "ולהעלות אותו כנכס ל-release בשם aip-source, כמו ratag.zip."
+                f"הנכס אינו קיים בכתובת {SOURCE_URL}\n"
+                f"יש להוריד את הארכיון בדפדפן מ-{UPSTREAM_URL}\n"
+                "ולהעלות אותו כנכס ל-release עם התג cvfr, בשם cvfr_mot.zip."
             ) from exc
         raise
     print(f"  {len(blob):,} bytes", file=sys.stderr)
@@ -128,6 +144,48 @@ def clean(value) -> str | None:
     return text if text and text.lower() not in ("none", "nan") else None
 
 
+def ring_area(ring: list[list[float]]) -> float:
+    """שטח מסומן. חיובי = כיוון השעון = טבעת חיצונית; שלילי = חור."""
+    return sum(
+        (ring[i][0] - ring[i - 1][0]) * (ring[i][1] + ring[i - 1][1])
+        for i in range(1, len(ring))
+    ) / 2
+
+
+def rings_to_geometry(shape, transformer) -> dict | None:
+    """הופך פוליגון של shapefile ל-GeoJSON, כולל חורים.
+
+    shapefile מפריד טבעות לפי `parts` ואינו מסמן מי חור — ההבחנה היא
+    בכיוון בלבד. כאן זה קריטי: הרשת היא טבעת חיצונית אחת עם 84 חורים,
+    ובלי ההפרדה היינו מציירים פי חמישה שטח "מותר לטוס" ממה שיש.
+    """
+    points = shape.points
+    parts = list(shape.parts) + [len(points)]
+    polygons: list[list[list[list[float]]]] = []
+
+    for index in range(len(parts) - 1):
+        ring = points[parts[index]: parts[index + 1]]
+        if len(ring) < 4:
+            continue
+        converted = [
+            [round(lon, PRECISION), round(lat, PRECISION)]
+            for lon, lat in (transformer.transform(x, y) for x, y in ring)
+        ]
+        if converted[0] != converted[-1]:
+            converted.append(converted[0])
+
+        if ring_area(converted) > 0 or not polygons:
+            polygons.append([converted])
+        else:
+            polygons[-1].append(converted)
+
+    if not polygons:
+        return None
+    if len(polygons) == 1:
+        return {"type": "Polygon", "coordinates": polygons[0]}
+    return {"type": "MultiPolygon", "coordinates": polygons}
+
+
 def build(shp_path: str) -> dict:
     import shapefile
     from pyproj import Transformer
@@ -135,44 +193,46 @@ def build(shp_path: str) -> dict:
     transformer = Transformer.from_crs(ITM, WGS84, always_xy=True)
     reader = shapefile.Reader(shp_path, encoding="utf-8")
     field_names = [f[0] for f in reader.fields[1:]]
-    print(f"  שדות: {field_names}", file=sys.stderr)
+    kind = shapefile.SHAPETYPE_LOOKUP.get(reader.shapeType, reader.shapeType)
+    print(f"  סוג: {kind} · שדות: {field_names}", file=sys.stderr)
+
+    # הגרסה הראשונה הניחה קווים והייתה מציירת קו מרכז במקום פרוזדור.
+    # אם המאגר יעבור יום אחד לקווים, עדיף להיעצר מאשר להמשיך בשקט.
+    if reader.shapeType not in (5, 15, 25):
+        raise SystemExit(
+            f"הקובץ אינו פוליגון אלא {kind}. הנתיבים הם פרוזדורים עם רוחב, "
+            "ושינוי כזה במקור מחייב בדיקה ולא המרה אוטומטית."
+        )
 
     features = []
     skipped = 0
     for shape, record in zip(reader.shapes(), reader.records()):
-        attrs = record.as_dict()
-        parts = list(shape.parts) + [len(shape.points)]
-        lines = []
-        for index in range(len(parts) - 1):
-            segment = shape.points[parts[index]: parts[index + 1]]
-            if len(segment) < 2:
-                continue
-            lines.append([
-                [round(lon, PRECISION), round(lat, PRECISION)]
-                for lon, lat in (transformer.transform(x, y) for x, y in segment)
-            ])
-        if not lines:
+        geometry = rings_to_geometry(shape, transformer)
+        if not geometry:
             skipped += 1
             continue
-
-        geometry = ({"type": "LineString", "coordinates": lines[0]} if len(lines) == 1
-                    else {"type": "MultiLineString", "coordinates": lines})
         # שומרים כל שדה טקסטואלי שיש בו תוכן; שמות השדות משתנים בין
         # גרסאות המאגר, ועדיף לשמור מה שיש מאשר לקבע רשימה שתישבר.
-        properties = {k: clean(v) for k, v in attrs.items() if clean(v)}
+        properties = {k: clean(v) for k, v in record.as_dict().items() if clean(v)}
         properties["source"] = ATTRIBUTION
         features.append({"type": "Feature", "geometry": geometry, "properties": properties})
 
     if skipped:
-        print(f"  {skipped} רשומות דולגו (פחות משתי נקודות)", file=sys.stderr)
-    vertices = sum(
-        len(line)
-        for feature in features
-        for line in ([feature["geometry"]["coordinates"]]
-                     if feature["geometry"]["type"] == "LineString"
-                     else feature["geometry"]["coordinates"])
+        print(f"  {skipped} רשומות דולגו (ללא טבעת תקינה)", file=sys.stderr)
+
+    rings = holes = vertices = 0
+    for feature in features:
+        coords = feature["geometry"]["coordinates"]
+        polys = [coords] if feature["geometry"]["type"] == "Polygon" else coords
+        for poly in polys:
+            rings += 1
+            holes += len(poly) - 1
+            vertices += sum(len(ring) for ring in poly)
+    print(
+        f"  {len(features)} רשומות · {rings} טבעות חיצוניות · "
+        f"{holes} חורים · {vertices:,} קודקודים",
+        file=sys.stderr,
     )
-    print(f"  {len(features)} נתיבים · {vertices:,} קודקודים", file=sys.stderr)
 
     return {
         "type": "FeatureCollection",
