@@ -237,8 +237,24 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 
 .legend {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.legend__group {
+  display: flex;
   flex-wrap: wrap;
-  gap: 8px 14px;
+  align-items: center;
+  gap: 6px 8px;
+}
+
+.legend__title {
+  width: 100%;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft, #55637a);
+  text-transform: none;
 }
 
 /* פער ידוע במפה. לא אזהרה אדומה — אזהרה שלישית ברציפות מאבדת את כוחה —
@@ -254,12 +270,60 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   border-radius: 6px;
 }
 
+/* פריט המקרא הוא כפתור: הצבע מסביר, המספר מכמת, הלחיצה מכבה.
+   מטרה גדולה מספיק לאצבע בשטח, גם עם כפפה. */
 .legend__item {
   display: flex;
   align-items: center;
   gap: 7px;
+  min-height: 38px;
+  padding: 4px 10px 4px 8px;
+  font: inherit;
   font-size: 0.86rem;
   font-weight: 700;
+  color: var(--swatch);
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.legend__item:hover { border-color: var(--swatch); }
+
+.legend__item:focus-visible {
+  outline: 3px solid var(--amber);
+  outline-offset: 2px;
+}
+
+/* כבוי — ניטרלי ודהוי, אבל עדיין קריא. קו חוצה כדי שהמצב יהיה ברור
+   גם בשמש ישירה, שבה הבדלי בהירות נעלמים. */
+.legend__item[aria-pressed="false"] {
+  color: var(--ink-soft, #55637a);
+  background: transparent;
+  opacity: 0.65;
+}
+
+.legend__item[aria-pressed="false"] .legend__label { text-decoration: line-through; }
+.legend__item[aria-pressed="false"] .legend__swatch { background: transparent; }
+
+.legend__label { color: var(--ink); }
+.legend__item[aria-pressed="false"] .legend__label { color: var(--ink-soft, #55637a); }
+
+.legend__count {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+  font-weight: 800;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--rule);
+  color: var(--ink);
+}
+
+.legend__note {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--ink-soft, #55637a);
 }
 
 .legend__swatch {
@@ -268,6 +332,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   border-radius: 3px;
   flex: none;
   border: 2px solid currentColor;
+  background: color-mix(in srgb, currentColor 20%, transparent);
 }
 
 .legend__swatch--dashed { border-style: dashed; background: transparent !important; }
