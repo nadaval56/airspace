@@ -30,8 +30,9 @@
     3055N03446E IS CLSD                                    ← שורה 2
 
 `merge_continuations` מאחד אותן. **אין בדף שורות Q** — הן נפתחות
-בלחיצה על ה-`+` — ולכן הגיאומטריה מגיעה ממה שאפשר לחלץ מטקסט ההודעה,
-בזהירות ורק כשהניסוח חד־משמעי.
+בלחיצה על ה-`+`, וזו בקשה נפרדת לכל הודעה (`more_info_payload` ו-
+`parse_more_info` למטה). עד שהודעה מורחבת, הגיאומטריה מגיעה ממה
+שאפשר לחלץ מטקסט ההודעה, בזהירות ורק כשהניסוח חד־משמעי.
 
 ## קידוד
 
@@ -209,14 +210,17 @@ def parse_notam_page(page: str) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# ההרחבה — הכפתור `+`, ולמה היא לא נמשכת
+# ההרחבה — הכפתור `+`
 # ---------------------------------------------------------------------------
 #
-# דף הרשימה לא נותן זמני תוקף. הם נפתחים בלחיצה על ה-`+`, ולכן נבדק
-# לעומק אם אפשר לפתוח אותם אוטומטית. **התשובה היא לא**, ומתועד כאן
-# למה, כדי שאיש לא ינסה שוב מאפס.
+# דף הרשימה לא נותן שורת Q, זמני תוקף או גבהים. כל אלה נפתחים בלחיצה
+# על ה-`+`, ואז מוצג הנוטאם המלא:
 #
-# מה הכפתור עושה, לפי `MoreInfo.js`:
+#     Q) LLLL/QAELC/IV/NBO/E /000/019/3059N03445E001
+#     A) LLLL B) 2608160800 C) 2608201000
+#     D) 16 0800-1500 1600-2059, 17 0600-0900 ...
+#
+# `MoreInfo.js` מראה איך זה נשלח — postback רגיל של WebForms:
 #
 #     document.getElementById('hidMsgNum').value = msgNum;
 #     document.getElementById('hidMode').value = mode;
@@ -224,22 +228,122 @@ def parse_notam_page(page: str) -> list[dict]:
 #     document.getElementById('hidTblClientId').value = "";
 #     document.getElementById('btnMoreInfo').click();
 #
-# כלומר postback של WebForms. באותו קובץ יש גם נתיב ישן דרך
-# `AeroInfo.asmx?op=getMoreMsgInfo` — כל שורה בו מסומנת כהערה, וה-`?WSDL`
-# שלו מחזיר `Unauthorized Request Blocked` מ-Radware.
+# **הטעות שעלתה ביוקר:** הניסיון הראשון שלח את *כל* שדות הטופס, ובהם
+# ששת כפתורי ה-submit — `btnSearch`, `btnTextChange`, `imgNotam` ועוד.
+# דפדפן שולח כפתור אחד בלבד, זה שנלחץ. ASP.NET בוחר את המטפל לפי
+# הכפתור שנמצא במטען, ולכן רץ החיפוש במקום ההרחבה, והדף חזר זהה — מה
+# שנראה כאילו המנגנון חסום. `form_fields` מקבל עכשיו `submitter`
+# ומשמיט את שאר הכפתורים, בדיוק כמו דפדפן.
 #
-# מה שנבדק בפועל, מול השרת החי, עם עוגיות סשן ועם כל שדות הטופס:
+# מה שכן חסום: `AeroInfo.asmx?WSDL` מחזיר `Unauthorized Request Blocked`
+# מ-Radware, ובקשת ASP.NET AJAX אסינכרונית מחזירה `Error 100` של זיהוי
+# בוטים. את שניהם לא עוקפים — וגם אין צורך: ה-postback המלא הוא הנתיב
+# שהדפדפן עצמו הולך בו.
+
+_INPUT_RE = re.compile(r"<input\b([^>]*)>", re.I)
+_ATTR_RE = re.compile(r'(\w+)\s*=\s*"([^"]*)"', re.I)
+
+# כפתורים. רק המבוקש נשלח; השאר מושמטים.
+_BUTTON_TYPES = ("submit", "button", "image", "reset")
+
+
+def form_fields(page: str, submitter: str | None = None) -> dict[str, str]:
+    """שדות ה-input של הטופס, לשחזור ה-postback.
+
+    כולל `__VIEWSTATE` ו-`__EVENTVALIDATION` — בלעדיהם WebForms דוחה
+    את הבקשה. משמיט כפתורים שאינם `submitter`, כי דפדפן שולח רק את
+    הכפתור שנלחץ, ו-ASP.NET בוחר את המטפל לפי מה שהגיע.
+    """
+    fields: dict[str, str] = {}
+    for raw in _INPUT_RE.findall(page):
+        attrs = {k.lower(): v for k, v in _ATTR_RE.findall(raw)}
+        name = attrs.get("name")
+        if not name:
+            continue
+        kind = attrs.get("type", "").lower()
+        if kind in _BUTTON_TYPES and name != submitter:
+            continue
+        if kind in ("checkbox", "radio") and "checked" not in raw.lower():
+            continue
+        fields[name] = _html.unescape(attrs.get("value", ""))
+    return fields
+
+
+def more_info_payload(page: str, msg_num: str) -> dict[str, str]:
+    """שדות ה-POST שפותחים את ההודעה `msg_num`, כמו לחיצה על ה-`+`."""
+    fields = form_fields(page, submitter="btnMoreInfo")
+    fields.update({
+        "hidMsgNum": str(msg_num), "hidMode": "more",
+        "hidCurOrHist": "Current", "hidTblClientId": "",
+        "btnMoreInfo": "",
+    })
+    return fields
+
+
+# תשובת ה-postback אינה מרנדרת את הפרטים כ-HTML — הטבלאות
+# `tblMoreInfo1_<n>` חוזרות ריקות, והדף מזריק במקומן קריאה ל-JavaScript
+# עם **XML** שמכיל את הכול:
 #
-#   postback מלא        → HTTP 200, הדף חוזר **זהה**. שום הרחבה לא נפתחת.
-#   postback אסינכרוני  → HTTP 200 עם `Error 100` — דף חסימה של זיהוי
-#                         בוטים (stormcaster.js, validate.perfdrive.com).
+#   f_buildMoreMsgInfo('<Msg MsgNumber="2046996" NotamID="C1760/26"
+#     Location="LLLL" Airfield="Tel-Aviv FIR" FromDate="202608160800"
+#     ToDate="202608201000" CreateDate="2026-08-13-15.13.46.000000" ...>
+#     <MsgText>(C1760/26 NOTAMN</MsgText>
+#     <MsgText>Q) LLLL/QAELC/IV/NBO/E /000/019/3059N03445E001</MsgText>
+#     <MsgText>A) LLLL B) 2608160800 C) 2608201000</MsgText>
+#     <MsgText>D) 16 0800-1500 ...</MsgText>
+#     <MsgText>E) AN AREA AT TLALIM ...</MsgText></Msg>')
 #
-# החסימה השנייה היא הגנה מכוונת מפני אוטומציה. לא עוקפים אותה. ההשלכה:
-# **זמני התוקף אינם זמינים לכלי הזה**, והכרטיסים מציגים "לא צוין" —
-# וזו האמת, לא תקלה. מי שצריך אותם ילחץ על ה-`+` באתר עצמו.
-#
-# מה שכן נשמר מהחקירה: `msg_num`. הוא מזהה ההודעה באתר, והוא זה שמסמן
-# אילו שורות ניתנות להרחבה שם.
+# חיפוש תאי טבלה החזיר אפס והוביל למסקנה שגויה שההרחבה חסומה. המטרה
+# הנכונה היא ה-XML.
+_MSG_BLOCK_RE = re.compile(r"<Msg\b([^>]*)>(.*?)</Msg>", re.S | re.I)
+_MSG_ATTR_RE = re.compile(r'(\w+)\s*=\s*"([^"]*)"')
+_MSG_TEXT_RE = re.compile(r"<MsgText>(.*?)</MsgText>", re.S | re.I)
+
+# "202608160800" — שנה, חודש, יום, שעה, דקה.
+_MSG_STAMP_RE = re.compile(r"^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})$")
+# "2026-08-13-15.13.46.000000" — הפורמט של DB2, שבו נשמר זמן היצירה.
+_MSG_CREATED_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})-(\d{2})\.(\d{2})")
+
+
+def _iso_from_stamp(value: str) -> str | None:
+    """מחזיר ISO, או None כשהפורמט אינו מוכר — לא מנחשים זמנים."""
+    value = (value or "").strip()
+    m = _MSG_STAMP_RE.match(value) or _MSG_CREATED_RE.match(value)
+    if not m:
+        return None
+    year, month, day, hour, minute = m.groups()
+    return f"{year}-{month}-{day}T{hour}:{minute}:00Z"
+
+
+def parse_more_info(page: str, msg_num: str) -> dict:
+    """קורא את פרטי ההודעה `msg_num` מתשובת ה-postback.
+
+    מחזיר `{id, location, airfield, created, valid_from, valid_to, raw}`.
+    `raw` הוא גוש הנוטאם המלא — כולל שורת Q, פריטי B)/C)/D) — ולכן הוא
+    נכנס ישירות ל-`parse_qline.parse_notam` בלי שום הרכבה מחדש.
+
+    התשובה מכילה את כל הדף, אבל רק בלוק `<Msg>` אחד: זה של ההודעה
+    שנפתחה. בכל זאת מוודאים התאמה של `MsgNumber`, כדי שלא נדביק פרטים
+    של הודעה אחת לנוטאם אחר.
+    """
+    for attrs_raw, inner in _MSG_BLOCK_RE.findall(page):
+        attrs = dict(_MSG_ATTR_RE.findall(attrs_raw))
+        if str(attrs.get("MsgNumber", "")) != str(msg_num):
+            continue
+
+        lines = [_text(t) for t in _MSG_TEXT_RE.findall(inner)]
+        detail = {
+            "id": attrs.get("NotamID") or None,
+            "location": attrs.get("Location") or None,
+            "airfield": attrs.get("Airfield") or None,
+            "created": _iso_from_stamp(attrs.get("CreateDate", "")),
+            "valid_from": _iso_from_stamp(attrs.get("FromDate", "")),
+            "valid_to": _iso_from_stamp(attrs.get("ToDate", "")),
+            "raw": "\n".join(line for line in lines if line),
+        }
+        return {k: v for k, v in detail.items() if v}
+    return {}
+
 
 # ---------------------------------------------------------------------------
 # מזג אוויר

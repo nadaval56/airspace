@@ -17,6 +17,10 @@ concurrency:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    # רשת אמורה לזרום או להיכשל, לא לזחול. ריצה אחת נתקעה 12 דקות כי
+    # השרת האט עד שה-timeout של השקע לא נורה אף פעם. הגבול הזה הוא
+    # רשת ביטחון: עדיף ריצה שנקטעת מאשר runner תפוס.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
 
@@ -47,13 +51,13 @@ jobs:
 
       - name: קומיט אם השתנה
         run: |
-          if git diff --quiet -- data/notams.json data/weather.json; then
+          if git diff --quiet -- data/notams.json data/weather.json data/notam-details.json; then
             echo "אין שינוי בנתונים."
             exit 0
           fi
           git config user.name  "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/notams.json data/weather.json
+          git add data/notams.json data/weather.json data/notam-details.json
           git commit -m "עדכון נוטאמים ומזג אוויר אוטומטי — $(date -u '+%Y-%m-%d %H:%M UTC')"
           for attempt in 1 2 3 4; do
             git push && break
