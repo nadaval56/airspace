@@ -65,7 +65,7 @@ def main() -> int:
     buttons = [k for k in payload if k.startswith(("btn", "img"))]
     print(f"כפתורים במטען: {buttons}  (דפדפן שולח אחד בלבד)")
 
-    for row in rows[:3]:
+    for row in rows[:1]:
         msg_num = row["msg_num"]
         print(f"\n{'─' * 70}\n▶ {row['id']} · msg_num={msg_num}")
         body, status = fetch(
@@ -74,9 +74,20 @@ def main() -> int:
             {"Content-Type": "application/x-www-form-urlencoded"},
         )
         detail = iaa.parse_more_info(body, msg_num)
-        print(f"  HTTP {status} · {len(body):,} bytes · שדות: {sorted(detail)}")
+        print(f"  HTTP {status} · {len(body):,} bytes "
+              f"(הרשימה: {len(page):,}, הפרש {len(body) - len(page):+,}) · "
+              f"שדות: {sorted(detail)}")
         if not detail:
-            print("  לא נפתח כלום.")
+            # התשובה גדלה, כלומר משהו נפתח — רק שהפרסר לא מזהה אותו.
+            # מדפיסים את ה-HTML כמו שהוא במקום לנחש שמות מחלקות.
+            import re as _re
+            spot = body.find(f"divMoreInfo_{msg_num}")
+            print(f"  לא נפתח לפי הפרסר. divMoreInfo_{msg_num} במיקום {spot}.")
+            if spot != -1:
+                print("  --- 3,000 תווים משם:")
+                print("  " + _re.sub(r"\s+", " ", body[spot: spot + 3000]))
+            classes = sorted(set(_re.findall(r'class="(more_[^"]+)"', body)))
+            print(f"  מחלקות more_ בגוף: {classes}")
             continue
         for key in ("id", "airfield", "created", "valid_from", "valid_to"):
             if detail.get(key):
