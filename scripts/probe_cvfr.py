@@ -143,6 +143,24 @@ def main() -> int:
             continue
         attempt(label, url, {"User-Agent": BROWSER_UA, "Referer": "https://data.gov.il/dataset/cvfr"})
 
+    # 5. אותה כתובת על המארח הראשי במקום על מארח הקצה.
+    #    `data.gov.il/api` עונה כרגיל, ורק `e.data.gov.il` מגיש אתגר —
+    #    כלומר החסימה היא של מארח ההורדות ולא של האתר. זו אינה עקיפה
+    #    של האתגר אלא בדיקה של כתובת CKAN תקנית אחרת.
+    print("\n=== המארח הראשי במקום מארח הקצה ===")
+    for label, url in urls:
+        attempt(
+            f"{label} (data.gov.il)",
+            url.replace("https://e.data.gov.il/", "https://data.gov.il/"),
+            {"User-Agent": BROWSER_UA, "Referer": "https://data.gov.il/dataset/cvfr"},
+        )
+
+    # 6. אולי הגיאומטריה בכל זאת יושבת ב-datastore של משאב ה-SHP.
+    print("\n=== datastore של משאב ה-SHP ===")
+    shp_id = "e5436712-2829-4079-982f-576195277766"
+    ds = api(f"{BASE}/datastore_search?resource_id={shp_id}&limit=2")
+    print("   ", json.dumps(ds, ensure_ascii=False)[:500])
+
     return 0
 
 
