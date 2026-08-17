@@ -423,11 +423,73 @@ def parse_notam(raw: str, source: str | None = None) -> dict:
     record["valid_from"] = parse_notam_datetime(items.get("B"))
     record["valid_to"] = parse_notam_datetime(items.get("C"))
 
+    # גבול מפורש בגוף ההודעה גובר על העיגול של שורת Q. העיגול הוא
+    # מעטפת מעוגלת כלפי מעלה; רשימת הקודקודים היא האזור עצמו.
+    record["area"] = extract_area(record["text"])
+
     record["floor_ft"] = _effective_floor(record)
     record["low_altitude"] = (
         record["floor_ft"] is not None and record["floor_ft"] < LOW_ALTITUDE_FT
     )
     return record
+
+
+"""רצף נקודות בגוף הנוטאם, בשני הפורמטים שמופיעים בפועל.
+
+    DDMMSS N DDDMMSS E   →   310714N0341759E
+    DDMM   N DDDMM   E   →   3107N03417E
+
+הצמדות, בלי רווח בין קו הרוחב לקו האורך. הצורה הזאת נבדלת משדה 8
+של שורת Q, שם אחרי קו האורך מגיע רדיוס בן שלוש ספרות.
+"""
+_AREA_PT_RE = re.compile(
+    r"\b(\d{2})(\d{2})(\d{2})([NS])(\d{3})(\d{2})(\d{2})([EW])\b"
+    r"|\b(\d{2})(\d{2})([NS])(\d{3})(\d{2})([EW])\b"
+)
+
+# פחות משלוש נקודות אינו מצולע. שתי נקודות הן קו, ואחת היא נקודה —
+# ובשני המקרים העיגול משורת Q נשאר הייצוג הנכון היחיד שיש.
+MIN_AREA_POINTS = 3
+
+
+def extract_area(text: str | None) -> list[list[float]] | None:
+    """מחלץ מצולע מגוף הנוטאם, אם הוא מונה נקודות במפורש.
+
+    חלק מהנוטאמים מוסרים את הגבול המדויק בתוך פריט E), למשל:
+
+        AN AREA AT GAZA-STRIP BTN FLW PSN CLSD TO ALL FLT …
+        310714N0341759E 310818N0343709E 310550N0344003E …
+
+    זה **הנתון האמיתי**, בניגוד לעיגול של שורת Q שהוא רק מעטפת. כשהוא
+    קיים אין שום סיבה לצייר במקומו עיגול.
+
+    מחזיר רשימת [lon, lat] בסדר GeoJSON, או None אם אין מספיק נקודות.
+    """
+    if not text:
+        return None
+
+    points: list[list[float]] = []
+    for match in _AREA_PT_RE.finditer(text):
+        groups = match.groups()
+        if groups[0] is not None:
+            dd, mm, ss, ns, ddd, mm2, ss2, ew = groups[:8]
+        else:
+            dd, mm, ns, ddd, mm2, ew = groups[8:]
+            ss = ss2 = "0"
+        lat = int(dd) + int(mm) / 60 + int(ss) / 3600
+        lon = int(ddd) + int(mm2) / 60 + int(ss2) / 3600
+        if ns == "S":
+            lat = -lat
+        if ew == "W":
+            lon = -lon
+        points.append([round(lon, 6), round(lat, 6)])
+
+    if len(points) < MIN_AREA_POINTS:
+        return None
+    # סוגרים את הטבעת. הנוטאם מונה קודקודים ואינו חוזר על הראשון.
+    if points[0] != points[-1]:
+        points.append(points[0])
+    return points
 
 
 def _effective_floor(record: dict) -> int | None:

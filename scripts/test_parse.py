@@ -14,6 +14,7 @@ from parse_qline import (  # noqa: E402
     parse_altitudes,
     parse_coord_field,
     parse_limit_item,
+    extract_area,
     parse_notam,
     parse_notam_datetime,
     parse_q_line,
@@ -364,3 +365,55 @@ class TestSorting(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+
+class ExtractAreaTest(unittest.TestCase):
+    """גבול מפורש בגוף הנוטאם — האזור עצמו, לא מעטפת שמקיפה אותו."""
+
+    def test_ddmmss_run_is_parsed(self):
+        text = ("AN AREA AT GAZA-STRIP BTN FLW PSN CLSD TO ALL FLT "
+                "310714N0341759E 310818N0343709E 310550N0344003E")
+        area = extract_area(text)
+        self.assertIsNotNone(area)
+        # 31°07'14" = 31.120556 · 34°17'59" = 34.299722
+        self.assertAlmostEqual(area[0][1], 31.120556, places=5)
+        self.assertAlmostEqual(area[0][0], 34.299722, places=5)
+
+    def test_lonlat_order_is_geojson(self):
+        area = extract_area(
+            "PSN 310714N0341759E 310818N0343709E 310550N0344003E")
+        # בישראל קו האורך גדול מקו הרוחב; היפוך היה בולט מיד
+        for lon, lat in area:
+            self.assertGreater(lon, lat)
+
+    def test_ring_is_closed(self):
+        area = extract_area(
+            "PSN 310714N0341759E 310818N0343709E 310550N0344003E")
+        self.assertEqual(area[0], area[-1])
+
+    def test_ddmm_short_form(self):
+        area = extract_area("PSN 3107N03417E 3108N03437E 3105N03440E")
+        self.assertIsNotNone(area)
+        self.assertAlmostEqual(area[0][1], 31 + 7 / 60, places=5)
+
+    def test_two_points_is_not_an_area(self):
+        """שתי נקודות הן קו. מצולע דורש שלוש."""
+        self.assertIsNone(
+            extract_area("PSN 310714N0341759E 310818N0343709E"))
+
+    def test_qline_coordinates_are_not_mistaken_for_an_area(self):
+        """שדה 8 של שורת Q נגמר ברדיוס, ואסור לו להיקרא כקודקוד."""
+        self.assertIsNone(extract_area(
+            "Q) LLLL/QAELC/IV/NBO/E /000/019/3059N03445E001"))
+
+    def test_plain_text_yields_nothing(self):
+        self.assertIsNone(extract_area("ATS RTE Q30 CLSD BTN BEXOM-NURIT."))
+        self.assertIsNone(extract_area(None))
+
+    def test_parse_notam_attaches_area(self):
+        raw = ("(C1575/26 NOTAMN Q) LLLL/QRTCA/IV/BO/W /000/100/3120N03430E030 "
+               "A) LLLL B) 2607261511 C) 2608312059 "
+               "E) AN AREA CLSD 310714N0341759E 310818N0343709E 310550N0344003E)")
+        record = parse_notam(raw)
+        self.assertIsNotNone(record["area"])
+        self.assertEqual(len(record["area"]), 4)   # שלוש נקודות + סגירה

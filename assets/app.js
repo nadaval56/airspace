@@ -50,9 +50,14 @@ const CVFR_COLOR = '#7c3aed';
  *   C1742/26 — עיגול 54 מייל, והטקסט הוא **רשימת נתיבים**:
  *   "CVFR RTE CLSD YAHEL-BMNUH-ZOFAR…". קווים, לא דיסקה.
  *
- * לצייר את הדיסקה מלאה זה לומר "כל השטח הזה מוגבל" — טענה שגויה,
- * ובכיוון שגורם לטייס לוותר על מרחב פתוח. לכן מעל הסף מציירים קו
- * בלבד: הסימון נשאר, הטענה נעלמת, והלחיצות מפסיקות להיבלע.
+ * מעטפת כזאת אינה מצוירת כלל. גם קו בלבד עדיין מצייר צורה שאינה
+ * קיימת, ומעמיס על המפה בלי להוסיף מידע: מרכז המעטפת אינו מרכז
+ * ההגבלה, והרדיוס אינו מרחקה. מה שכן קיים — הזהות, הזמנים, הגבהים
+ * והנוסח המלא — נמצא ברשימה, והיא מלאה תמיד.
+ *
+ * זה **אינו** ויתור על הנתון: כשהנוטאם מפרט קודקודים בגוף ההודעה,
+ * `extract_area` מוציא אותם והאזור מצויר במלואו. הכלל הזה חל רק על
+ * מי שאין לו שום גבול מפורש.
  *
  * הסף עצמו הוא החלטת תצוגה ולא נתון מהמקור, ולכן הוא כתוב כאן במפורש.
  */
@@ -427,32 +432,46 @@ function renderNotams(notams) {
     const state = notamState(n, now);
 
     const geo = n.geo;
-    // רדיוס 999 = כל ה-FIR. לא מציירים — היה בולע את המפה. תג ברשימה בלבד.
-    if (!geo || geo.fir_wide) return;
-
     const color = notamColor(n);
     // עתידי נסוג ויזואלית — שקיפות וקו דק — אבל **שומר על הצבע**.
     // הצבע מסמן גובה, וזה נתון בטיחותי שאסור לו להשתנות לפי שעון.
     const faded = state === 'future';
-    const envelope = geo.radius_nm >= ENVELOPE_NM;
-    const shape = geo.radius_nm > 0
-      ? L.circle([geo.lat, geo.lon], {
-          pane: 'notam',
-          radius: geo.radius_nm * NM_TO_M,
-          color, weight: faded ? 2 : 3, opacity: faded ? 0.5 : 1,
-          dashArray: faded ? '3 7' : '8 6',
-          // מעטפת מצוירת בקו בלבד. המילוי היה אומר "כל השטח הזה
-          // מוגבל", וזה פשוט לא נכון — ובנוסף הוא בלע כל לחיצה בתוכו.
-          fill: !envelope,
-          fillColor: color, fillOpacity: faded ? 0.04 : 0.1
-        })
-      : L.circleMarker([geo.lat, geo.lon], {
-          pane: 'notam', radius: faded ? 6 : 8,
-          color, weight: faded ? 2 : 3, opacity: faded ? 0.5 : 1,
-          fillColor: color, fillOpacity: faded ? 0.15 : 0.35
-        });
 
-    shape.bindPopup(notamPopup(n, envelope), { maxWidth: 260, minWidth: 200 });
+    // הגבול המפורש שבגוף ההודעה גובר על הכול. זה האזור עצמו, לא
+    // מעטפת שמקיפה אותו, ולכן הוא מצויר מלא ככל אזור אמיתי אחר.
+    let shape = null;
+    if (n.area) {
+      shape = L.polygon(n.area.map(([lon, lat]) => [lat, lon]), {
+        pane: 'notam',
+        color, weight: faded ? 2 : 3, opacity: faded ? 0.5 : 1,
+        dashArray: faded ? '3 7' : '8 6',
+        fillColor: color, fillOpacity: faded ? 0.06 : 0.16
+      });
+    } else if (!geo || geo.fir_wide) {
+      // רדיוס 999 = כל ה-FIR. אין מה לצייר; תג ברשימה בלבד.
+      return;
+    } else if (geo.radius_nm >= ENVELOPE_NM) {
+      // מעטפת רחבה בלי גבול מפורש — אין כאן צורה לצייר, רק מספר
+      // שמקיף את אזור ההשפעה. ציור שלה טוען טענה שגויה על השטח,
+      // מצפין את המפה, וחוסם לחיצות. הנוטאם נשאר ברשימה במלואו.
+      return;
+    } else if (geo.radius_nm > 0) {
+      shape = L.circle([geo.lat, geo.lon], {
+        pane: 'notam',
+        radius: geo.radius_nm * NM_TO_M,
+        color, weight: faded ? 2 : 3, opacity: faded ? 0.5 : 1,
+        dashArray: faded ? '3 7' : '8 6',
+        fillColor: color, fillOpacity: faded ? 0.04 : 0.1
+      });
+    } else {
+      shape = L.circleMarker([geo.lat, geo.lon], {
+        pane: 'notam', radius: faded ? 6 : 8,
+        color, weight: faded ? 2 : 3, opacity: faded ? 0.5 : 1,
+        fillColor: color, fillOpacity: faded ? 0.15 : 0.35
+      });
+    }
+
+    shape.bindPopup(notamPopup(n), { maxWidth: 260, minWidth: 200 });
     register(shape, notamLayer, { notam: notamFamily(n), state });
     if (n.id) notamShapes.set(n.id, shape);
     drawn += 1;
@@ -469,7 +488,7 @@ function renderNotams(notams) {
  * ברגע שרוצים לראות היכן האזור יושב ביחס לסביבה, החלונית מכסה אותה.
  * לכן כאן רק מה שמזהה את הנוטאם, וכפתור שקופץ לכרטיס המלא ברשימה.
  */
-function notamPopup(n, envelope) {
+function notamPopup(n) {
   const subject = subjectText(n);
   const rows = [];
   const from = fmtStamp(n.valid_from, null);
@@ -485,10 +504,9 @@ function notamPopup(n, envelope) {
       ${subject ? `<p class="popup__subject">${esc(subject)}</p>` : ''}
       <dl class="kv kv--tight">${rows.map(([k, v]) =>
         `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
-      ${envelope ? `<p class="popup__envelope">
-        מעטפת של ${n.geo.radius_nm} מייל ימי, לא צורת ההגבלה. שורת Q
-        מוסרת עיגול שמקיף את אזור ההשפעה, והשטח האמיתי קטן ממנו —
-        לרוב בהרבה. <strong>הנוסח המלא הוא הקובע.</strong>
+      ${n.area ? `<p class="popup__terms">
+        הגבול מגיע מרשימת הקודקודים שבגוף ההודעה — האזור עצמו,
+        ולא עיגול שמקיף אותו.
       </p>` : ''}
       ${anchor ? `<button type="button" class="popup__jump" data-jump="${esc(anchor)}">פרטים מלאים ↓</button>` : ''}
     </div>`;
@@ -513,11 +531,26 @@ function wireJumpButtons() {
 
 /* --- כרטיס נוטאם (משותף למפה ולרשימה) --------------------------------- */
 
+/**
+ * נוטאם שכל מה שיש לו הוא מעטפת רחבה, בלי גבול מפורש בגוף ההודעה.
+ *
+ * כשיש רשימת קודקודים ב-E) — יש אזור אמיתי, והמעטפת אינה רלוונטית.
+ * רק בהיעדרה המספר של שורת Q נשאר לבדו, ואז אין מה לצייר.
+ */
+function isEnvelope(n) {
+  return !n.area && !!n.geo && !n.geo.fir_wide && n.geo.radius_nm >= ENVELOPE_NM;
+}
+
 function badges(n) {
   const out = [];
   // מצב התוקף ראשון — זו השאלה הראשונה שמישהו בשטח שואל.
   if (notamState(n, Date.now()) === 'future') out.push(['future', 'טרם נכנס לתוקף']);
   if (n.geo && n.geo.fir_wide) out.push(['fir', 'חל על כל המרחב']);
+  // מעטפת רחבה בלי גבול מפורש — לא מצוירת, ולכן הרשימה היא המקום
+  // היחיד שבו היא נראית. התג חייב לומר את זה במפורש.
+  else if (isEnvelope(n)) {
+    out.push(['fir', `אזור רחב (מעטפת ${n.geo.radius_nm} מייל) — לא מצויר`]);
+  }
   if (!n.geo) out.push(['nogeo', 'ללא מיקום על המפה']);
   if (n.low_altitude) out.push(['low', `רצפה מתחת ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל`]);
   else if (n.geo) out.push(['high', 'רצפה גבוהה']);
@@ -673,8 +706,10 @@ function renderLegend() {
       <span style="color:${CVFR_COLOR}">סגול</span> = פרוזדור CVFR פתוח ·
       <span style="color:${NOTAM_LOW}">ורוד</span> = רצפה מתחת
       ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל.
-      עיגול נוטאם מ-${ENVELOPE_NM} מייל ימי ומעלה מצויר <strong>בקו בלבד</strong>:
-      שורת Q נותנת מעטפת שמקיפה את אזור ההשפעה, לא את צורתו.
+      נוטאם שגבולו מפורט בגוף ההודעה מצויר כאזור אמיתי; נוטאם שכל
+      שיש לו הוא מעטפת מ-${ENVELOPE_NM} מייל ימי ומעלה
+      <strong>אינו מצויר</strong> ומופיע ברשימה בלבד — עיגול כזה מקיף
+      את אזור ההשפעה ואינו צורתו.
       נוטאם עתידי מצויר דהוי. "פעיל עכשיו" לפי תוקף כללי בלבד —
       לוח הזמנים היומי מופיע בכרטיס. כיבוי משפיע על המפה בלבד;
       הרשימה למטה תמיד מלאה.
@@ -1083,6 +1118,10 @@ async function init() {
     const counts = payload.counts || {};
     const extras = [];
     if (counts.fir_wide) extras.push(`${counts.fir_wide} חלים על כל המרחב`);
+    // אלה אינם "חסרים" — הם פשוט חסרי צורה. חייבים להיספר בגלוי,
+    // אחרת ההפרש בין 128 למספר המסומן נראה כמו נתונים שאבדו.
+    const envelopes = notams.filter(isEnvelope).length;
+    if (envelopes) extras.push(`${envelopes} על אזור רחב מכדי לצייר`);
     if (counts.no_geo) extras.push(`${counts.no_geo} ללא מיקום גיאוגרפי`);
     el('list-sub').textContent =
       `${notams.length} נוטאמים · ${drawn} מסומנים על המפה` +
