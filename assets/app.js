@@ -100,6 +100,19 @@ let map = null;
 let aipLayer = null;
 let notamLayer = null;
 let weatherLayer = null;
+
+/**
+ * תת־שכבות לפי קטגוריה.
+ *
+ * 137 אזורי פמ"ת ו-127 נוטאמים על מפה אחת זה קיר. החלוקה נותנת לעין
+ * דרך להיכנס פנימה: לכבות את הכטב"ם ולראות רק את האסור, או לבודד את
+ * שדות התעופה.
+ *
+ * **הרשימה שמתחת למפה אינה מסוננת לעולם.** זו הבחנה מהותית ולא
+ * טכנית: המתגים כאן שולטים במה שמצויר, לא במה שקיים. נוטאם שכובה
+ * בשכבה עדיין מופיע ברשימה במלואו, וכל המתגים דולקים כברירת מחדל.
+ */
+const sublayers = new Map();   // מפתח קטגוריה -> {group, count, on}
 const notamShapes = new Map();   // מזהה נוטאם -> שכבה, לכפתור "הצג במפה"
 
 /**
@@ -174,27 +187,34 @@ function zoneKind(props) {
   return 'other';
 }
 
+/** מחזיר את קבוצת התת־שכבה, ויוצר אותה בפעם הראשונה. */
+function sublayer(key, parent) {
+  let entry = sublayers.get(key);
+  if (!entry) {
+    entry = { group: L.layerGroup(), count: 0, on: true, parent };
+    entry.group.addTo(parent);
+    sublayers.set(key, entry);
+  }
+  entry.count += 1;
+  return entry.group;
+}
+
 function renderAip(geojson) {
   const features = (geojson && geojson.features) || [];
   el('count-aip').textContent = features.length;
   if (!features.length || !map) return features.length;
 
-  L.geoJSON(geojson, {
-    pane: 'aip',
-    style: (feature) => {
-      const kind = zoneKind(feature.properties || {});
-      return {
-        color: ZONE_STYLES[kind].color,
-        weight: 2.5,
-        opacity: 1,
-        fillColor: ZONE_STYLES[kind].color,
-        fillOpacity: 0.18
-      };
-    },
-    onEachFeature: (feature, layer) => {
-      layer.bindPopup(aipPopup(feature.properties || {}), { maxWidth: 340 });
-    }
-  }).addTo(aipLayer);
+  features.forEach((feature) => {
+    const kind = zoneKind(feature.properties || {});
+    const color = ZONE_STYLES[kind].color;
+    L.geoJSON(feature, {
+      pane: 'aip',
+      style: { color, weight: 2.5, opacity: 1, fillColor: color, fillOpacity: 0.18 },
+      onEachFeature: (f, layer) => {
+        layer.bindPopup(aipPopup(f.properties || {}), { maxWidth: 340 });
+      }
+    }).addTo(sublayer('aip:' + kind, aipLayer));
+  });
 
   return features.length;
 }
@@ -225,6 +245,34 @@ function notamColor(n) {
   return n.low_altitude ? NOTAM_LOW : NOTAM_HIGH;
 }
 
+/**
+ * משפחת הנוטאם, לפי האות הראשונה של קוד הנושא בשורת Q.
+ *
+ * ICAO מגדיר את האות הזאת כמשפחת הנושא: `A` מרחב אווירי, `F`/`M`/`L`/`S`
+ * שדה תעופה ושירותיו, `R`/`W` הגבלות ואזהרות, והשאר עזרי ניווט
+ * ומכשולים. זו חלוקה של התקן עצמו, לא המצאה שלנו.
+ *
+ * נוטאם שטרם הורחב אין לו שורת Q, ולכן אין לו משפחה — הוא מקבל
+ * קטגוריה משלו במקום להיעלם או להיתלות בניחוש.
+ */
+const NOTAM_FAMILIES = {
+  airspace:   { label: 'מרחב אווירי ונתיבים', letters: 'A' },
+  aerodrome:  { label: 'שדות תעופה ומנחתים', letters: 'FMLS' },
+  hazard:     { label: 'הגבלות ואזהרות', letters: 'RW' },
+  navigation: { label: 'ניווט ומכשולים', letters: 'CINOP' },
+  unknown:    { label: 'טרם הורחב', letters: '' }
+};
+
+function notamFamily(n) {
+  const code = n.q && n.q.subject_code;
+  if (!code) return 'unknown';
+  const letter = code[0].toUpperCase();
+  for (const [key, family] of Object.entries(NOTAM_FAMILIES)) {
+    if (family.letters.includes(letter)) return key;
+  }
+  return 'navigation';
+}
+
 function renderNotams(notams) {
   let drawn = 0;
   if (!map) return drawn;
@@ -248,7 +296,7 @@ function renderNotams(notams) {
         });
 
     shape.bindPopup(notamPopup(n), { maxWidth: 260, minWidth: 200 });
-    shape.addTo(notamLayer);
+    shape.addTo(sublayer('notam:' + notamFamily(n), notamLayer));
     if (n.id) notamShapes.set(n.id, shape);
     drawn += 1;
   });
@@ -400,22 +448,69 @@ function renderList(notams) {
 
 /* --- מקרא ------------------------------------------------------------- */
 
-function renderLegend(hasAip) {
-  const items = [];
-  if (hasAip) {
-    ['prohibited', 'restricted', 'danger', 'uav'].forEach((kind) => {
-      items.push({ color: ZONE_STYLES[kind].color, label: ZONE_STYLES[kind].label, dashed: false });
-    });
-  }
-  items.push({ color: NOTAM_LOW, label: `נוטאם — רצפה מתחת ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל`, dashed: true });
-  items.push({ color: NOTAM_HIGH, label: 'נוטאם — רצפה גבוהה יותר', dashed: true });
+/**
+ * המקרא הוא גם לוח הבקרה.
+ *
+ * הגרסה הראשונה הציגה מקרא סטטי ליד מתגי שכבה — שני אזורים שמדברים על
+ * אותו דבר. כאן פריט המקרא **הוא** המתג: הצבע מסביר, המספר מכמת,
+ * והלחיצה מכבה. פחות ממשק, יותר שליטה.
+ */
+function renderLegend() {
+  const groups = [];
 
-  el('legend').innerHTML = items.map((item) => `
-    <span class="legend__item" style="color:${item.color}">
-      <span class="legend__swatch${item.dashed ? ' legend__swatch--dashed' : ''}"
-            style="background:${item.color}33"></span>
-      <span style="color:var(--ink)">${esc(item.label)}</span>
-    </span>`).join('');
+  const aipItems = ['prohibited', 'restricted', 'danger', 'uav']
+    .map((kind) => ({
+      key: 'aip:' + kind,
+      label: ZONE_STYLES[kind].label,
+      color: ZONE_STYLES[kind].color,
+      dashed: false
+    }))
+    .filter((item) => sublayers.has(item.key));
+  if (aipItems.length) groups.push({ title: 'מגבלות קבועות', items: aipItems });
+
+  const notamItems = Object.entries(NOTAM_FAMILIES)
+    .map(([key, family]) => ({
+      key: 'notam:' + key,
+      label: family.label,
+      color: NOTAM_HIGH,
+      dashed: true
+    }))
+    .filter((item) => sublayers.has(item.key));
+  if (notamItems.length) groups.push({ title: 'נוטאמים על המפה', items: notamItems });
+
+  el('legend').innerHTML = groups.map((group) => `
+    <div class="legend__group">
+      <span class="legend__title">${esc(group.title)}</span>
+      ${group.items.map((item) => {
+        const entry = sublayers.get(item.key);
+        return `
+        <button type="button" class="legend__item" data-layer="${esc(item.key)}"
+                aria-pressed="${entry.on}" style="--swatch:${item.color}">
+          <span class="legend__swatch${item.dashed ? ' legend__swatch--dashed' : ''}"></span>
+          <span class="legend__label">${esc(item.label)}</span>
+          <span class="legend__count">${entry.count}</span>
+        </button>`;
+      }).join('')}
+    </div>`).join('') + `
+    <p class="legend__note">
+      קו מלא — מגבלה קבועה · קו מקווקו — נוטאם ·
+      <span style="color:${NOTAM_LOW}">ורוד</span> = רצפה מתחת
+      ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל.
+      כיבוי משפיע על המפה בלבד; הרשימה למטה תמיד מלאה.
+    </p>`;
+}
+
+/** לחיצה על פריט מקרא מכבה או מדליקה את התת־שכבה שלו. */
+function wireLegend() {
+  el('legend').addEventListener('click', (event) => {
+    const button = event.target.closest('[data-layer]');
+    if (!button) return;
+    const entry = sublayers.get(button.getAttribute('data-layer'));
+    if (!entry) return;
+    entry.on = !entry.on;
+    entry.on ? entry.parent.addLayer(entry.group) : entry.parent.removeLayer(entry.group);
+    button.setAttribute('aria-pressed', String(entry.on));
+  });
 }
 
 /* --- מזג אוויר --------------------------------------------------------- */
@@ -614,7 +709,8 @@ async function init() {
     el('freshness-note').textContent = 'קובץ הנתונים לא נקרא.';
   }
 
-  renderLegend(aipCount > 0);
+  renderLegend();
+  wireLegend();
   renderList(notams);
   wireJumpButtons();
 
