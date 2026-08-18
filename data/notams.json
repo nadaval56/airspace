@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-18T11:35:03Z",
- "last_success": "2026-08-18T11:35:03Z",
+ "generated_at": "2026-08-18T13:02:59Z",
+ "last_success": "2026-08-18T13:02:59Z",
  "last_error": {
   "at": "2026-08-17T22:34:57Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; faa-dins"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 129,
+   "count": 128,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 129,
-  "mapped": 125,
+  "total": 128,
+  "mapped": 124,
   "fir_wide": 4,
   "no_geo": 0,
-  "low_altitude": 117,
+  "low_altitude": 118,
   "administrative": 18
  },
  "notams": [
@@ -552,6 +552,109 @@
    "administrative": false,
    "parse_errors": [],
    "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1771/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1771/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/080/3129N03450E005\nA) LLLL B) 2608240400 C) 2608272059\nE) PJE WILL TAKE PLACE AT KELACH.\nAN AREA FM GND UP TO 8,000FT AMSL CLSD TO ALL FLT BTN FLW PSN\n313200N0345319E 313159N0344733E 312602N0344730E\n312444N0345024E 312602N0345311E.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nCTN ADZ.\nF) GND G) 8000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWPLW",
+    "subject_code": "WP",
+    "subject": "צניחה חופשית",
+    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 80,
+     "lower_ft": 0,
+     "upper_ft": 8000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.483333333333334,
+     "lon": 34.833333333333336,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.483333333333334,
+    "lon": 34.833333333333336,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 80,
+    "lower_ft": 0,
+    "upper_ft": 8000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2608240400",
+    "iso": "2026-08-24T04:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2608272059",
+    "iso": "2026-08-27T20:59:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "PJE WILL TAKE PLACE AT KELACH.\nAN AREA FM GND UP TO 8,000FT AMSL CLSD TO ALL FLT BTN FLW PSN\n313200N0345319E 313159N0344733E 312602N0344730E\n312444N0345024E 312602N0345311E.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "8000FT AMSL)",
+    "feet": 8000,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": [
+    [
+     34.888611,
+     31.533333
+    ],
+    [
+     34.7925,
+     31.533056
+    ],
+    [
+     34.791667,
+     31.433889
+    ],
+    [
+     34.84,
+     31.412222
+    ],
+    [
+     34.886389,
+     31.433889
+    ],
+    [
+     34.888611,
+     31.533333
+    ]
+   ],
    "floor_ft": 0,
    "low_altitude": true
   },
@@ -2294,146 +2397,6 @@
    "parse_errors": [],
    "area": null,
    "floor_ft": 3000,
-   "low_altitude": false
-  },
-  {
-   "id": "C1746/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1746/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /045/050/3150N03512E004\nA) LLLL B) 2608181220 C) 2608181240\nE) CVFR RTE CLSD HAREL-HNINA-ANATA.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 45,
-     "upper_fl": 50,
-     "lower_ft": 4500,
-     "upper_ft": 5000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.833333333333332,
-     "lon": 35.2,
-     "radius_nm": 4,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.833333333333332,
-    "lon": 35.2,
-    "radius_nm": 4,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 45,
-    "upper_fl": 50,
-    "lower_ft": 4500,
-    "upper_ft": 5000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2608181220",
-    "iso": "2026-08-18T12:20:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2608181240",
-    "iso": "2026-08-18T12:40:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "CVFR RTE CLSD HAREL-HNINA-ANATA.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 4500,
-   "low_altitude": false
-  },
-  {
-   "id": "C1743/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1743/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/040/3157N03524E008\nA) LLLL B) 2608181220 C) 2608181250\nE) CVFR RTE CLSD\nMIHMS-SHAHR-ALLON-FAZEL.\nNAAMA-FAZEL.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 35,
-     "upper_fl": 40,
-     "lower_ft": 3500,
-     "upper_ft": 4000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.95,
-     "lon": 35.4,
-     "radius_nm": 8,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.95,
-    "lon": 35.4,
-    "radius_nm": 8,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 35,
-    "upper_fl": 40,
-    "lower_ft": 3500,
-    "upper_ft": 4000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2608181220",
-    "iso": "2026-08-18T12:20:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2608181250",
-    "iso": "2026-08-18T12:50:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "CVFR RTE CLSD\nMIHMS-SHAHR-ALLON-FAZEL.\nNAAMA-FAZEL.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 3500,
    "low_altitude": false
   },
   {
