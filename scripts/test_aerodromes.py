@@ -248,24 +248,20 @@ class ChapterTest(unittest.TestCase):
         self.assertNotEqual(records[0]["lon"], records[1]["lon"])
 
     def test_a_second_surface_too_far_away_is_not_drawn(self):
-        """הדסה: הגג יושב במקור 1.4 ק"מ מהמשטח הקרקעי, בשטח אורה.
+        """שני משטחים של אותו מתקן אינם רחוקים קילומטר.
 
-        שני משטחים של אותו בית חולים אינם רחוקים קילומטר וחצי, ולכן
-        אחד המספרים שגוי — ואי אפשר לדעת איזה. מסומן הראשון בלבד,
-        והחוסר נאמר גם באזהרה וגם בהערה שנשמרת על הנקודה.
+        שם בדוי בכוונה: להדסה יש תיקון מיקום מתועד (ראו
+        CorrectionTest), וכאן נבדק הכלל הכללי ולא המקרה שכבר תוקן.
         """
         lines = [
-            "מנחת מסוקים הדסה עין כרם (LLHD)",
-            ".1 נקודת התייחסות המנחת (HRP)",
+            "מנחת מסוקים בדיקה (LLZZ)",
             "א. מנחת קרקעי, ברשת 1984 :WGS 035°08'50\"E 31°45'52\"N",
             "ב. מנחת מוגבה על גג בניין, ברשת 1984 :WGS 035°08'57\"E 31°45'08\"N",
             ".3 גובה המנחת",
             "א. מנחת קרקעי: 2,088 רגל.",
             "ב. מנחת מוגבה: 2,379 רגל.",
         ]
-        records, warnings = fields.parse_field(
-            "הדסה עין כרם", lines, "helipad", [414]
-        )
+        records, warnings = fields.parse_field("שדה בדיקה", lines, "helipad", [1])
         self.assertEqual(len(records), 1)
         self.assertIn("קרקעי", records[0]["name"])
         self.assertTrue(records[0]["note"])
@@ -302,6 +298,60 @@ class ChapterTest(unittest.TestCase):
     def test_chapter_without_coordinates_yields_nothing(self):
         records, _ = fields.parse_field("שדה", [".3 גובה השדה", "100 רגל."], "airport", [1])
         self.assertEqual(records, [])
+
+
+class CorrectionTest(unittest.TestCase):
+    """התיקון המוצהר היחיד — הגג בהדסה עין כרם."""
+
+    HADASSAH = [
+        "מנחת מסוקים הדסה עין כרם (LLHD)",
+        ".1 נקודת התייחסות המנחת (HRP)",
+        "א. מנחת קרקעי, ברשת 1984 :WGS 035°08'50\"E 31°45'52\"N",
+        "ב. מנחת מוגבה על גג בניין, ברשת 1984 :WGS 035°08'57\"E 31°45'08\"N",
+        ".3 גובה המנחת",
+        "א. מנחת קרקעי: 2,088 רגל.",
+        "ב. מנחת מוגבה: 2,379 רגל.",
+    ]
+
+    def test_the_roof_moves_to_where_the_pad_is(self):
+        records, warnings = fields.parse_field(
+            "הדסה עין כרם", self.HADASSAH, "helipad", [414]
+        )
+        self.assertEqual(len(records), 2)
+        roof = records[1]
+        self.assertAlmostEqual(roof["lat"], 31.76634, places=5)
+        self.assertAlmostEqual(roof["lon"], 35.14941, places=5)
+        self.assertEqual(roof["elevation_ft"], 2379)
+        self.assertIn("מיקום מתוקן", roof["note"])
+        self.assertTrue(any("תיקון מיקום מתועד" in w for w in warnings), warnings)
+
+    def test_the_two_pads_end_up_on_the_same_campus(self):
+        records, _ = fields.parse_field(
+            "הדסה עין כרם", self.HADASSAH, "helipad", [414]
+        )
+        gap = fields.distance_m(
+            (records[0]["lat"], records[0]["lon"]),
+            (records[1]["lat"], records[1]["lon"]),
+        )
+        self.assertLess(gap, 400)
+
+    def test_a_changed_source_disables_the_correction(self):
+        """אם הפמ"ת יתוקן, התיקון שלנו חייב להפסיק לחול ולהודיע."""
+        fixed = [
+            line.replace("31°45'08\"N", "31°45'58\"N") for line in self.HADASSAH
+        ]
+        records, warnings = fields.parse_field("הדסה עין כרם", fixed, "helipad", [414])
+        self.assertEqual(len(records), 2)
+        self.assertIsNone(records[1]["note"])
+        self.assertTrue(any("יש לבדוק מחדש" in w for w in warnings), warnings)
+
+    def test_the_correction_is_declared_in_full(self):
+        """כל תיקון נושא את מה שכתוב במקור, את מה שנמדד, ואת הראיה."""
+        for entry in fields.SOURCE_CORRECTIONS:
+            for key in ("field", "source", "source_text", "actual", "actual_text",
+                        "evidence"):
+                self.assertIn(key, entry)
+            self.assertTrue(fields.in_israel(*entry["actual"]))
 
 
 class AgriculturalTest(unittest.TestCase):
