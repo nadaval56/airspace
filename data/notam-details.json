@@ -935,33 +935,6 @@
   "valid_from": "2026-08-16T05:00:00Z",
   "valid_to": "2026-08-20T16:00:00Z"
  },
- "C1735/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-13T05:57:00Z",
-  "id": "C1735/26",
-  "location": "LLLL",
-  "raw": "(C1735/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3253N03507E005\nA) LLLL B) 2608180920 C) 2608181730\nD) 0920-1000 1230-1345 1630-1730\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-  "valid_from": "2026-08-18T09:20:00Z",
-  "valid_to": "2026-08-18T17:30:00Z"
- },
- "C1738/26": {
-  "airfield": "Shomrath",
-  "created": "2026-08-13T06:03:00Z",
-  "id": "C1738/26",
-  "location": "LLSO",
-  "raw": "(C1738/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3257N03506E005\nA) LLSO B) 2608180920 C) 2608181730\nD) 0920-1000 1230-1320 1630-1730\nE) AIRSTRIP CLSD TO ALL FLT INCLUDING AGRICULTURE FLT.)",
-  "valid_from": "2026-08-18T09:20:00Z",
-  "valid_to": "2026-08-18T17:30:00Z"
- },
- "C1741/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-13T06:09:00Z",
-  "id": "C1741/26",
-  "location": "LLLL",
-  "raw": "(C1741/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/040/3254N03507E006\nA) LLLL B) 2608180920 C) 2608181730\nD) 0920-1000 1230-1345 1630-1730\nE) ZVULUN ULTRALIGHT BUBBLE NORTH (BZVUL) AND SOUTH (BZVUE)\nCLSD TO ALL FLT.)",
-  "valid_from": "2026-08-18T09:20:00Z",
-  "valid_to": "2026-08-18T17:30:00Z"
- },
  "C1742/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-08-13T06:21:00Z",
