@@ -962,24 +962,6 @@
   "valid_from": "2026-08-18T16:50:00Z",
   "valid_to": "2026-08-18T18:10:00Z"
  },
- "C1744/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-13T06:39:00Z",
-  "id": "C1744/26",
-  "location": "LLLL",
-  "raw": "(C1744/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /030/035/3214N03531E012\nA) LLLL B) 2608181230 C) 2608181310\nE) CVFR RTE CLSD FAZEL-ARGMN-TIRAT.)",
-  "valid_from": "2026-08-18T12:30:00Z",
-  "valid_to": "2026-08-18T13:10:00Z"
- },
- "C1745/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-13T06:41:00Z",
-  "id": "C1745/26",
-  "location": "LLLL",
-  "raw": "(C1745/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/030/3233N03524E008\nA) LLLL B) 2608181230 C) 2608181310\nE) CVFR RTE CLSD AFULA-EITAN.)",
-  "valid_from": "2026-08-18T12:30:00Z",
-  "valid_to": "2026-08-18T13:10:00Z"
- },
  "C1747/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-08-13T06:45:00Z",
@@ -1114,15 +1096,6 @@
   "raw": "(C1765/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/003/3201N03444E001\nA) LLLL B) 2608221800 C) 2608222030\nE) UAS/UAV AIR-SHOW WILL TAKE PLACE AT BAT-YAM.\nAN AREA WI 0.3KM RADIUS CENTERED ON PSN 320055N0344414E\nCLSD FM GND UP TO 50M AGL 300FT AMSL.\nCTN ADZ.\nF) GND G) 300FT AMSL)",
   "valid_from": "2026-08-22T18:00:00Z",
   "valid_to": "2026-08-22T20:30:00Z"
- },
- "C1768/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-17T10:14:00Z",
-  "id": "C1768/26",
-  "location": "LLLL",
-  "raw": "(C1768/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/030/3251N03520E011\nA) LLLL B) 2608181300 C) 2608181330\nE) CVFR RTE CLSD GILAM-AVLYM-SEGEV-ZALMN-DESHE.)",
-  "valid_from": "2026-08-18T13:00:00Z",
-  "valid_to": "2026-08-18T13:30:00Z"
  },
  "C1769/26": {
   "airfield": "Tel-Aviv FIR",
