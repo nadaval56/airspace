@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-18T06:59:18Z",
- "last_success": "2026-08-18T06:59:18Z",
+ "generated_at": "2026-08-18T07:48:26Z",
+ "last_success": "2026-08-18T07:48:26Z",
  "last_error": {
   "at": "2026-08-17T22:34:59Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -19,12 +19,31 @@
   "LLSD"
  ],
  "counts": {
-  "total": 11,
+  "total": 10,
   "METAR": 4,
-  "TAF": 6,
-  "AIRMET": 1
+  "TAF": 6
  },
  "reports": [
+  {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 180720Z 26005KT 200V320 9999 SCT037 30/19 Q1010 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 180600 TILL 190600, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 3 THOUSAND FEET,",
+   "truncated": true,
+   "valid_from": "180600",
+   "valid_to": "190600",
+   "area": null
+  },
   {
    "id": "METAR",
    "station": "LLHA",
@@ -53,26 +72,6 @@
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 180650Z 28004KT 230V320 9999 SCT035 29/19 Q1010 NOSIG=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 180600 TILL 190600, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 3 THOUSAND FEET,",
-   "truncated": true,
-   "valid_from": "180600",
-   "valid_to": "190600",
    "area": null
   },
   {
@@ -124,37 +123,6 @@
    "valid_from": null,
    "valid_to": null,
    "area": null
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 1 VALID 180300/180700 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR WKN=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.8,
-     33.35
-    ],
-    [
-     35.916667,
-     32.95
-    ],
-    [
-     34.583333,
-     30.3
-    ],
-    [
-     34.433333,
-     30.7
-    ],
-    [
-     35.8,
-     33.35
-    ]
-   ]
   }
  ]
 }
