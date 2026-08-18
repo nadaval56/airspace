@@ -404,6 +404,15 @@
   "valid_from": "2026-08-18T08:38:00Z",
   "valid_to": "2026-09-30T23:59:00Z"
  },
+ "A0671/26": {
+  "airfield": "Tel-Aviv FIR",
+  "created": "2026-08-18T16:11:00Z",
+  "id": "A0671/26",
+  "location": "LLLL",
+  "raw": "(A0671/26 NOTAMN\nQ) LLLL/QANLC/I /NBO/E /040/070/3227N03507E011\nA) LLLL B) 2608190600 C) 2608191300\nE) ATS RTE J14 CLSD BTN NAT-MEGID.)",
+  "valid_from": "2026-08-19T06:00:00Z",
+  "valid_to": "2026-08-19T13:00:00Z"
+ },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
