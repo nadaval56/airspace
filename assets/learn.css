@@ -1,0 +1,1024 @@
+/* ---------------------------------------------------------------------------
+   איך קוראים נוטאם — חלק ב'
+   ---------------------------------------------------------------------------
+   נשען על assets/style.css ואינו משכתב אותו: אותם משתני צבע, אותה
+   טיפוגרפיה כבדה, אותן מסגרות עבות. הקובץ הזה מוסיף רק את מה שאין
+   במפה — לשוניות, כרטיסיות, טבלאות פענוח ותרגול.
+
+   הכלל שמעל כולם: **הטקסט המקורי של הנוטאם תמיד באנגלית, תמיד
+   מימין לשמאל הפוך, ותמיד בגופן קבוע־רוחב.** ערבוב של עברית ואנגלית
+   בשורה אחת בלי כיוון כפוי שובר את הסדר של הקודים, ומספר שקפץ
+   למקום הלא נכון בשורת Q הוא מידע שגוי, לא באג קוסמטי.
+--------------------------------------------------------------------------- */
+
+:root {
+  --learn-accent: #0b5d8f;
+  --ok: #15803d;
+  --ok-bg: #e6f4ea;
+  --no: #b3151b;
+  --no-bg: #fdecec;
+}
+
+/* --- כללי --------------------------------------------------------------- */
+
+.mono, .field__raw, .quiz-raw, .anatomy .mono, .ex-raw {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+/* כל מקטע קוד הוא אנגלית — הכיוון נכפה כדי שהתווים לא יתערבבו. */
+.mono {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+  font-size: 0.92em;
+  font-weight: 700;
+}
+
+.muted { color: var(--ink-soft); font-weight: 400; }
+
+.lede {
+  margin: 10px 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #dbe4ed;
+  max-width: 62ch;
+}
+
+.lede strong { color: #fff; }
+
+/* --- כפתור החזרה -------------------------------------------------------- */
+
+/*
+  ראשון בעמוד, לפני הכותרת. מי שהגיע מהמפה צריך למצוא את הדרך חזרה
+  בלי לחשוב — ולכן זה קישור מלא־רוחב עם מטרה גדולה לאצבע, ולא חץ
+  קטן בפינה.
+*/
+.backlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  margin-bottom: 10px;
+  padding: 6px 14px 6px 12px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--navy);
+  background: var(--amber);
+  border: 2px solid var(--amber);
+  border-radius: 999px;
+  text-decoration: none;
+}
+
+.backlink:hover { background: #ffc61a; }
+.backlink__arrow { font-size: 1.1rem; line-height: 1; }
+
+.feed-note {
+  margin: 12px 0 0;
+  padding: 8px 12px;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #cfd9e3;
+  background: var(--navy-2);
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 8px;
+}
+
+.feed-note strong { color: #fff; font-variant-numeric: tabular-nums; }
+.feed-note--off { background: #4a1113; border-color: #ff6b6b; color: #ffd9d9; }
+
+/* --- לשוניות ------------------------------------------------------------ */
+
+/*
+  במובייל הלשוניות גוללות לרוחב. זו הצורה היחידה שבה שבע לשוניות
+  נשארות קריאות במסך צר בלי להתקפל לתפריט נסתר — ותפריט נסתר הוא
+  בדיוק מה שגורם לאנשים לא לדעת שיש עוד מסכים.
+*/
+.tabs {
+  display: flex;
+  gap: 8px;
+  padding-block: 12px;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+  scroll-margin-top: 0;
+}
+
+.tab {
+  flex: none;
+  min-height: var(--tap);
+  padding: 8px 16px;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tab:hover { border-color: var(--navy); }
+
+.tab[aria-selected="true"] {
+  color: var(--paper-2);
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+/* --- מסך ---------------------------------------------------------------- */
+
+.panel { padding-bottom: 40px; }
+
+.panel__title {
+  margin: 22px 0 0;
+  padding-top: 16px;
+  border-top: 3px solid var(--rule-hard);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.panel > .panel__title:first-child { margin-top: 4px; border-top: none; padding-top: 0; }
+
+.panel__sub {
+  margin: 22px 0 6px;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.panel__lede {
+  margin: 8px 0 16px;
+  font-size: 0.97rem;
+  line-height: 1.65;
+  color: var(--ink);
+  max-width: 68ch;
+}
+
+.panel__foot {
+  margin-top: 24px;
+  padding: 12px 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-inline-start: 6px solid var(--amber);
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.hint {
+  margin: 6px 0 10px;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 68ch;
+}
+
+.lbl {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: var(--ink-soft);
+}
+
+/* --- כפתורים ושדות ------------------------------------------------------ */
+
+.btn {
+  min-height: var(--tap);
+  padding: 9px 16px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn:hover { border-color: var(--navy); }
+
+.btn--primary {
+  color: var(--paper-2);
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+.btn--primary:hover { background: var(--navy-2); }
+
+.btn--quiet { background: transparent; color: var(--ink-soft); }
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.inp, .sel, .ta {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 9px 12px;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+}
+
+.ta {
+  font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 10px 0;
+}
+
+.chip {
+  min-height: 38px;
+  padding: 5px 13px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.chip:hover { border-color: var(--navy); }
+
+.chip[aria-pressed="true"] {
+  color: var(--paper-2);
+  background: var(--navy);
+  border-color: var(--navy);
+}
+
+/* --- מסך השיטה ---------------------------------------------------------- */
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.step {
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  border-inline-start: 8px solid var(--navy);
+}
+
+.step__num {
+  flex: none;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--paper-2);
+  background: var(--navy);
+  border-radius: 50%;
+}
+
+.step h3 {
+  margin: 4px 0 6px;
+  font-size: 1.02rem;
+  font-weight: 800;
+}
+
+.step__where {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--learn-accent);
+}
+
+.step p { margin: 0; font-size: 0.92rem; line-height: 1.6; }
+
+.anatomy {
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper-2);
+  overflow: hidden;
+}
+
+.anatomy__row {
+  display: flex;
+  gap: 12px;
+  padding: 11px 13px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.anatomy__row:last-child { border-bottom: none; }
+.anatomy__row--opt { background: #f1ede2; }
+
+/*
+  אות הפריט היא טקסט לטיני בתוך שורה עברית, והסוגר שאחריה נודד לצד
+  הלא נכון בלי כיוון כפוי: "Q)" נקרא "(Q". זה נראה כמו פגם קוסמטי
+  והוא אינו — אות פריט שקוראים אותה הפוך היא הדבר הראשון שמבלבל
+  את מי שבא ללמוד את הפריטים.
+*/
+.anatomy__key {
+  flex: none;
+  width: 62px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--navy);
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: right;
+}
+
+.anatomy__row p {
+  margin: 3px 0 0;
+  font-size: 0.87rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.anatomy__row > div { min-width: 0; }
+.anatomy__row .mono { word-break: break-all; }
+
+/* --- מפרק ההודעות ------------------------------------------------------- */
+
+.ex-why {
+  margin: 4px 0 14px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  background: var(--paper-2);
+  border-inline-start: 6px solid var(--amber);
+  border-radius: 6px;
+}
+
+.ex-body { display: grid; gap: 14px; }
+
+/*
+  ההודעה המקורית, חתוכה לחלקים לחיצים. כל חלק הוא כפתור מלא־רוחב
+  ולא מילה מודגשת: המטרה היא שיהיה **ברור שאפשר ללחוץ**, גם למי
+  שלא קרא את ההוראה שמעל.
+*/
+.ex-raw {
+  padding: 6px;
+  background: #efeade;
+  border: 2px solid var(--rule-hard);
+  border-radius: 8px;
+  direction: ltr;
+  text-align: left;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.seg {
+  display: block;
+  width: 100%;
+  margin: 2px 0;
+  padding: 6px 8px;
+  font: inherit;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--ink);
+  background: var(--paper-2);
+  border: 2px solid transparent;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.seg:hover { border-color: var(--navy); }
+
+.seg--on {
+  border-color: var(--navy);
+  background: #fff8dd;
+  box-shadow: inset 4px 0 0 var(--amber);
+}
+
+.seg--plain {
+  display: block;
+  padding: 4px 8px;
+  color: var(--ink-soft);
+  white-space: pre-wrap;
+  cursor: default;
+}
+
+.ex-explain {
+  padding: 13px 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  min-height: 120px;
+}
+
+.explain__title { margin: 0 0 8px; font-size: 1rem; font-weight: 800; }
+
+.explain__about { margin: 0 0 8px; font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft); }
+
+.explain__here {
+  margin: 0;
+  padding: 9px 11px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  background: #fff8dd;
+  border-inline-start: 5px solid var(--amber);
+  border-radius: 5px;
+}
+
+.explain__hint { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+.ex-nav { display: flex; gap: 8px; margin-top: 14px; }
+
+.fold--tight { margin-top: 18px; }
+
+@media (min-width: 860px) {
+  .ex-body { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* --- הפענוח המשותף ------------------------------------------------------ */
+
+.brk {
+  padding: 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  border-inline-start: 8px solid var(--navy);
+}
+
+.brk__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.brk__id {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.brk__sub {
+  margin: 20px 0 8px;
+  padding-top: 12px;
+  border-top: 2px solid var(--rule);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+.brk__err {
+  margin: 0 0 10px;
+  padding: 9px 11px;
+  font-size: 0.88rem;
+  color: #4a2c04;
+  background: #fef4e2;
+  border: 2px solid #b45309;
+  border-radius: 6px;
+}
+
+.brk__note {
+  margin: 8px 0 0;
+  padding: 8px 11px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  background: #efeade;
+  border-inline-start: 4px solid var(--navy);
+  border-radius: 0 6px 6px 0;
+}
+
+/* חמש השאלות — אותה שפה בכל מסך שמפענח הודעה. */
+.five {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 12px;
+  font-size: 0.92rem;
+}
+
+.five dt { font-weight: 800; color: var(--ink-soft); white-space: nowrap; }
+.five dd { margin: 0; line-height: 1.55; }
+
+.fields {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field {
+  padding: 10px 12px;
+  background: var(--paper);
+  border: 2px solid var(--rule);
+  border-radius: 6px;
+}
+
+.field__head { display: flex; align-items: baseline; gap: 8px; }
+
+.field__letter {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--paper-2);
+  background: var(--navy);
+  border-radius: 4px;
+  padding: 1px 6px;
+  /* ראו ההערה ב-.anatomy__key: בלי זה הסוגר קופץ לצד השני. */
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.field__name { font-size: 0.85rem; font-weight: 800; color: var(--ink-soft); }
+
+.field__raw {
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  background: #efeade;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  direction: ltr;
+  text-align: left;
+}
+
+.field__mean { margin: 8px 0 0; font-size: 0.9rem; line-height: 1.55; font-weight: 600; }
+.field__about { margin: 4px 0 0; font-size: 0.83rem; line-height: 1.5; color: var(--ink-soft); }
+
+.qtable-wrap { overflow-x: auto; margin-top: 8px; }
+
+.qtable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.87rem;
+}
+
+.qtable th, .qtable td {
+  padding: 8px 10px;
+  text-align: start;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.qtable thead th {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+  background: #efeade;
+  border-bottom: 2px solid var(--rule-hard);
+  white-space: nowrap;
+}
+
+.qtable td.mono { direction: ltr; text-align: left; white-space: nowrap; }
+.qtable__n { font-weight: 800; color: var(--ink-soft); }
+
+.qrow__note { display: block; font-size: 0.82rem; color: var(--ink-soft); margin-top: 2px; }
+.qrow__count { white-space: nowrap; }
+
+/* --- תגיות נוספות ------------------------------------------------------- */
+
+.badge--now    { color: #14532d; background: #e3f4e8; }
+.badge--past   { color: #3f3f46; background: #ececec; }
+.badge--type   { color: #1e3a5f; background: #e4eef7; }
+.badge--rep    { color: #713f12; background: #fdf3d7; }
+.badge--live   { color: #0f6fa8; background: #e4f1f9; }
+.badge--hot    { color: #7c2d12; background: #fdece0; }
+
+/* --- קיצור לחיץ וחלוניתו ------------------------------------------------ */
+
+.abbr {
+  font: inherit;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  color: var(--learn-accent);
+  background: #e4f1f9;
+  border: none;
+  border-bottom: 2px dotted var(--learn-accent);
+  border-radius: 3px;
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+.abbr:hover { background: #cfe6f5; }
+
+.abbr-pop {
+  position: absolute;
+  z-index: 900;
+  max-width: min(300px, calc(100vw - 24px));
+  padding: 12px 14px;
+  background: var(--paper-2);
+  border: 3px solid var(--rule-hard);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgb(16 22 29 / 30%);
+}
+
+.abbr-pop__x {
+  float: inline-end;
+  width: 28px;
+  height: 28px;
+  font: inherit;
+  color: var(--ink-soft);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.abbr-pop__term {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  direction: ltr;
+  text-align: left;
+}
+
+.abbr-pop__he { margin: 2px 0 0; font-size: 0.98rem; font-weight: 700; }
+.abbr-pop__note { margin: 6px 0 0; font-size: 0.86rem; line-height: 1.5; color: var(--ink-soft); }
+
+/* --- קוד Q -------------------------------------------------------------- */
+
+.qbuild { display: grid; gap: 14px; }
+
+.qbuild__out {
+  padding: 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+}
+
+.qbuild__code {
+  margin: 0 0 10px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--navy);
+  direction: ltr;
+  text-align: left;
+}
+
+.qbuild__read {
+  margin: 10px 0 0;
+  padding: 9px 11px;
+  font-size: 0.95rem;
+  background: #fff8dd;
+  border-inline-start: 5px solid var(--amber);
+  border-radius: 5px;
+}
+
+.qbuild__seen { margin: 10px 0 0; font-size: 0.88rem; }
+
+@media (min-width: 800px) {
+  .qbuild { grid-template-columns: 280px 1fr; align-items: start; }
+}
+
+.qfam {
+  margin-top: 22px;
+  padding: 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+}
+
+.qfam__list {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.qfam__list .mono {
+  display: inline-block;
+  width: 26px;
+  font-weight: 800;
+  color: var(--paper-2);
+  background: var(--navy);
+  border-radius: 4px;
+  text-align: center;
+  margin-inline-end: 8px;
+}
+
+@media (min-width: 720px) {
+  .qfam__list { grid-template-columns: 1fr 1fr; }
+}
+
+/* --- מילון -------------------------------------------------------------- */
+
+.gl-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.gl-item {
+  padding: 11px 13px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  border-inline-start: 6px solid var(--rule);
+}
+
+.gl-item--hot { border-inline-start-color: var(--amber); }
+
+.gl-item__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; }
+
+.gl-item__term {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--navy);
+}
+
+.gl-item__he { font-size: 0.95rem; font-weight: 700; }
+
+.gl-item__note { margin: 6px 0 0; font-size: 0.86rem; line-height: 1.55; color: var(--ink-soft); }
+
+.gl-item__use {
+  margin: 8px 0 0;
+  padding: 7px 9px;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  background: #efeade;
+  border-radius: 5px;
+}
+
+.gl-item__use .mono { direction: ltr; unicode-bidi: isolate; }
+
+.gl-item__use-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--paper-2);
+  background: var(--ink-soft);
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+/* --- כרטיסיות ----------------------------------------------------------- */
+
+.fc { margin-top: 12px; }
+
+/*
+  היפוך אמיתי ולא החלפת טקסט: התנועה היא מה שמלמד שיש צד שני, וילד
+  בן שלוש מבין אותה בלי הוראה. מי שכיבה אנימציות (prefers-reduced-
+  motion) מקבל החלפה מיידית — הכלל הכללי ב-style.css מטפל בזה.
+*/
+.fc-card {
+  position: relative;
+  min-height: 168px;
+  cursor: pointer;
+  perspective: 1000px;
+}
+
+.fc-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 18px;
+  text-align: center;
+  background: var(--paper-2);
+  border: 3px solid var(--rule-hard);
+  border-radius: 10px;
+  backface-visibility: hidden;
+  transition: transform 0.4s ease;
+}
+
+.fc-face--front { transform: rotateY(0deg); }
+.fc-face--back { transform: rotateY(180deg); background: #fff8dd; }
+.fc--flipped .fc-face--front { transform: rotateY(-180deg); }
+.fc--flipped .fc-face--back { transform: rotateY(0deg); }
+
+.fc-term {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--navy);
+  direction: ltr;
+}
+
+.fc-hint { font-size: 0.8rem; color: var(--ink-soft); }
+.fc-he { font-size: 1.35rem; font-weight: 800; }
+.fc-note { font-size: 0.87rem; line-height: 1.5; color: var(--ink-soft); }
+.fc-done { font-size: 1.2rem; font-weight: 800; }
+
+.fc-progress {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.fc-score { margin: 4px 0 0; font-size: 0.95rem; font-weight: 800; }
+
+/* --- מלכודות ------------------------------------------------------------ */
+
+.traps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  counter-reset: trap;
+}
+
+.trap {
+  position: relative;
+  padding: 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  border-inline-start: 8px solid var(--alert);
+}
+
+.trap__what {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.trap__wrong, .trap__right {
+  margin: 6px 0 0;
+  padding: 8px 11px;
+  font-size: 0.91rem;
+  line-height: 1.55;
+  border-radius: 5px;
+}
+
+.trap__wrong {
+  color: #4a0c0f;
+  background: var(--no-bg);
+  border-inline-start: 4px solid var(--no);
+}
+
+.trap__right {
+  color: #0d3f21;
+  background: var(--ok-bg);
+  border-inline-start: 4px solid var(--ok);
+}
+
+/* --- ממיר זמנים --------------------------------------------------------- */
+
+.cv { display: grid; gap: 14px; }
+
+.cv__controls {
+  padding: 12px 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+}
+
+.cv__controls .btn { margin-top: 12px; }
+
+.cv__out {
+  padding: 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+}
+
+.cv-line { margin: 0 0 8px; font-size: 0.95rem; }
+.cv-line--big { font-size: 1.15rem; }
+.cv-line--big strong { font-variant-numeric: tabular-nums; }
+
+.cv-line__tag {
+  display: inline-block;
+  min-width: 108px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 800px) {
+  .cv { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* --- תרגול -------------------------------------------------------------- */
+
+.quiz-bar {
+  height: 8px;
+  background: var(--rule);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.quiz-bar__fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: var(--navy);
+  transition: width 0.25s ease;
+}
+
+.quiz-box {
+  margin-top: 10px;
+  padding: 14px;
+  background: var(--paper-2);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+}
+
+.quiz-q { margin: 0 0 10px; font-size: 1.05rem; font-weight: 800; line-height: 1.5; }
+
+.quiz-raw {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  background: #efeade;
+  border-inline-start: 4px solid var(--navy);
+  border-radius: 0 6px 6px 0;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+  direction: ltr;
+  text-align: left;
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.quiz-options {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quiz-opt {
+  width: 100%;
+  min-height: var(--tap);
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: start;
+  color: var(--ink);
+  background: var(--paper);
+  border: 2px solid var(--rule);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.quiz-opt:hover:not(:disabled) { border-color: var(--navy); }
+.quiz-opt:disabled { cursor: default; }
+
+.quiz-opt--right { color: #0d3f21; background: var(--ok-bg); border-color: var(--ok); }
+.quiz-opt--wrong { color: #4a0c0f; background: var(--no-bg); border-color: var(--no); }
+
+.quiz-feedback:empty { display: none; }
+.quiz-feedback { margin-top: 14px; }
+
+.quiz-verdict { margin: 0 0 6px; font-size: 1rem; font-weight: 800; }
+.quiz-verdict.is-right { color: var(--ok); }
+.quiz-verdict.is-wrong { color: var(--no); }
+
+.quiz-why {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  background: #efeade;
+  border-inline-start: 4px solid var(--navy);
+  border-radius: 0 6px 6px 0;
+}
+
+.quiz-done { text-align: center; padding: 20px 10px; }
+.quiz-done__score { margin: 0; font-size: 2.2rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.quiz-done__note { margin: 8px 0 0; font-size: 1rem; color: var(--ink-soft); }
+
+/* --- מסכים גדולים ------------------------------------------------------- */
+
+@media (min-width: 720px) {
+  .lede { font-size: 1.05rem; }
+  .panel__title { font-size: 1.5rem; }
+  .ex-raw { font-size: 0.88rem; }
+}

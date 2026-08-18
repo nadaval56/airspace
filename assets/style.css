@@ -125,6 +125,67 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .freshness--stale .freshness__label,
 .freshness--stale .freshness__note { color: #ffc2c2; }
 
+/*
+  הדלת לעמוד הלימוד. כפתור ולא קישור טקסט: השאלה "איך קוראים נוטאם"
+  היא שאלה שמי ששואל אותה לא יודע שיש לה תשובה כאן, ולכן היא צריכה
+  להיראות כמו משהו שנכנסים אליו.
+
+  ענבר על כחול — אותו צמד שכבר משמש בדף לדברים שדורשים מבט. הוא
+  יושב מתחת לחותמת הזמן, כדי שלא ידחוף אותה מטה.
+*/
+.learn-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 11px 14px;
+  color: var(--paper-2);
+  text-decoration: none;
+  background: var(--navy-2);
+  border: 2px solid var(--amber);
+  border-radius: 8px;
+  min-height: var(--tap);
+}
+
+.learn-link:hover { background: #31465c; }
+
+.learn-link__q {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--navy);
+  background: var(--amber);
+  border-radius: 50%;
+}
+
+.learn-link__text { flex: 1; min-width: 0; }
+
+.learn-link__text strong {
+  display: block;
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #fff;
+}
+
+.learn-link__sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #cfd9e3;
+}
+
+.learn-link__arrow {
+  flex: none;
+  font-size: 1.2rem;
+  color: var(--amber);
+}
+
 /* --- באנר NFOU -------------------------------------------------------- */
 
 .nfou {

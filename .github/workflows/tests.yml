@@ -2,7 +2,10 @@ name: בדיקות
 
 on:
   push:
-    paths: ['scripts/**', 'requirements.txt', '.github/workflows/tests.yml']
+    # assets/learn.js נמצא כאן מפני ש-test_learn_tables משווה את
+    # טבלאות הפענוח שבו למודול הפייתון. שינוי בו בלבד חייב להריץ
+    # את הבדיקות, אחרת הסטייה שהן שומרות מפניה תעבור בשקט.
+    paths: ['scripts/**', 'assets/learn.js', 'requirements.txt', '.github/workflows/tests.yml']
   pull_request:
   workflow_dispatch:
 
