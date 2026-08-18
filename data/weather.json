@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-18T03:54:00Z",
- "last_success": "2026-08-18T03:54:00Z",
+ "generated_at": "2026-08-18T04:46:04Z",
+ "last_success": "2026-08-18T04:46:04Z",
  "last_error": {
   "at": "2026-08-17T22:34:59Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -29,10 +29,20 @@
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 180350Z 14005KT 9999 FEW030 25/18 Q1010 NOSIG=",
+   "text": "METAR LLBG 180420Z VRB03KT 9999 FEW030 25/19 Q1010 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 180000 TILL 190000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 3 THOUSAND 5",
+   "truncated": true,
+   "valid_from": "180000",
+   "valid_to": "190000",
    "area": null
   },
   {
@@ -63,16 +73,6 @@
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 180000 TILL 190000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 3 THOUSAND 5",
-   "truncated": true,
-   "valid_from": "180000",
-   "valid_to": "190000",
    "area": null
   },
   {
