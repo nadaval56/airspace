@@ -182,6 +182,72 @@ BBOX = {"min_lat": 29.0, "max_lat": 33.5, "min_lon": 34.0, "max_lon": 36.0}
 # מפנה טייס למקום אחר, ולכן היא אינה מצוירת והחוסר נאמר בקול.
 SAME_SITE_LIMIT_M = 1000
 
+# ---------------------------------------------------------------------------
+# תיקוני מקור מוצהרים
+# ---------------------------------------------------------------------------
+#
+# הכלל בכל הקבצים האלה הוא לא לגעת במספרים של הפמ"ת. כאן יש חריג אחד,
+# והוא כתוב במלואו כדי שאפשר יהיה לחלוק עליו:
+#
+#     הפמ"ת נותן למשטח המוגבה בהדסה עין כרם 31°45'08"N 035°08'57"E.
+#     המשטח נמצא בפועל ב-31°45'58.8"N 035°08'57.9"E — על גג בית החולים,
+#     כפי שנראה בבירור בצילום אוויר (עיגול נחיתה מסומן על הגג).
+#
+#     **קו האורך במקור נכון עד 23 מטר.** רק שניות קו הרוחב שגויות:
+#     '08 במקום '58. ספרה אחת, 1,570 מטר.
+#
+# תיקון כזה אינו ניחוש והוא גם לא נסתר: הנקודה מסומנת במקומה האמיתי,
+# והחלונית אומרת מה כתוב במקור, מה נמדד, ולמה. בלי התיקון הנקודה
+# פשוט לא הייתה מצוירת (ראו SAME_SITE_LIMIT_M) — כלומר החלופה אינה
+# "נאמנות למקור" אלא משטח נחיתה שנעלם מהמפה.
+#
+# **התיקון מבטל את עצמו כשהמקור יתוקן.** הוא חל רק אם הערך שחולץ עדיין
+# זהה לזה שמתועד כאן; אחרת הוא מדווח ואינו מוחל, כדי שגרסה חדשה של
+# הפמ"ת לא תקבל תיקון של גרסה ישנה.
+CORRECTION_MATCH_M = 60
+
+SOURCE_CORRECTIONS: tuple[dict, ...] = (
+    {
+        "field": "הדסה עין כרם",
+        "surface": "מנחת מוגבה על גג בניין",
+        "source": (31.75222, 35.14917),
+        "source_text": "31°45'08\"N 035°08'57\"E",
+        "actual": (31.76634, 35.14941),
+        "actual_text": "31°45'58.8\"N 035°08'57.9\"E",
+        "evidence": "צילום אוויר — עיגול הנחיתה מסומן על גג בית החולים",
+    },
+)
+
+
+def _correction_for(
+    field: str, surface: str | None, coords: tuple[float, float]
+) -> tuple[dict | None, str | None]:
+    """(התיקון שחל על הנקודה הזאת, אזהרה). שניהם None כשאין תיקון."""
+    for entry in SOURCE_CORRECTIONS:
+        if entry["field"] not in field:
+            continue
+        if entry["surface"] and entry["surface"] != (surface or ""):
+            continue
+        gap = distance_m(entry["source"], coords)
+        if gap <= CORRECTION_MATCH_M:
+            return entry, None
+        return None, (
+            f'תיקון מתועד ל"{entry["surface"] or field}" אינו חל: המקור נותן עכשיו '
+            f"{coords[0]:.5f},{coords[1]:.5f} במקום {entry['source'][0]:.5f},"
+            f"{entry['source'][1]:.5f}. אולי הפמ\"ת תוקן — יש לבדוק מחדש."
+        )
+    return None, None
+
+
+def correction_note(entry: dict) -> str:
+    """מה שהחלונית תציג. אומר גם מה כתוב במקור וגם מה נמדד."""
+    return (
+        f"מיקום מתוקן. הפמ\"ת נותן {entry['source_text']}, ושם אין משטח נחיתה — "
+        f"זה נופל כקילומטר וחצי דרומה. המשטח נמצא ב-{entry['actual_text']} "
+        f"({entry['evidence']}), וההפרש הוא ספרה אחת בשניות קו הרוחב. "
+        f"המקור הוא הקובע; הנקודה מסומנת במקום שבו המשטח באמת נמצא."
+    )
+
 
 def distance_m(first: tuple[float, float], second: tuple[float, float]) -> float:
     """מרחק בין שתי נקודות במטרים (הברסין)."""
@@ -535,8 +601,21 @@ def parse_field(
                 f"לא פורסם גובה."
             )
 
+        # תיקון מוצהר, אם יש כזה לנקודה הזאת. ראו SOURCE_CORRECTIONS.
+        note = None
+        entry, correction_warning = _correction_for(name, label, coords)
+        if correction_warning:
+            warnings.append(f"{name}: {correction_warning}")
+        if entry:
+            coords = entry["actual"]
+            note = correction_note(entry)
+            warnings.append(
+                f"{name} — {label or 'משטח'}: הוחל תיקון מיקום מתועד "
+                f"({entry['source_text']} → {entry['actual_text']})."
+            )
+
         # משטח שני שרחוק מהראשון יותר מקילומטר אינו יכול להיות באותו
-        # מתקן. ראו SAME_SITE_LIMIT_M — זה בדיוק המקרה של הגג בהדסה.
+        # מתקן. ראו SAME_SITE_LIMIT_M.
         if records:
             gap = distance_m((records[0]["lat"], records[0]["lon"]), coords)
             if gap > SAME_SITE_LIMIT_M:
@@ -563,7 +642,7 @@ def parse_field(
             "lon": coords[1],
             "elevation_ft": elevation,
             "atz_radius_nm": radius,
-            "note": None,
+            "note": note,
             "pages": [min(pages), max(pages)],
         })
     return records, warnings
