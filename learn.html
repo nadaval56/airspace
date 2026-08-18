@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="איך קוראים נוטאם — מדריך אינטראקטיבי בעברית: מפרק הודעות, מפענח חי, מילון קיצורים, טבלת קוד Q, מלכודות נפוצות ותרגול.">
+<meta name="description" content="איך קוראים נוטאם — מדריך אינטראקטיבי בעברית: מפרק הודעות, מילון קיצורים, טבלת קוד Q, מלכודות נפוצות ותרגול.">
 <meta name="theme-color" content="#1c2b3a">
 <title>איך קוראים נוטאם? — מגבלות מרחב אווירי</title>
 
@@ -14,19 +14,26 @@
 </head>
 <body class="learn">
 
+<!--
+  ניווט האתר. שלוש לשוניות, ולא כפתור שמוביל לעמוד "אחר": שלושת
+  המסכים שווי־מעמד. המפה עונה "איפה מותר", הלימוד עונה "מה כתוב
+  שם", והמפענח הוא הכלי — מי שכבר יודע לקרוא עדיין רוצה להדביק
+  הודעה ולקבל תשובה בלי לעבור דרך שיעור.
+
+  קישורים ולא כפתורי JS: כל לשונית היא עמוד עם כתובת משלה, שאפשר
+  לשמור במועדפים ולשלוח בוואטסאפ. `aria-current` מסמן היכן אנחנו.
+-->
+<nav class="sitenav" aria-label="מסכי האתר">
+  <div class="wrap sitenav__inner">
+    <a class="sitenav__tab" href="index.html">איפה אפשר לטוס</a>
+    <a class="sitenav__tab sitenav__tab--on" href="learn.html" aria-current="page">איך קוראים נוטאם</a>
+    <a class="sitenav__tab" href="decode.html">מפענח נוטאם</a>
+  </div>
+</nav>
+
 <header class="masthead">
   <div class="wrap">
-    <!--
-      החזרה קודמת לכל השאר, ובראש העמוד ממש. מי שנכנס לכאן מתוך המפה
-      עשוי לרצות לחזור אליה תוך שניות, ואסור שהדרך חזרה תהיה גלילה
-      עד התחתית או כפתור "אחורה" של הדפדפן.
-    -->
-    <a class="backlink" href="index.html">
-      <span class="backlink__arrow" aria-hidden="true">←</span>
-      חזרה למפה — איפה אפשר לטוס
-    </a>
-
-    <p class="eyebrow">חלק ב' · פענוח</p>
+    <p class="eyebrow">חלק ב' · לימוד</p>
     <h1>איך קוראים נוטאם?</h1>
     <p class="lede">
       נוטאם נראה כמו ג'יבריש מפני שהוא נכתב למחשב לפני שנכתב לאדם.
@@ -52,7 +59,6 @@
 <nav class="tabs wrap" role="tablist" aria-label="דרכי לימוד">
   <button type="button" class="tab" role="tab" data-tab="method"  aria-selected="true">השיטה</button>
   <button type="button" class="tab" role="tab" data-tab="dissect" aria-selected="false">מפרק הודעות</button>
-  <button type="button" class="tab" role="tab" data-tab="decode"  aria-selected="false">מפענח חי</button>
   <button type="button" class="tab" role="tab" data-tab="qcode"   aria-selected="false">קוד Q</button>
   <button type="button" class="tab" role="tab" data-tab="words"   aria-selected="false">מילון וכרטיסיות</button>
   <button type="button" class="tab" role="tab" data-tab="traps"   aria-selected="false">מלכודות</button>
@@ -162,7 +168,8 @@
 
   <p class="panel__foot">
     מוכנים? עברו ל<strong>מפרק ההודעות</strong> ופרקו תשע הודעות
-    אמיתיות, אחת־אחת.
+    אמיתיות, אחת־אחת. ואם כבר יש לכם הודעה ביד שצריך לפענח עכשיו —
+    היא שייכת ל<a href="decode.html">מפענח</a>, בלשונית השלישית למעלה.
   </p>
 </section>
 
@@ -193,29 +200,7 @@
   </details>
 </section>
 
-<!-- ===================== 3. מפענח ===================== -->
-<section class="panel" role="tabpanel" data-panel="decode" aria-label="מפענח חי" hidden>
-  <h2 class="panel__title">הדביקו נוטאם — קבלו עברית</h2>
-  <p class="panel__lede">
-    מכל מקום: מהתדריך, מהאתר של רש"ת, מקבוצת הוואטסאפ של המועדון.
-    הפענוח רץ בדפדפן שלכם בלבד — לדף הזה אין שרת, ואין לאן לשלוח.
-  </p>
-
-  <label class="lbl" for="dec-input">טקסט הנוטאם</label>
-  <textarea id="dec-input" class="ta" rows="8" spellcheck="false" dir="ltr"
-    placeholder="(C1764/26 NOTAMN&#10;Q) LLLL/QWULW/IV/BO /W /000/037/3058N03456E001&#10;A) LLLL B) 2608230300 C) 2608271430&#10;..."></textarea>
-
-  <div class="btn-row">
-    <button type="button" class="btn btn--primary" id="dec-run">פענח</button>
-    <button type="button" class="btn" id="dec-sample">הודעה אמיתית מהפיד</button>
-    <button type="button" class="btn btn--quiet" id="dec-clear">נקה</button>
-  </div>
-  <p class="hint">טיפ: <span class="mono">Ctrl+Enter</span> מפענח בלי לעזוב את המקלדת.</p>
-
-  <div id="dec-out" class="dec-out"></div>
-</section>
-
-<!-- ===================== 4. קוד Q ===================== -->
+<!-- ===================== 3. קוד Q ===================== -->
 <section class="panel" role="tabpanel" data-panel="qcode" aria-label="קוד Q" hidden>
   <h2 class="panel__title">חמש אותיות שמספרות את כל הסיפור</h2>
   <p class="panel__lede">
@@ -274,7 +259,7 @@
   <div id="q-table" class="qtable-wrap"></div>
 </section>
 
-<!-- ===================== 5. מילון ===================== -->
+<!-- ===================== 4. מילון ===================== -->
 <section class="panel" role="tabpanel" data-panel="words" aria-label="מילון וכרטיסיות" hidden>
   <h2 class="panel__title">המילון</h2>
   <p class="panel__lede">
@@ -313,7 +298,7 @@
   </div>
 </section>
 
-<!-- ===================== 6. מלכודות ===================== -->
+<!-- ===================== 5. מלכודות ===================== -->
 <section class="panel" role="tabpanel" data-panel="traps" aria-label="מלכודות" hidden>
   <h2 class="panel__title">שמונה קריאות שגויות שקורות לכולם</h2>
   <p class="panel__lede">
@@ -381,7 +366,7 @@
   </div>
 </section>
 
-<!-- ===================== 7. תרגול ===================== -->
+<!-- ===================== 6. תרגול ===================== -->
 <section class="panel" role="tabpanel" data-panel="quiz" aria-label="תרגול" hidden>
   <h2 class="panel__title">עשר שאלות</h2>
   <p class="panel__lede">
@@ -401,8 +386,7 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <p><a href="index.html">← חזרה למפה: איפה אפשר לטוס</a></p>
-    <p>הדוגמאות החיות נמשכות מאותו קובץ שמזין את המפה, ונשמרות בתוך המאגר. הדף אינו פונה למקור חיצוני.</p>
+    <p>הדוגמאות החיות נמשכות מאותו קובץ שמזין את <a href="index.html">המפה</a>, ונשמרות בתוך המאגר. הדף אינו פונה למקור חיצוני.</p>
     <p><a href="https://github.com/nadaval56/airspace">קוד המקור והסבר על מגבלות הנתונים</a></p>
   </div>
 </footer>

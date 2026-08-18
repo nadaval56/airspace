@@ -15,6 +15,23 @@
 </head>
 <body>
 
+<!--
+  ניווט האתר. שלוש לשוניות, ולא כפתור שמוביל לעמוד "אחר": שלושת
+  המסכים שווי־מעמד. המפה עונה "איפה מותר", הלימוד עונה "מה כתוב
+  שם", והמפענח הוא הכלי — מי שכבר יודע לקרוא עדיין רוצה להדביק
+  הודעה ולקבל תשובה בלי לעבור דרך שיעור.
+
+  קישורים ולא כפתורי JS: כל לשונית היא עמוד עם כתובת משלה, שאפשר
+  לשמור במועדפים ולשלוח בוואטסאפ. `aria-current` מסמן היכן אנחנו.
+-->
+<nav class="sitenav" aria-label="מסכי האתר">
+  <div class="wrap sitenav__inner">
+    <a class="sitenav__tab sitenav__tab--on" href="index.html" aria-current="page">איפה אפשר לטוס</a>
+    <a class="sitenav__tab" href="learn.html">איך קוראים נוטאם</a>
+    <a class="sitenav__tab" href="decode.html">מפענח נוטאם</a>
+  </div>
+</nav>
+
 <header class="masthead">
   <div class="wrap">
     <p class="eyebrow">מגבלות מרחב אווירי — ישראל</p>
@@ -26,23 +43,6 @@
       <strong class="freshness__value" id="freshness-value">טוען…</strong>
       <span class="freshness__note" id="freshness-note"></span>
     </div>
-
-    <!--
-      הדלת לחלק ב'. המפה עונה על "איפה אפשר לטוס"; מי שפותח נוטאם
-      ולא מבין מה כתוב בו נתקע בשאלה שקודמת לה, וזו שאלה שאין לה
-      מקום על המפה עצמה. לכן היא עמוד נפרד, וזה הכפתור אליו.
-
-      הוא יושב מתחת לחותמת הזמן ולא מעליה בכוונה: חותמת הזמן היא
-      הדבר שאסור לפספס, ושום דבר לא ידחוף אותה למטה.
-    -->
-    <a class="learn-link" href="learn.html">
-      <span class="learn-link__q" aria-hidden="true">?</span>
-      <span class="learn-link__text">
-        <strong>איך קוראים נוטאם?</strong>
-        <span class="learn-link__sub">מדריך אינטראקטיבי: מפרק הודעות, מפענח, מילון ותרגול</span>
-      </span>
-      <span class="learn-link__arrow" aria-hidden="true">←</span>
-    </a>
   </div>
 </header>
 

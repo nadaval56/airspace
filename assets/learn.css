@@ -46,32 +46,6 @@
 
 .lede strong { color: #fff; }
 
-/* --- כפתור החזרה -------------------------------------------------------- */
-
-/*
-  ראשון בעמוד, לפני הכותרת. מי שהגיע מהמפה צריך למצוא את הדרך חזרה
-  בלי לחשוב — ולכן זה קישור מלא־רוחב עם מטרה גדולה לאצבע, ולא חץ
-  קטן בפינה.
-*/
-.backlink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 40px;
-  margin-bottom: 10px;
-  padding: 6px 14px 6px 12px;
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: var(--navy);
-  background: var(--amber);
-  border: 2px solid var(--amber);
-  border-radius: 999px;
-  text-decoration: none;
-}
-
-.backlink:hover { background: #ffc61a; }
-.backlink__arrow { font-size: 1.1rem; line-height: 1; }
-
 .feed-note {
   margin: 12px 0 0;
   padding: 8px 12px;

@@ -125,65 +125,73 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 .freshness--stale .freshness__label,
 .freshness--stale .freshness__note { color: #ffc2c2; }
 
-/*
-  הדלת לעמוד הלימוד. כפתור ולא קישור טקסט: השאלה "איך קוראים נוטאם"
-  היא שאלה שמי ששואל אותה לא יודע שיש לה תשובה כאן, ולכן היא צריכה
-  להיראות כמו משהו שנכנסים אליו.
+/* --- ניווט האתר ------------------------------------------------------- */
 
-  ענבר על כחול — אותו צמד שכבר משמש בדף לדברים שדורשים מבט. הוא
-  יושב מתחת לחותמת הזמן, כדי שלא ידחוף אותה מטה.
+/*
+  שלוש לשוניות בראש כל עמוד. הן קישורים ולא כפתורי JS, ולכן כל מסך
+  הוא כתובת שאפשר לשמור, לשלוח ולפתוח בלשונית חדשה — ולכן גם כפתור
+  "אחורה" של הדפדפן עושה כאן בדיוק את מה שמצפים ממנו.
+
+  הרצועה יושבת מעל הכותרת ולא בתוכה: היא שייכת לאתר כולו ולא לעמוד
+  אחד, וכשהיא במקום קבוע העין לומדת אותה אחרי מעבר אחד.
 */
-.learn-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 12px;
-  padding: 11px 14px;
-  color: var(--paper-2);
-  text-decoration: none;
-  background: var(--navy-2);
-  border: 2px solid var(--amber);
-  border-radius: 8px;
-  min-height: var(--tap);
+.sitenav {
+  background: #16222e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.learn-link:hover { background: #31465c; }
+.sitenav__inner {
+  display: flex;
+  gap: 4px;
+  padding-block: 6px;
+}
 
-.learn-link__q {
-  flex: none;
-  width: 32px;
-  height: 32px;
+/*
+  `flex: 1` ולא רוחב לפי תוכן: שלוש לשוניות שוות אומרות "שלושה
+  מסכים שווי־מעמד", ורוחב לפי תוכן היה הופך את הקצרה מביניהן
+  למשנית. במסך צר התווית נשברת לשתי שורות ונשארת מלאה — קיצור
+  שלה ל"מפה" ו"לימוד" היה חוסך פיקסלים ומוחק את המשמעות.
+*/
+.sitenav__tab {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem;
+  min-height: var(--tap);
+  padding: 6px 8px;
+  font-size: 0.84rem;
   font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+  color: #b9c6d4;
+  background: transparent;
+  /* מסגרת דקה ולא שקופה: בלעדיה הלשונית הכבויה נקראת ככותרת
+     ולא כמטרה, ואנשים לא מנסים ללחוץ על מה שלא נראה לחיץ. */
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+
+.sitenav__tab:hover {
+  color: #fff;
+  background: var(--navy-2);
+}
+
+/* הלשונית הפעילה נושאת את הענבר — אותו סימן שכבר אומר בדף הזה
+   "כאן צריך להסתכל". */
+.sitenav__tab--on {
   color: var(--navy);
   background: var(--amber);
-  border-radius: 50%;
+  border-color: var(--amber);
 }
 
-.learn-link__text { flex: 1; min-width: 0; }
-
-.learn-link__text strong {
-  display: block;
-  font-size: 1.02rem;
-  font-weight: 800;
-  color: #fff;
+.sitenav__tab--on:hover {
+  color: var(--navy);
+  background: #ffc61a;
 }
 
-.learn-link__sub {
-  display: block;
-  margin-top: 2px;
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: #cfd9e3;
-}
-
-.learn-link__arrow {
-  flex: none;
-  font-size: 1.2rem;
-  color: var(--amber);
+@media (min-width: 560px) {
+  .sitenav__tab { font-size: 0.92rem; }
 }
 
 /* --- באנר NFOU -------------------------------------------------------- */
