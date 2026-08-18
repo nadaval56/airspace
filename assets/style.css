@@ -842,6 +842,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 /* --- תחתית ------------------------------------------------------------ */
 
 .site-footer {
+  margin-top: 8px;
   border-top: 3px solid var(--rule-hard);
   background: var(--navy);
   color: #cfd9e3;
@@ -1149,7 +1150,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   אזהרה. הבאנר נושא את המשפט האחד שאסור לפספס; הפירוט כאן, פתוח
   בלחיצה, ומקושר משם.
 */
-.limits { margin: 28px auto 0; }
+/* הקיפול נגע בתחתית האתר וקצה הקופסה נבלע בקו העליון שלה — שתי
+   מסגרות שנפגשות בלי אוויר נקראות כאלמנט אחד שבור. */
+.limits { margin: 28px auto 36px; }
 
 .limits summary {
   font-weight: 800;
