@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="מפענח נוטאם — הדביקו הודעה גולמית וקבלו פענוח מלא בעברית: שורת Q שדה־שדה, זמנים בשעון ישראל, גבהים וקיצורים.">
+<meta name="theme-color" content="#1c2b3a">
+<title>מפענח נוטאם — מגבלות מרחב אווירי</title>
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231c2b3a'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23e8b100' stroke-width='2.5' stroke-dasharray='4 3'/%3E%3Ccircle cx='16' cy='16' r='2.5' fill='%23e8b100'/%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/learn.css">
+</head>
+<body class="learn">
+
+<!--
+  ניווט האתר. שלוש לשוניות, ולא כפתור שמוביל לעמוד "אחר": שלושת
+  המסכים שווי־מעמד. המפה עונה "איפה מותר", הלימוד עונה "מה כתוב
+  שם", והמפענח הוא הכלי — מי שכבר יודע לקרוא עדיין רוצה להדביק
+  הודעה ולקבל תשובה בלי לעבור דרך שיעור.
+
+  קישורים ולא כפתורי JS: כל לשונית היא עמוד עם כתובת משלה, שאפשר
+  לשמור במועדפים ולשלוח בוואטסאפ. `aria-current` מסמן היכן אנחנו.
+-->
+<nav class="sitenav" aria-label="מסכי האתר">
+  <div class="wrap sitenav__inner">
+    <a class="sitenav__tab" href="index.html">איפה אפשר לטוס</a>
+    <a class="sitenav__tab" href="learn.html">איך קוראים נוטאם</a>
+    <a class="sitenav__tab sitenav__tab--on" href="decode.html" aria-current="page">מפענח נוטאם</a>
+  </div>
+</nav>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">כלי · פענוח</p>
+    <h1>מפענח נוטאם</h1>
+    <!--
+      עמוד של מסך אחד, ולכן ההסבר קצר: מי שהגיע לכאן מחזיק הודעה
+      ביד ורוצה תשובה, לא הקדמה. הלימוד המלא נמצא בלשונית שלידו.
+    -->
+    <p class="lede">
+      הדביקו הודעה גולמית — מהתדריך, מאתר רש"ת, מקבוצת הוואטסאפ של
+      המועדון — וקבלו אותה מפורקת לשדותיה, בעברית, עם הזמנים בשעון
+      ישראל. <strong>הכול רץ בדפדפן שלכם;</strong> לדף אין שרת, ואין
+      לאן לשלוח.
+    </p>
+    <p class="feed-note" id="feed-note">טוען דוגמאות מהפיד…</p>
+  </div>
+</header>
+
+<aside class="nfou" role="note">
+  <div class="wrap">
+    <p class="nfou__main">כלי הבנה. אינו מיועד לשימוש מבצעי ואינו מחליף תדריך רשמי.</p>
+    <p class="nfou__sub">הפענוח אוטומטי, וההחלטה נשענת על ההודעה המקורית — היא מוצגת כאן במלואה, בלי נגיעה.</p>
+  </div>
+</aside>
+
+<main class="wrap">
+  <section class="panel" aria-label="מפענח נוטאם">
+    <label class="lbl" for="dec-input">טקסט הנוטאם</label>
+    <textarea id="dec-input" class="ta" rows="8" spellcheck="false" dir="ltr"
+      placeholder="(C1764/26 NOTAMN&#10;Q) LLLL/QWULW/IV/BO /W /000/037/3058N03456E001&#10;A) LLLL B) 2608230300 C) 2608271430&#10;..."></textarea>
+
+    <div class="btn-row">
+      <button type="button" class="btn btn--primary" id="dec-run">פענח</button>
+      <button type="button" class="btn" id="dec-sample">הודעה אמיתית מהפיד</button>
+      <button type="button" class="btn btn--quiet" id="dec-clear">נקה</button>
+    </div>
+    <p class="hint">
+      טיפ: <span class="mono">Ctrl+Enter</span> מפענח בלי לעזוב את המקלדת.
+      כל קיצור מוכר בטקסט המקורי הוא כפתור — לחצו עליו כדי לראות מה הוא.
+    </p>
+
+    <div id="dec-out" class="dec-out"></div>
+
+    <p class="panel__foot">
+      לא בטוחים מה אתם קוראים? <a href="learn.html">איך קוראים נוטאם</a>
+      מלמד את השיטה מההתחלה — חמש שאלות, מפרק הודעות, מילון קיצורים
+      ותרגול.
+    </p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>הפענוח נעשה בדפדפן בלבד. הטקסט שהדבקתם אינו נשלח לשום מקום.</p>
+    <p>הדוגמאות מהפיד נמשכות מאותו קובץ שמזין את <a href="index.html">המפה</a>, ונשמרות בתוך המאגר.</p>
+    <p><a href="https://github.com/nadaval56/airspace">קוד המקור והסבר על מגבלות הנתונים</a></p>
+  </div>
+</footer>
+
+<!--
+  אותו קובץ שמשרת את עמוד הלימוד. הוא נושא גם את המילון, את החידון
+  ואת שאר המסכים שאינם כאן — ובכל זאת הוא אחד: הפרסור, טבלאות
+  הפענוח והרינדור משותפים לשני העמודים, וקובץ שני היה מייצר בדיוק
+  את הסטייה שהעמודים האלה נועדו למנוע. כל מודול בודק אם ה-DOM שלו
+  קיים לפני שהוא נדלק, ולכן כאן נדלק המפענח בלבד.
+-->
+<script src="assets/learn.js"></script>
+</body>
+</html>

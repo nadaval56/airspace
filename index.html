@@ -15,6 +15,23 @@
 </head>
 <body>
 
+<!--
+  ניווט האתר. שלוש לשוניות, ולא כפתור שמוביל לעמוד "אחר": שלושת
+  המסכים שווי־מעמד. המפה עונה "איפה מותר", הלימוד עונה "מה כתוב
+  שם", והמפענח הוא הכלי — מי שכבר יודע לקרוא עדיין רוצה להדביק
+  הודעה ולקבל תשובה בלי לעבור דרך שיעור.
+
+  קישורים ולא כפתורי JS: כל לשונית היא עמוד עם כתובת משלה, שאפשר
+  לשמור במועדפים ולשלוח בוואטסאפ. `aria-current` מסמן היכן אנחנו.
+-->
+<nav class="sitenav" aria-label="מסכי האתר">
+  <div class="wrap sitenav__inner">
+    <a class="sitenav__tab sitenav__tab--on" href="index.html" aria-current="page">איפה אפשר לטוס</a>
+    <a class="sitenav__tab" href="learn.html">איך קוראים נוטאם</a>
+    <a class="sitenav__tab" href="decode.html">מפענח נוטאם</a>
+  </div>
+</nav>
+
 <header class="masthead">
   <div class="wrap">
     <p class="eyebrow">מגבלות מרחב אווירי — ישראל</p>
