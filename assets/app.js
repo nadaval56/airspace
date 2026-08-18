@@ -996,7 +996,13 @@ const PANELS = [
     id: 'aip',
     toggle: 'toggle-aip',
     label: 'מגבלות קבועות (פמ"ת)',
-    open: true,
+    /*
+      כל הקופסאות נפתחות סגורות. פתוחות הן תפסו מסך שלם של תיבות
+      סימון בין המפה לרשימה, ומי שגלל מהמפה למטה עבר דרך לוח בקרה
+      שהוא לא ביקש. שורת הכותרת לבדה מספיקה לפעולה הנפוצה — לכבות
+      שכבה שלמה — והפירוט נפתח למי שרוצה לדייק.
+    */
+    open: false,
     on: true,
     axes: [
       {
@@ -1023,7 +1029,7 @@ const PANELS = [
     id: 'notam',
     toggle: 'toggle-notam',
     label: 'מגבלות זמניות (נוטאם)',
-    open: true,
+    open: false,
     on: true,
     axes: [
       { title: 'כל הנושאים', prefix: 'notam', dashed: true,
@@ -1141,15 +1147,13 @@ function renderControls() {
     <div class="controls__col">${primary}</div>
     <div class="controls__col">${secondary}</div>` + `
     <p class="legend__note">
-      קו מלא — מגבלה קבועה · קו מקווקו — נוטאם ·
-      <span style="color:${CVFR_COLOR}">סגול</span> = פרוזדור CVFR פתוח ·
-      <span style="color:${NOTAM_LOW}">ורוד</span> = רצפה מתחת
-      ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל.
-      נוטאם שגבולו מפורט בגוף ההודעה מצויר כאזור אמיתי; נוטאם שכל
-      שיש לו הוא מעטפת מ-${ENVELOPE_NM} מייל ימי ומעלה
-      <strong>אינו מצויר</strong> ומופיע ברשימה בלבד.
-      נוטאם עתידי מצויר דהוי. כיבוי כאן משפיע על המפה בלבד;
-      הרשימה למטה תמיד מלאה.
+      קו מלא — מגבלה קבועה מהפמ"ת · קו מקווקו — נוטאם, נתיב או מזג
+      אוויר · <span style="color:${NOTAM_LOW}">ורוד</span> — נוטאם
+      שרצפתו מתחת ל-${LOW_ALTITUDE_FT.toLocaleString('he-IL')} רגל ·
+      דהוי — נוטאם שטרם נכנס לתוקף.
+      <br>נוטאם שגבולו מפורט בהודעה מצויר כאזור; נוטאם שיש לו רק
+      מעטפת של ${ENVELOPE_NM} מייל ומעלה <strong>אינו מצויר</strong>
+      ונמצא ברשימה בלבד. הכיבוי כאן משפיע על המפה — הרשימה תמיד מלאה.
     </p>`;
 }
 
@@ -1659,7 +1663,7 @@ async function init() {
     el('list-sub').textContent =
       `${notams.length} נוטאמים · ${drawn} מסומנים על המפה` +
       (extras.length ? ` · ${extras.join(' · ')}` : '') +
-      '. ממוין לפי זמן תחילת תוקף, החדש למעלה.';
+      '. מהחדש לישן; הודעות מנהלתיות בתחתית.';
   } else {
     el('freshness').classList.add('freshness--stale');
     el('freshness-value').textContent = 'לא נטען';

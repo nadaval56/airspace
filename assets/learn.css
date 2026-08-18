@@ -36,6 +36,13 @@
 
 .muted { color: var(--ink-soft); font-weight: 400; }
 
+/* רצף לטיני בתוך משפט עברי, מבודד כדי שהפיסוק סביבו לא ייגרר איתו.
+   בלי גופן מיוחד ובלי צבע — זו פרוזה, לא קוד. ראו richText ב-learn.js. */
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
 .lede {
   margin: 10px 0 0;
   font-size: 1rem;
@@ -153,6 +160,14 @@
   font-weight: 800;
   letter-spacing: 0.02em;
   color: var(--ink-soft);
+}
+
+/* ההוראה של המסך הראשי בעמוד — היא צריכה להיקרא כהנחיה ולא כתווית
+   שדה, ולכן היא גדולה יותר ובצבע הדיו המלא. */
+.lbl--big {
+  font-size: 1.02rem;
+  color: var(--ink);
+  margin-top: 4px;
 }
 
 /* --- כפתורים ושדות ------------------------------------------------------ */

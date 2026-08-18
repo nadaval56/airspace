@@ -264,6 +264,17 @@ const NOTAM_TYPE = {
 };
 
 const ITEM_INFO = {
+  /*
+    הכותרת אינה פריט ממוספר, ובכל זאת היא חלק מההודעה — ומי שלוחץ
+    על כל השאר מנסה ללחוץ גם עליה. השורה הראשונה נושאת שני דברים
+    שקובעים איך לקרוא את כל מה שאחריה: מי ההודעה, ואם היא מחליפה
+    או מבטלת קודמת.
+  */
+  HEAD: {
+    name: 'הכותרת',
+    short: 'מי ההודעה, ומה סוגה',
+    text: 'מזהה ההודעה — אות הסדרה, מספר רץ ושנה — ואחריו סוגה. בפיד הישראלי סדרה A נושאת בעיקר את הודעות שדות התעופה, וסדרה C את ההודעות המקומיות: בועות אולטרלייט, כדורים פורחים, רחפנים וצניחה.',
+  },
   Q: {
     name: 'שורת Q',
     short: 'התקציר הממוכן',
@@ -329,7 +340,7 @@ const ABBR = {
   UNL:   { g: 'space', he: 'ללא הגבלת גובה', note: 'אין תקרה. אי אפשר לעבור מעל האזור הזה.' },
   FL:    { g: 'space', he: 'רמת טיסה', note: 'מאות רגל בלחץ תקני: FL080 הם 8,000 רגל.' },
   FT:    { g: 'space', hot: true, he: 'רגל', note: 'רגל אחת ≈ 30.5 ס"מ. 1,000 רגל ≈ 305 מטר.' },
-  M:     { g: 'space', he: 'מטר', note: 'הודעות ישראליות נוקבות לעתים בשני האופנים: "600M AGL" ולצדו "3,700FT AMSL".' },
+  M:     { g: 'space', he: 'מטר', note: 'הודעות ישראליות נוקבות לעתים בשני האופנים: 600M AGL, ולצדו 3,700FT AMSL.' },
   KM:    { g: 'space', he: 'קילומטר' },
   NM:    { g: 'space', hot: true, he: 'מייל ימי', note: 'מייל ימי אחד = 1,852 מטר. רדיוסים בשורת Q נמדדים ביחידה הזאת.' },
   ELEV:  { g: 'space', he: 'גובה המקום', note: 'גובה הקרקע עצמה מעל פני הים, לא גובה הטיסה.' },
@@ -349,7 +360,7 @@ const ABBR = {
   AIRSPACE: { g: 'space', he: 'מרחב אווירי' },
 
   // --- פעילות ומצב ---
-  ACT:   { g: 'act', hot: true, he: 'פעיל / פעילות', note: 'ACTIVE או ACTIVITY, לפי ההקשר. במרבית ההודעות המקומיות: "יש שם פעילות".' },
+  ACT:   { g: 'act', hot: true, he: 'פעיל / פעילות', note: 'ACTIVE או ACTIVITY, לפי ההקשר. במרבית ההודעות המקומיות פירושו שיש שם פעילות.' },
   CLSD:  { g: 'act', hot: true, he: 'סגור', note: 'הקיצור הנפוץ ביותר בפיד — הוא מופיע ביותר מחצי מההודעות.' },
   AVBL:  { g: 'act', hot: true, he: 'זמין' },
   'U/S': { g: 'act', he: 'לא שמיש', note: 'Unserviceable. מתקן שקיים אך אינו פועל.' },
@@ -366,7 +377,7 @@ const ABBR = {
   NIL:   { g: 'act', he: 'אין', note: 'ברשימת בדיקה: אין הודעות בתוקף בקבוצה הזאת.' },
   CHG:   { g: 'act', he: 'שינוי' },
   CTN:   { g: 'act', hot: true, he: 'זהירות', note: 'כמעט תמיד בצמד CTN ADZ.' },
-  ADZ:   { g: 'act', hot: true, he: 'מומלץ', note: 'Advised. הצירוף CTN ADZ = "מומלצת זהירות", והוא הביטוי השכיח ביותר בסיום הודעות ישראליות.' },
+  ADZ:   { g: 'act', hot: true, he: 'מומלץ', note: 'Advised. הצירוף CTN ADZ פירושו מומלצת זהירות, והוא הביטוי השכיח ביותר בסיום הודעות ישראליות.' },
   'CTN ADZ': { g: 'act', hot: true, he: 'מומלצת זהירות', note: 'עשרות הודעות נחתמות כך. זו אינה אזהרה טקסית: היא נאמרת כשהאזור פתוח אך משהו קורה בו.' },
   EXP:   { g: 'act', he: 'צפוי' },
   DLA:   { g: 'act', he: 'עיכוב' },
@@ -380,14 +391,14 @@ const ABBR = {
   OPS:   { g: 'act', he: 'מבצעים' },
 
   // --- שדה ומסלול ---
-  AD:    { g: 'field', hot: true, he: 'שדה תעופה', note: 'Aerodrome. "AD CLSD" = השדה כולו סגור.' },
+  AD:    { g: 'field', hot: true, he: 'שדה תעופה', note: 'Aerodrome. הצירוף AD CLSD פירושו שהשדה כולו סגור.' },
   ARP:   { g: 'field', he: 'נקודת ייחוס של שדה', note: 'הנקודה שמייצגת את השדה במפות — לא הגבול שלו.' },
   RWY:   { g: 'field', hot: true, he: 'מסלול' },
   TWY:   { g: 'field', he: 'מסלול הסעה' },
   APN:   { g: 'field', he: 'מדרון חניה', note: 'Apron. השטח שבו המטוסים חונים ומטופלים.' },
   TKOF:  { g: 'field', he: 'המראה' },
   LDG:   { g: 'field', he: 'נחיתה' },
-  INT:   { g: 'field', he: 'הצטלבות', note: 'Intersection. "EXC RWY INT" = למעט מהצטלבות המסלולים.' },
+  INT:   { g: 'field', he: 'הצטלבות', note: 'Intersection. הצירוף EXC RWY INT פירושו למעט מהצטלבות המסלולים.' },
   OBST:  { g: 'field', he: 'מכשול' },
   CRANE: { g: 'field', he: 'עגורן', note: 'המכשול הזמני הנפוץ ביותר סביב ערים.' },
   AIRSTRIP: { g: 'field', he: 'מנחת' },
@@ -432,7 +443,7 @@ const ABBR = {
   MIL:   { g: 'who', he: 'צבאי' },
   TFC:   { g: 'who', he: 'תעבורה' },
   TRG:   { g: 'who', he: 'אימון' },
-  AGRICULTURE: { g: 'who', he: 'חקלאי', note: 'טיסת ריסוס. "INCLUDING AGRICULTURE FLT" נאמר במפורש כי אחרת נוטים להניח שהיא פטורה.' },
+  AGRICULTURE: { g: 'who', he: 'חקלאי', note: 'טיסת ריסוס. הצירוף INCLUDING AGRICULTURE FLT נאמר במפורש, כי אחרת נוטים להניח שהיא פטורה.' },
 
   // --- מנהלה ---
   AIP:   { g: 'admin', hot: true, he: 'פרסום מידע תעופתי', note: 'בעברית: פמ"ת. הספר הרשמי שבו כל המגבלות הקבועות.' },
@@ -448,15 +459,15 @@ const ABBR = {
   PART:  { g: 'admin', he: 'חלק' },
 
   // --- מילות קישור ---
-  WI:    { g: 'glue', hot: true, he: 'בתוך', note: 'Within. "WI 2NM RADIUS" = בתוך רדיוס שני מיילים.' },
-  BTN:   { g: 'glue', hot: true, he: 'בין', note: 'Between. "BTN FLW PSN" = בין הנקודות הבאות — ואחריו רשימת קודקודים.' },
-  FM:    { g: 'glue', hot: true, he: 'מ־', note: 'From. "FM GND UP TO 3,700FT" = מהקרקע ועד 3,700 רגל.' },
+  WI:    { g: 'glue', hot: true, he: 'בתוך', note: 'Within. למשל WI 2NM RADIUS — בתוך רדיוס שני מיילים.' },
+  BTN:   { g: 'glue', hot: true, he: 'בין', note: 'Between. הצירוף BTN FLW PSN פותח רשימת קודקודים: בין הנקודות הבאות.' },
+  FM:    { g: 'glue', hot: true, he: 'מ־', note: 'From. למשל FM GND UP TO 3,700FT — מהקרקע ועד 3,700 רגל.' },
   'UP TO': { g: 'glue', hot: true, he: 'עד' },
   FLW:   { g: 'glue', he: 'הבאים', note: 'Following. אחריו רשימה — נקודות, שעות או תדרים.' },
   EXC:   { g: 'glue', he: 'למעט', note: 'המילה שהופכת סגירה מוחלטת לסגירה חלקית. קל לפספס אותה, ויקר.' },
   INCL:  { g: 'glue', he: 'כולל' },
   INCLUDING: { g: 'glue', he: 'כולל' },
-  NR:    { g: 'glue', he: 'מספר', note: 'Number. בהודעות מקומיות: "BUBBLE NR B-WEST". בהקשרים אחרים NR הוא גם NEAR — ההקשר מכריע.' },
+  NR:    { g: 'glue', he: 'מספר', note: 'Number. בהודעות מקומיות, למשל BUBBLE NR B-WEST. בהקשרים אחרים NR הוא גם NEAR, וההקשר מכריע.' },
   BLW:   { g: 'glue', he: 'מתחת' },
   ABV:   { g: 'glue', he: 'מעל' },
   SHALL: { g: 'glue', he: 'חובה ל־' },
@@ -785,6 +796,39 @@ function durationText(rec) {
   return Math.round(hours / 24).toLocaleString('he-IL') + ' ימים';
 }
 
+/*
+  טקסט עברי שמשובצים בו קודים באנגלית — וזה כל ההסברים בעמוד הזה.
+
+  הדפדפן פותר כיוון לפי אלגוריתם דו־כיווני, ותווים "ניטרליים"
+  (נקודה, מרכאות, סימן שווה, סוגריים) מקבלים את כיוון השכן. כשקוד
+  לטיני יושב בין שני ניטרליים בתוך משפט עברי, הם נגררים איתו
+  והתוצאה נקראת הפוך:
+
+      From. "FM GND UP TO 3,700FT" = מהקרקע     ← מה שנכתב
+      "From. "FM GND UP TO 3,700FT = מהקרקע     ← מה שנראה
+
+  הפתרון הוא לבודד כל רצף לטיני בתוך תחום כיוון משלו. שני כללים
+  שומרים על הפיסוק העברי מחוץ לבידוד: הרצף חייב להיגמר באות או
+  בספרה, ומרכאות אינן חלק ממנו לעולם. בלי הכלל השני מרכאה פותחת
+  נבלעת פנימה והסוגרת נשארת בחוץ — והציטוט נראה שבור בדיוק כמו
+  קודם, רק במקום אחר.
+*/
+const LATIN_RUN_RE = /[A-Za-z0-9][A-Za-z0-9 .,:;\/()+\u2013\u2014-]*[A-Za-z0-9]|[A-Za-z0-9]/g;
+
+function richText(value) {
+  const source = String(value == null ? '' : value);
+  let out = '';
+  let idx = 0;
+  let m;
+  LATIN_RUN_RE.lastIndex = 0;
+  while ((m = LATIN_RUN_RE.exec(source)) !== null) {
+    out += esc(source.slice(idx, m.index));
+    out += '<span class="ltr">' + esc(m[0]) + '</span>';
+    idx = m.index + m[0].length;
+  }
+  return out + esc(source.slice(idx));
+}
+
 /* --- הדגשת קיצורים בתוך טקסט ------------------------------------------ */
 
 /*
@@ -962,6 +1006,18 @@ function qLineRows(q) {
 function itemMeaning(letter, rec) {
   const v = rec.items[letter];
   switch (letter) {
+    case 'HEAD': {
+      const parts = [];
+      if (rec.id) {
+        // השנה במזהה היא דו־ספרתית ("/26"), ו"שנת 26" אינו אומר דבר.
+        parts.push('הודעה ' + rec.id.split('/')[0].slice(1) + ' בסדרה ' +
+          rec.id[0] + ', שנת 20' + rec.id.split('/')[1] + '.');
+      }
+      const t = NOTAM_TYPE[rec.type];
+      if (t) parts.push(rec.type + ' — ' + t.label + '. ' + t.note);
+      if (rec.replaces) parts.push('ההודעה שהיא מחליפה: ' + rec.replaces + '.');
+      return parts.join(' ') || 'לא זוהתה כותרת.';
+    }
     case 'Q':
       return rec.q ? 'שמונה שדות, מפורטים בטבלה.' : 'שורת Q שלא נפרסרה: ' + (rec.parse_errors[0] || '');
     case 'A': {
@@ -1031,7 +1087,7 @@ function renderBreakdown(rec, opts) {
 
   html += '<dl class="five">';
   fiveAnswers(rec).forEach((row) => {
-    html += '<dt>' + esc(row.k) + '</dt><dd>' + esc(row.v) + '</dd>';
+    html += '<dt>' + esc(row.k) + '</dt><dd>' + richText(row.v) + '</dd>';
   });
   html += '</dl>';
 
@@ -1045,8 +1101,8 @@ function renderBreakdown(rec, opts) {
     html += '<div class="field__head"><span class="field__letter">' + letter + ')</span>';
     html += '<span class="field__name">' + esc(info.short) + '</span></div>';
     html += '<pre class="field__raw">' + (letter === 'E' ? markAbbreviations(raw) : esc(raw)) + '</pre>';
-    html += '<p class="field__mean">' + esc(itemMeaning(letter, rec)) + '</p>';
-    html += '<p class="field__about">' + esc(info.text) + '</p>';
+    html += '<p class="field__mean">' + richText(itemMeaning(letter, rec)) + '</p>';
+    html += '<p class="field__about">' + richText(info.text) + '</p>';
     html += '</li>';
   });
   html += '</ol>';
@@ -1057,11 +1113,11 @@ function renderBreakdown(rec, opts) {
       '<th>#</th><th>שדה</th><th>הערך</th><th>מה זה אומר</th></tr></thead><tbody>';
     qLineRows(rec.q).forEach((r) => {
       html += '<tr><td class="qtable__n">' + r.n + '</td><td>' + esc(r.name) + '</td>' +
-        '<td class="mono">' + esc(r.raw) + '</td><td>' + esc(r.mean) + '</td></tr>';
+        '<td class="mono">' + esc(r.raw) + '</td><td>' + richText(r.mean) + '</td></tr>';
     });
     html += '</tbody></table></div>';
     if (rec.q.subject_note) {
-      html += '<p class="brk__note">' + esc(rec.q.subject_note) + '</p>';
+      html += '<p class="brk__note">' + richText(rec.q.subject_note) + '</p>';
     }
   }
 
@@ -1211,7 +1267,15 @@ function initDissector() {
     }
     marks.forEach((mk, i) => {
       const stop = i + 1 < marks.length ? marks[i + 1].start : raw.length;
-      if (mk.start > cursor) parts.push('<span class="seg seg--plain">' + esc(raw.slice(cursor, mk.start)) + '</span>');
+      if (mk.start > cursor) {
+        // הקטע שלפני הפריט הראשון הוא הכותרת. הוא לחיץ כמו השאר,
+        // וכל קטע ביניים אחר נשאר טקסט פשוט.
+        const cls = i === 0 ? 'seg' : 'seg seg--plain';
+        const attr = i === 0 ? ' data-letter="HEAD"' : '';
+        const tag = i === 0 ? 'button' : 'span';
+        parts.push('<' + tag + ' type="button" class="' + cls + '"' + attr + '>' +
+          esc(raw.slice(cursor, mk.start)) + '</' + tag + '>');
+      }
       parts.push('<button type="button" class="seg" data-letter="' + mk.letter + '">' +
         esc(raw.slice(mk.start, stop)) + '</button>');
       cursor = stop;
@@ -1226,10 +1290,12 @@ function initDissector() {
     segsBox.querySelectorAll('.seg[data-letter]').forEach((b) => {
       b.classList.toggle('seg--on', b.dataset.letter === letter);
     });
+    const chip = letter === 'HEAD' ? '' :
+      '<span class="field__letter">' + letter + ')</span> ';
     let html =
-      '<h3 class="explain__title"><span class="field__letter">' + letter + ')</span> ' + esc(info.name) +
+      '<h3 class="explain__title">' + chip + esc(info.name) +
       ' — ' + esc(info.short) + '</h3>' +
-      '<p class="explain__about">' + esc(info.text) + '</p>';
+      '<p class="explain__about">' + richText(info.text) + '</p>';
     // שורת Q היא היחידה שאי אפשר להסביר במשפט: היא שמונה שדות,
     // וההפניה ל"טבלה שלמטה" שולחת את הלומד לחפש במקום ללמד.
     if (letter === 'Q' && rec.q) {
@@ -1237,12 +1303,12 @@ function initDissector() {
         '<th>#</th><th>שדה</th><th>הערך</th><th>מה זה אומר</th></tr></thead><tbody>';
       qLineRows(rec.q).forEach((r) => {
         html += '<tr><td class="qtable__n">' + r.n + '</td><td>' + esc(r.name) + '</td>' +
-          '<td class="mono">' + esc(r.raw) + '</td><td>' + esc(r.mean) + '</td></tr>';
+          '<td class="mono">' + esc(r.raw) + '</td><td>' + richText(r.mean) + '</td></tr>';
       });
       html += '</tbody></table></div>';
     } else {
       html += '<p class="explain__here"><strong>בהודעה הזאת:</strong> ' +
-        esc(itemMeaning(letter, rec)) + '</p>';
+        richText(itemMeaning(letter, rec)) + '</p>';
     }
     explain.innerHTML = html;
   }
@@ -1292,8 +1358,10 @@ function initDecoder() {
 
   function run() {
     const raw = input.value.trim();
+    // תיבה ריקה אינה שגיאה ואינה מצריכה הודעה: ההוראה כתובה בתוך
+    // התיבה עצמה, במקום שבו באמת מדביקים.
     if (!raw) {
-      out.innerHTML = '<p class="empty">הדביקו נוטאם ולחצו "פענח".</p>';
+      out.innerHTML = '';
       return;
     }
     const rec = parseNotam(raw);
@@ -1381,7 +1449,7 @@ function initQCodes() {
       (family ? ' <span class="muted">— משפחת ' + esc(s[0]) + ': ' + esc(family) + '</span>' : '') + '</dd>';
     html += '<dt>' + c + '</dt><dd>' + esc(Q_CONDITION[c]) + '</dd>';
     html += '</dl>';
-    if (Q_SUBJECT_NOTE[s]) html += '<p class="brk__note">' + esc(Q_SUBJECT_NOTE[s]) + '</p>';
+    if (Q_SUBJECT_NOTE[s]) html += '<p class="brk__note">' + richText(Q_SUBJECT_NOTE[s]) + '</p>';
     html += '<p class="qbuild__read"><strong>קוראים את זה כך:</strong> ' +
       esc(Q_SUBJECT[s]) + ' — ' + esc(Q_CONDITION[c]) + '.</p>';
     if (seen) {
@@ -1403,7 +1471,7 @@ function initQCodes() {
       if (term && hay.indexOf(term) === -1) return;
       const n = useSubject.get(code) || 0;
       rows.push('<tr><td class="mono">' + code + '</td><td>' + esc(label) +
-        (note ? '<span class="qrow__note">' + esc(note) + '</span>' : '') + '</td>' +
+        (note ? '<span class="qrow__note">' + richText(note) + '</span>' : '') + '</td>' +
         '<td class="qrow__count">' + (n ? '<span class="badge badge--live">' + n + ' בפיד</span>' : '') + '</td></tr>');
     });
     tableBox.innerHTML = rows.length
@@ -1495,7 +1563,7 @@ function initGlossary() {
         '<div class="gl-item__head"><span class="gl-item__term mono">' + esc(k) + '</span>' +
         '<span class="gl-item__he">' + esc(e.he) + '</span>' +
         (e.hot ? '<span class="badge badge--hot">שכיח</span>' : '') + '</div>' +
-        (e.note ? '<p class="gl-item__note">' + esc(e.note) + '</p>' : '') +
+        (e.note ? '<p class="gl-item__note">' + richText(e.note) + '</p>' : '') +
         (use ? '<p class="gl-item__use"><span class="gl-item__use-tag">מהפיד</span> <span class="mono">' +
           esc(use.line) + '</span> <span class="muted">(' + esc(use.id) + ')</span></p>' : '') +
         '</li>';
@@ -1920,7 +1988,7 @@ function initQuiz() {
     el('quiz-feedback').innerHTML =
       '<p class="quiz-verdict ' + (ok ? 'is-right' : 'is-wrong') + '">' +
       (ok ? 'נכון.' : 'לא. התשובה: ' + esc(q.options[q.correct])) + '</p>' +
-      '<p class="quiz-why">' + esc(q.why) + '</p>' +
+      '<p class="quiz-why">' + richText(q.why) + '</p>' +
       '<button type="button" class="btn btn--primary" id="quiz-next">' +
       (idx + 1 >= questions.length ? 'לסיכום' : 'לשאלה הבאה') + '</button>';
     el('quiz-next').addEventListener('click', () => { idx++; render(); });
@@ -1959,7 +2027,7 @@ function initAbbrPopover() {
     pop.innerHTML = '<button type="button" class="abbr-pop__x" aria-label="סגירה">✕</button>' +
       '<p class="abbr-pop__term mono">' + esc(key) + '</p>' +
       '<p class="abbr-pop__he">' + esc(e.he) + '</p>' +
-      (e.note ? '<p class="abbr-pop__note">' + esc(e.note) + '</p>' : '');
+      (e.note ? '<p class="abbr-pop__note">' + richText(e.note) + '</p>' : '');
     pop.hidden = false;
     const r = btn.getBoundingClientRect();
     const top = r.bottom + window.scrollY + 6;
