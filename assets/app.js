@@ -1056,7 +1056,7 @@ const PANELS = [
   // כמו אזהרה שלישית ברציפות, ואף אחד לא קשר אותה לשכבה. הסייג לכל
   // פוליגון (מקור הגבול, ואם אין לו גובה בנספח ה') כתוב בחלונית שלו.
   { id: 'ratag', toggle: 'toggle-ratag', label: 'שמורות טבע וגנים לאומיים',
-    hint: 'טעינה בלחיצה',
+    hint: ['טעינה', 'בלחיצה'],
     link: { href: 'data/ratag-terms.md', text: 'תנאי השימוש בנתוני רט"ג' } }
 ];
 
@@ -1122,12 +1122,18 @@ function renderControls() {
       .filter(Boolean)
       .join('');
 
+    // רמז יכול לבוא כמערך שורות. גלולה ארוכה בקצה השורה גזלה במובייל
+    // את הרוחב שהשם צריך, ודחפה דווקא **אותו** לשתי שורות; שבירה של
+    // הרמז עצמה מצרה את הגלולה ומחזירה את השם לשורה אחת.
+    const hintLines = Array.isArray(panel.hint) ? panel.hint : [panel.hint || '—'];
+    const countClass = 'switch__count' + (hintLines.length > 1 ? ' switch__count--stack' : '');
+
     // שכבה בלי צירי סינון אינה נפתחת — קופסה ריקה רק מבלבלת.
     const head = `
       <span class="ctl__switch">
         <input type="checkbox" id="${panel.toggle}"${panel.on ? ' checked' : ''}>
         <span class="ctl__label">${esc(panel.label)}</span>
-        <span class="switch__count" id="count-${panel.id}">${esc(panel.hint || '—')}</span>
+        <span class="${countClass}" id="count-${panel.id}">${hintLines.map(esc).join('<br>')}</span>
       </span>`;
 
     const link = panel.link
