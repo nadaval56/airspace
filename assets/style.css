@@ -290,6 +290,20 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 }
 
 /*
+  רמז דו־שורתי. "טעינה בלחיצה" בשורה אחת היה גלולה ברוחב חצי הקופסה,
+  והשם של השכבה — המידע החשוב מבין השניים — נשבר לשתי שורות במקומה.
+  כשהרמז נשבר, הגלולה מצרה והשם חוזר לשורה אחת.
+
+  המספר שמחליף את הרמז אחרי הטעינה הוא שורה אחת, והכלל הזה לא מזיק לו.
+*/
+.switch__count--stack {
+  text-align: center;
+  line-height: 1.25;
+  padding: 4px 10px;
+  border-radius: 14px;
+}
+
+/*
   לוח בקרה בשתי רמות: קופסה לכל שכבה, ובתוכה צירי הסינון שלה.
 
   בדסקטופ הקופסאות יושבות זו לצד זו — ברוחב 1440 טור אחד היה יוצר
@@ -321,6 +335,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 }
 
 .ctl--flat { padding: 6px 12px; }
+
+/*
+  קופסה שטוחה שנושאת גם קישור: שם השכבה ותנאי השימוש בטור אחד, והמונה
+  לצדם — מרוכז מול **גובה הקופסה כולה** ולא מול השורה העליונה בלבד.
+*/
+.ctl--aside {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ctl__main { flex: 1; min-width: 0; }
 
 .ctl__head {
   list-style: none;
@@ -380,6 +406,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 }
 
 .ctl__label { flex: 1; font-weight: 700; }
+
+/*
+  קרדיט וקישור לתנאי השימוש של ספק הנתונים, בתוך קופסת השכבה שהם חלים
+  עליה. שורה קטנה ומוזחת עד לתחילת שם השכבה — כך היא נקראת כשייכת
+  לשכבה, ולא כהערה עצמאית שמתחרה בה על תשומת הלב.
+*/
+.ctl__terms {
+  margin: 0 0 4px;
+  /* 22px לתיבת הסימון + 10px של הרווח בשורת המתג. */
+  padding-inline-start: 32px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
 
 .ctl__body {
   padding: 2px 12px 10px;
@@ -507,19 +546,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   letter-spacing: 0.04em;
   color: var(--ink-soft, #55637a);
   text-transform: none;
-}
-
-/* פער ידוע במפה. לא אזהרה אדומה — אזהרה שלישית ברציפות מאבדת את כוחה —
-   אבל גם לא הערת שוליים אפורה שאיש לא קורא. */
-.gap-note {
-  margin: 12px 0 0;
-  padding: 10px 12px;
-  font-size: 0.86rem;
-  line-height: 1.55;
-  color: var(--ink);
-  background: var(--paper-2);
-  border-inline-start: 6px solid var(--amber);
-  border-radius: 6px;
 }
 
 /* פריט המקרא הוא כפתור: הצבע מסביר, המספר מכמת, הלחיצה מכבה.
@@ -859,9 +885,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
   body { font-size: 18px; }
   .masthead h1 { font-size: 2.1rem; }
   #map { height: 68vh; }
-  /* לוח הבקרה מסדר את עצמו ב-grid, ולכן `map-tools` נשאר טור פשוט:
-     הלוח, ואז הערת הפער מתחתיו. */
-  .gap-note { margin-top: 0; }
   #map { border-radius: 10px; border: 3px solid var(--rule-hard); }
   .map-section { padding-inline: 16px; max-width: 960px; margin-inline: auto; }
 }

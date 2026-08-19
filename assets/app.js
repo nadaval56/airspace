@@ -1051,8 +1051,13 @@ const PANELS = [
   },
   { id: 'weather', toggle: 'toggle-weather', label: 'מזג אוויר (METAR / TAF / AIRMET)' },
   { id: 'cvfr', toggle: 'toggle-cvfr', label: 'נתיבי טיסה (CVFR)' },
+  // תנאי השימוש של רט"ג מחייבים קרדיט וקישור. הם יושבים בתוך הקופסה של
+  // השכבה שהם חלים עליה, ולא בהערה נפרדת מתחת ללוח — הערה כזאת נקראה
+  // כמו אזהרה שלישית ברציפות, ואף אחד לא קשר אותה לשכבה. הסייג לכל
+  // פוליגון (מקור הגבול, ואם אין לו גובה בנספח ה') כתוב בחלונית שלו.
   { id: 'ratag', toggle: 'toggle-ratag', label: 'שמורות טבע וגנים לאומיים',
-    hint: 'טעינה בלחיצה' }
+    hint: ['טעינה', 'בלחיצה'],
+    link: { href: 'data/ratag-terms.md', text: 'תנאי השימוש בנתוני רט"ג' } }
 ];
 
 /**
@@ -1117,21 +1122,45 @@ function renderControls() {
       .filter(Boolean)
       .join('');
 
+    // רמז יכול לבוא כמערך שורות. גלולה ארוכה בקצה השורה גזלה במובייל
+    // את הרוחב שהשם צריך, ודחפה דווקא **אותו** לשתי שורות; שבירה של
+    // הרמז עצמה מצרה את הגלולה ומחזירה את השם לשורה אחת.
+    const hintLines = Array.isArray(panel.hint) ? panel.hint : [panel.hint || '—'];
+    const countClass = 'switch__count' + (hintLines.length > 1 ? ' switch__count--stack' : '');
+    const count = `<span class="${countClass}" id="count-${panel.id}"
+        >${hintLines.map(esc).join('<br>')}</span>`;
+
+    const link = panel.link
+      ? `<p class="ctl__terms"><a href="${esc(panel.link.href)}">${esc(panel.link.text)}</a></p>`
+      : '';
+
     // שכבה בלי צירי סינון אינה נפתחת — קופסה ריקה רק מבלבלת.
-    const head = `
+    const head = (inner) => `
       <span class="ctl__switch">
         <input type="checkbox" id="${panel.toggle}"${panel.on ? ' checked' : ''}>
         <span class="ctl__label">${esc(panel.label)}</span>
-        <span class="switch__count" id="count-${panel.id}">${esc(panel.hint || '—')}</span>
+        ${inner}
       </span>`;
 
-    if (!body) return { id: panel.id, html: `<div class="ctl ctl--flat">${head}</div>` };
+    if (!body) {
+      // קופסה שטוחה שיש בה גם קישור היא בת שתי שורות, והמונה יוצא
+      // משורת המתג כדי להתמרכז מול **שתיהן**. מרוכז מול השורה העליונה
+      // בלבד הוא נראה תלוי גבוה מדי, במיוחד כשהוא עצמו דו־שורתי.
+      if (link) {
+        return { id: panel.id, html: `
+      <div class="ctl ctl--flat ctl--aside">
+        <div class="ctl__main">${head('')}${link}</div>
+        ${count}
+      </div>` };
+      }
+      return { id: panel.id, html: `<div class="ctl ctl--flat">${head(count)}</div>` };
+    }
     return {
       id: panel.id,
       html: `
       <details class="ctl"${panel.open ? ' open' : ''}>
-        <summary class="ctl__head">${head}</summary>
-        <div class="ctl__body">${body}</div>
+        <summary class="ctl__head">${head(count)}</summary>
+        <div class="ctl__body">${link}${body}</div>
       </details>`
     };
   });
