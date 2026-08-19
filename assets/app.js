@@ -1051,8 +1051,13 @@ const PANELS = [
   },
   { id: 'weather', toggle: 'toggle-weather', label: 'מזג אוויר (METAR / TAF / AIRMET)' },
   { id: 'cvfr', toggle: 'toggle-cvfr', label: 'נתיבי טיסה (CVFR)' },
+  // תנאי השימוש של רט"ג מחייבים קרדיט וקישור. הם יושבים בתוך הקופסה של
+  // השכבה שהם חלים עליה, ולא בהערה נפרדת מתחת ללוח — הערה כזאת נקראה
+  // כמו אזהרה שלישית ברציפות, ואף אחד לא קשר אותה לשכבה. הסייג לכל
+  // פוליגון (מקור הגבול, ואם אין לו גובה בנספח ה') כתוב בחלונית שלו.
   { id: 'ratag', toggle: 'toggle-ratag', label: 'שמורות טבע וגנים לאומיים',
-    hint: 'טעינה בלחיצה' }
+    hint: 'טעינה בלחיצה',
+    link: { href: 'data/ratag-terms.md', text: 'תנאי השימוש בנתוני רט"ג' } }
 ];
 
 /**
@@ -1125,13 +1130,19 @@ function renderControls() {
         <span class="switch__count" id="count-${panel.id}">${esc(panel.hint || '—')}</span>
       </span>`;
 
-    if (!body) return { id: panel.id, html: `<div class="ctl ctl--flat">${head}</div>` };
+    const link = panel.link
+      ? `<p class="ctl__terms"><a href="${esc(panel.link.href)}">${esc(panel.link.text)}</a></p>`
+      : '';
+
+    if (!body) {
+      return { id: panel.id, html: `<div class="ctl ctl--flat">${head}${link}</div>` };
+    }
     return {
       id: panel.id,
       html: `
       <details class="ctl"${panel.open ? ' open' : ''}>
         <summary class="ctl__head">${head}</summary>
-        <div class="ctl__body">${body}</div>
+        <div class="ctl__body">${link}${body}</div>
       </details>`
     };
   });
