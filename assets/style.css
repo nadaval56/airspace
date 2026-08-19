@@ -336,6 +336,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visibl
 
 .ctl--flat { padding: 6px 12px; }
 
+/*
+  קופסה שטוחה שנושאת גם קישור: שם השכבה ותנאי השימוש בטור אחד, והמונה
+  לצדם — מרוכז מול **גובה הקופסה כולה** ולא מול השורה העליונה בלבד.
+*/
+.ctl--aside {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ctl__main { flex: 1; min-width: 0; }
+
 .ctl__head {
   list-style: none;
   cursor: pointer;
