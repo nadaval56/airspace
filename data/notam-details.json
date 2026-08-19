@@ -359,24 +359,6 @@
   "valid_from": "2026-09-01T05:25:00Z",
   "valid_to": "2026-09-01T10:00:00Z"
  },
- "A0666/26": {
-  "airfield": "Ben-Gurion",
-  "created": "2026-08-18T08:16:00Z",
-  "id": "A0666/26",
-  "location": "LLBG",
-  "raw": "(A0666/26 NOTAMN\nQ) LLLL/QOBCE/IV/M /AE/000/004/3159N03454E001\nA) LLBG B) 2608190300 C) 2608190900\nE) CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA FM GND UP TO 100M 360FT AMSL CLSD BTN FLW PSN\n315924N0345425E 315922N0345423E 315924N0345419E\n315926N0345421E.\nCTN ADZ.)",
-  "valid_from": "2026-08-19T03:00:00Z",
-  "valid_to": "2026-08-19T09:00:00Z"
- },
- "A0667/26": {
-  "airfield": "Ben-Gurion",
-  "created": "2026-08-18T08:16:00Z",
-  "id": "A0667/26",
-  "location": "LLBG",
-  "raw": "(A0667/26 NOTAMN\nQ) LLLL/QMRLT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2608190300 C) 2608190900\nE) RWY 12 CLSD FOR TKOF ONLY, EXC RWY INT DUE CRANE.)",
-  "valid_from": "2026-08-19T03:00:00Z",
-  "valid_to": "2026-08-19T09:00:00Z"
- },
  "A0668/26": {
   "airfield": "Ben-Gurion",
   "created": "2026-08-18T08:40:00Z",
