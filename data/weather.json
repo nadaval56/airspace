@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-18T23:31:18Z",
- "last_success": "2026-08-18T23:31:18Z",
+ "generated_at": "2026-08-19T01:48:10Z",
+ "last_success": "2026-08-19T01:48:10Z",
  "last_error": {
   "at": "2026-08-17T22:34:59Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,26 +20,56 @@
  ],
  "counts": {
   "total": 11,
-  "TAF": 6,
   "METAR": 4,
+  "TAF": 6,
   "AIRMET": 1
  },
  "reports": [
   {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 190120Z VRB03KT 9999 SCT027 26/21 Q1010 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 181800 TILL 191800, WIND 330 DEGREES, 5 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 3 THOUSAND FEET,",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 190000 TILL 200000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 3 THOUSAND",
    "truncated": true,
-   "valid_from": "181800",
-   "valid_to": "191800",
+   "valid_from": "190000",
+   "valid_to": "200000",
    "area": null
   },
   {
    "id": "METAR",
-   "station": "LLBG",
+   "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLBG 182320Z 09004KT 9999 FEW030 26/21 Q1010 NOSIG=",
+   "text": "METAR LLHA 190050Z AUTO 34005KT 9999 SCT028 27/21 Q1010=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 190050Z AUTO 01012KT CAVOK 29/17 Q1009=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 190050Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -90,36 +120,6 @@
    "station": "LLHZ",
    "kind": "TAF",
    "text": "TAF LLHZ 182303Z 1900/1924 VRB04KT 9999 SCT030 TX31/1911Z TN23/1902Z PROB40 TEMPO 1900/1906 BKN025",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 182250Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 182250Z AUTO 01015KT CAVOK 30/18 Q1009=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 182250Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
