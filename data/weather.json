@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-20T01:47:00Z",
- "last_success": "2026-08-20T01:47:00Z",
+ "generated_at": "2026-08-20T03:06:18Z",
+ "last_success": "2026-08-20T03:06:18Z",
  "last_error": {
   "at": "2026-08-17T22:34:59Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,16 +20,77 @@
  ],
  "counts": {
   "total": 11,
+  "AIRMET": 1,
   "METAR": 4,
-  "TAF": 6,
-  "AIRMET": 1
+  "TAF": 6
  },
  "reports": [
+  {
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 1 VALID 200300/200700 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR WKN=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": [
+    [
+     35.8,
+     33.35
+    ],
+    [
+     35.916667,
+     32.95
+    ],
+    [
+     34.583333,
+     30.3
+    ],
+    [
+     34.433333,
+     30.7
+    ],
+    [
+     35.8,
+     33.35
+    ]
+   ]
+  },
+  {
+   "id": "METAR",
+   "station": "LLHA",
+   "kind": "METAR",
+   "text": "METAR LLHA 200250Z AUTO VRB01KT 9999 FEW027 26/21 Q1011=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 200250Z AUTO 01013KT CAVOK 27/19 Q1010=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 200250Z AUTO VRB03KT CAVOK 20/16 Q1012=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
   {
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 200120Z VRB02KT 9999 FEW028 25/20 Q1011 NOSIG=",
+   "text": "METAR LLBG 200250Z 13004KT 9999 FEW027 25/20 Q1011 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -43,36 +104,6 @@
    "truncated": true,
    "valid_from": "200000",
    "valid_to": "210000",
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 200050Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 200050Z AUTO 01016KT CAVOK 28/19 Q1010=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 200050Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
    "area": null
   },
   {
@@ -124,37 +155,6 @@
    "valid_from": null,
    "valid_to": null,
    "area": null
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 3 VALID 192300/200300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR INTSF=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.8,
-     33.35
-    ],
-    [
-     35.916667,
-     32.95
-    ],
-    [
-     34.583333,
-     30.3
-    ],
-    [
-     34.433333,
-     30.7
-    ],
-    [
-     35.8,
-     33.35
-    ]
-   ]
   }
  ]
 }
