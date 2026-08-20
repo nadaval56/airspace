@@ -13,9 +13,12 @@
 
 from __future__ import annotations
 
+import html
 import json
 import os
+import re
 import sys
+from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
@@ -54,6 +57,29 @@ PROBE = """() => {
     leaves: panel ? panel.querySelectorAll('input[data-layer]').length : 0
   };
 }"""
+
+
+def expected_limits_heading() -> str | None:
+    """הכותרת שכתובה ב-index.html שב-checkout.
+
+    היא לא מקובעת בקוד הבדיקה בכוונה. ניסוח של כותרת הוא החלטת עריכה
+    שמשתנה, וב-#50 היא באמת השתנתה — הבדיקה נפלה יומיים ברצף על שינוי
+    טקסט מכוון, בזמן שהאתר עצמו היה תקין לחלוטין. בדיקה שנשברת מעריכת
+    ניסוח מלמדת להתעלם ממנה, וזה בדיוק מה שאסור לבדיקת עשן.
+
+    השוואה מול המאגר עדיין תופסת את שני השברים האמיתיים: כותרת שנעלמה,
+    ואתר חי שאינו תואם את מה שמפורסם ב-main.
+    """
+    source = Path(__file__).resolve().parent.parent / "index.html"
+    try:
+        markup = source.read_text(encoding="utf-8")
+    except OSError:
+        return None
+    match = re.search(r'<summary[^>]*id="limits-heading"[^>]*>(.*?)</summary>',
+                      markup, re.S)
+    if not match:
+        return None
+    return html.unescape(re.sub(r"<[^>]+>", "", match.group(1))).strip() or None
 
 
 def fail(message: str) -> None:
@@ -102,8 +128,13 @@ def main() -> int:
             fail(f"רק {state['axisToggles']} תיבות ציר")
         if "איפה" not in (state["title"] or ""):
             fail(f"כותרת לא צפויה: {state['title']}")
-        if state["limitsHeading"] != "מגבלות האפליקציה":
-            fail(f"כותרת המגבלות: {state['limitsHeading']}")
+        live_heading = (state["limitsHeading"] or "").strip()
+        expected_heading = expected_limits_heading()
+        if not live_heading:
+            fail("כותרת המגבלות חסרה מהדף")
+        elif expected_heading and live_heading != expected_heading:
+            fail(f"כותרת המגבלות: {live_heading!r} באתר החי מול "
+                 f"{expected_heading!r} ב-index.html — פרסום שלא הספיק לעלות?")
         if state["fieldPins"] < MIN_FIELDS:
             fail(f"רק {state['fieldPins']} סמלי שדות תעופה על המפה")
         if not state["cvfrEnabled"]:
