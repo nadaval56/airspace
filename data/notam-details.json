@@ -332,15 +332,6 @@
   "valid_from": "2026-08-19T11:07:00Z",
   "valid_to": "2026-08-24T13:00:00Z"
  },
- "A0676/26": {
-  "airfield": "Ben-Gurion",
-  "created": "2026-08-20T14:38:00Z",
-  "id": "A0676/26",
-  "location": "LLBG",
-  "raw": "(A0676/26 NOTAMR A0675/26\nQ) LLLL/QFALT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2608201436 C) 2608210400\nE) DLA EXP DUE AD CAPACITY.)",
-  "valid_from": "2026-08-20T14:36:00Z",
-  "valid_to": "2026-08-21T04:00:00Z"
- },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
