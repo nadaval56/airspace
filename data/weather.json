@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-19T23:32:20Z",
- "last_success": "2026-08-19T23:32:20Z",
+ "generated_at": "2026-08-20T01:47:00Z",
+ "last_success": "2026-08-20T01:47:00Z",
  "last_error": {
   "at": "2026-08-17T22:34:59Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,26 +20,56 @@
  ],
  "counts": {
   "total": 11,
-  "TAF": 6,
   "METAR": 4,
+  "TAF": 6,
   "AIRMET": 1
  },
  "reports": [
   {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 200120Z VRB02KT 9999 FEW028 25/20 Q1011 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 191800 TILL 201800, WIND 360 DEGREES, 8 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 200000 TILL 210000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
    "truncated": true,
-   "valid_from": "191800",
-   "valid_to": "201800",
+   "valid_from": "200000",
+   "valid_to": "210000",
    "area": null
   },
   {
    "id": "METAR",
-   "station": "LLBG",
+   "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLBG 192320Z VRB03KT 9999 FEW025 26/20 Q1012 NOSIG=",
+   "text": "METAR LLHA 200050Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 200050Z AUTO 01016KT CAVOK 28/19 Q1010=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 200050Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -90,36 +120,6 @@
    "station": "LLER",
    "kind": "TAF",
    "text": "TAF LLER 192301Z 2000/2024 02015KT CAVOK TX39/2013Z TN26/2003Z PROB40 TEMPO 2004/2016 02020G30KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 192250Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 192250Z AUTO 01014KT CAVOK 30/18 Q1010=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 192250Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
