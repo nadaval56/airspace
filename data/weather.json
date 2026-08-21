@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-21T22:35:37Z",
- "last_success": "2026-08-21T22:35:37Z",
+ "generated_at": "2026-08-21T23:33:11Z",
+ "last_success": "2026-08-21T23:33:11Z",
  "last_error": {
   "at": "2026-08-17T22:34:59Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -19,12 +19,112 @@
   "LLSD"
  ],
  "counts": {
-  "total": 12,
-  "AIRMET": 2,
+  "total": 11,
   "METAR": 4,
-  "TAF": 6
+  "TAF": 6,
+  "AIRMET": 1
  },
  "reports": [
+  {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 212320Z 20004KT 9999 FEW020 SCT032 28/24 Q1008 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 211800 TILL 221800, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
+   "truncated": true,
+   "valid_from": "211800",
+   "valid_to": "221800",
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHA",
+   "kind": "TAF",
+   "text": "TAF LLHA 212302Z 2200/2224 VRB04KT 9999 SCT020 TX33/2210Z TN26/2203Z TEMPO 2200/2207 25006KT BKN015",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLIB",
+   "kind": "TAF",
+   "text": "TAF LLIB 212303Z 2200/2224 VRB04KT 9999 FEW020 TX37/2212Z TN24/2203Z PROB40 TEMPO 2202/2206 7000 BKN012",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHZ",
+   "kind": "TAF",
+   "text": "TAF LLHZ 212302Z 2200/2224 VRB04KT 9999 SCT022 TX31/2210Z TN27/2203Z TEMPO 2200/2207 22006KT BKN017",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 212302Z 2200/2224 VRB04KT 9999 SCT025 TX33/2210Z TN26/2203Z TEMPO 2200/2206 18006KT BKN020",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 212301Z 2200/2224 33010KT CAVOK TX39/2213Z TN27/2203Z BECMG 2207/2209 02015KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLHA",
+   "kind": "METAR",
+   "text": "METAR LLHA 212250Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 212250Z AUTO 32010KT CAVOK 30/19 Q1008=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 212250Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
   {
    "id": "AIRMET",
    "station": "LLLL",
@@ -55,137 +155,6 @@
      33.35
     ]
    ]
-  },
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 212220Z 22004KT 9999 FEW025 28/24 Q1008 NOSIG=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 211800 TILL 221800, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
-   "truncated": true,
-   "valid_from": "211800",
-   "valid_to": "221800",
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 212150Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 212150Z AUTO 33012KT CAVOK 31/19 Q1008=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 212150Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 5 VALID 211900/212300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3310 E03527 - N3226 E03531 - N3018 E03435 - N3042 E03426 - N3310 E03527 STNR INTSF=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.45,
-     33.166667
-    ],
-    [
-     35.516667,
-     32.433333
-    ],
-    [
-     34.583333,
-     30.3
-    ],
-    [
-     34.433333,
-     30.7
-    ],
-    [
-     35.45,
-     33.166667
-    ]
-   ]
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHA",
-   "kind": "TAF",
-   "text": "TAF LLHA 211710Z 2118/2218 32008KT 9999 BKN015 TX32/2210Z TN26/2203Z BECMG 2120/2122 25006KT SCT015",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLIB",
-   "kind": "TAF",
-   "text": "TAF LLIB 211710Z 2118/2218 VRB04KT 9999 FEW020 TX37/2212Z TN23/2203Z PROB40 TEMPO 2203/2206 BKN013",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHZ",
-   "kind": "TAF",
-   "text": "TAF LLHZ 211709Z 2118/2218 VRB04KT 9999 SCT025 TX31/2212Z TN25/2200Z PROB40 TEMPO 2118/2205 BKN020",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 211702Z 2118/2218 VRB04KT 9999 SCT025 TX33/2209Z TN25/2203Z PROB40 TEMPO 2118/2206 BKN020",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 211702Z 2118/2218 33010KT CAVOK TX39/2213Z TN27/2203Z BECMG 2206/2208 02015KT=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
   }
  ]
 }
