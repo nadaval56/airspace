@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-21T07:52:17Z",
- "last_success": "2026-08-21T07:52:17Z",
+ "generated_at": "2026-08-21T08:53:06Z",
+ "last_success": "2026-08-21T08:53:06Z",
  "last_error": {
   "at": "2026-08-17T22:34:59Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -28,7 +28,7 @@
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 210750Z VRB02KT 9999 FEW030 32/21 Q1009 NOSIG=",
+   "text": "METAR LLBG 210820Z VRB03KT 9999 FEW030 33/22 Q1009 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
