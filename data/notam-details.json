@@ -719,24 +719,6 @@
   "valid_from": "2026-08-16T02:00:00Z",
   "valid_to": "2026-08-22T14:00:00Z"
  },
- "C1761/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-17T07:17:00Z",
-  "id": "C1761/26",
-  "location": "LLLL",
-  "raw": "(C1761/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/080/3120N03523E003\nA) LLLL B) 2608200930 C) 2608211100\nD) 20 0930-1645, 21 0600-1100\nE) PJE AIRSPACE METZADA ACT FM 8,000FT AMSL.\nOPR BY PPR FM ATC ONLY.\nF) GND G) 8000FT AMSL)",
-  "valid_from": "2026-08-20T09:30:00Z",
-  "valid_to": "2026-08-21T11:00:00Z"
- },
- "C1762/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-17T07:59:00Z",
-  "id": "C1762/26",
-  "location": "LLLL",
-  "raw": "(C1762/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/110/3117N03443E004\nA) LLLL B) 2608210500 C) 2608211100\nE) PJE AIRSPACE TEIMAN ACT FM 11,000FT AMSL.\nIN CASE OF EMERG CLEAR THE AIRSPACE WI 5MIN.\nCTN ADZ.\nF) GND G) 11000FT AMSL)",
-  "valid_from": "2026-08-21T05:00:00Z",
-  "valid_to": "2026-08-21T11:00:00Z"
- },
  "C1764/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-08-17T08:45:00Z",
