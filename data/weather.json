@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-22T03:02:58Z",
- "last_success": "2026-08-22T03:02:58Z",
+ "generated_at": "2026-08-22T03:51:01Z",
+ "last_success": "2026-08-22T03:51:01Z",
  "last_error": {
   "at": "2026-08-17T22:34:59Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -25,6 +25,26 @@
   "AIRMET": 1
  },
  "reports": [
+  {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 220320Z 16005KT 9999 SCT020 27/24 Q1009 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 220000 TILL 230000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
+   "truncated": true,
+   "valid_from": "220000",
+   "valid_to": "230000",
+   "area": null
+  },
   {
    "id": "METAR",
    "station": "LLHA",
@@ -53,26 +73,6 @@
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 220250Z 15004KT 9999 FEW020 27/24 Q1008 NOSIG=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 220000 TILL 230000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
-   "truncated": true,
-   "valid_from": "220000",
-   "valid_to": "230000",
    "area": null
   },
   {
