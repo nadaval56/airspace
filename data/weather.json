@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-08-22T22:33:17Z",
+ "generated_at": "2026-08-22T23:30:10Z",
  "last_success": "2026-08-22T22:33:17Z",
  "last_error": {
-  "at": "2026-08-17T22:34:59Z",
+  "at": "2026-08-22T23:30:10Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
  },
- "stale": false,
+ "stale": true,
  "source": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Weather",
  "source_name": "רשות שדות התעופה",
  "nearby": [
