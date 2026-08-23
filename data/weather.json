@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-23T01:55:52Z",
- "last_success": "2026-08-23T01:55:52Z",
+ "generated_at": "2026-08-23T03:11:48Z",
+ "last_success": "2026-08-23T03:11:48Z",
  "last_error": {
   "at": "2026-08-22T23:30:10Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -19,17 +19,27 @@
   "LLSD"
  ],
  "counts": {
-  "total": 12,
-  "METAR": 4,
+  "total": 11,
   "TAF": 6,
-  "AIRMET": 2
+  "METAR": 4,
+  "AIRMET": 1
  },
  "reports": [
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 230000 TILL 240000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
+   "truncated": true,
+   "valid_from": "230000",
+   "valid_to": "240000",
+   "area": null
+  },
   {
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 230150Z 17006KT 9999 FEW022 26/22 Q1009 NOSIG=",
+   "text": "METAR LLBG 230250Z 17005KT 9999 FEW022 26/22 Q1009 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -39,7 +49,7 @@
    "id": "METAR",
    "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLHA 230150Z AUTO VRB03KT CAVOK 29/23 Q1008=",
+   "text": "METAR LLHA 230250Z AUTO VRB03KT CAVOK 28/23 Q1008=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -49,7 +59,7 @@
    "id": "METAR",
    "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLER 230150Z AUTO 32010KT CAVOK 28/18 Q1009=",
+   "text": "METAR LLER 230250Z AUTO 02006KT CAVOK 27/19 Q1009=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -59,20 +69,10 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 230150Z NIL=",
+   "text": "METAR LLIB 230250Z AUTO VRB03KT CAVOK 22/19 Q1010=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 230000 TILL 240000, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
-   "truncated": true,
-   "valid_from": "230000",
-   "valid_to": "240000",
    "area": null
   },
   {
@@ -155,37 +155,6 @@
    "valid_from": null,
    "valid_to": null,
    "area": null
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 4 VALID 222300/230300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR NC=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.8,
-     33.35
-    ],
-    [
-     35.916667,
-     32.95
-    ],
-    [
-     34.583333,
-     30.3
-    ],
-    [
-     34.433333,
-     30.7
-    ],
-    [
-     35.8,
-     33.35
-    ]
-   ]
   }
  ]
 }

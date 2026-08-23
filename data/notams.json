@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-23T01:55:50Z",
- "last_success": "2026-08-23T01:55:50Z",
+ "generated_at": "2026-08-23T03:11:45Z",
+ "last_success": "2026-08-23T03:11:45Z",
  "last_error": {
   "at": "2026-08-22T23:30:09Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; faa-dins"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 87,
+   "count": 85,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 87,
-  "mapped": 84,
+  "total": 85,
+  "mapped": 82,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 79,
+  "low_altitude": 77,
   "administrative": 4
  },
  "notams": [
@@ -1611,162 +1611,6 @@
    "text": "CRANE ERECTED AT SHOAH WI LLBG CTR.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN\n315907.32N0345601.24E CLSD FM GND UP TO 134M 440FT AMSL.\n315907.04N0345606.77E CLSD FM GND UP TO 140M 460FT AMSL.\nCTN ADZ.)",
    "lower_limit": null,
    "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1719/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1719/26 NOTAMN\nQ) LLLL/QWCLW/IV/M /W /000/018/3306N03535E001\nA) LLLL B) 2608160330 C) 2608230200\nD) DAILY 0330-1400 1700-0200\nE) CAPTIVE BALLOON WILL TAKE PLACE AT HACHULA-LAKE,\nFM GND UP TO 400M AGL. LIT AND DAY MARKED.\nAN AREA WI 0.54NM RADIUS CENTERED ON PSN 330622N0353454E\nCLSD FM GND UP TO 1,800FT AMSL, TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.\nF) GND G) 1800FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWCLW",
-    "subject_code": "WC",
-    "subject": "כדור פורח קשור / עפיפון",
-    "subject_note": "בלון הקשור לקרקע בכבל. הכבל — לא הבלון — הוא המכשול.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 18,
-     "lower_ft": 0,
-     "upper_ft": 1800,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 33.1,
-     "lon": 35.583333333333336,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 33.1,
-    "lon": 35.583333333333336,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 18,
-    "lower_ft": 0,
-    "upper_ft": 1800,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2608160330",
-    "iso": "2026-08-16T03:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2608230200",
-    "iso": "2026-08-23T02:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "DAILY 0330-1400 1700-0200",
-   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT HACHULA-LAKE,\nFM GND UP TO 400M AGL. LIT AND DAY MARKED.\nAN AREA WI 0.54NM RADIUS CENTERED ON PSN 330622N0353454E\nCLSD FM GND UP TO 1,800FT AMSL, TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "1800FT AMSL)",
-    "feet": 1800,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1723/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1723/26 NOTAMN\nQ) LLLL/QWCLW/IV/M /W /000/022/3123N03446E001\nA) LLLL B) 2608120240 C) 2608230240\nD) 12 0240-2359, 13 0001-0415 1215-1640, 14-15 DAILY 1650-0240,\n16-17 DAILY 0240-1650, 18-20 DAILY 0240-0420 1215-1650, 21-23 DAILY\n1650-0240\nE) CAPTIVE BALLOON WILL TAKE PLACE AT RAHAT, UP TO 1,700FT AMSL.\nAN AREA WI 0.4NM RADIUS CENTERED ON PSN 312252N0344541E\nCLSD FM GND UP TO 2,200FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ\nF) GND G) 2200FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWCLW",
-    "subject_code": "WC",
-    "subject": "כדור פורח קשור / עפיפון",
-    "subject_note": "בלון הקשור לקרקע בכבל. הכבל — לא הבלון — הוא המכשול.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 22,
-     "lower_ft": 0,
-     "upper_ft": 2200,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.383333333333333,
-     "lon": 34.766666666666666,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.383333333333333,
-    "lon": 34.766666666666666,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 22,
-    "lower_ft": 0,
-    "upper_ft": 2200,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2608120240",
-    "iso": "2026-08-12T02:40:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2608230240",
-    "iso": "2026-08-23T02:40:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "12 0240-2359, 13 0001-0415 1215-1640, 14-15 DAILY 1650-0240,\n16-17 DAILY 0240-1650, 18-20 DAILY 0240-0420 1215-1650, 21-23 DAILY\n1650-0240",
-   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT RAHAT, UP TO 1,700FT AMSL.\nAN AREA WI 0.4NM RADIUS CENTERED ON PSN 312252N0344541E\nCLSD FM GND UP TO 2,200FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "2200FT AMSL)",
-    "feet": 2200,
-    "reference": "AMSL"
-   },
    "administrative": false,
    "parse_errors": [],
    "area": null,
