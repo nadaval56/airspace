@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-23T11:30:41Z",
- "last_success": "2026-08-23T11:30:41Z",
+ "generated_at": "2026-08-23T12:57:56Z",
+ "last_success": "2026-08-23T12:57:56Z",
  "last_error": {
   "at": "2026-08-22T23:30:10Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,25 +20,55 @@
  ],
  "counts": {
   "total": 10,
-  "TAF": 6,
-  "METAR": 4
+  "METAR": 4,
+  "TAF": 6
  },
  "reports": [
+  {
+   "id": "METAR",
+   "station": "LLHA",
+   "kind": "METAR",
+   "text": "METAR LLHA 231250Z AUTO 30009KT 9999 SCT025 31/24 Q1008=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 231250Z AUTO 01014KT CAVOK 40/09 Q1006=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 231250Z AUTO 34012KT CAVOK 36/17 Q1009=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
   {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 230600 TILL 240600, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 231200 TILL 241200, WIND 310 DEGREES, 12 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 2 THOUSAND 5",
    "truncated": true,
-   "valid_from": "230600",
-   "valid_to": "240600",
+   "valid_from": "231200",
+   "valid_to": "241200",
    "area": null
   },
   {
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 231120Z 29011KT 260V330 9999 FEW030 32/22 Q1009 NOSIG=",
+   "text": "METAR LLBG 231250Z 29011KT 9999 FEW025 31/22 Q1009 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -89,36 +119,6 @@
    "station": "LLER",
    "kind": "TAF",
    "text": "TAF LLER 231107Z 2312/2412 02012KT CAVOK TX40/2313Z TN27/2404Z PROB40 TEMPO 2312/2317 02017KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 231050Z AUTO 28009KT 9999 FEW030 31/24 Q1009=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 231050Z AUTO 02010KT 340V070 CAVOK 38/11 Q1008=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 231050Z AUTO 13010KT 9999 FEW040 35/21 Q1009=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
