@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-23T04:48:07Z",
- "last_success": "2026-08-23T04:48:07Z",
+ "generated_at": "2026-08-23T05:38:17Z",
+ "last_success": "2026-08-23T05:38:17Z",
  "last_error": {
   "at": "2026-08-22T23:30:10Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -29,7 +29,7 @@
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 230420Z 16005KT 9999 FEW025 26/22 Q1010 NOSIG=",
+   "text": "METAR LLBG 230520Z 18005KT 9999 FEW025 28/22 Q1010 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -46,10 +46,60 @@
    "area": null
   },
   {
+   "id": "TAFLG",
+   "station": "LLHA",
+   "kind": "TAF",
+   "text": "TAF LLHA 230507Z 2306/2406 VRB04KT 9999 FEW025 TX32/2310Z TN26/2404Z BECMG 2307/2309 29010KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLIB",
+   "kind": "TAF",
+   "text": "TAF LLIB 230507Z 2306/2406 VRB04KT 9999 FEW020 TX36/2311Z TN23/2404Z BECMG 2307/2309 17006KT FEW035",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHZ",
+   "kind": "TAF",
+   "text": "TAF LLHZ 230506Z 2306/2406 VRB04KT 9999 FEW025 TX31/2310Z TN26/2404Z BECMG 2307/2309 28010KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 230502Z 2306/2406 VRB04KT 9999 SCT025 TX32/2311Z TN25/2404Z BECMG 2307/2309 29010KT FEW030",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 230501Z 2306/2406 35010KT CAVOK TX40/2313Z TN27/2404Z BECMG 2307/2309 02012KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
    "id": "METAR",
    "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLHA 230350Z AUTO 20004KT 9999 FEW025 28/23 Q1009=",
+   "text": "METAR LLHA 230450Z AUTO 19005KT 120V260 9999 FEW025 29/23 Q1009=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -59,7 +109,7 @@
    "id": "METAR",
    "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLER 230350Z AUTO 03006KT CAVOK 27/19 Q1010=",
+   "text": "METAR LLER 230450Z AUTO 02007KT CAVOK 28/19 Q1010=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -69,7 +119,7 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 230350Z AUTO VRB03KT CAVOK 23/19 Q1011=",
+   "text": "METAR LLIB 230450Z AUTO VRB02KT CAVOK 26/21 Q1011=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -105,56 +155,6 @@
      33.35
     ]
    ]
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHA",
-   "kind": "TAF",
-   "text": "TAF LLHA 222303Z 2300/2324 VRB04KT 9999 SCT022 TX32/2310Z TN26/2303Z PROB40 TEMPO 2300/2306 23005KT BKN018",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLIB",
-   "kind": "TAF",
-   "text": "TAF LLIB 222304Z 2300/2324 VRB04KT 9999 FEW020 TX36/2311Z TN23/2303Z PROB40 TEMPO 2301/2305 7000 BKN012",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHZ",
-   "kind": "TAF",
-   "text": "TAF LLHZ 222303Z 2300/2324 VRB04KT 9999 SCT022 TX31/2310Z TN26/2303Z PROB40 TEMPO 2300/2306 21005KT BKN018",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 222303Z 2300/2324 VRB04KT 9999 SCT025 TX32/2311Z TN25/2303Z PROB40 TEMPO 2300/2306 17006KT BKN020",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 222303Z 2300/2324 32010KT CAVOK TX40/2313Z TN27/2304Z BECMG 2305/2307 02012KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
   }
  ]
 }
