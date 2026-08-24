@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-24T04:56:09Z",
- "last_success": "2026-08-24T04:56:09Z",
+ "generated_at": "2026-08-24T05:48:24Z",
+ "last_success": "2026-08-24T05:48:24Z",
  "last_error": {
   "at": "2026-08-22T23:30:10Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -29,7 +29,67 @@
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 240450Z 15004KT 9999 FEW018 26/17 Q1010 NOSIG=",
+   "text": "METAR LLBG 240520Z 15004KT 9999 FEW020 27/20 Q1010 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 240000 TILL 250000, WIND VARIABLE, 4 KNOTS, CAVOK, PROBABILITY 40 TEMPORARY FROM 240100 TILL 240500 WIND",
+   "truncated": true,
+   "valid_from": "240000",
+   "valid_to": "250000",
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHA",
+   "kind": "TAF",
+   "text": "TAF LLHA 240504Z 2406/2506 16004KT 9999 FEW020 TX32/2411Z TN24/2503Z BECMG 2407/2409 29010KT FEW025",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLIB",
+   "kind": "TAF",
+   "text": "TAF LLIB 240505Z 2406/2506 16008KT CAVOK TX36/2413Z TN20/2503Z TEMPO 2406/2408 VRB03KT 9999 FEW020",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHZ",
+   "kind": "TAF",
+   "text": "TAF LLHZ 240503Z 2406/2506 VRB03KT 9999 FEW020 TX31/2411Z TN23/2503Z BECMG 2407/2409 30010KT CAVOK",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 240503Z 2406/2506 14005KT 9999 FEW020 TX33/2411Z TN23/2503Z BECMG 2407/2409 30010KT CAVOK",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 240503Z 2406/2506 01012KT CAVOK TX41/2413Z TN28/2504Z PROB40 TEMPO 2415/2419 33014KT=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -63,16 +123,6 @@
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 240000 TILL 250000, WIND VARIABLE, 4 KNOTS, CAVOK, PROBABILITY 40 TEMPORARY FROM 240100 TILL 240500 WIND",
-   "truncated": true,
-   "valid_from": "240000",
-   "valid_to": "250000",
    "area": null
   },
   {
@@ -144,56 +194,6 @@
      31.483333
     ]
    ]
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 232312Z 2400/2424 VRB04KT CAVOK TX33/2411Z TN24/2403Z PROB40 TEMPO 2401/2405 14005KT 9999 SCT015",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 232310Z 2400/2424 01012KT CAVOK TX41/2413Z TN28/2403Z PROB40 TEMPO 2415/2419 33014KT=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHA",
-   "kind": "TAF",
-   "text": "TAF LLHA 232313Z 2400/2424 VRB04KT 9999 FEW020 TX32/2411Z TN25/2403Z PROB40 TEMPO 2401/2405 BKN015",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLIB",
-   "kind": "TAF",
-   "text": "TAF LLIB 232313Z 2400/2424 VRB04KT CAVOK TX37/2413Z TN20/2403Z PROB30 TEMPO 2403/2406 9999 SCT015",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHZ",
-   "kind": "TAF",
-   "text": "TAF LLHZ 232313Z 2400/2424 VRB03KT 9999 FEW020 TX31/2411Z TN23/2403Z PROB40 TEMPO 2401/2405 BKN015",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
   }
  ]
 }
