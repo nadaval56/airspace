@@ -305,15 +305,6 @@
   "valid_from": "2026-08-18T08:38:00Z",
   "valid_to": "2026-09-30T23:59:00Z"
  },
- "A0672/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-19T11:10:00Z",
-  "id": "A0672/26",
-  "location": "LLLL",
-  "raw": "(A0672/26 NOTAMN\nQ) LLLL/QNMAS/IV/BO /E /000/999/3117N03443E025\nA) LLLL B) 2608191107 C) 2608241300\nE) VOR/DME BSA FREQ 114.300MHZ U/S.)",
-  "valid_from": "2026-08-19T11:07:00Z",
-  "valid_to": "2026-08-24T13:00:00Z"
- },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
