@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-25T04:48:52Z",
- "last_success": "2026-08-25T04:48:52Z",
+ "generated_at": "2026-08-25T05:40:15Z",
+ "last_success": "2026-08-25T05:40:15Z",
  "last_error": {
   "at": "2026-08-24T17:39:26Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; faa-dins"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 91,
+   "count": 92,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 91,
-  "mapped": 88,
+  "total": 92,
+  "mapped": 89,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 83,
+  "low_altitude": 84,
   "administrative": 4
  },
  "notams": [
@@ -1279,6 +1279,76 @@
    },
    "schedule": null,
    "text": "VOR/DME NAT FREQ 112.400MHZ WITHDRAWN FOR MAINT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0678/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0678/26 NOTAMN\nQ) LLLL/QCACS/IV/BO /AE/000/999/3249N03503E005\nA) LLHA B) 2608250512 C) 2611302159\nE) NEW FREQ INSTL FOR CLEARANCE BFR TAXI (CPT) 128.000MHZ.\nDEP FLT SHALL CTC TWR ON CPT FREQ BFR STARTING UP ENGINE.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLHA"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QCACS",
+    "subject_code": "CA",
+    "subject": "מתקן קשר אוויר-קרקע",
+    "subject_note": "תדרי הרדיו שבהם מדברים עם הבקרה.",
+    "condition_code": "CS",
+    "condition": "מותקן",
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "AE",
+    "scope": null,
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.81666666666667,
+     "lon": 35.05,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.81666666666667,
+    "lon": 35.05,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2608250512",
+    "iso": "2026-08-25T05:12:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2611302159",
+    "iso": "2026-11-30T21:59:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "NEW FREQ INSTL FOR CLEARANCE BFR TAXI (CPT) 128.000MHZ.\nDEP FLT SHALL CTC TWR ON CPT FREQ BFR STARTING UP ENGINE.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,

@@ -296,6 +296,15 @@
   "valid_from": "2026-08-18T08:38:00Z",
   "valid_to": "2026-09-30T23:59:00Z"
  },
+ "A0678/26": {
+  "airfield": "Haifa",
+  "created": "2026-08-25T05:14:00Z",
+  "id": "A0678/26",
+  "location": "LLHA",
+  "raw": "(A0678/26 NOTAMN\nQ) LLLL/QCACS/IV/BO /AE/000/999/3249N03503E005\nA) LLHA B) 2608250512 C) 2611302159\nE) NEW FREQ INSTL FOR CLEARANCE BFR TAXI (CPT) 128.000MHZ.\nDEP FLT SHALL CTC TWR ON CPT FREQ BFR STARTING UP ENGINE.)",
+  "valid_from": "2026-08-25T05:12:00Z",
+  "valid_to": "2026-11-30T21:59:00Z"
+ },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
