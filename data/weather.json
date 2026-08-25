@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-25T15:54:05Z",
- "last_success": "2026-08-25T15:54:05Z",
+ "generated_at": "2026-08-25T16:50:08Z",
+ "last_success": "2026-08-25T16:50:08Z",
  "last_error": {
   "at": "2026-08-24T17:39:28Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -28,10 +28,20 @@
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 251550Z 31006KT CAVOK 30/22 Q1009 NOSIG=",
+   "text": "METAR LLBG 251620Z 34005KT CAVOK 30/22 Q1009 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 251200 TILL 261200, WIND 300 DEGREES, 10 KNOTS, CAVOK, BECOMING FROM 251500 TILL 251800 WIND VARIABLE, 4",
+   "truncated": true,
+   "valid_from": "251200",
+   "valid_to": "261200",
    "area": null
   },
   {
@@ -62,16 +72,6 @@
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 251200 TILL 261200, WIND 300 DEGREES, 10 KNOTS, CAVOK, BECOMING FROM 251500 TILL 251800 WIND VARIABLE, 4",
-   "truncated": true,
-   "valid_from": "251200",
-   "valid_to": "261200",
    "area": null
   },
   {
