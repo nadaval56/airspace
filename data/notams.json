@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-25T11:37:15Z",
- "last_success": "2026-08-25T11:37:15Z",
+ "generated_at": "2026-08-25T13:06:06Z",
+ "last_success": "2026-08-25T13:06:06Z",
  "last_error": {
   "at": "2026-08-24T17:39:26Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; faa-dins"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 96,
+   "count": 95,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 96,
-  "mapped": 93,
+  "total": 95,
+  "mapped": 92,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 88,
+  "low_altitude": 87,
   "administrative": 4
  },
  "notams": [
@@ -1752,10 +1752,10 @@
    "low_altitude": true
   },
   {
-   "id": "A0679/26",
+   "id": "A0684/26",
    "type": "NOTAMN",
    "replaces": null,
-   "raw": "(A0679/26 NOTAMN\nQ) LLLL/QMRLT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2608260330 C) 2608261300\nD) DAILY 0330-1300\nE) RWY 08 CLSD FOR TKOF ONLY, EXC RWY INT DUE CRANE.)",
+   "raw": "(A0684/26 NOTAMN\nQ) LLLL/QMRLT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2608260330 C) 2608271300\nD) DAILY 0330-1300\nE) RWY 08 CLSD FOR TKOF ONLY, DUE CRANE.)",
    "source": "iaa:LLLL",
    "locations": [
     "LLBG"
@@ -1806,13 +1806,13 @@
     "estimated": false
    },
    "valid_to": {
-    "raw": "2608261300",
-    "iso": "2026-08-26T13:00:00Z",
+    "raw": "2608271300",
+    "iso": "2026-08-27T13:00:00Z",
     "permanent": false,
     "estimated": false
    },
    "schedule": "DAILY 0330-1300",
-   "text": "RWY 08 CLSD FOR TKOF ONLY, EXC RWY INT DUE CRANE.)",
+   "text": "RWY 08 CLSD FOR TKOF ONLY, DUE CRANE.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
@@ -1883,76 +1883,6 @@
    },
    "schedule": null,
    "text": "NEW FREQ INSTL FOR CLEARANCE BFR TAXI (CPT) 121.800MHZ.\nDEP FLT SHALL CTC TWR ON CPT FREQ BFR STARTING UP ENGINE.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "A0646/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(A0646/26 NOTAMN\nQ) LLLL/QNMAS/IV/BO /E /000/999/3220N03458E025\nA) LLLL B) 2608250700 C) 2608251200\nE) VOR/DME NAT FREQ 112.400MHZ WITHDRAWN FOR MAINT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QNMAS",
-    "subject_code": "NM",
-    "subject": "משואת VOR/DME",
-    "subject_note": "משואת ניווט שמוסרת גם כיוון וגם מרחק.",
-    "condition_code": "AS",
-    "condition": "מושבת",
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 999,
-     "lower_ft": 0,
-     "upper_ft": 99900,
-     "unlimited": true
-    },
-    "geo": {
-     "lat": 32.333333333333336,
-     "lon": 34.96666666666667,
-     "radius_nm": 25,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.333333333333336,
-    "lon": 34.96666666666667,
-    "radius_nm": 25,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 999,
-    "lower_ft": 0,
-    "upper_ft": 99900,
-    "unlimited": true
-   },
-   "valid_from": {
-    "raw": "2608250700",
-    "iso": "2026-08-25T07:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2608251200",
-    "iso": "2026-08-25T12:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "VOR/DME NAT FREQ 112.400MHZ WITHDRAWN FOR MAINT.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
