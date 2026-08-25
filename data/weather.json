@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-25T17:40:04Z",
- "last_success": "2026-08-25T17:40:04Z",
+ "generated_at": "2026-08-25T18:52:38Z",
+ "last_success": "2026-08-25T18:52:38Z",
  "last_error": {
   "at": "2026-08-24T17:39:28Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,28 +20,58 @@
  ],
  "counts": {
   "total": 10,
-  "TAF": 6,
-  "METAR": 4
+  "METAR": 4,
+  "TAF": 6
  },
  "reports": [
   {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 251200 TILL 261200, WIND 300 DEGREES, 10 KNOTS, CAVOK, BECOMING FROM 251500 TILL 251800 WIND VARIABLE, 4",
+   "id": "METAR",
+   "station": "LLHA",
+   "kind": "METAR",
+   "text": "METAR LLHA 251850Z NIL=",
    "truncated": true,
-   "valid_from": "251200",
-   "valid_to": "261200",
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 251850Z AUTO 02017KT CAVOK 34/08 Q1008=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 251850Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
    "area": null
   },
   {
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 251720Z 33004KT CAVOK 29/23 Q1010 NOSIG=",
+   "text": "METAR LLBG 251850Z VRB03KT CAVOK 28/23 Q1010 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 251800 TILL 261800, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 2 THOUSAND FEET,",
+   "truncated": true,
+   "valid_from": "251800",
+   "valid_to": "261800",
    "area": null
   },
   {
@@ -89,36 +119,6 @@
    "station": "LLER",
    "kind": "TAF",
    "text": "TAF LLER 251701Z 2518/2618 35012KT CAVOK TX41/2612Z TN28/2603Z BECMG 2604/2606 02016KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 251650Z AUTO 32006KT 280V350 9999 SCT019 29/24 Q1009=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 251650Z AUTO 01013KT CAVOK 37/01 Q1007=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 251650Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
