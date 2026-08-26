@@ -170,15 +170,6 @@
   "valid_from": "2026-07-19T11:45:00Z",
   "valid_to": "2026-08-31T23:59:00Z"
  },
- "A0592/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-07-26T16:27:00Z",
-  "id": "A0592/26",
-  "location": "LLLL",
-  "raw": "(A0592/26 NOTAMR A0505/26\nQ) LLLL/QANLC/I /NBO/E /050/370/3056N03502E053\nA) LLLL B) 2607261624 C) 2608312059\nE) ATS RTE Q30 CLSD BTN BEXOM-NURIT.)",
-  "valid_from": "2026-07-26T16:24:00Z",
-  "valid_to": "2026-08-31T20:59:00Z"
- },
  "A0610/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-08-03T06:00:00Z",
@@ -303,6 +294,15 @@
   "location": "LLLL",
   "raw": "(A0688/26 NOTAMR A0596/26\nQ) LLLL/QGWAU/IV/NBO/E /000/999/3125N03521E117\nA) LLLL B) 2608260947 C) 2610312359\nE) POSS INTRP TO AIRBORNE GNSS EQPT WI TEL-AVIV FIR.)",
   "valid_from": "2026-08-26T09:47:00Z",
+  "valid_to": "2026-10-31T23:59:00Z"
+ },
+ "A0689/26": {
+  "airfield": "Tel-Aviv FIR",
+  "created": "2026-08-26T09:59:00Z",
+  "id": "A0689/26",
+  "location": "LLLL",
+  "raw": "(A0689/26 NOTAMR A0592/26\nQ) LLLL/QANLC/I /NBO/E /050/370/3056N03502E053\nA) LLLL B) 2608260957 C) 2610312359\nE) ATS RTE Q30 CLSD BTN BEXOM-NURIT.)",
+  "valid_from": "2026-08-26T09:57:00Z",
   "valid_to": "2026-10-31T23:59:00Z"
  },
  "C0005/26": {
