@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-29T18:22:10Z",
- "last_success": "2026-08-29T18:22:10Z",
+ "generated_at": "2026-08-29T21:40:39Z",
+ "last_success": "2026-08-29T21:40:39Z",
  "last_error": {
   "at": "2026-08-24T17:39:28Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -29,7 +29,7 @@
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 291820Z 26014KT 9999 FEW025 SCT040 29/21 Q1005 NOSIG=",
+   "text": "METAR LLBG 292120Z 28009KT 9999 FEW030 27/20 Q1005 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -44,6 +44,108 @@
    "valid_from": "291800",
    "valid_to": "301800",
    "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLHA",
+   "kind": "METAR",
+   "text": "METAR LLHA 292050Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 292050Z AUTO 35011KT 8000 NCD 31/19 Q1006=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 292050Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 13 VALID 292048/292300 LLBD-",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 12 VALID 291900/292300 LLBD- LLLL TEL AVIV FIR ISOL TS FCST WI N3317 E03450 - N3315 E03557 - N3230 E03525 - N3252 E03340 - N3317 E03450 TOP FL200 MOV NNE 15KT WKN=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": [
+    [
+     34.833333,
+     33.283333
+    ],
+    [
+     35.95,
+     33.25
+    ],
+    [
+     35.416667,
+     32.5
+    ],
+    [
+     33.666667,
+     32.866667
+    ],
+    [
+     34.833333,
+     33.283333
+    ]
+   ]
+  },
+  {
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 11 VALID 291900/292300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR NC=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": [
+    [
+     35.8,
+     33.35
+    ],
+    [
+     35.916667,
+     32.95
+    ],
+    [
+     34.583333,
+     30.3
+    ],
+    [
+     34.433333,
+     30.7
+    ],
+    [
+     35.8,
+     33.35
+    ]
+   ]
   },
   {
    "id": "AIRMET",
@@ -75,36 +177,6 @@
      31.1
     ]
    ]
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 291750Z AUTO 24009KT 9999 FEW035 29/23 Q1003=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 291750Z AUTO 34016KT 5000 HZ SCT026 34/19 Q1004=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 291750Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
   },
   {
    "id": "TAFLG",
@@ -155,107 +227,6 @@
    "valid_from": null,
    "valid_to": null,
    "area": null
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 9 VALID 291700/291900 LLBD- LLLL TEL AVIV FIR MOD TURB FCST WI N3252 E03340 - N3310 E03423 - N3228 E03535 - N3147 E03501 - N3252 E03340 FL030/140 NC=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     33.666667,
-     32.866667
-    ],
-    [
-     34.383333,
-     33.166667
-    ],
-    [
-     35.583333,
-     32.466667
-    ],
-    [
-     35.016667,
-     31.783333
-    ],
-    [
-     33.666667,
-     32.866667
-    ]
-   ]
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 8 VALID 291700/291900 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3241 E03514 - N3311 E03512 - N3321 E03548 - N3257 E03555 - N3243 E03541 - N3238 E03528 - N3241 E03514",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.233333,
-     32.683333
-    ],
-    [
-     35.2,
-     33.183333
-    ],
-    [
-     35.8,
-     33.35
-    ],
-    [
-     35.916667,
-     32.95
-    ],
-    [
-     35.683333,
-     32.716667
-    ],
-    [
-     35.466667,
-     32.633333
-    ],
-    [
-     35.233333,
-     32.683333
-    ]
-   ]
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 7 VALID 291510/291900 LLBD- LLLL TEL AVIV FIR ISOL TS OBS WI N3311 E03512 - N3321 E03548 - N3257 E03555 - N3231 E03535 - N3311 E03512 TOP FL160 MOV NNE 20KT WKN=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.2,
-     33.183333
-    ],
-    [
-     35.8,
-     33.35
-    ],
-    [
-     35.916667,
-     32.95
-    ],
-    [
-     35.583333,
-     32.516667
-    ],
-    [
-     35.2,
-     33.183333
-    ]
-   ]
   }
  ]
 }
