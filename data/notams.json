@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-08-31T13:33:16Z",
- "last_success": "2026-08-31T13:33:16Z",
+ "generated_at": "2026-08-31T19:57:57Z",
+ "last_success": "2026-08-31T19:57:57Z",
  "last_error": {
   "at": "2026-08-26T11:38:40Z",
   "message": "iaa/LLLL: TimeoutError: The read operation timed out; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; fa"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 119,
+   "count": 118,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 119,
-  "mapped": 116,
+  "total": 118,
+  "mapped": 115,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 111,
+  "low_altitude": 110,
   "administrative": 4
  },
  "notams": [
@@ -2472,6 +2472,76 @@
     "feet": 500,
     "reference": "AMSL"
    },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1849/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1849/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3243N03524E001\nA) LLLL B) 2609011100 C) 2609011300\nE) AN AREA AT KFAR-TAVOR WI 1.1NM RADIUS CENTERED ON\nPSN 324241N0352429E CLSD FM GND UP TO 2,000FT AMSL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 20,
+     "lower_ft": 0,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.71666666666667,
+     "lon": 35.4,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.71666666666667,
+    "lon": 35.4,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 20,
+    "lower_ft": 0,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609011100",
+    "iso": "2026-09-01T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609011300",
+    "iso": "2026-09-01T13:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "AN AREA AT KFAR-TAVOR WI 1.1NM RADIUS CENTERED ON\nPSN 324241N0352429E CLSD FM GND UP TO 2,000FT AMSL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
+   "lower_limit": null,
+   "upper_limit": null,
    "administrative": false,
    "parse_errors": [],
    "area": null,
@@ -6722,84 +6792,6 @@
    "low_altitude": false
   },
   {
-   "id": "C1679/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1679/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/028/3147N03506E001\nA) LLLL B) 2608060700 C) 2608311500\nD) DAILY 0700-1500\nE) UAS/UAV ACT WILL TAKE PLACE AT EITANIM-HOSPITAL.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 314643N0350539E\nCLSD FM GND UP TO 100M AGL, 2,800FT AMSL.\nCTN ADZ.\nF) GND G) 2800FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWULW",
-    "subject_code": "WU",
-    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
-    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 28,
-     "lower_ft": 0,
-     "upper_ft": 2800,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.783333333333335,
-     "lon": 35.1,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.783333333333335,
-    "lon": 35.1,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 28,
-    "lower_ft": 0,
-    "upper_ft": 2800,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2608060700",
-    "iso": "2026-08-06T07:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2608311500",
-    "iso": "2026-08-31T15:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "DAILY 0700-1500",
-   "text": "UAS/UAV ACT WILL TAKE PLACE AT EITANIM-HOSPITAL.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 314643N0350539E\nCLSD FM GND UP TO 100M AGL, 2,800FT AMSL.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "2800FT AMSL)",
-    "feet": 2800,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
    "id": "C1698/26",
    "type": "NOTAMR",
    "replaces": "C0458/26",
@@ -7006,105 +6998,6 @@
    "administrative": false,
    "parse_errors": [],
    "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1558/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1558/26 NOTAMN\nQ) LLLL/QWMLW/IV/BO /W /000/120/3105N03454E001\nA) LLLL B) 2608020500 C) 2608311500\nD) SUN-THU 0500-1500\nE) FRNG WILL TAKE PLACE AT RAMAT-BEKA WI LLP14.\nAN AREA BTN THE FLW PSN 310542N0345314E\n310541N0345352E 310509N0345351E 310453N0345313E\nCLSD FM GND UP TO 12,000FT AMSL.\nCTN ADZ.\nF) GND G) 12000FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWMLW",
-    "subject_code": "WM",
-    "subject": "ירי טילים / רקטות",
-    "subject_note": null,
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 120,
-     "lower_ft": 0,
-     "upper_ft": 12000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.083333333333332,
-     "lon": 34.9,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.083333333333332,
-    "lon": 34.9,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 120,
-    "lower_ft": 0,
-    "upper_ft": 12000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2608020500",
-    "iso": "2026-08-02T05:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2608311500",
-    "iso": "2026-08-31T15:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "SUN-THU 0500-1500",
-   "text": "FRNG WILL TAKE PLACE AT RAMAT-BEKA WI LLP14.\nAN AREA BTN THE FLW PSN 310542N0345314E\n310541N0345352E 310509N0345351E 310453N0345313E\nCLSD FM GND UP TO 12,000FT AMSL.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "12000FT AMSL)",
-    "feet": 12000,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": [
-    [
-     34.887222,
-     31.095
-    ],
-    [
-     34.897778,
-     31.094722
-    ],
-    [
-     34.8975,
-     31.085833
-    ],
-    [
-     34.886944,
-     31.081389
-    ],
-    [
-     34.887222,
-     31.095
-    ]
-   ],
    "floor_ft": 0,
    "low_altitude": true
   },
