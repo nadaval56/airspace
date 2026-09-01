@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-01T09:58:29Z",
- "last_success": "2026-09-01T09:58:29Z",
+ "generated_at": "2026-09-01T14:45:58Z",
+ "last_success": "2026-09-01T14:45:58Z",
  "last_error": {
   "at": "2026-08-26T11:38:40Z",
   "message": "iaa/LLLL: TimeoutError: The read operation timed out; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; fa"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 106,
+   "count": 107,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -158,50 +158,50 @@
    "icao": "LLLL",
    "ok": false,
    "count": 0,
-   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403"
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Errno -2] Name or service not known>"
   },
   {
    "source": "faa-dins",
    "icao": "LLBG",
    "ok": false,
    "count": 0,
-   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLBG&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403"
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLBG&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Errno -2] Name or service not known>"
   },
   {
    "source": "faa-dins",
    "icao": "LLHA",
    "ok": false,
    "count": 0,
-   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLHA&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403"
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLHA&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Errno -2] Name or service not known>"
   },
   {
    "source": "faa-dins",
    "icao": "LLIB",
    "ok": false,
    "count": 0,
-   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLIB&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403"
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLIB&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Errno -2] Name or service not known>"
   },
   {
    "source": "faa-dins",
    "icao": "LLRD",
    "ok": false,
    "count": 0,
-   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLRD&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403"
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLRD&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Errno -2] Name or service not known>"
   },
   {
    "source": "faa-dins",
    "icao": "LLHZ",
    "ok": false,
    "count": 0,
-   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLHZ&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403"
+   "error": "RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLHZ&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Errno -2] Name or service not known>"
   }
  ],
  "counts": {
-  "total": 106,
-  "mapped": 103,
+  "total": 107,
+  "mapped": 104,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 97,
+  "low_altitude": 98,
   "administrative": 4
  },
  "notams": [
@@ -638,6 +638,76 @@
    },
    "schedule": "08 1535-1815, 09 1335-1445 1535-1815",
    "text": "AD CLSD TO ALL FLT INCLUDING HEL, DUE WIP.\nIN CASE OF EMERG OR MEDEVAC HEL AVBL WI 10MIN.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0715/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0715/26 NOTAMN\nQ) LLLL/QNMAS/IV/BO /AE/000/999/2945N03501E025\nA) LLER B) 2609080700 C) 2609080800\nE) VOR/DME RAM FREQ 113.850MHZ WITHDRAWN FOR MAINT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QNMAS",
+    "subject_code": "NM",
+    "subject": "משואת VOR/DME",
+    "subject_note": "משואת ניווט שמוסרת גם כיוון וגם מרחק.",
+    "condition_code": "AS",
+    "condition": "מושבת",
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "AE",
+    "scope": null,
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 29.75,
+     "lon": 35.016666666666666,
+     "radius_nm": 25,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 29.75,
+    "lon": 35.016666666666666,
+    "radius_nm": 25,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2609080700",
+    "iso": "2026-09-08T07:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609080800",
+    "iso": "2026-09-08T08:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "VOR/DME RAM FREQ 113.850MHZ WITHDRAWN FOR MAINT.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
@@ -2570,6 +2640,154 @@
    "low_altitude": true
   },
   {
+   "id": "C1852/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1852/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/020/3246N03523E001\nA) LLLL B) 2609020250 C) 2609020400\nE) UAS ACT WILL TAKE PLACE AT GOLANI-JUNCTION.\nAN AREA WI 1NM RADIUS CENTERED ON PSN 324550N0352304E\nCLSD TO ALL FLT FM GND UP TO 2,000FT AMSL.\nOPS OF AGRICULTURE FLT AVBL WITH 15MIN PPR FM ATC.\nCTN ADZ.\nF) GND G) 2000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWULW",
+    "subject_code": "WU",
+    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
+    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 20,
+     "lower_ft": 0,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.766666666666666,
+     "lon": 35.38333333333333,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.766666666666666,
+    "lon": 35.38333333333333,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 20,
+    "lower_ft": 0,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609020250",
+    "iso": "2026-09-02T02:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609020400",
+    "iso": "2026-09-02T04:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "UAS ACT WILL TAKE PLACE AT GOLANI-JUNCTION.\nAN AREA WI 1NM RADIUS CENTERED ON PSN 324550N0352304E\nCLSD TO ALL FLT FM GND UP TO 2,000FT AMSL.\nOPS OF AGRICULTURE FLT AVBL WITH 15MIN PPR FM ATC.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "2000FT AMSL)",
+    "feet": 2000,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0716/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0716/26 NOTAMN\nQ) LLLL/QANLC/I /NBO/E /040/060/3242N03524E012\nA) LLLL B) 2609020250 C) 2609020300\nE) ATS RTE J14 CLSD BTN MEGID-BARZI.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QANLC",
+    "subject_code": "AN",
+    "subject": "נתיב ניווט שטח (RNAV)",
+    "subject_note": "נתיב המוגדר בנקודות ציון ולא במשואות קרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "I",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 40,
+     "upper_fl": 60,
+     "lower_ft": 4000,
+     "upper_ft": 6000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.7,
+     "lon": 35.4,
+     "radius_nm": 12,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.7,
+    "lon": 35.4,
+    "radius_nm": 12,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 40,
+    "upper_fl": 60,
+    "lower_ft": 4000,
+    "upper_ft": 6000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609020250",
+    "iso": "2026-09-02T02:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609020300",
+    "iso": "2026-09-02T03:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "ATS RTE J14 CLSD BTN MEGID-BARZI.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 4000,
+   "low_altitude": false
+  },
+  {
    "id": "C1799/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -2641,146 +2859,6 @@
     "feet": 500,
     "reference": "AMSL"
    },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "A0713/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(A0713/26 NOTAMN\nQ) LLLL/QANLC/I /NBO/E /040/060/3242N03524E012\nA) LLLL B) 2609011200 C) 2609011400\nE) ATS RTE J14 CLSD BTN MEGID-BARZI.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QANLC",
-    "subject_code": "AN",
-    "subject": "נתיב ניווט שטח (RNAV)",
-    "subject_note": "נתיב המוגדר בנקודות ציון ולא במשואות קרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "I",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 40,
-     "upper_fl": 60,
-     "lower_ft": 4000,
-     "upper_ft": 6000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.7,
-     "lon": 35.4,
-     "radius_nm": 12,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.7,
-    "lon": 35.4,
-    "radius_nm": 12,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 40,
-    "upper_fl": 60,
-    "lower_ft": 4000,
-    "upper_ft": 6000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609011200",
-    "iso": "2026-09-01T12:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609011400",
-    "iso": "2026-09-01T14:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "ATS RTE J14 CLSD BTN MEGID-BARZI.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 4000,
-   "low_altitude": false
-  },
-  {
-   "id": "C1849/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1849/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3243N03524E001\nA) LLLL B) 2609011100 C) 2609011300\nE) AN AREA AT KFAR-TAVOR WI 1.1NM RADIUS CENTERED ON\nPSN 324241N0352429E CLSD FM GND UP TO 2,000FT AMSL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QAELC",
-    "subject_code": "AE",
-    "subject": "אזור בקרה (CTA)",
-    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 20,
-     "lower_ft": 0,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.71666666666667,
-     "lon": 35.4,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.71666666666667,
-    "lon": 35.4,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 20,
-    "lower_ft": 0,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609011100",
-    "iso": "2026-09-01T11:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609011300",
-    "iso": "2026-09-01T13:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "AN AREA AT KFAR-TAVOR WI 1.1NM RADIUS CENTERED ON\nPSN 324241N0352429E CLSD FM GND UP TO 2,000FT AMSL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
-   "lower_limit": null,
-   "upper_limit": null,
    "administrative": false,
    "parse_errors": [],
    "area": null,
