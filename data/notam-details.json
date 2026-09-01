@@ -746,15 +746,6 @@
   "valid_from": "2026-09-06T03:00:00Z",
   "valid_to": "2026-09-10T14:30:00Z"
  },
- "C1824/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-30T11:59:00Z",
-  "id": "C1824/26",
-  "location": "LLLL",
-  "raw": "(C1824/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/046/3257N03519E002\nA) LLLL B) 2609010600 C) 2609011630\nE) AN AREA WI 1.3NM RADIUS CENTERED ON PSN 325732N0351857E\nCLSD FM GND UP TO 4,550FT AMSL TO ALL FLT,\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC ONLY.\nCTN ADZ.)",
-  "valid_from": "2026-09-01T06:00:00Z",
-  "valid_to": "2026-09-01T16:30:00Z"
- },
  "C1825/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-08-30T12:27:00Z",
