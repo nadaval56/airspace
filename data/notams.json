@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-02T04:20:17Z",
- "last_success": "2026-09-02T04:20:17Z",
+ "generated_at": "2026-09-02T09:29:57Z",
+ "last_success": "2026-09-02T09:29:57Z",
  "last_error": {
   "at": "2026-08-26T11:38:40Z",
   "message": "iaa/LLLL: TimeoutError: The read operation timed out; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; fa"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 104,
+   "count": 108,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,12 +197,12 @@
   }
  ],
  "counts": {
-  "total": 104,
-  "mapped": 101,
-  "fir_wide": 3,
+  "total": 108,
+  "mapped": 104,
+  "fir_wide": 4,
   "no_geo": 0,
-  "low_altitude": 96,
-  "administrative": 4
+  "low_altitude": 100,
+  "administrative": 6
  },
  "notams": [
   {
@@ -1200,6 +1200,113 @@
    "parse_errors": [],
    "area": null,
    "floor_ft": 2500,
+   "low_altitude": true
+  },
+  {
+   "id": "C1854/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1854/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/028/3057N03456E002\nA) LLLL B) 2609060300 C) 2609081620\nD) DAILY 0300-1620\nE) UAS/UAV ACT WILL TAKE PLACE AT YERUHAM, FM GND UP TO 250M AGL.\nAN AREA BTN FLW PSN 305830N0345551E 305823N0345644E\n305803N0345708E 305709N0345649E 305624N0345614E\n305652N0345453E CLSD FM GND UP TO 2,800FT AMSL.\nCTN ADZ.\nF) GND G) 2800FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWULW",
+    "subject_code": "WU",
+    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
+    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 28,
+     "lower_ft": 0,
+     "upper_ft": 2800,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 30.95,
+     "lon": 34.93333333333333,
+     "radius_nm": 2,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 30.95,
+    "lon": 34.93333333333333,
+    "radius_nm": 2,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 28,
+    "lower_ft": 0,
+    "upper_ft": 2800,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609060300",
+    "iso": "2026-09-06T03:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609081620",
+    "iso": "2026-09-08T16:20:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "DAILY 0300-1620",
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT YERUHAM, FM GND UP TO 250M AGL.\nAN AREA BTN FLW PSN 305830N0345551E 305823N0345644E\n305803N0345708E 305709N0345649E 305624N0345614E\n305652N0345453E CLSD FM GND UP TO 2,800FT AMSL.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "2800FT AMSL)",
+    "feet": 2800,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": [
+    [
+     34.930833,
+     30.975
+    ],
+    [
+     34.945556,
+     30.973056
+    ],
+    [
+     34.952222,
+     30.9675
+    ],
+    [
+     34.946944,
+     30.9525
+    ],
+    [
+     34.937222,
+     30.94
+    ],
+    [
+     34.914722,
+     30.947778
+    ],
+    [
+     34.930833,
+     30.975
+    ]
+   ],
+   "floor_ft": 0,
    "low_altitude": true
   },
   {
@@ -2227,6 +2334,76 @@
    },
    "schedule": null,
    "text": "AIRSTRIP LTD TO MAX 400FT AMSL DUE ILS ACT WI LLRD.\nCTN ADZ.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0717/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0717/26 NOTAMN\nQ) LLLL/QMRLC/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2609020640 C) 2609021000\nE) RWY 08/26 CLSD EXC RWY INT, DUE WIP.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QMRLC",
+    "subject_code": "MR",
+    "subject": "מסלול",
+    "subject_note": null,
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.016666666666666,
+     "lon": 34.88333333333333,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.016666666666666,
+    "lon": 34.88333333333333,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2609020640",
+    "iso": "2026-09-02T06:40:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609021000",
+    "iso": "2026-09-02T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "RWY 08/26 CLSD EXC RWY INT, DUE WIP.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
@@ -7884,6 +8061,146 @@
     "reference": "AMSL"
    },
    "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1853/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1853/26 NOTAMN\nQ) LLLL/QOATT/IV/BO /E /000/999/3211N03515E015\nA) LLLL B) 2610010001 C) 2610142359\nE) TRIGGER NOTAM - NIL AIRAC DOM AIP AMDT WEF 01 OCT 2026.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QOATT",
+    "subject_code": "OA",
+    "subject": "שירות מידע תעופתי (AIS)",
+    "subject_note": "הודעה על שינוי בפמ\"ת עצמו. אינה מגבלה בשטח.",
+    "condition_code": "TT",
+    "condition": "שינוי זמני",
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.18333333333333,
+     "lon": 35.25,
+     "radius_nm": 15,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.18333333333333,
+    "lon": 35.25,
+    "radius_nm": 15,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610010001",
+    "iso": "2026-10-01T00:01:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610142359",
+    "iso": "2026-10-14T23:59:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "TRIGGER NOTAM - NIL AIRAC DOM AIP AMDT WEF 01 OCT 2026.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0718/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0718/26 NOTAMN\nQ) LLLL/QOATT/IV/BO /E /000/999/3123N03515E999\nA) LLLL B) 2610010001 C) 2610142359\nE) TRIGGER NOTAM - NIL AIRAC AIP AMDT WEF 01 OCT 2026.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QOATT",
+    "subject_code": "OA",
+    "subject": "שירות מידע תעופתי (AIS)",
+    "subject_note": "הודעה על שינוי בפמ\"ת עצמו. אינה מגבלה בשטח.",
+    "condition_code": "TT",
+    "condition": "שינוי זמני",
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 31.383333333333333,
+     "lon": 35.25,
+     "radius_nm": 999,
+     "fir_wide": true
+    }
+   },
+   "geo": {
+    "lat": 31.383333333333333,
+    "lon": 35.25,
+    "radius_nm": 999,
+    "fir_wide": true
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610010001",
+    "iso": "2026-10-01T00:01:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610142359",
+    "iso": "2026-10-14T23:59:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "TRIGGER NOTAM - NIL AIRAC AIP AMDT WEF 01 OCT 2026.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": true,
    "parse_errors": [],
    "area": null,
    "floor_ft": 0,
