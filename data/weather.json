@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-03T00:06:12Z",
- "last_success": "2026-09-03T00:06:12Z",
+ "generated_at": "2026-09-03T04:17:39Z",
+ "last_success": "2026-09-03T04:17:39Z",
  "last_error": {
   "at": "2026-08-24T17:39:28Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -19,10 +19,10 @@
   "LLSD"
  ],
  "counts": {
-  "total": 12,
+  "total": 11,
   "TAF": 6,
   "METAR": 4,
-  "AIRMET": 2
+  "AIRMET": 1
  },
  "reports": [
   {
@@ -39,7 +39,7 @@
    "id": "METAR",
    "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLHA 022350Z NIL=",
+   "text": "METAR LLHA 030350Z AUTO 26004KT 9999 FEW024 28/22 Q1008=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -49,7 +49,7 @@
    "id": "METAR",
    "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLER 022350Z AUTO 34010KT CAVOK 30/19 Q1008=",
+   "text": "METAR LLER 030350Z AUTO 03006KT CAVOK 27/19 Q1009=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -59,7 +59,7 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 022350Z NIL=",
+   "text": "METAR LLIB 030350Z AUTO VRB03KT CAVOK 23/18 Q1010=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -69,11 +69,42 @@
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 022350Z 14006KT 9999 SCT024 27/22 Q1009 NOSIG=",
+   "text": "METAR LLBG 030350Z 16006KT 9999 SCT023 26/22 Q1009 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
    "area": null
+  },
+  {
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 1 VALID 030300/030700 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3255 E03533 - N3320 E03535 - N3018 E03435 - N3042 E03426 - N3255 E03533 STNR WKN=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": [
+    [
+     35.55,
+     32.916667
+    ],
+    [
+     35.583333,
+     33.333333
+    ],
+    [
+     34.583333,
+     30.3
+    ],
+    [
+     34.433333,
+     30.7
+    ],
+    [
+     35.55,
+     32.916667
+    ]
+   ]
   },
   {
    "id": "TAFLG",
@@ -124,76 +155,6 @@
    "valid_from": null,
    "valid_to": null,
    "area": null
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 5 VALID 022300/030300 LLBD- LLLL TEL AVIV FIR BKN CLD 400/1500FT FCST WI N3129 E03419 - N3121 E03411 - N3044 E03425 - N3051 E03510 - N3106 E03518 - N3122 E03514 -",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     34.316667,
-     31.483333
-    ],
-    [
-     34.183333,
-     31.35
-    ],
-    [
-     34.416667,
-     30.733333
-    ],
-    [
-     35.166667,
-     30.85
-    ],
-    [
-     35.3,
-     31.1
-    ],
-    [
-     35.233333,
-     31.366667
-    ],
-    [
-     34.316667,
-     31.483333
-    ]
-   ]
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 4 VALID 022300/030300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR INTSF=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.8,
-     33.35
-    ],
-    [
-     35.916667,
-     32.95
-    ],
-    [
-     34.583333,
-     30.3
-    ],
-    [
-     34.433333,
-     30.7
-    ],
-    [
-     35.8,
-     33.35
-    ]
-   ]
   }
  ]
 }
