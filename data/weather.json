@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-02T21:45:55Z",
- "last_success": "2026-09-02T21:45:55Z",
+ "generated_at": "2026-09-03T00:06:12Z",
+ "last_success": "2026-09-03T00:06:12Z",
  "last_error": {
   "at": "2026-08-24T17:39:28Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,36 +20,26 @@
  ],
  "counts": {
   "total": 12,
-  "METAR": 4,
   "TAF": 6,
+  "METAR": 4,
   "AIRMET": 2
  },
  "reports": [
   {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 022120Z VRB03KT 9999 FEW025 27/22 Q1009 NOSIG=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 021800 TILL 031800, WIND 340 DEGREES, 7 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 2 THOUSAND 5",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 030000 TILL 040000, WIND VARIABLE, 3 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
    "truncated": true,
-   "valid_from": "021800",
-   "valid_to": "031800",
+   "valid_from": "030000",
+   "valid_to": "040000",
    "area": null
   },
   {
    "id": "METAR",
    "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLHA 022050Z NIL=",
+   "text": "METAR LLHA 022350Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -59,7 +49,7 @@
    "id": "METAR",
    "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLER 022050Z AUTO 02011KT CAVOK 32/18 Q1008=",
+   "text": "METAR LLER 022350Z AUTO 34010KT CAVOK 30/19 Q1008=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -69,7 +59,67 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 022050Z NIL=",
+   "text": "METAR LLIB 022350Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 022350Z 14006KT 9999 SCT024 27/22 Q1009 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHA",
+   "kind": "TAF",
+   "text": "TAF LLHA 022316Z 0300/0324 VRB03KT 9999 FEW025 TX31/0311Z TN26/0303Z BECMG 0307/0309 29010KT FEW030",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLIB",
+   "kind": "TAF",
+   "text": "TAF LLIB 022309Z 0300/0324 VRB04KT CAVOK TX36/0312Z TN23/0302Z BECMG 0304/0307 17007KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHZ",
+   "kind": "TAF",
+   "text": "TAF LLHZ 022315Z 0300/0324 VRB03KT 9999 SCT025 TX31/0311Z TN25/0302Z PROB40 TEMPO 0302/0306 BKN020",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 022313Z 0300/0324 VRB03KT 9999 SCT025 TX32/0311Z TN25/0303Z PROB40 TEMPO 0302/0306 16005KT BKN020",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 022313Z 0300/0324 36010KT CAVOK TX40/0313Z TN27/0303Z BECMG 0304/0306 02015KT",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -79,7 +129,7 @@
    "id": "AIRMET",
    "station": "LLLL",
    "kind": "AIRMET",
-   "text": "LLLL AIRMET 3 VALID 022100/022300 LLBD- LLLL TEL AVIV FIR BKN CLD 400/1500FT FCST WI N3129 E03419 - N3121 E03411 - N3044 E03425 - N3051 E03510 - N3106 E03518 - N3122 E03514 -",
+   "text": "LLLL AIRMET 5 VALID 022300/030300 LLBD- LLLL TEL AVIV FIR BKN CLD 400/1500FT FCST WI N3129 E03419 - N3121 E03411 - N3044 E03425 - N3051 E03510 - N3106 E03518 - N3122 E03514 -",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -118,18 +168,18 @@
    "id": "AIRMET",
    "station": "LLLL",
    "kind": "AIRMET",
-   "text": "LLLL AIRMET 2 VALID 021900/022300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3231 E03508 - N3226 E03531 - N3018 E03435 - N3042 E03426 - N3231 E03508 STNR INTSF=",
+   "text": "LLLL AIRMET 4 VALID 022300/030300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR INTSF=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
    "area": [
     [
-     35.133333,
-     32.516667
+     35.8,
+     33.35
     ],
     [
-     35.516667,
-     32.433333
+     35.916667,
+     32.95
     ],
     [
      34.583333,
@@ -140,60 +190,10 @@
      30.7
     ],
     [
-     35.133333,
-     32.516667
+     35.8,
+     33.35
     ]
    ]
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHA",
-   "kind": "TAF",
-   "text": "TAF LLHA 021703Z 0218/0318 34007KT 9999 FEW025 TX31/0311Z TN26/0303Z BECMG 0221/0223 VRB04KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLIB",
-   "kind": "TAF",
-   "text": "TAF LLIB 021704Z 0218/0318 32007KT CAVOK TX36/0312Z TN23/0302Z BECMG 0219/0221 VRB04KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHZ",
-   "kind": "TAF",
-   "text": "TAF LLHZ 021702Z 0218/0318 VRB03KT 9999 SCT025 TX31/0311Z TN25/0302Z PROB40 TEMPO 0222/0306 18005KT BKN020",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 021702Z 0218/0318 34007KT 9999 FEW025 TX32/0311Z TN24/0303Z BECMG 0219/0221 VRB03KT SCT025",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 021702Z 0218/0318 36010KT CAVOK TX40/0313Z TN27/0303Z BECMG 0305/0307 02015KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
   }
  ]
 }
