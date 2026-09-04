@@ -827,15 +827,6 @@
   "valid_from": "2026-08-30T13:26:00Z",
   "valid_to": "2026-10-31T21:59:00Z"
  },
- "C1846/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-30T13:45:00Z",
-  "id": "C1846/26",
-  "location": "LLLL",
-  "raw": "(C1846/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/080/3120N03523E003\nA) LLLL B) 2609031005 C) 2609041100\nD) 03 1005-1630, 04 0600-1100\nE) PJE AIRSPACE METZADA ACT FM 8,000FT AMSL.\nOPR BY PPR FM ATC ONLY.\nF) GND G) 8000FT AMSL)",
-  "valid_from": "2026-09-03T10:05:00Z",
-  "valid_to": "2026-09-04T11:00:00Z"
- },
  "C1853/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-09-02T07:01:00Z",
