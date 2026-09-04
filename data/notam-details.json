@@ -35,15 +35,6 @@
   "valid_from": "2026-03-25T11:46:00Z",
   "valid_to": "2029-03-25T11:49:00Z"
  },
- "A0353/26": {
-  "airfield": "Ben-Gurion",
-  "created": "2026-04-23T14:17:00Z",
-  "id": "A0353/26",
-  "location": "LLBG",
-  "raw": "(A0353/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2609041500 C) 2609041955\nE) AD CLSD DUE WIP.)",
-  "valid_from": "2026-09-04T15:00:00Z",
-  "valid_to": "2026-09-04T19:55:00Z"
- },
  "A0354/26": {
   "airfield": "Ben-Gurion",
   "created": "2026-04-23T14:17:00Z",
@@ -403,6 +394,15 @@
   "raw": "(A0725/26 NOTAMN\nQ) LLLL/QANLC/I /NBO/E /050/060/3241N03524E011\nA) LLLL B) 2609070730 C) 2609070900\nE) ATS RTE J14 CLSD BTN MEGID-GIMIK.)",
   "valid_from": "2026-09-07T07:30:00Z",
   "valid_to": "2026-09-07T09:00:00Z"
+ },
+ "A0727/26": {
+  "airfield": "Ben-Gurion",
+  "created": "2026-09-04T08:41:00Z",
+  "id": "A0727/26",
+  "location": "LLBG",
+  "raw": "(A0727/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2609041550 C) 2609041955\nE) AD CLSD DUE WIP.)",
+  "valid_from": "2026-09-04T15:50:00Z",
+  "valid_to": "2026-09-04T19:55:00Z"
  },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
