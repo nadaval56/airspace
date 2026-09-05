@@ -566,15 +566,6 @@
   "valid_from": "2026-09-07T03:00:00Z",
   "valid_to": "2026-09-08T06:30:00Z"
  },
- "C1786/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-08-24T07:03:00Z",
-  "id": "C1786/26",
-  "location": "LLLL",
-  "raw": "(C1786/26 NOTAMN\nQ) LLLL/QWSLW/IV/M /W /000/010/3237N03502E001\nA) LLLL B) 2609051900 C) 2609052300\nE) AN AREA WI 0.6NM RADIUS CENTERED ON PSN 323704N0350226\nAT HAGIT POWER PLANT, CLSD FM GND UP TO 1,000FT AMSL,\nDUE TO GAS EMISSION.\nCTN ADZ.\nF) GND G) 1000FT AMSL)",
-  "valid_from": "2026-09-05T19:00:00Z",
-  "valid_to": "2026-09-05T23:00:00Z"
- },
  "C1788/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-08-24T09:37:00Z",
