@@ -395,6 +395,15 @@
   "valid_from": "2026-09-07T07:30:00Z",
   "valid_to": "2026-09-07T09:00:00Z"
  },
+ "A0728/26": {
+  "airfield": "Haifa",
+  "created": "2026-09-05T09:55:00Z",
+  "id": "A0728/26",
+  "location": "LLHA",
+  "raw": "(A0728/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3249N03503E005\nA) LLHA B) 2610060525 C) 2610061000\nD) 0525-0725 0830-1000\nE) AD CLSD TO ALL FLT INCLUDING HEL, DUE WIP.\nIN CASE OF EMERG AVBL WI 10MIN.)",
+  "valid_from": "2026-10-06T05:25:00Z",
+  "valid_to": "2026-10-06T10:00:00Z"
+ },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
