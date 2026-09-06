@@ -890,33 +890,6 @@
   "valid_from": "2026-09-08T00:01:00Z",
   "valid_to": "2026-09-11T02:50:00Z"
  },
- "C1863/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-09-03T08:45:00Z",
-  "id": "C1863/26",
-  "location": "LLLL",
-  "raw": "(C1863/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/040/3051N03515E054\nA) LLLL B) 2609061620 C) 2609061800\nE) CVFR RTE CLSD\nKTORA-YAHEL-BMNUH-ZOFAR-ARAVA-ZOHAR-MMORR-LLMZ-ZUKIM.\nMMORR-ARRAD-LLMZ.\nARRAD-HATRU-ZOHAR.\nTARAD-ARRAD.)",
-  "valid_from": "2026-09-06T16:20:00Z",
-  "valid_to": "2026-09-06T18:00:00Z"
- },
- "C1864/26": {
-  "airfield": "Eyn-Yahav",
-  "created": "2026-09-03T08:47:00Z",
-  "id": "C1864/26",
-  "location": "LLEY",
-  "raw": "(C1864/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3037N03512E005\nA) LLEY B) 2609061620 C) 2609061800\nE) AIRSTRIP CLSD TO ALL FLT.)",
-  "valid_from": "2026-09-06T16:20:00Z",
-  "valid_to": "2026-09-06T18:00:00Z"
- },
- "C1865/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-09-03T08:47:00Z",
-  "id": "C1865/26",
-  "location": "LLLL",
-  "raw": "(C1865/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3035N03504E007\nA) LLLL B) 2609061620 C) 2609061800\nE) CVFR RTE CLSD ZOFAR-HRGVS.)",
-  "valid_from": "2026-09-06T16:20:00Z",
-  "valid_to": "2026-09-06T18:00:00Z"
- },
  "C1866/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-09-03T08:49:00Z",
