@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-06T19:04:42Z",
- "last_success": "2026-09-06T19:04:42Z",
+ "generated_at": "2026-09-06T21:16:53Z",
+ "last_success": "2026-09-06T21:16:53Z",
  "last_error": {
   "at": "2026-09-05T18:11:33Z",
   "message": "URLError: <urlopen error timed out>"
@@ -20,11 +20,61 @@
  ],
  "counts": {
   "total": 11,
-  "AIRMET": 1,
+  "TAF": 6,
   "METAR": 4,
-  "TAF": 6
+  "AIRMET": 1
  },
  "reports": [
+  {
+   "id": "VOLMET",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 061800 TILL 071800, WIND VARIABLE, 3 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
+   "truncated": true,
+   "valid_from": "061800",
+   "valid_to": "071800",
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLHA",
+   "kind": "METAR",
+   "text": "METAR LLHA 062050Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 062050Z AUTO 01010KT CAVOK 30/11 Q1012=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 062050Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 062050Z 20004KT 9999 FEW025 27/22 Q1012 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
   {
    "id": "AIRMET",
    "station": "LLLL",
@@ -55,56 +105,6 @@
      33.35
     ]
    ]
-  },
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 061850Z 24004KT 9999 FEW027 28/21 Q1013 NOSIG=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 061850Z AUTO 30006KT 9999 FEW022 28/22 Q1012=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 061850Z AUTO 36015KT CAVOK 32/11 Q1012=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 061850Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "VOLMET",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 061800 TILL 071800, WIND VARIABLE, 3 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 2 THOUSAND 5",
-   "truncated": true,
-   "valid_from": "061800",
-   "valid_to": "071800",
-   "area": null
   },
   {
    "id": "TAFLG",
