@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-07T04:25:12Z",
- "last_success": "2026-09-07T04:25:12Z",
+ "generated_at": "2026-09-07T10:09:37Z",
+ "last_success": "2026-09-07T10:09:37Z",
  "last_error": {
   "at": "2026-08-26T11:38:40Z",
   "message": "iaa/LLLL: TimeoutError: The read operation timed out; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; fa"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 109,
+   "count": 108,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,8 +197,8 @@
   }
  ],
  "counts": {
-  "total": 109,
-  "mapped": 105,
+  "total": 108,
+  "mapped": 104,
   "fir_wide": 4,
   "no_geo": 0,
   "low_altitude": 100,
@@ -644,6 +644,76 @@
    "parse_errors": [],
    "area": null,
    "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1886/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1886/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3253N03507E005\nA) LLLL B) 2609090650 C) 2609091050\nD) 0650-0735 1000-1050\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 15,
+     "upper_fl": 20,
+     "lower_ft": 1500,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.88333333333333,
+     "lon": 35.11666666666667,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.88333333333333,
+    "lon": 35.11666666666667,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 15,
+    "upper_fl": 20,
+    "lower_ft": 1500,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609090650",
+    "iso": "2026-09-09T06:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609091050",
+    "iso": "2026-09-09T10:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0650-0735 1000-1050",
+   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 1500,
    "low_altitude": true
   },
   {
@@ -1326,80 +1396,10 @@
    "low_altitude": true
   },
   {
-   "id": "C1871/26",
+   "id": "C1885/26",
    "type": "NOTAMN",
    "replaces": null,
-   "raw": "(C1871/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /017/020/3244N03525E003\nA) LLLL B) 2609070730 C) 2609070900\nE) ULTRALIGHT AND HEL RTE CLSD\nTAVOR-ZGLNI .)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 17,
-     "upper_fl": 20,
-     "lower_ft": 1700,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.733333333333334,
-     "lon": 35.416666666666664,
-     "radius_nm": 3,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.733333333333334,
-    "lon": 35.416666666666664,
-    "radius_nm": 3,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 17,
-    "upper_fl": 20,
-    "lower_ft": 1700,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609070730",
-    "iso": "2026-09-07T07:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609070900",
-    "iso": "2026-09-07T09:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "ULTRALIGHT AND HEL RTE CLSD\nTAVOR-ZGLNI .)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 1700,
-   "low_altitude": true
-  },
-  {
-   "id": "C1870/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1870/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/070/3243N03523E003\nA) LLLL B) 2609070730 C) 2609070900\nE) AN AREA AT KFAR TAVOR CLSD FM GND UP TO 7,000FT AMSL\nTO ALL FLT BTN FLW PSN 324355N0352454E 324150N0352458E\n324157N0352129E 324400N0352124E.\nOPS OF AGRICULTURE FLT WI 15MIN PPR FM ATC.\nCTN ADZ.)",
+   "raw": "(C1885/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/010/3224N03502E001\nA) LLLL B) 2609070930 C) 2609071500\nE) AN AREA WI 0.54NM RADIUS CENTERED ON PSN 322437N0350210E\nCLSD FM GND UP TO 1,000FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.)",
    "source": "iaa:LLLL",
    "locations": [
     "LLLL"
@@ -1418,143 +1418,122 @@
     "scope": "נתיב טיסה",
     "altitude": {
      "lower_fl": 0,
-     "upper_fl": 70,
+     "upper_fl": 10,
      "lower_ft": 0,
-     "upper_ft": 7000,
+     "upper_ft": 1000,
      "unlimited": false
     },
     "geo": {
-     "lat": 32.71666666666667,
-     "lon": 35.38333333333333,
-     "radius_nm": 3,
+     "lat": 32.4,
+     "lon": 35.03333333333333,
+     "radius_nm": 1,
      "fir_wide": false
     }
    },
    "geo": {
-    "lat": 32.71666666666667,
-    "lon": 35.38333333333333,
-    "radius_nm": 3,
+    "lat": 32.4,
+    "lon": 35.03333333333333,
+    "radius_nm": 1,
     "fir_wide": false
    },
    "altitude": {
     "lower_fl": 0,
-    "upper_fl": 70,
+    "upper_fl": 10,
     "lower_ft": 0,
-    "upper_ft": 7000,
+    "upper_ft": 1000,
     "unlimited": false
    },
    "valid_from": {
-    "raw": "2609070730",
-    "iso": "2026-09-07T07:30:00Z",
+    "raw": "2609070930",
+    "iso": "2026-09-07T09:30:00Z",
     "permanent": false,
     "estimated": false
    },
    "valid_to": {
-    "raw": "2609070900",
-    "iso": "2026-09-07T09:00:00Z",
+    "raw": "2609071500",
+    "iso": "2026-09-07T15:00:00Z",
     "permanent": false,
     "estimated": false
    },
    "schedule": null,
-   "text": "AN AREA AT KFAR TAVOR CLSD FM GND UP TO 7,000FT AMSL\nTO ALL FLT BTN FLW PSN 324355N0352454E 324150N0352458E\n324157N0352129E 324400N0352124E.\nOPS OF AGRICULTURE FLT WI 15MIN PPR FM ATC.\nCTN ADZ.)",
+   "text": "AN AREA WI 0.54NM RADIUS CENTERED ON PSN 322437N0350210E\nCLSD FM GND UP TO 1,000FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
    "parse_errors": [],
-   "area": [
-    [
-     35.415,
-     32.731944
-    ],
-    [
-     35.416111,
-     32.697222
-    ],
-    [
-     35.358056,
-     32.699167
-    ],
-    [
-     35.356667,
-     32.733333
-    ],
-    [
-     35.415,
-     32.731944
-    ]
-   ],
+   "area": null,
    "floor_ft": 0,
    "low_altitude": true
   },
   {
-   "id": "A0725/26",
+   "id": "C1884/26",
    "type": "NOTAMN",
    "replaces": null,
-   "raw": "(A0725/26 NOTAMN\nQ) LLLL/QANLC/I /NBO/E /050/060/3241N03524E011\nA) LLLL B) 2609070730 C) 2609070900\nE) ATS RTE J14 CLSD BTN MEGID-GIMIK.)",
+   "raw": "(C1884/26 NOTAMN\nQ) LLLL/QAECH/IV/NBO/E /000/030/3223N03453E004\nA) LLLL B) 2609070727 C) PERM\nE) THE RESTRICTIONS OF OPR AEROBATICS FLT WI LLHZ TRG AREA NR 12\nCOMPLETELY WITHDRAW.\nDOM AIP, PART AD, PAGE LLHZ 14, PARA 24.D. REF.)",
    "source": "iaa:LLLL",
    "locations": [
     "LLLL"
    ],
    "q": {
     "fir": "LLLL",
-    "q_code": "QANLC",
-    "subject_code": "AN",
-    "subject": "נתיב ניווט שטח (RNAV)",
-    "subject_note": "נתיב המוגדר בנקודות ציון ולא במשואות קרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "I",
+    "q_code": "QAECH",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "CH",
+    "condition": "שונה",
+    "traffic": "IV",
     "purpose": "NBO",
     "scope_code": "E",
     "scope": "נתיב טיסה",
     "altitude": {
-     "lower_fl": 50,
-     "upper_fl": 60,
-     "lower_ft": 5000,
-     "upper_ft": 6000,
+     "lower_fl": 0,
+     "upper_fl": 30,
+     "lower_ft": 0,
+     "upper_ft": 3000,
      "unlimited": false
     },
     "geo": {
-     "lat": 32.68333333333333,
-     "lon": 35.4,
-     "radius_nm": 11,
+     "lat": 32.38333333333333,
+     "lon": 34.88333333333333,
+     "radius_nm": 4,
      "fir_wide": false
     }
    },
    "geo": {
-    "lat": 32.68333333333333,
-    "lon": 35.4,
-    "radius_nm": 11,
+    "lat": 32.38333333333333,
+    "lon": 34.88333333333333,
+    "radius_nm": 4,
     "fir_wide": false
    },
    "altitude": {
-    "lower_fl": 50,
-    "upper_fl": 60,
-    "lower_ft": 5000,
-    "upper_ft": 6000,
+    "lower_fl": 0,
+    "upper_fl": 30,
+    "lower_ft": 0,
+    "upper_ft": 3000,
     "unlimited": false
    },
    "valid_from": {
-    "raw": "2609070730",
-    "iso": "2026-09-07T07:30:00Z",
+    "raw": "2609070727",
+    "iso": "2026-09-07T07:27:00Z",
     "permanent": false,
     "estimated": false
    },
    "valid_to": {
-    "raw": "2609070900",
-    "iso": "2026-09-07T09:00:00Z",
-    "permanent": false,
+    "raw": "PERM",
+    "iso": null,
+    "permanent": true,
     "estimated": false
    },
    "schedule": null,
-   "text": "ATS RTE J14 CLSD BTN MEGID-GIMIK.)",
+   "text": "THE RESTRICTIONS OF OPR AEROBATICS FLT WI LLHZ TRG AREA NR 12\nCOMPLETELY WITHDRAW.\nDOM AIP, PART AD, PAGE LLHZ 14, PARA 24.D. REF.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
    "parse_errors": [],
    "area": null,
-   "floor_ft": 5000,
-   "low_altitude": false
+   "floor_ft": 0,
+   "low_altitude": true
   },
   {
    "id": "C1872/26",
@@ -1694,76 +1673,6 @@
    "parse_errors": [],
    "area": null,
    "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1866/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1866/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3253N03507E005\nA) LLLL B) 2609070600 C) 2609071000\nD) 0600-0645 0920-1000\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 15,
-     "upper_fl": 20,
-     "lower_ft": 1500,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.88333333333333,
-     "lon": 35.11666666666667,
-     "radius_nm": 5,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.88333333333333,
-    "lon": 35.11666666666667,
-    "radius_nm": 5,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 15,
-    "upper_fl": 20,
-    "lower_ft": 1500,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609070600",
-    "iso": "2026-09-07T06:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609071000",
-    "iso": "2026-09-07T10:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "0600-0645 0920-1000",
-   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 1500,
    "low_altitude": true
   },
   {
