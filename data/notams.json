@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-09T09:36:51Z",
- "last_success": "2026-09-09T09:36:51Z",
+ "generated_at": "2026-09-09T14:27:47Z",
+ "last_success": "2026-09-09T14:27:47Z",
  "last_error": {
   "at": "2026-08-26T11:38:40Z",
   "message": "iaa/LLLL: TimeoutError: The read operation timed out; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — HTTP 403; fa"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 106,
+   "count": 109,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 106,
-  "mapped": 102,
+  "total": 109,
+  "mapped": 105,
   "fir_wide": 4,
   "no_geo": 0,
-  "low_altitude": 98,
+  "low_altitude": 100,
   "administrative": 6
  },
  "notams": [
@@ -692,6 +692,146 @@
    "low_altitude": true
   },
   {
+   "id": "C1906/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1906/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3239N03458E005\nA) LLLL B) 2609141430 C) 2609142055\nD) 1430-1600 1800-2055\nE) CVFR RTE CLSD FRDIS-BOREN.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 15,
+     "upper_fl": 20,
+     "lower_ft": 1500,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.65,
+     "lon": 34.96666666666667,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.65,
+    "lon": 34.96666666666667,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 15,
+    "upper_fl": 20,
+    "lower_ft": 1500,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609141430",
+    "iso": "2026-09-14T14:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609142055",
+    "iso": "2026-09-14T20:55:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "1430-1600 1800-2055",
+   "text": "CVFR RTE CLSD FRDIS-BOREN.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 1500,
+   "low_altitude": true
+  },
+  {
+   "id": "C1903/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1903/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/030/3235N03513E013\nA) LLLL B) 2609140945 C) 2609141005\nE) CVFR RTE CLSD DUE ILS ACT WI LLRD\nEIRON-ZMGID-AFULA-TAVOR.\nAFULA-EITAN.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 25,
+     "upper_fl": 30,
+     "lower_ft": 2500,
+     "upper_ft": 3000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.583333333333336,
+     "lon": 35.21666666666667,
+     "radius_nm": 13,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.583333333333336,
+    "lon": 35.21666666666667,
+    "radius_nm": 13,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 25,
+    "upper_fl": 30,
+    "lower_ft": 2500,
+    "upper_ft": 3000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609140945",
+    "iso": "2026-09-14T09:45:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609141005",
+    "iso": "2026-09-14T10:05:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD DUE ILS ACT WI LLRD\nEIRON-ZMGID-AFULA-TAVOR.\nAFULA-EITAN.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 2500,
+   "low_altitude": true
+  },
+  {
    "id": "C1890/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -1035,6 +1175,154 @@
    "text": "VOR/DME NAT FREQ 112.400MHZ WITHDRAWN FOR MAINT.)",
    "lower_limit": null,
    "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1904/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1904/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3035N03504E007\nA) LLLL B) 2609140650 C) 2609141815\nD) 0650-1410 1600-1815\nE) CVFR RTE CLSD ZOFAR-HRGVS.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 35,
+     "upper_fl": 45,
+     "lower_ft": 3500,
+     "upper_ft": 4500,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 30.583333333333332,
+     "lon": 35.06666666666667,
+     "radius_nm": 7,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 30.583333333333332,
+    "lon": 35.06666666666667,
+    "radius_nm": 7,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 35,
+    "upper_fl": 45,
+    "lower_ft": 3500,
+    "upper_ft": 4500,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609140650",
+    "iso": "2026-09-14T06:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609141815",
+    "iso": "2026-09-14T18:15:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0650-1410 1600-1815",
+   "text": "CVFR RTE CLSD ZOFAR-HRGVS.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 3500,
+   "low_altitude": false
+  },
+  {
+   "id": "C1905/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1905/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/110/3117N03443E004\nA) LLLL B) 2609140430 C) 2609141200\nE) PJE AIRSPACE TEIMAN CLSD.\nF) GND G) 11000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWPLW",
+    "subject_code": "WP",
+    "subject": "צניחה חופשית",
+    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 110,
+     "lower_ft": 0,
+     "upper_ft": 11000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.283333333333335,
+     "lon": 34.71666666666667,
+     "radius_nm": 4,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.283333333333335,
+    "lon": 34.71666666666667,
+    "radius_nm": 4,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 110,
+    "lower_ft": 0,
+    "upper_ft": 11000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609140430",
+    "iso": "2026-09-14T04:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609141200",
+    "iso": "2026-09-14T12:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "PJE AIRSPACE TEIMAN CLSD.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "11000FT AMSL)",
+    "feet": 11000,
+    "reference": "AMSL"
+   },
    "administrative": false,
    "parse_errors": [],
    "area": null,
@@ -1742,76 +2030,6 @@
    "parse_errors": [],
    "area": null,
    "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1886/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1886/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3253N03507E005\nA) LLLL B) 2609090650 C) 2609091050\nD) 0650-0735 1000-1050\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 15,
-     "upper_fl": 20,
-     "lower_ft": 1500,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.88333333333333,
-     "lon": 35.11666666666667,
-     "radius_nm": 5,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.88333333333333,
-    "lon": 35.11666666666667,
-    "radius_nm": 5,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 15,
-    "upper_fl": 20,
-    "lower_ft": 1500,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609090650",
-    "iso": "2026-09-09T06:50:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609091050",
-    "iso": "2026-09-09T10:50:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "0650-0735 1000-1050",
-   "text": "CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 1500,
    "low_altitude": true
   },
   {
