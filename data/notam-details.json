@@ -53,15 +53,6 @@
   "valid_from": "2026-06-08T05:31:00Z",
   "valid_to": "2029-06-08T05:32:00Z"
  },
- "A0467/26": {
-  "airfield": "Ramon",
-  "created": "2026-06-10T05:38:00Z",
-  "id": "A0467/26",
-  "location": "LLER",
-  "raw": "(A0467/26 NOTAMN\nQ) LLLL/QLPAS/IV/BO /A /000/999/2944N03501E005\nA) LLER B) 2606100537 C) 2609102359\nE) PAPI RWY 19 EAST U/S.)",
-  "valid_from": "2026-06-10T05:37:00Z",
-  "valid_to": "2026-09-10T23:59:00Z"
- },
  "A0475/26": {
   "airfield": "Haifa",
   "created": "2026-06-15T06:47:00Z",
