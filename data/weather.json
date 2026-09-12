@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-12T00:11:13Z",
- "last_success": "2026-09-12T00:11:13Z",
+ "generated_at": "2026-09-12T05:40:00Z",
+ "last_success": "2026-09-12T05:40:00Z",
  "last_error": {
   "at": "2026-09-05T18:11:33Z",
   "message": "URLError: <urlopen error timed out>"
@@ -20,11 +20,21 @@
  ],
  "counts": {
   "total": 11,
-  "TAF": 6,
   "METAR": 4,
+  "TAF": 6,
   "AIRMET": 1
  },
  "reports": [
+  {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 120520Z VRB03KT 9999 SCT028 27/21 Q1012 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
   {
    "id": "VOLMET",
    "station": "LLBG",
@@ -36,10 +46,60 @@
    "area": null
   },
   {
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 120502Z 1206/1306 VRB04KT 9999 SCT025 TX32/1211Z TN23/1303Z BECMG 1207/1209 31010KT FEW035",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 120501Z 1206/1306 01015KT CAVOK TX36/1213Z TN26/1303Z PROB40 TEMPO 1206/1215 02020G30KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHA",
+   "kind": "TAF",
+   "text": "TAF LLHA 120502Z 1206/1306 31010KT 9999 FEW030 TX32/1210Z TN25/1303Z PROB40 TEMPO 1206/1207 VRB04KT SCT025",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLIB",
+   "kind": "TAF",
+   "text": "TAF LLIB 120503Z 1206/1306 17008KT CAVOK TX35/1212Z TN22/1303Z TEMPO 1206/1207 VRB04KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHZ",
+   "kind": "TAF",
+   "text": "TAF LLHZ 120501Z 1206/1306 30010KT 9999 FEW030 TX30/1211Z TN24/1303Z PROB40 TEMPO 1206/1207 15005KT SCT025",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
    "id": "METAR",
    "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLHA 112350Z NIL=",
+   "text": "METAR LLHA 120450Z AUTO VRB03KT 9999 FEW022 26/21 Q1012=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -49,7 +109,7 @@
    "id": "METAR",
    "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLER 112350Z AUTO 01012KT CAVOK 28/18 Q1010=",
+   "text": "METAR LLER 120450Z AUTO 01011KT CAVOK 27/18 Q1012=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -59,17 +119,7 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 112350Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 112350Z 12004KT 9999 BKN030 26/21 Q1012 NOSIG=",
+   "text": "METAR LLIB 120450Z AUTO VRB01KT CAVOK 25/19 Q1013=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -79,7 +129,7 @@
    "id": "AIRMET",
    "station": "LLLL",
    "kind": "AIRMET",
-   "text": "LLLL AIRMET 6 VALID 112336/120300 LLBD- LLLL TEL AVIV FIR MT OBSC OBS WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR NC=",
+   "text": "LLLL AIRMET 1 VALID 120300/120700 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR NC=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -105,56 +155,6 @@
      33.35
     ]
    ]
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHA",
-   "kind": "TAF",
-   "text": "TAF LLHA 112324Z 1200/1224 VRB04KT 9999 SCT025 TX32/1210Z TN25/1203Z PROB40 TEMPO 1200/1206 BKN020",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLIB",
-   "kind": "TAF",
-   "text": "TAF LLIB 112324Z 1200/1224 VRB04KT CAVOK TX35/1212Z TN22/1203Z PROB40 TEMPO 1200/1205 9999 SCT020",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHZ",
-   "kind": "TAF",
-   "text": "TAF LLHZ 112323Z 1200/1224 VRB03KT 9999 SCT025 TX30/1211Z TN24/1203Z PROB40 TEMPO 1200/1205 15005KT BKN020",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 112322Z 1200/1224 VRB04KT 9999 SCT025 TX32/1211Z TN24/1204Z PROB40 TEMPO 1200/1206 14005KT BKN020",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 112322Z 1200/1224 35010KT CAVOK TX36/1213Z TN26/1203Z BECMG 1204/1206 01015KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
   }
  ]
 }
