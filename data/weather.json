@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-14T06:07:37Z",
- "last_success": "2026-09-14T06:07:37Z",
+ "generated_at": "2026-09-14T12:39:35Z",
+ "last_success": "2026-09-14T12:39:35Z",
  "last_error": {
   "at": "2026-09-13T11:41:43Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -19,27 +19,36 @@
   "LLSD"
  ],
  "counts": {
-  "total": 12,
+  "total": 10,
   "TAF": 6,
-  "METAR": 4,
-  "AIRMET": 2
+  "METAR": 4
  },
  "reports": [
   {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 140600 TILL 150600, WIND VARIABLE, 4 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 2 THOUSAND FEET,",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 141200 TILL 151200, WIND 310 DEGREES, 10 KNOTS, CAVOK, BECOMING FROM 141500 TILL 141700 WIND VARIABLE, 4",
    "truncated": true,
-   "valid_from": "140600",
-   "valid_to": "150600",
+   "valid_from": "141200",
+   "valid_to": "151200",
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 141220Z 32009KT 280V350 CAVOK 32/20 Q1012 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
    "area": null
   },
   {
    "id": "METAR",
    "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLHA 140550Z AUTO VRB03KT 9999 FEW022 28/22 Q1014=",
+   "text": "METAR LLHA 141150Z AUTO 33010KT CAVOK 31/23 Q1013=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -49,7 +58,7 @@
    "id": "METAR",
    "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLER 140550Z AUTO 02016KT CAVOK 29/17 Q1013=",
+   "text": "METAR LLER 141150Z AUTO 02014KT CAVOK 38/09 Q1010=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -59,17 +68,27 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 140550Z AUTO VRB03KT CAVOK 25/20 Q1015=",
+   "text": "METAR LLIB 141150Z AUTO 12009KT 070V160 9999 FEW050 36/19 Q1013=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
    "area": null
   },
   {
-   "id": "METAR",
+   "id": "TAFLG",
    "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 140550Z VRB02KT 9999 FEW025 27/20 Q1014 NOSIG=",
+   "kind": "TAF",
+   "text": "TAF LLBG 141112Z 1412/1512 31010KT CAVOK TX33/1412Z TN22/1504Z BECMG 1415/1417 VRB04KT 9999 FEW018",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 141111Z 1412/1512 02016KT CAVOK TX39/1413Z TN26/1504Z BECMG 1416/1418 35010KT",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -79,7 +98,7 @@
    "id": "TAFLG",
    "station": "LLHA",
    "kind": "TAF",
-   "text": "TAF LLHA 140509Z 1406/1506 VRB04KT 9999 SCT018 TX33/1410Z TN25/1504Z BECMG 1407/1409 30010KT FEW025",
+   "text": "TAF LLHA 141113Z 1412/1512 32010KT 9999 FEW020 TX31/1412Z TN24/1504Z BECMG 1415/1417 VRB04KT FEW017",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -89,7 +108,7 @@
    "id": "TAFLG",
    "station": "LLIB",
    "kind": "TAF",
-   "text": "TAF LLIB 140510Z 1406/1506 VRB04KT CAVOK TX36/1412Z TN22/1504Z BECMG 1407/1409 16007KT",
+   "text": "TAF LLIB 141113Z 1412/1512 15008KT CAVOK TX35/1412Z TN21/1504Z BECMG 1413/1415 34012KT",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -99,109 +118,11 @@
    "id": "TAFLG",
    "station": "LLHZ",
    "kind": "TAF",
-   "text": "TAF LLHZ 140509Z 1406/1506 VRB04KT 9999 SCT020 TX30/1411Z TN23/1504Z PROB40 TEMPO 1406/1407 BKN018",
+   "text": "TAF LLHZ 141112Z 1412/1512 30010KT CAVOK TX30/1412Z TN23/1504Z BECMG 1415/1417 VRB04KT FEW015",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
    "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 140508Z 1406/1506 VRB04KT 9999 FEW020 TX33/1411Z TN22/1504Z PROB40 TEMPO 1406/1407 BKN018",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 140507Z 1406/1506 02016KT CAVOK TX39/1413Z TN26/1504Z BECMG 1419/1421 35010KT=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 4 VALID 140400/140800 LLBD- LLLL TEL AVIV FIR BKN CLD 300/1000FT FCST WI N3129 E03419 - N3121 E03411 - N3044 E03425 - N3051 E03510 - N3106 E03518 - N3122 E03514 -",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     34.316667,
-     31.483333
-    ],
-    [
-     34.183333,
-     31.35
-    ],
-    [
-     34.416667,
-     30.733333
-    ],
-    [
-     35.166667,
-     30.85
-    ],
-    [
-     35.3,
-     31.1
-    ],
-    [
-     35.233333,
-     31.366667
-    ],
-    [
-     34.316667,
-     31.483333
-    ]
-   ]
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 3 VALID 140400/140700 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3242 E03506 - N3250 E03458 - N3250 E03457 - N3247 E03459 - N3238 E03457 - N3240 E03506 - N3242 E03506",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     35.1,
-     32.7
-    ],
-    [
-     34.966667,
-     32.833333
-    ],
-    [
-     34.95,
-     32.833333
-    ],
-    [
-     34.983333,
-     32.783333
-    ],
-    [
-     34.95,
-     32.633333
-    ],
-    [
-     35.1,
-     32.666667
-    ],
-    [
-     35.1,
-     32.7
-    ]
-   ]
   }
  ]
 }
