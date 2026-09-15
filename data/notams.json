@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-15T13:27:21Z",
- "last_success": "2026-09-15T13:27:21Z",
+ "generated_at": "2026-09-15T18:07:15Z",
+ "last_success": "2026-09-15T18:07:15Z",
  "last_error": {
   "at": "2026-09-13T11:41:05Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 115,
+   "count": 114,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 115,
-  "mapped": 111,
+  "total": 114,
+  "mapped": 110,
   "fir_wide": 4,
   "no_geo": 0,
-  "low_altitude": 103,
+  "low_altitude": 104,
   "administrative": 6
  },
  "notams": [
@@ -836,6 +836,76 @@
    "low_altitude": true
   },
   {
+   "id": "A0751/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0751/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/2944N03501E005\nA) LLER B) 2610051600 C) 2610070200\nD) 05 1600-2359, 06 0001-0200 1800-2359, 07 0001-0200\nE) AD CLSD TO ALL FLT DUE WIP.\nIN CASE OF EMERG AVBL WI 10MIN PPR FM ATC.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLER"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QFALC",
+    "subject_code": "FA",
+    "subject": "שדה תעופה",
+    "subject_note": null,
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 29.733333333333334,
+     "lon": 35.016666666666666,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 29.733333333333334,
+    "lon": 35.016666666666666,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610051600",
+    "iso": "2026-10-05T16:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610070200",
+    "iso": "2026-10-07T02:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "05 1600-2359, 06 0001-0200 1800-2359, 07 0001-0200",
+   "text": "AD CLSD TO ALL FLT DUE WIP.\nIN CASE OF EMERG AVBL WI 10MIN PPR FM ATC.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
    "id": "A0749/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -1215,6 +1285,105 @@
    "low_altitude": true
   },
   {
+   "id": "C1950/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1950/26 NOTAMN\nQ) LLLL/QWBLW/IV/M /W /005/040/3233N03517E002\nA) LLLL B) 2609230500 C) 2609230630\nE) AEROBATICS FLT WILL TAKE PLACE AT TAANACHIM,\nBTN 500-4,000FT AMSL, WI THE FLW PSN, ACFT TYPE/DR107,\nREG/4X-OMR 323334N0351615E 323155N0351609E\n323156N0351804E 323334N0351807E.\nCTN ADZ.\nF) 500FT AMSL G) 4000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWBLW",
+    "subject_code": "WB",
+    "subject": "אווירובטיקה",
+    "subject_note": null,
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 5,
+     "upper_fl": 40,
+     "lower_ft": 500,
+     "upper_ft": 4000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.55,
+     "lon": 35.28333333333333,
+     "radius_nm": 2,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.55,
+    "lon": 35.28333333333333,
+    "radius_nm": 2,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 5,
+    "upper_fl": 40,
+    "lower_ft": 500,
+    "upper_ft": 4000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609230500",
+    "iso": "2026-09-23T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609230630",
+    "iso": "2026-09-23T06:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "AEROBATICS FLT WILL TAKE PLACE AT TAANACHIM,\nBTN 500-4,000FT AMSL, WI THE FLW PSN, ACFT TYPE/DR107,\nREG/4X-OMR 323334N0351615E 323155N0351609E\n323156N0351804E 323334N0351807E.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "500FT AMSL",
+    "feet": 500,
+    "reference": "AMSL"
+   },
+   "upper_limit": {
+    "raw": "4000FT AMSL)",
+    "feet": 4000,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": [
+    [
+     35.270833,
+     32.559444
+    ],
+    [
+     35.269167,
+     32.531944
+    ],
+    [
+     35.301111,
+     32.532222
+    ],
+    [
+     35.301944,
+     32.559444
+    ],
+    [
+     35.270833,
+     32.559444
+    ]
+   ],
+   "floor_ft": 500,
+   "low_altitude": true
+  },
+  {
    "id": "A0750/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -1351,6 +1520,113 @@
    "administrative": false,
    "parse_errors": [],
    "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1951/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1951/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/025/3132N03451E003\nA) LLLL B) 2609220500 C) 2609241500\nD) DAILY 0500-1500\nE) UAS ACT WILL TAKE PLACE AT KELCH/LACHISH.\nAN AREA FM GND UP TO 2,500FT AMSL CLSD TO ALL FLT\nBTN FLW PSN 313226N0344801E 313225N0345409E\n313144N0345409E 313129N0345246E 313129N0345126E\n313125N0344843E\nOPS OF AGRICULTURE FLT WI 15MIN PPR FM ATC.\nCTN ADZ.\nF) GND G) 2500FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWULW",
+    "subject_code": "WU",
+    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
+    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 25,
+     "lower_ft": 0,
+     "upper_ft": 2500,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.533333333333335,
+     "lon": 34.85,
+     "radius_nm": 3,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.533333333333335,
+    "lon": 34.85,
+    "radius_nm": 3,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 25,
+    "lower_ft": 0,
+    "upper_ft": 2500,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609220500",
+    "iso": "2026-09-22T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609241500",
+    "iso": "2026-09-24T15:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "DAILY 0500-1500",
+   "text": "UAS ACT WILL TAKE PLACE AT KELCH/LACHISH.\nAN AREA FM GND UP TO 2,500FT AMSL CLSD TO ALL FLT\nBTN FLW PSN 313226N0344801E 313225N0345409E\n313144N0345409E 313129N0345246E 313129N0345126E\n313125N0344843E\nOPS OF AGRICULTURE FLT WI 15MIN PPR FM ATC.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "2500FT AMSL)",
+    "feet": 2500,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": [
+    [
+     34.800278,
+     31.540556
+    ],
+    [
+     34.9025,
+     31.540278
+    ],
+    [
+     34.9025,
+     31.528889
+    ],
+    [
+     34.879444,
+     31.524722
+    ],
+    [
+     34.857222,
+     31.524722
+    ],
+    [
+     34.811944,
+     31.523611
+    ],
+    [
+     34.800278,
+     31.540556
+    ]
+   ],
    "floor_ft": 0,
    "low_altitude": true
   },
@@ -2199,76 +2475,6 @@
    "low_altitude": true
   },
   {
-   "id": "C1907/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1907/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3035N03504E007\nA) LLLL B) 2609151615 C) 2609151745\nE) CVFR RTE CLSD ZOFAR-HRGVS.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 35,
-     "upper_fl": 45,
-     "lower_ft": 3500,
-     "upper_ft": 4500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 30.583333333333332,
-     "lon": 35.06666666666667,
-     "radius_nm": 7,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 30.583333333333332,
-    "lon": 35.06666666666667,
-    "radius_nm": 7,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 35,
-    "upper_fl": 45,
-    "lower_ft": 3500,
-    "upper_ft": 4500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609151615",
-    "iso": "2026-09-15T16:15:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609151745",
-    "iso": "2026-09-15T17:45:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "CVFR RTE CLSD ZOFAR-HRGVS.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 3500,
-   "low_altitude": false
-  },
-  {
    "id": "C1943/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -2487,154 +2693,6 @@
    "low_altitude": true
   },
   {
-   "id": "C1930/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1930/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/085/3149N03449E003\nA) LLLL B) 2609151245 C) 2609151330\nE) PJE WILL TAKE PLACE AT TEL-NOF.\nAN AREA WI 3NM RADIUS CENTERED ON PSN 314907N0344929E\nCLSD FM GND UP TO 8,500FT AMSL TO ALL FLT.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nCTN ADZ.\nF) GND G) 8500FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWPLW",
-    "subject_code": "WP",
-    "subject": "צניחה חופשית",
-    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 85,
-     "lower_ft": 0,
-     "upper_ft": 8500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.816666666666666,
-     "lon": 34.81666666666667,
-     "radius_nm": 3,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.816666666666666,
-    "lon": 34.81666666666667,
-    "radius_nm": 3,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 85,
-    "lower_ft": 0,
-    "upper_ft": 8500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609151245",
-    "iso": "2026-09-15T12:45:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609151330",
-    "iso": "2026-09-15T13:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "PJE WILL TAKE PLACE AT TEL-NOF.\nAN AREA WI 3NM RADIUS CENTERED ON PSN 314907N0344929E\nCLSD FM GND UP TO 8,500FT AMSL TO ALL FLT.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "8500FT AMSL)",
-    "feet": 8500,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1908/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1908/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3037N03500E011\nA) LLLL B) 2609150650 C) 2609151410\nD) 0650-1000 1050-1410\nE) CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 35,
-     "upper_fl": 45,
-     "lower_ft": 3500,
-     "upper_ft": 4500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 30.616666666666667,
-     "lon": 35.0,
-     "radius_nm": 11,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 30.616666666666667,
-    "lon": 35.0,
-    "radius_nm": 11,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 35,
-    "upper_fl": 45,
-    "lower_ft": 3500,
-    "upper_ft": 4500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609150650",
-    "iso": "2026-09-15T06:50:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609151410",
-    "iso": "2026-09-15T14:10:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "0650-1000 1050-1410",
-   "text": "CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 3500,
-   "low_altitude": false
-  },
-  {
    "id": "C1923/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -2709,113 +2767,6 @@
    "administrative": false,
    "parse_errors": [],
    "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1934/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1934/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/025/3132N03451E003\nA) LLLL B) 2609150500 C) 2609151500\nE) UAS ACT WILL TAKE PLACE AT KELCH/LACHISH.\nAN AREA FM GND UP TO 2,500FT AMSL CLSD TO ALL FLT\nBTN FLW PSN 313226N0344801E 313225N0345409E\n313144N0345409E 313129N0345246E 313129N0345126E\n313125N0344843E\nOPS OF AGRICULTURE FLT WI 15MIN PPR FM ATC.\nCTN ADZ.\nF) GND G) 2500FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWULW",
-    "subject_code": "WU",
-    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
-    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 25,
-     "lower_ft": 0,
-     "upper_ft": 2500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.533333333333335,
-     "lon": 34.85,
-     "radius_nm": 3,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.533333333333335,
-    "lon": 34.85,
-    "radius_nm": 3,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 25,
-    "lower_ft": 0,
-    "upper_ft": 2500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609150500",
-    "iso": "2026-09-15T05:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609151500",
-    "iso": "2026-09-15T15:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "UAS ACT WILL TAKE PLACE AT KELCH/LACHISH.\nAN AREA FM GND UP TO 2,500FT AMSL CLSD TO ALL FLT\nBTN FLW PSN 313226N0344801E 313225N0345409E\n313144N0345409E 313129N0345246E 313129N0345126E\n313125N0344843E\nOPS OF AGRICULTURE FLT WI 15MIN PPR FM ATC.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "2500FT AMSL)",
-    "feet": 2500,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": [
-    [
-     34.800278,
-     31.540556
-    ],
-    [
-     34.9025,
-     31.540278
-    ],
-    [
-     34.9025,
-     31.528889
-    ],
-    [
-     34.879444,
-     31.524722
-    ],
-    [
-     34.857222,
-     31.524722
-    ],
-    [
-     34.811944,
-     31.523611
-    ],
-    [
-     34.800278,
-     31.540556
-    ]
-   ],
    "floor_ft": 0,
    "low_altitude": true
   },
