@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-16T11:23:57Z",
- "last_success": "2026-09-16T11:23:57Z",
+ "generated_at": "2026-09-16T16:45:05Z",
+ "last_success": "2026-09-16T16:45:05Z",
  "last_error": {
   "at": "2026-09-13T11:41:05Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 113,
+   "count": 123,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 113,
-  "mapped": 109,
+  "total": 123,
+  "mapped": 119,
   "fir_wide": 4,
   "no_geo": 0,
-  "low_altitude": 103,
+  "low_altitude": 113,
   "administrative": 6
  },
  "notams": [
@@ -556,6 +556,286 @@
    "low_altitude": true
   },
   {
+   "id": "A0759/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0759/26 NOTAMN\nQ) LLLL/QMRLT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2610260600 C) 2610261100\nE) DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QMRLT",
+    "subject_code": "MR",
+    "subject": "מסלול",
+    "subject_note": null,
+    "condition_code": "LT",
+    "condition": "מוגבל ל-",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.016666666666666,
+     "lon": 34.88333333333333,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.016666666666666,
+    "lon": 34.88333333333333,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610260600",
+    "iso": "2026-10-26T06:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610261100",
+    "iso": "2026-10-26T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0755/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0755/26 NOTAMN\nQ) LLLL/QOBCE/IV/M /AE/000/003/3159N03454E001\nA) LLBG B) 2610260600 C) 2610261100\nE) CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 315938.65N0345424.86E\nCLSD FM GND UP TO 91.80M 302FT AMSL.\nIN CASE OF EMERG LOWERED WI 5MIN.\nCTN ADZ.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QOBCE",
+    "subject_code": "OB",
+    "subject": "מכשול",
+    "subject_note": null,
+    "condition_code": "CE",
+    "condition": "הוקם",
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "AE",
+    "scope": null,
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 3,
+     "lower_ft": 0,
+     "upper_ft": 300,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.983333333333334,
+     "lon": 34.9,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.983333333333334,
+    "lon": 34.9,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 3,
+    "lower_ft": 0,
+    "upper_ft": 300,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610260600",
+    "iso": "2026-10-26T06:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610261100",
+    "iso": "2026-10-26T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 315938.65N0345424.86E\nCLSD FM GND UP TO 91.80M 302FT AMSL.\nIN CASE OF EMERG LOWERED WI 5MIN.\nCTN ADZ.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0758/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0758/26 NOTAMN\nQ) LLLL/QMRLT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2610190500 C) 2610191000\nE) DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QMRLT",
+    "subject_code": "MR",
+    "subject": "מסלול",
+    "subject_note": null,
+    "condition_code": "LT",
+    "condition": "מוגבל ל-",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.016666666666666,
+     "lon": 34.88333333333333,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.016666666666666,
+    "lon": 34.88333333333333,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610190500",
+    "iso": "2026-10-19T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610191000",
+    "iso": "2026-10-19T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0754/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0754/26 NOTAMN\nQ) LLLL/QOBCE/IV/M /AE/000/003/3159N03454E001\nA) LLBG B) 2610190500 C) 2610191000\nE) CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 315938.65N0345424.86E\nCLSD FM GND UP TO 91.80M 302FT AMSL.\nIN CASE OF EMERG LOWERED WI 5MIN.\nCTN ADZ.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QOBCE",
+    "subject_code": "OB",
+    "subject": "מכשול",
+    "subject_note": null,
+    "condition_code": "CE",
+    "condition": "הוקם",
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "AE",
+    "scope": null,
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 3,
+     "lower_ft": 0,
+     "upper_ft": 300,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.983333333333334,
+     "lon": 34.9,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.983333333333334,
+    "lon": 34.9,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 3,
+    "lower_ft": 0,
+    "upper_ft": 300,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610190500",
+    "iso": "2026-10-19T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610191000",
+    "iso": "2026-10-19T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 315938.65N0345424.86E\nCLSD FM GND UP TO 91.80M 302FT AMSL.\nIN CASE OF EMERG LOWERED WI 5MIN.\nCTN ADZ.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
    "id": "A0354/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -617,6 +897,146 @@
    },
    "schedule": null,
    "text": "AD CLSD DUE WIP.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0757/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0757/26 NOTAMN\nQ) LLLL/QMRLT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2610120500 C) 2610121000\nE) DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QMRLT",
+    "subject_code": "MR",
+    "subject": "מסלול",
+    "subject_note": null,
+    "condition_code": "LT",
+    "condition": "מוגבל ל-",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.016666666666666,
+     "lon": 34.88333333333333,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.016666666666666,
+    "lon": 34.88333333333333,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610120500",
+    "iso": "2026-10-12T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610121000",
+    "iso": "2026-10-12T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0753/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0753/26 NOTAMN\nQ) LLLL/QOBCE/IV/M /AE/000/003/3159N03454E001\nA) LLBG B) 2610120500 C) 2610121000\nE) CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 315938.65N0345424.86E\nCLSD FM GND UP TO 91.80M 302FT AMSL.\nIN CASE OF EMERG LOWERED WI 5MIN.\nCTN ADZ.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QOBCE",
+    "subject_code": "OB",
+    "subject": "מכשול",
+    "subject_note": null,
+    "condition_code": "CE",
+    "condition": "הוקם",
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "AE",
+    "scope": null,
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 3,
+     "lower_ft": 0,
+     "upper_ft": 300,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.983333333333334,
+     "lon": 34.9,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.983333333333334,
+    "lon": 34.9,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 3,
+    "lower_ft": 0,
+    "upper_ft": 300,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610120500",
+    "iso": "2026-10-12T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610121000",
+    "iso": "2026-10-12T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 315938.65N0345424.86E\nCLSD FM GND UP TO 91.80M 302FT AMSL.\nIN CASE OF EMERG LOWERED WI 5MIN.\nCTN ADZ.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
@@ -897,6 +1317,146 @@
    },
    "schedule": "05 1600-2359, 06 0001-0200 1800-2359, 07 0001-0200",
    "text": "AD CLSD TO ALL FLT DUE WIP.\nIN CASE OF EMERG AVBL WI 10MIN PPR FM ATC.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0756/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0756/26 NOTAMN\nQ) LLLL/QMRLT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2610050500 C) 2610051000\nE) DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QMRLT",
+    "subject_code": "MR",
+    "subject": "מסלול",
+    "subject_note": null,
+    "condition_code": "LT",
+    "condition": "מוגבל ל-",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.016666666666666,
+     "lon": 34.88333333333333,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.016666666666666,
+    "lon": 34.88333333333333,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610050500",
+    "iso": "2026-10-05T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610051000",
+    "iso": "2026-10-05T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0752/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0752/26 NOTAMN\nQ) LLLL/QOBCE/IV/M /AE/000/003/3159N03454E001\nA) LLBG B) 2610050500 C) 2610051000\nE) CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 315938.65N0345424.86E\nCLSD FM GND UP TO 91.80M 302FT AMSL.\nIN CASE OF EMERG LOWERED WI 5MIN.\nCTN ADZ.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QOBCE",
+    "subject_code": "OB",
+    "subject": "מכשול",
+    "subject_note": null,
+    "condition_code": "CE",
+    "condition": "הוקם",
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "AE",
+    "scope": null,
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 3,
+     "lower_ft": 0,
+     "upper_ft": 300,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.983333333333334,
+     "lon": 34.9,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.983333333333334,
+    "lon": 34.9,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 3,
+    "lower_ft": 0,
+    "upper_ft": 300,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610050500",
+    "iso": "2026-10-05T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610051000",
+    "iso": "2026-10-05T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CRANE ERECTED WI LLBG CTR, AT EL-AL JUNCTION.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 315938.65N0345424.86E\nCLSD FM GND UP TO 91.80M 302FT AMSL.\nIN CASE OF EMERG LOWERED WI 5MIN.\nCTN ADZ.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
@@ -1281,6 +1841,84 @@
      32.031111
     ]
    ],
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1963/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1963/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/080/3120N03523E003\nA) LLLL B) 2609240930 C) 2609251100\nD) 24 0930-1600, 25 0600-1100\nE) PJE AIRSPACE METZADA ACT FM 8,000FT AMSL.\nOPR BY PPR FM ATC ONLY.\nF) GND G) 8000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWPLW",
+    "subject_code": "WP",
+    "subject": "צניחה חופשית",
+    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 80,
+     "lower_ft": 0,
+     "upper_ft": 8000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.333333333333332,
+     "lon": 35.38333333333333,
+     "radius_nm": 3,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.333333333333332,
+    "lon": 35.38333333333333,
+    "radius_nm": 3,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 80,
+    "lower_ft": 0,
+    "upper_ft": 8000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609240930",
+    "iso": "2026-09-24T09:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609251100",
+    "iso": "2026-09-25T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "24 0930-1600, 25 0600-1100",
+   "text": "PJE AIRSPACE METZADA ACT FM 8,000FT AMSL.\nOPR BY PPR FM ATC ONLY.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "8000FT AMSL)",
+    "feet": 8000,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
    "floor_ft": 0,
    "low_altitude": true
   },
@@ -1709,6 +2347,76 @@
    "low_altitude": true
   },
   {
+   "id": "C1964/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1964/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /017/020/3243N03524E010\nA) LLLL B) 2609180330 C) 2609180600\nE) ULTRALIGHT RTE CLSD, EXC PARTICIPATING ACFT IN FLY-PAST\nMOVIL-KKANA-ZGLNI-MIGDL.\nTAVOR-ZGLNI.\nHEL RTE CLSD, EXC PARTICIPATING ACFT IN FLY-PAST\nMOVIL-ZGLNI-MIGDL.\nTAVOR-ZGLNI.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 17,
+     "upper_fl": 20,
+     "lower_ft": 1700,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.71666666666667,
+     "lon": 35.4,
+     "radius_nm": 10,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.71666666666667,
+    "lon": 35.4,
+    "radius_nm": 10,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 17,
+    "upper_fl": 20,
+    "lower_ft": 1700,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609180330",
+    "iso": "2026-09-18T03:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609180600",
+    "iso": "2026-09-18T06:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "ULTRALIGHT RTE CLSD, EXC PARTICIPATING ACFT IN FLY-PAST\nMOVIL-KKANA-ZGLNI-MIGDL.\nTAVOR-ZGLNI.\nHEL RTE CLSD, EXC PARTICIPATING ACFT IN FLY-PAST\nMOVIL-ZGLNI-MIGDL.\nTAVOR-ZGLNI.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 1700,
+   "low_altitude": true
+  },
+  {
    "id": "C1959/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -1997,6 +2705,302 @@
    "low_altitude": true
   },
   {
+   "id": "C1965/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1965/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/030/3220N03459E001\nA) LLLL B) 2609170630 C) 2609171600\nE) AN AREA AT OLESH WI 0.8NM RADIUS CENTERED ON PSN 322017N0345921E\nCLSD FM GND UP TO 3,000FT AMSL TO ALL FLT.\nHASHARON-DAROM BUBBLE (BSARS) CLSD E OF NAT VOR.\nLLHZ TRG AREA NR 13 CLSD E OF NAT VOR.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nCTN ADZ.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 30,
+     "lower_ft": 0,
+     "upper_ft": 3000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.333333333333336,
+     "lon": 34.983333333333334,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.333333333333336,
+    "lon": 34.983333333333334,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 30,
+    "lower_ft": 0,
+    "upper_ft": 3000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609170630",
+    "iso": "2026-09-17T06:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609171600",
+    "iso": "2026-09-17T16:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "AN AREA AT OLESH WI 0.8NM RADIUS CENTERED ON PSN 322017N0345921E\nCLSD FM GND UP TO 3,000FT AMSL TO ALL FLT.\nHASHARON-DAROM BUBBLE (BSARS) CLSD E OF NAT VOR.\nLLHZ TRG AREA NR 13 CLSD E OF NAT VOR.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nCTN ADZ.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1961/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1961/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3242N03521E006\nA) LLLL B) 2609170630 C) 2609171100\nD) 0630-0830 0900-1100\nE) ULTRALIGHT BUBBLE A-WEST (BMGWA) CLSD.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 20,
+     "lower_ft": 0,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.7,
+     "lon": 35.35,
+     "radius_nm": 6,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.7,
+    "lon": 35.35,
+    "radius_nm": 6,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 20,
+    "lower_ft": 0,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609170630",
+    "iso": "2026-09-17T06:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609171100",
+    "iso": "2026-09-17T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0630-0830 0900-1100",
+   "text": "ULTRALIGHT BUBBLE A-WEST (BMGWA) CLSD.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1960/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1960/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/040/3243N03524E001\nA) LLLL B) 2609170630 C) 2609171100\nD) 0630-0830 0900-1100\nE) UAS ACT WILL TAKE PLACE AT KFAR-TAVOR.\nAN AREA WI 1.1NM RADIUS CENTERED ON PSN 324241N0352429E\nCLSD FM GND UP TO 4,000FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.\nF) GND G) 4000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWULW",
+    "subject_code": "WU",
+    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
+    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 40,
+     "lower_ft": 0,
+     "upper_ft": 4000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.71666666666667,
+     "lon": 35.4,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.71666666666667,
+    "lon": 35.4,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 40,
+    "lower_ft": 0,
+    "upper_ft": 4000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609170630",
+    "iso": "2026-09-17T06:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609171100",
+    "iso": "2026-09-17T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0630-0830 0900-1100",
+   "text": "UAS ACT WILL TAKE PLACE AT KFAR-TAVOR.\nAN AREA WI 1.1NM RADIUS CENTERED ON PSN 324241N0352429E\nCLSD FM GND UP TO 4,000FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "4000FT AMSL)",
+    "feet": 4000,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C1962/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C1962/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/020/3138N03439E002\nA) LLLL B) 2609170600 C) 2609171500\nE) UAS ACT WILL TAKE PLACE AT KOHAV-MICHAL.\nAN AREA WI 1.4NM RADIUS CENTERED ON PSN 313758N0343929E\nCLSD FM GND UP TO 2,000FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.\nF) GND G) 2000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWULW",
+    "subject_code": "WU",
+    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
+    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 20,
+     "lower_ft": 0,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.633333333333333,
+     "lon": 34.65,
+     "radius_nm": 2,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.633333333333333,
+    "lon": 34.65,
+    "radius_nm": 2,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 20,
+    "lower_ft": 0,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609170600",
+    "iso": "2026-09-17T06:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609171500",
+    "iso": "2026-09-17T15:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "UAS ACT WILL TAKE PLACE AT KOHAV-MICHAL.\nAN AREA WI 1.4NM RADIUS CENTERED ON PSN 313758N0343929E\nCLSD FM GND UP TO 2,000FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "2000FT AMSL)",
+    "feet": 2000,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
    "id": "C1941/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -2137,22 +3141,22 @@
    "low_altitude": true
   },
   {
-   "id": "C1942/26",
+   "id": "A0760/26",
    "type": "NOTAMN",
    "replaces": null,
-   "raw": "(C1942/26 NOTAMN\nQ) LLLL/QOALT/IV/BO /A /000/999/3201N03453E005\nA) LLBG B) 2609161400 C) 2609161420\nE) AIS, ARO, FMP OFFICE PHONE NR WILL NOT BE AVBL, DUE MAINT.\nIN CASE OF URGENT OR EMERG PILOT SHALL CALL 050-9756217.\nNO RESTRICTIONS FOR SUBMISSION FPL VIA E-MAIL OR AFTN.)",
+   "raw": "(A0760/26 NOTAMN\nQ) LLLL/QLPAS/IV/BO /A /000/999/2944N03501E005\nA) LLER B) 2609161349 C) 2612312159\nE) PAPI RWY 19 EAST U/S.)",
    "source": "iaa:LLLL",
    "locations": [
-    "LLBG"
+    "LLER"
    ],
    "q": {
     "fir": "LLLL",
-    "q_code": "QOALT",
-    "subject_code": "OA",
-    "subject": "שירות מידע תעופתי (AIS)",
-    "subject_note": "הודעה על שינוי בפמ\"ת עצמו. אינה מגבלה בשטח.",
-    "condition_code": "LT",
-    "condition": "מוגבל ל-",
+    "q_code": "QLPAS",
+    "subject_code": "LP",
+    "subject": "מחוון זווית גישה (PAPI)",
+    "subject_note": "פנסים ליד המסלול שמראים לטייס אם הגישה גבוהה או נמוכה מדי.",
+    "condition_code": "AS",
+    "condition": "מושבת",
     "traffic": "IV",
     "purpose": "BO",
     "scope_code": "A",
@@ -2165,15 +3169,15 @@
      "unlimited": true
     },
     "geo": {
-     "lat": 32.016666666666666,
-     "lon": 34.88333333333333,
+     "lat": 29.733333333333334,
+     "lon": 35.016666666666666,
      "radius_nm": 5,
      "fir_wide": false
     }
    },
    "geo": {
-    "lat": 32.016666666666666,
-    "lon": 34.88333333333333,
+    "lat": 29.733333333333334,
+    "lon": 35.016666666666666,
     "radius_nm": 5,
     "fir_wide": false
    },
@@ -2185,99 +3189,21 @@
     "unlimited": true
    },
    "valid_from": {
-    "raw": "2609161400",
-    "iso": "2026-09-16T14:00:00Z",
+    "raw": "2609161349",
+    "iso": "2026-09-16T13:49:00Z",
     "permanent": false,
     "estimated": false
    },
    "valid_to": {
-    "raw": "2609161420",
-    "iso": "2026-09-16T14:20:00Z",
+    "raw": "2612312159",
+    "iso": "2026-12-31T21:59:00Z",
     "permanent": false,
     "estimated": false
    },
    "schedule": null,
-   "text": "AIS, ARO, FMP OFFICE PHONE NR WILL NOT BE AVBL, DUE MAINT.\nIN CASE OF URGENT OR EMERG PILOT SHALL CALL 050-9756217.\nNO RESTRICTIONS FOR SUBMISSION FPL VIA E-MAIL OR AFTN.)",
+   "text": "PAPI RWY 19 EAST U/S.)",
    "lower_limit": null,
    "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1955/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1955/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/130/3150N03449E007\nA) LLLL B) 2609161345 C) 2609161430\nE) PJE WILL TAKE PLACE AT TEL-NOF.\nAN AREA WI 3NM RADIUS CENTERED ON PSN 314907N0344929E\nCLSD FM GND UP TO 8,500FT AMSL TO ALL FLT.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nCTN ADZ.\nF) GND G) 13000FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWPLW",
-    "subject_code": "WP",
-    "subject": "צניחה חופשית",
-    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 130,
-     "lower_ft": 0,
-     "upper_ft": 13000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.833333333333332,
-     "lon": 34.81666666666667,
-     "radius_nm": 7,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.833333333333332,
-    "lon": 34.81666666666667,
-    "radius_nm": 7,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 130,
-    "lower_ft": 0,
-    "upper_ft": 13000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609161345",
-    "iso": "2026-09-16T13:45:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609161430",
-    "iso": "2026-09-16T14:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "PJE WILL TAKE PLACE AT TEL-NOF.\nAN AREA WI 3NM RADIUS CENTERED ON PSN 314907N0344929E\nCLSD FM GND UP TO 8,500FT AMSL TO ALL FLT.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "13000FT AMSL)",
-    "feet": 13000,
-    "reference": "AMSL"
-   },
    "administrative": false,
    "parse_errors": [],
    "area": null,
@@ -2458,179 +3384,6 @@
    "low_altitude": false
   },
   {
-   "id": "C1939/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1939/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/035/3140N03501E003\nA) LLLL B) 2609160630 C) 2609161130\nD) 0630-0800 0900-1130\nE) UAS ACT WILL TAKE PLACE AT ADERET.\nAN AREA BTN FLW PSN FM GND UP TO 3,500FT AMSL CLSD TO\nALL FLT INCLUDING AGRICULTURE FLT 314107N0345919E\n313846N0345857E 313824N0350011E 314028N0350307E\n314131N0350134E.\nCTN ADZ.\nF) GND G) 3500FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWULW",
-    "subject_code": "WU",
-    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
-    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 35,
-     "lower_ft": 0,
-     "upper_ft": 3500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.666666666666668,
-     "lon": 35.016666666666666,
-     "radius_nm": 3,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.666666666666668,
-    "lon": 35.016666666666666,
-    "radius_nm": 3,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 35,
-    "lower_ft": 0,
-    "upper_ft": 3500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609160630",
-    "iso": "2026-09-16T06:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609161130",
-    "iso": "2026-09-16T11:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "0630-0800 0900-1130",
-   "text": "UAS ACT WILL TAKE PLACE AT ADERET.\nAN AREA BTN FLW PSN FM GND UP TO 3,500FT AMSL CLSD TO\nALL FLT INCLUDING AGRICULTURE FLT 314107N0345919E\n313846N0345857E 313824N0350011E 314028N0350307E\n314131N0350134E.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "3500FT AMSL)",
-    "feet": 3500,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": [
-    [
-     34.988611,
-     31.685278
-    ],
-    [
-     34.9825,
-     31.646111
-    ],
-    [
-     35.003056,
-     31.64
-    ],
-    [
-     35.051944,
-     31.674444
-    ],
-    [
-     35.026111,
-     31.691944
-    ],
-    [
-     34.988611,
-     31.685278
-    ]
-   ],
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1946/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1946/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3138N03439E002\nA) LLLL B) 2609160600 C) 2609161500\nE) AN AREA AT KOHAV-MICHAL WI 1.4NM RADIUS CENTERED\nON PSN 313758N0343929E CLSD FM GND UP TO 2,000FT AMSL\nTO ALL FLT, INCLUDING AGRICULTURE FLT.\nCTN ADZ.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QAELC",
-    "subject_code": "AE",
-    "subject": "אזור בקרה (CTA)",
-    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 20,
-     "lower_ft": 0,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.633333333333333,
-     "lon": 34.65,
-     "radius_nm": 2,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.633333333333333,
-    "lon": 34.65,
-    "radius_nm": 2,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 20,
-    "lower_ft": 0,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609160600",
-    "iso": "2026-09-16T06:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609161500",
-    "iso": "2026-09-16T15:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "AN AREA AT KOHAV-MICHAL WI 1.4NM RADIUS CENTERED\nON PSN 313758N0343929E CLSD FM GND UP TO 2,000FT AMSL\nTO ALL FLT, INCLUDING AGRICULTURE FLT.\nCTN ADZ.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
    "id": "C1923/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -2702,76 +3455,6 @@
     "feet": 2700,
     "reference": "AMSL"
    },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1931/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1931/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/007/3307N03536E001\nA) LLLL B) 2609150500 C) 2609161200\nD) DAILY 0500-1200\nE) AN AREA AT HACHULA-LAKE WI 0.54NM RADIUS CENTERED ON\nPSN 330651N0353618E CLSD FM GND UP TO 660FT AGL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QAELC",
-    "subject_code": "AE",
-    "subject": "אזור בקרה (CTA)",
-    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 7,
-     "lower_ft": 0,
-     "upper_ft": 700,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 33.11666666666667,
-     "lon": 35.6,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 33.11666666666667,
-    "lon": 35.6,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 7,
-    "lower_ft": 0,
-    "upper_ft": 700,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609150500",
-    "iso": "2026-09-15T05:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609161200",
-    "iso": "2026-09-16T12:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "DAILY 0500-1200",
-   "text": "AN AREA AT HACHULA-LAKE WI 0.54NM RADIUS CENTERED ON\nPSN 330651N0353618E CLSD FM GND UP TO 660FT AGL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
-   "lower_limit": null,
-   "upper_limit": null,
    "administrative": false,
    "parse_errors": [],
    "area": null,
