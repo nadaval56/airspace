@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-17T13:23:43Z",
- "last_success": "2026-09-17T13:23:43Z",
+ "generated_at": "2026-09-17T18:10:18Z",
+ "last_success": "2026-09-17T18:10:18Z",
  "last_error": {
   "at": "2026-09-13T11:41:43Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,57 +20,36 @@
  ],
  "counts": {
   "total": 11,
-  "AIRMET": 1,
   "TAF": 6,
-  "METAR": 4
+  "METAR": 4,
+  "AIRMET": 1
  },
  "reports": [
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 3 VALID 171312/171600 LLBD- LLLL TEL AVIV FIR MOD TURB OBS WI N3317 E03450 - N3315 E03557 - N3119 E03526 - N3130 E03420 - N3317 E03450 FL020/120 NC=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     34.833333,
-     33.283333
-    ],
-    [
-     35.95,
-     33.25
-    ],
-    [
-     35.433333,
-     31.316667
-    ],
-    [
-     34.333333,
-     31.5
-    ],
-    [
-     34.833333,
-     33.283333
-    ]
-   ]
-  },
   {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 171200 TILL 181200, WIND 310 DEGREES, 10 KNOTS, CAVOK, BECOMING FROM 171500 TILL 171700 WIND VARIABLE, 4",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 171800 TILL 181800, WIND VARIABLE, 4 KNOTS, CAVOK, BECOMING FROM 172100 TILL 172300 WIND 190 DEGREES, 6",
    "truncated": true,
-   "valid_from": "171200",
-   "valid_to": "181200",
+   "valid_from": "171800",
+   "valid_to": "181800",
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 171750Z 36006KT 320V020 CAVOK 30/21 Q1007 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
    "area": null
   },
   {
    "id": "METAR",
    "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLHA 171250Z AUTO 32010KT CAVOK 30/24 Q1008=",
+   "text": "METAR LLHA 171750Z AUTO 35004KT 320V030 CAVOK 28/23 Q1008=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -80,7 +59,7 @@
    "id": "METAR",
    "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLER 171250Z AUTO 02006KT CAVOK 40/00 Q1008=",
+   "text": "METAR LLER 171750Z AUTO 34004KT CAVOK 35/02 Q1008=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -90,17 +69,7 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 171250Z AUTO 33010KT CAVOK 36/07 Q1009 RMK FEW078=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 171250Z 32008KT 290V350 CAVOK 33/21 Q1008 NOSIG=",
+   "text": "METAR LLIB 171750Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -110,7 +79,7 @@
    "id": "TAFLG",
    "station": "LLHA",
    "kind": "TAF",
-   "text": "TAF LLHA 171106Z 1712/1812 32010KT CAVOK TX32/1712Z TN24/1803Z BECMG 1715/1717 VRB04KT",
+   "text": "TAF LLHA 171707Z 1718/1818 32006KT CAVOK TX30/1811Z TN24/1804Z BECMG 1722/1724 19006KT 9999 SCT025",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -120,7 +89,7 @@
    "id": "TAFLG",
    "station": "LLIB",
    "kind": "TAF",
-   "text": "TAF LLIB 171104Z 1712/1812 33012KT CAVOK TX36/1713Z TN23/1803Z BECMG 1716/1718 VRB04KT",
+   "text": "TAF LLIB 171713Z 1718/1818 VRB04KT CAVOK TX30/1810Z TN21/1804Z BECMG 1802/1804 18008KT 9999 SCT022",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -130,7 +99,7 @@
    "id": "TAFLG",
    "station": "LLHZ",
    "kind": "TAF",
-   "text": "TAF LLHZ 171109Z 1712/1812 31010KT CAVOK TX31/1712Z TN24/1803Z BECMG 1715/1717 VRB04KT",
+   "text": "TAF LLHZ 171707Z 1718/1818 VRB04KT CAVOK TX30/1811Z TN24/1804Z BECMG 1721/1723 19006KT 9999 SCT025",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -140,7 +109,7 @@
    "id": "TAFLG",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "TAF LLBG 171104Z 1712/1812 31010KT CAVOK TX34/1712Z TN24/1803Z BECMG 1715/1717 VRB04KT",
+   "text": "TAF LLBG 171707Z 1718/1818 VRB04KT CAVOK TX30/1811Z TN24/1804Z BECMG 1721/1723 19006KT 9999 SCT025",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -150,11 +119,42 @@
    "id": "TAFLG",
    "station": "LLER",
    "kind": "TAF",
-   "text": "TAF LLER 171106Z 1712/1812 02012KT CAVOK TX39/1713Z TN25/1803Z PROB40 TEMPO 1714/1716 33014KT",
+   "text": "TAF LLER 171706Z 1718/1818 31010KT CAVOK TX36/1813Z TN26/1804Z BECMG 1719/1721 VRB04KT",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
    "area": null
+  },
+  {
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 4 VALID 171600/171900 LLBD- LLLL TEL AVIV FIR MOD TURB FCST WI N3310 E03430 - N3320 E03550 - N2930 E03500 - N3120 E03340 - N3310 E03430 FL020/120 INTSF=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": [
+    [
+     34.5,
+     33.166667
+    ],
+    [
+     35.833333,
+     33.333333
+    ],
+    [
+     35.0,
+     29.5
+    ],
+    [
+     33.666667,
+     31.333333
+    ],
+    [
+     34.5,
+     33.166667
+    ]
+   ]
   }
  ]
 }
