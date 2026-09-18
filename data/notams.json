@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-18T05:49:36Z",
- "last_success": "2026-09-18T05:49:36Z",
+ "generated_at": "2026-09-18T11:04:47Z",
+ "last_success": "2026-09-18T11:04:47Z",
  "last_error": {
   "at": "2026-09-13T11:41:05Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 122,
+   "count": 119,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 122,
-  "mapped": 119,
+  "total": 119,
+  "mapped": 116,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 111,
+  "low_altitude": 108,
   "administrative": 4
  },
  "notams": [
@@ -3405,183 +3405,6 @@
    "low_altitude": true
   },
   {
-   "id": "C1974/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1974/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3248N03525E005\nA) LLLL B) 2609180330 C) 2609180600\nE) POWERED PARACHUTE WILL TAKE PLACE N OF GOLANI JUNCTION.\nAN AREA BTN FLW PSN CLSD TO ALL FLT INCLUDING\nAGRICULTURE FLT 324724N0351923E 324636N0352108E\n324700N0352630E 324548N0353003E 324927N0353034E\n325019N0352946E 324950N0352125E 324750N0351940E.\nCTN ADZ.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QAELC",
-    "subject_code": "AE",
-    "subject": "אזור בקרה (CTA)",
-    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 20,
-     "lower_ft": 0,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.8,
-     "lon": 35.416666666666664,
-     "radius_nm": 5,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.8,
-    "lon": 35.416666666666664,
-    "radius_nm": 5,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 20,
-    "lower_ft": 0,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609180330",
-    "iso": "2026-09-18T03:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609180600",
-    "iso": "2026-09-18T06:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "POWERED PARACHUTE WILL TAKE PLACE N OF GOLANI JUNCTION.\nAN AREA BTN FLW PSN CLSD TO ALL FLT INCLUDING\nAGRICULTURE FLT 324724N0351923E 324636N0352108E\n324700N0352630E 324548N0353003E 324927N0353034E\n325019N0352946E 324950N0352125E 324750N0351940E.\nCTN ADZ.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": [
-    [
-     35.323056,
-     32.79
-    ],
-    [
-     35.352222,
-     32.776667
-    ],
-    [
-     35.441667,
-     32.783333
-    ],
-    [
-     35.500833,
-     32.763333
-    ],
-    [
-     35.509444,
-     32.824167
-    ],
-    [
-     35.496111,
-     32.838611
-    ],
-    [
-     35.356944,
-     32.830556
-    ],
-    [
-     35.327778,
-     32.797222
-    ],
-    [
-     35.323056,
-     32.79
-    ]
-   ],
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1964/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1964/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /017/020/3243N03524E010\nA) LLLL B) 2609180330 C) 2609180600\nE) ULTRALIGHT RTE CLSD, EXC PARTICIPATING ACFT IN FLY-PAST\nMOVIL-KKANA-ZGLNI-MIGDL.\nTAVOR-ZGLNI.\nHEL RTE CLSD, EXC PARTICIPATING ACFT IN FLY-PAST\nMOVIL-ZGLNI-MIGDL.\nTAVOR-ZGLNI.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 17,
-     "upper_fl": 20,
-     "lower_ft": 1700,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.71666666666667,
-     "lon": 35.4,
-     "radius_nm": 10,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.71666666666667,
-    "lon": 35.4,
-    "radius_nm": 10,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 17,
-    "upper_fl": 20,
-    "lower_ft": 1700,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609180330",
-    "iso": "2026-09-18T03:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609180600",
-    "iso": "2026-09-18T06:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "ULTRALIGHT RTE CLSD, EXC PARTICIPATING ACFT IN FLY-PAST\nMOVIL-KKANA-ZGLNI-MIGDL.\nTAVOR-ZGLNI.\nHEL RTE CLSD, EXC PARTICIPATING ACFT IN FLY-PAST\nMOVIL-ZGLNI-MIGDL.\nTAVOR-ZGLNI.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 1700,
-   "low_altitude": true
-  },
-  {
    "id": "A0763/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -3720,84 +3543,6 @@
    "area": null,
    "floor_ft": 5000,
    "low_altitude": false
-  },
-  {
-   "id": "C1897/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1897/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/080/3120N03523E003\nA) LLLL B) 2609170930 C) 2609181100\nD) 17 0930-1608, 18 0600-1100\nE) PJE AIRSPACE METZADA ACT FM 8,000FT AMSL.\nOPR BY PPR FM ATC ONLY.\nF) GND G) 8000FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWPLW",
-    "subject_code": "WP",
-    "subject": "צניחה חופשית",
-    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 80,
-     "lower_ft": 0,
-     "upper_ft": 8000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.333333333333332,
-     "lon": 35.38333333333333,
-     "radius_nm": 3,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.333333333333332,
-    "lon": 35.38333333333333,
-    "radius_nm": 3,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 80,
-    "lower_ft": 0,
-    "upper_ft": 8000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609170930",
-    "iso": "2026-09-17T09:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609181100",
-    "iso": "2026-09-18T11:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "17 0930-1608, 18 0600-1100",
-   "text": "PJE AIRSPACE METZADA ACT FM 8,000FT AMSL.\nOPR BY PPR FM ATC ONLY.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "8000FT AMSL)",
-    "feet": 8000,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
   },
   {
    "id": "C1969/26",
