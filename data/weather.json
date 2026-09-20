@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-20T15:59:02Z",
- "last_success": "2026-09-20T15:59:02Z",
+ "generated_at": "2026-09-20T18:43:06Z",
+ "last_success": "2026-09-20T18:43:06Z",
  "last_error": {
   "at": "2026-09-13T11:41:43Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,25 +20,24 @@
  ],
  "counts": {
   "total": 6,
-  "אחר": 1,
-  "TAF": 5
+  "TAF": 6
  },
  "reports": [
   {
    "id": "VOLMET",
    "station": "LLBG",
-   "kind": null,
-   "text": "THIS IS BEN GURION VOLMET. BEN GURION, NIL REPORT. OVDA, NIL REPORT.",
+   "kind": "TAF",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 201702 TILL 210502. BEN GURION, NIL REPORT.",
    "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
+   "valid_from": "201702",
+   "valid_to": "210502",
    "area": null
   },
   {
    "id": "TAFLG",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "TAF AMD LLBG 201158Z 2012/2112 CNL=",
+   "text": "TAF LLBG 201702Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -48,7 +47,7 @@
    "id": "TAFLG",
    "station": "LLER",
    "kind": "TAF",
-   "text": "TAF LLER 201103Z NIL=",
+   "text": "TAF LLER 201703Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -58,7 +57,7 @@
    "id": "TAFLG",
    "station": "LLHA",
    "kind": "TAF",
-   "text": "TAF LLHA 201104Z NIL=",
+   "text": "TAF LLHA 201702Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -68,7 +67,7 @@
    "id": "TAFLG",
    "station": "LLIB",
    "kind": "TAF",
-   "text": "TAF LLIB 201104Z NIL=",
+   "text": "TAF LLIB 201702Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -78,7 +77,7 @@
    "id": "TAFLG",
    "station": "LLHZ",
    "kind": "TAF",
-   "text": "TAF LLHZ 201105Z NIL=",
+   "text": "TAF LLHZ 201703Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
