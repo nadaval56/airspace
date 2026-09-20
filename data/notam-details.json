@@ -998,15 +998,6 @@
   "valid_from": "2026-09-24T09:30:00Z",
   "valid_to": "2026-09-25T11:00:00Z"
  },
- "C1975/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-09-17T15:33:00Z",
-  "id": "C1975/26",
-  "location": "LLLL",
-  "raw": "(C1975/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /005/018/3201N03501E013\nA) LLLL B) 2609201000 C) 2609201200\nE) ULTRALIGHT RTE CLSD SHARG-HORON-REUTE-LAPID-MCZVA-YARHV-MEYAL.)",
-  "valid_from": "2026-09-20T10:00:00Z",
-  "valid_to": "2026-09-20T12:00:00Z"
- },
  "C1976/26": {
   "airfield": "Rishon Letzion",
   "created": "2026-09-17T15:57:00Z",
