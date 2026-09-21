@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-21T19:19:39Z",
- "last_success": "2026-09-21T19:19:39Z",
+ "generated_at": "2026-09-21T23:13:13Z",
+ "last_success": "2026-09-21T23:13:13Z",
  "last_error": {
   "at": "2026-09-13T11:41:43Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -21,10 +21,60 @@
  "counts": {
   "total": 11,
   "TAF": 6,
-  "AIRMET": 1,
-  "METAR": 4
+  "METAR": 4,
+  "AIRMET": 1
  },
  "reports": [
+  {
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 212303Z 2200/2224 VRB03KT 9999 SCT028 TX31/2210Z TN23/2203Z PROB40 TEMPO 2201/2205 15006KT -RA BKN025",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 212301Z 2200/2224 35008KT CAVOK TX34/2213Z TN24/2203Z BECMG 2205/2207 02014KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHA",
+   "kind": "TAF",
+   "text": "TAF LLHA 212305Z 2200/2224 VRB04KT 9999 SCT030 TX30/2211Z TN24/2203Z PROB40 TEMPO 2200/2207 26005KT -RA BKN025",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLIB",
+   "kind": "TAF",
+   "text": "TAF LLIB 212306Z 2200/2224 VRB03KT 9999 FEW030 TX31/2211Z TN20/2203Z PROB40 TEMPO 2200/2206 BKN025",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHZ",
+   "kind": "TAF",
+   "text": "TAF LLHZ 212304Z 2200/2224 VRB03KT 9999 SCT030 TX29/2210Z TN22/2203Z PROB40 TEMPO 2201/2205 15006KT -RA BKN025",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
   {
    "id": "VOLMET",
    "station": "LLBG",
@@ -36,10 +86,50 @@
    "area": null
   },
   {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 212250Z 13005KT 9999 FEW032 26/20 Q1012 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLHA",
+   "kind": "METAR",
+   "text": "METAR LLHA 212250Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 212250Z AUTO 36011KT CAVOK 27/17 Q1011=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 212250Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
    "id": "AIRMET",
    "station": "LLLL",
    "kind": "AIRMET",
-   "text": "LLLL AIRMET 3 VALID 211900/212300 LLBD- LLLL TEL AVIV FIR MT OBSC OBS WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR INTSF=",
+   "text": "LLLL AIRMET 4 VALID 212300/220300 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR NC=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -65,96 +155,6 @@
      33.35
     ]
    ]
-  },
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 211850Z 35004KT 9999 FEW030 27/20 Q1012 NOSIG=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 211850Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 211850Z AUTO 32015KT CAVOK 31/16 Q1011=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 211850Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHA",
-   "kind": "TAF",
-   "text": "TAF LLHA 211703Z 2118/2218 33008KT 9999 SCT030 TX30/2211Z TN24/2203Z BECMG 2120/2122 VRB04KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLIB",
-   "kind": "TAF",
-   "text": "TAF LLIB 211702Z 2118/2218 35007KT CAVOK TX32/2212Z TN21/2203Z BECMG 2119/2121 VRB03KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLHZ",
-   "kind": "TAF",
-   "text": "TAF LLHZ 211703Z 2118/2218 VRB03KT 9999 SCT030 TX29/2211Z TN24/2203Z PROB40 TEMPO 2122/2205 15006KT -RA BKN025",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 211704Z 2118/2218 VRB03KT 9999 SCT028 TX31/2211Z TN23/2203Z PROB40 TEMPO 2122/2205 15006KT -RA BKN025",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 211705Z 2118/2218 32014KT CAVOK TX34/2213Z TN25/2203Z BECMG 2119/2121 36008KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
   }
  ]
 }

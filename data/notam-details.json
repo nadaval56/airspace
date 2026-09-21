@@ -998,15 +998,6 @@
   "valid_from": "2026-09-24T09:30:00Z",
   "valid_to": "2026-09-25T11:00:00Z"
  },
- "C1976/26": {
-  "airfield": "Rishon Letzion",
-  "created": "2026-09-17T15:57:00Z",
-  "id": "C1976/26",
-  "location": "LLRS",
-  "raw": "(C1976/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3158N03445E005\nA) LLRS B) 2609200300 C) 2609212159\nE) AIRSTRIP CLSD TO ALL FLT, ON SEP 20 BTN 0600-1500LMT\nOPS OF HEL BY PPR FM AIRSTRIP OPR.)",
-  "valid_from": "2026-09-20T03:00:00Z",
-  "valid_to": "2026-09-21T21:59:00Z"
- },
  "C1977/26": {
   "airfield": "Meggido",
   "created": "2026-09-17T16:13:00Z",
