@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-21T00:10:00Z",
- "last_success": "2026-09-21T00:10:00Z",
+ "generated_at": "2026-09-21T06:12:22Z",
+ "last_success": "2026-09-21T06:12:22Z",
  "last_error": {
   "at": "2026-09-13T11:41:43Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -19,51 +19,69 @@
   "LLSD"
  ],
  "counts": {
-  "total": 2,
-  "TAF": 1,
-  "AIRMET": 1
+  "total": 6,
+  "TAF": 6
  },
  "reports": [
   {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 201702 TILL 210502. BEN GURION, NIL REPORT.",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 210600 TILL 220600, WIND VARIABLE, 3 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD FEW 3 THOUSAND 5",
    "truncated": true,
-   "valid_from": "201702",
-   "valid_to": "210502",
+   "valid_from": "210600",
+   "valid_to": "220600",
    "area": null
   },
   {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 2 VALID 202200/210200 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR NC=",
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 210503Z 2106/2206 VRB03KT 9999 FEW035 TX31/2111Z TN23/2203Z BECMG 2107/2109 30010KT FEW040",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": [
-    [
-     35.8,
-     33.35
-    ],
-    [
-     35.916667,
-     32.95
-    ],
-    [
-     34.583333,
-     30.3
-    ],
-    [
-     34.433333,
-     30.7
-    ],
-    [
-     35.8,
-     33.35
-    ]
-   ]
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 210501Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHA",
+   "kind": "TAF",
+   "text": "TAF LLHA 210504Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLIB",
+   "kind": "TAF",
+   "text": "TAF LLIB 210504Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHZ",
+   "kind": "TAF",
+   "text": "TAF LLHZ 210503Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
   }
  ]
 }
