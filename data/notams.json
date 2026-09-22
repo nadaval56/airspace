@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-21T23:12:34Z",
- "last_success": "2026-09-21T23:12:34Z",
+ "generated_at": "2026-09-22T04:43:44Z",
+ "last_success": "2026-09-22T04:43:44Z",
  "last_error": {
   "at": "2026-09-13T11:41:05Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 117,
+   "count": 116,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,8 +197,8 @@
   }
  ],
  "counts": {
-  "total": 117,
-  "mapped": 114,
+  "total": 116,
+  "mapped": 113,
   "fir_wide": 3,
   "no_geo": 0,
   "low_altitude": 106,
@@ -3256,76 +3256,6 @@
    },
    "schedule": null,
    "text": "ATS RTE L53 CLSD BTN ABIMI-BGN.\nTFC WITH DEP FM AD WITHIN AMMAN FIR SHALL FILE H24\nTALMI DCT TAPUZ BTN 11,000-16,000FT.\nTFC WITH DEP FM LLER, LLNV, LLOV AND LLRM ONLY SHALL\nFILE H24 GOBRI DCT TAPUZ BTN 11,000-16,000FT.\nMIL FLT OVERFLYING FM AMMAN FIR TO NICOSIA FIR SHALL\nFILE H24 TALMI DCT TAPUZ ABV 17,000FT.\nMIL FLT OVERFLYING FM LLER, LLNV, LLOV AND LLRM TO NICOSIA\nFIR SHALL FILE H24 GOBRI DCT TAPUZ ABV 17,000FT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 5000,
-   "low_altitude": false
-  },
-  {
-   "id": "A0763/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(A0763/26 NOTAMN\nQ) LLLL/QANLT/I /NBO/E /050/600/3156N03501E027\nA) LLLL B) 2609171221 C) 2609212359\nE) ATS RTE L53 BTN TALMI-TAPUZ AVBL H24 BTN 11,000-16,000FT\nFOR TFC WITH DEP FM AD WITHIN AMMAN FIR, LLER, LLNV,\nLLOV AND LLRM ONLY, AVBL H24 ABV 17,000FT FOR MIL TFC ONLY.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QANLT",
-    "subject_code": "AN",
-    "subject": "נתיב ניווט שטח (RNAV)",
-    "subject_note": "נתיב המוגדר בנקודות ציון ולא במשואות קרקע.",
-    "condition_code": "LT",
-    "condition": "מוגבל ל-",
-    "traffic": "I",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 50,
-     "upper_fl": 600,
-     "lower_ft": 5000,
-     "upper_ft": 60000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.933333333333334,
-     "lon": 35.016666666666666,
-     "radius_nm": 27,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.933333333333334,
-    "lon": 35.016666666666666,
-    "radius_nm": 27,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 50,
-    "upper_fl": 600,
-    "lower_ft": 5000,
-    "upper_ft": 60000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609171221",
-    "iso": "2026-09-17T12:21:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609212359",
-    "iso": "2026-09-21T23:59:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "ATS RTE L53 BTN TALMI-TAPUZ AVBL H24 BTN 11,000-16,000FT\nFOR TFC WITH DEP FM AD WITHIN AMMAN FIR, LLER, LLNV,\nLLOV AND LLRM ONLY, AVBL H24 ABV 17,000FT FOR MIL TFC ONLY.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
