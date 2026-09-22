@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-22T04:43:44Z",
- "last_success": "2026-09-22T04:43:44Z",
+ "generated_at": "2026-09-22T09:52:00Z",
+ "last_success": "2026-09-22T09:52:00Z",
  "last_error": {
   "at": "2026-09-13T11:41:05Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 116,
+   "count": 114,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 116,
-  "mapped": 113,
+  "total": 114,
+  "mapped": 111,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 106,
+  "low_altitude": 104,
   "administrative": 4
  },
  "notams": [
@@ -2730,10 +2730,10 @@
    "low_altitude": true
   },
   {
-   "id": "C1949/26",
+   "id": "C1984/26",
    "type": "NOTAMN",
    "replaces": null,
-   "raw": "(C1949/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/025/3227N03507E002\nA) LLLL B) 2609220600 C) 2609220900\nE) FIREFIGHTING ACT WILL TAKE PLACE AT BARTAAH.\nAN AREA WI 2NM RADIUS CENTERED ON PSN 322724N0350649E\nCLSD FM GND UP TO 2,500FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.)",
+   "raw": "(C1984/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/012/3256N03508E001\nA) LLLL B) 2609220811 C) 2609221100\nE) AN AREA BTN FLW PSN CLSD TO ALL FLT,\nINCLUDING AGRICULTURE FLT FM GND UP TO 1,200FT AMSL\n325523N0350819E 325554N0350852E 325602N0350809E.\nCTN ADZ.))",
    "source": "iaa:LLLL",
    "locations": [
     "LLLL"
@@ -2752,120 +2752,166 @@
     "scope": "נתיב טיסה",
     "altitude": {
      "lower_fl": 0,
-     "upper_fl": 25,
+     "upper_fl": 12,
      "lower_ft": 0,
-     "upper_ft": 2500,
+     "upper_ft": 1200,
      "unlimited": false
     },
     "geo": {
-     "lat": 32.45,
-     "lon": 35.11666666666667,
-     "radius_nm": 2,
+     "lat": 32.93333333333333,
+     "lon": 35.13333333333333,
+     "radius_nm": 1,
      "fir_wide": false
     }
    },
    "geo": {
-    "lat": 32.45,
-    "lon": 35.11666666666667,
-    "radius_nm": 2,
+    "lat": 32.93333333333333,
+    "lon": 35.13333333333333,
+    "radius_nm": 1,
     "fir_wide": false
    },
    "altitude": {
     "lower_fl": 0,
-    "upper_fl": 25,
+    "upper_fl": 12,
     "lower_ft": 0,
-    "upper_ft": 2500,
+    "upper_ft": 1200,
     "unlimited": false
    },
    "valid_from": {
-    "raw": "2609220600",
-    "iso": "2026-09-22T06:00:00Z",
+    "raw": "2609220811",
+    "iso": "2026-09-22T08:11:00Z",
     "permanent": false,
     "estimated": false
    },
    "valid_to": {
-    "raw": "2609220900",
-    "iso": "2026-09-22T09:00:00Z",
+    "raw": "2609221100",
+    "iso": "2026-09-22T11:00:00Z",
     "permanent": false,
     "estimated": false
    },
    "schedule": null,
-   "text": "FIREFIGHTING ACT WILL TAKE PLACE AT BARTAAH.\nAN AREA WI 2NM RADIUS CENTERED ON PSN 322724N0350649E\nCLSD FM GND UP TO 2,500FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.)",
+   "text": "AN AREA BTN FLW PSN CLSD TO ALL FLT,\nINCLUDING AGRICULTURE FLT FM GND UP TO 1,200FT AMSL\n325523N0350819E 325554N0350852E 325602N0350809E.\nCTN ADZ.))",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
    "parse_errors": [],
-   "area": null,
+   "area": [
+    [
+     35.138611,
+     32.923056
+    ],
+    [
+     35.147778,
+     32.931667
+    ],
+    [
+     35.135833,
+     32.933889
+    ],
+    [
+     35.138611,
+     32.923056
+    ]
+   ],
    "floor_ft": 0,
    "low_altitude": true
   },
   {
-   "id": "A0765/26",
+   "id": "C1983/26",
    "type": "NOTAMN",
    "replaces": null,
-   "raw": "(A0765/26 NOTAMN\nQ) LLLL/QISAS/I /NBO/A /000/999/3200N03454E005\nA) LLBG B) 2609220600 C) 2609220900\nE) ILS RWY 12 C/S BG FREQ 110.300MHZ WITHDRAWN FOR MAINT.)",
+   "raw": "(C1983/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/010/3224N03454E001\nA) LLLL B) 2609220737 C) 2610152059\nE) UAS/UAV ACT WILL TAKE PLACE AT EMEK HEFER, FM GND UP TO 30M AGL.\nAN AREA BTN FLW PSN CLSD FM GND UP TO 950FT AMSL\n322407N0345354E 322407N0345357E 322405N0345357E\n322405N0345355E.\nCTN ADZ.\nF) GND G) 950FT AMSL)",
    "source": "iaa:LLLL",
    "locations": [
-    "LLBG"
+    "LLLL"
    ],
    "q": {
     "fir": "LLLL",
-    "q_code": "QISAS",
-    "subject_code": "IS",
-    "subject": "מערכת ILS",
-    "subject_note": "מערכת נחיתה בהנחיית מכשירים — אלומות רדיו שמובילות למסלול.",
-    "condition_code": "AS",
-    "condition": "מושבת",
-    "traffic": "I",
-    "purpose": "NBO",
-    "scope_code": "A",
-    "scope": "שדה תעופה",
+    "q_code": "QWULW",
+    "subject_code": "WU",
+    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
+    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
     "altitude": {
      "lower_fl": 0,
-     "upper_fl": 999,
+     "upper_fl": 10,
      "lower_ft": 0,
-     "upper_ft": 99900,
-     "unlimited": true
+     "upper_ft": 1000,
+     "unlimited": false
     },
     "geo": {
-     "lat": 32.0,
+     "lat": 32.4,
      "lon": 34.9,
-     "radius_nm": 5,
+     "radius_nm": 1,
      "fir_wide": false
     }
    },
    "geo": {
-    "lat": 32.0,
+    "lat": 32.4,
     "lon": 34.9,
-    "radius_nm": 5,
+    "radius_nm": 1,
     "fir_wide": false
    },
    "altitude": {
     "lower_fl": 0,
-    "upper_fl": 999,
+    "upper_fl": 10,
     "lower_ft": 0,
-    "upper_ft": 99900,
-    "unlimited": true
+    "upper_ft": 1000,
+    "unlimited": false
    },
    "valid_from": {
-    "raw": "2609220600",
-    "iso": "2026-09-22T06:00:00Z",
+    "raw": "2609220737",
+    "iso": "2026-09-22T07:37:00Z",
     "permanent": false,
     "estimated": false
    },
    "valid_to": {
-    "raw": "2609220900",
-    "iso": "2026-09-22T09:00:00Z",
+    "raw": "2610152059",
+    "iso": "2026-10-15T20:59:00Z",
     "permanent": false,
     "estimated": false
    },
    "schedule": null,
-   "text": "ILS RWY 12 C/S BG FREQ 110.300MHZ WITHDRAWN FOR MAINT.)",
-   "lower_limit": null,
-   "upper_limit": null,
+   "text": "UAS/UAV ACT WILL TAKE PLACE AT EMEK HEFER, FM GND UP TO 30M AGL.\nAN AREA BTN FLW PSN CLSD FM GND UP TO 950FT AMSL\n322407N0345354E 322407N0345357E 322405N0345357E\n322405N0345355E.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "950FT AMSL)",
+    "feet": 950,
+    "reference": "AMSL"
+   },
    "administrative": false,
    "parse_errors": [],
-   "area": null,
+   "area": [
+    [
+     34.898333,
+     32.401944
+    ],
+    [
+     34.899167,
+     32.401944
+    ],
+    [
+     34.899167,
+     32.401389
+    ],
+    [
+     34.898611,
+     32.401389
+    ],
+    [
+     34.898333,
+     32.401944
+    ]
+   ],
    "floor_ft": 0,
    "low_altitude": true
   },
@@ -4848,76 +4894,6 @@
    "low_altitude": true
   },
   {
-   "id": "A0708/26",
-   "type": "NOTAMR",
-   "replaces": "A0501/26",
-   "raw": "(A0708/26 NOTAMR A0501/26\nQ) LLLL/QPOCH/I /NBO/A /000/999/3201N03452E005\nA) LLBG B) 2608310632 C) 2609302359\nE) OCA(H) FOR ILS RWY 30 CHG TO 500(370) FOR ALL CAT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLBG"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QPOCH",
-    "subject_code": "PO",
-    "subject": "גובה עקיפת מכשולים (OCA/H)",
-    "subject_note": "הגובה הנמוך ביותר שממנו מותר להמשיך בגישה בלי לראות את המסלול.",
-    "condition_code": "CH",
-    "condition": "שונה",
-    "traffic": "I",
-    "purpose": "NBO",
-    "scope_code": "A",
-    "scope": "שדה תעופה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 999,
-     "lower_ft": 0,
-     "upper_ft": 99900,
-     "unlimited": true
-    },
-    "geo": {
-     "lat": 32.016666666666666,
-     "lon": 34.86666666666667,
-     "radius_nm": 5,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.016666666666666,
-    "lon": 34.86666666666667,
-    "radius_nm": 5,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 999,
-    "lower_ft": 0,
-    "upper_ft": 99900,
-    "unlimited": true
-   },
-   "valid_from": {
-    "raw": "2608310632",
-    "iso": "2026-08-31T06:32:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609302359",
-    "iso": "2026-09-30T23:59:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "OCA(H) FOR ILS RWY 30 CHG TO 500(370) FOR ALL CAT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
    "id": "A0707/26",
    "type": "NOTAMR",
    "replaces": "A0575/26",
@@ -5119,76 +5095,6 @@
    },
    "schedule": null,
    "text": "OCA(H) FOR ILS RWY 26 CHG TO 500(376) FOR ALL CAT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "A0704/26",
-   "type": "NOTAMR",
-   "replaces": "A0499/26",
-   "raw": "(A0704/26 NOTAMR A0499/26\nQ) LLLL/QPOCH/I /NBO/A /000/999/3200N03453E005\nA) LLBG B) 2608310629 C) 2609302359\nE) OCA(H) FOR ILS RWY 21 CHG TO 500(366) FOR ALL CAT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLBG"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QPOCH",
-    "subject_code": "PO",
-    "subject": "גובה עקיפת מכשולים (OCA/H)",
-    "subject_note": "הגובה הנמוך ביותר שממנו מותר להמשיך בגישה בלי לראות את המסלול.",
-    "condition_code": "CH",
-    "condition": "שונה",
-    "traffic": "I",
-    "purpose": "NBO",
-    "scope_code": "A",
-    "scope": "שדה תעופה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 999,
-     "lower_ft": 0,
-     "upper_ft": 99900,
-     "unlimited": true
-    },
-    "geo": {
-     "lat": 32.0,
-     "lon": 34.88333333333333,
-     "radius_nm": 5,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.0,
-    "lon": 34.88333333333333,
-    "radius_nm": 5,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 999,
-    "lower_ft": 0,
-    "upper_ft": 99900,
-    "unlimited": true
-   },
-   "valid_from": {
-    "raw": "2608310629",
-    "iso": "2026-08-31T06:29:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609302359",
-    "iso": "2026-09-30T23:59:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "OCA(H) FOR ILS RWY 21 CHG TO 500(366) FOR ALL CAT.)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
