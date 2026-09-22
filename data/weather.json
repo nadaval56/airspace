@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-22T18:47:54Z",
- "last_success": "2026-09-22T18:47:54Z",
+ "generated_at": "2026-09-22T22:00:44Z",
+ "last_success": "2026-09-22T22:00:44Z",
  "last_error": {
   "at": "2026-09-13T11:41:43Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -19,17 +19,47 @@
   "LLSD"
  ],
  "counts": {
-  "total": 11,
+  "total": 12,
   "METAR": 4,
   "TAF": 6,
-  "AIRMET": 1
+  "AIRMET": 2
  },
  "reports": [
   {
    "id": "METAR",
    "station": "LLBG",
    "kind": "METAR",
-   "text": "METAR LLBG 221820Z VRB02KT 9999 FEW034 26/19 Q1014 NOSIG=",
+   "text": "METAR LLBG 222150Z 15004KT 9999 FEW035 25/18 Q1014 NOSIG=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLHA",
+   "kind": "METAR",
+   "text": "METAR LLHA 222150Z NIL=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 222150Z AUTO 01014KT CAVOK 28/17 Q1013=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
+   "station": "LLIB",
+   "kind": "METAR",
+   "text": "METAR LLIB 222150Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -44,6 +74,37 @@
    "valid_from": "221800",
    "valid_to": "231800",
    "area": null
+  },
+  {
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 3 VALID 222200/230200 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR INTSF=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": [
+    [
+     35.8,
+     33.35
+    ],
+    [
+     35.916667,
+     32.95
+    ],
+    [
+     34.583333,
+     30.3
+    ],
+    [
+     34.433333,
+     30.7
+    ],
+    [
+     35.8,
+     33.35
+    ]
+   ]
   },
   {
    "id": "AIRMET",
@@ -75,36 +136,6 @@
      33.35
     ]
    ]
-  },
-  {
-   "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 221750Z AUTO 31004KT 280V340 9999 FEW033 27/19 Q1012=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 221750Z AUTO 31013KT CAVOK 33/12 Q1011=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 221750Z NIL=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
   },
   {
    "id": "TAFLG",
