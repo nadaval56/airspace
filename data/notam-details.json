@@ -449,6 +449,24 @@
   "valid_from": "2026-09-24T08:30:00Z",
   "valid_to": "2026-09-24T10:30:00Z"
  },
+ "A0774/26": {
+  "airfield": "Ben-Gurion",
+  "created": "2026-09-24T04:26:00Z",
+  "id": "A0774/26",
+  "location": "LLBG",
+  "raw": "(A0774/26 NOTAMN\nQ) LLLL/QMRLC/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2609280400 C) 2609281100\nE) RWY 12/30 CLSD EXC RWY INT DUE WIP.)",
+  "valid_from": "2026-09-28T04:00:00Z",
+  "valid_to": "2026-09-28T11:00:00Z"
+ },
+ "A0775/26": {
+  "airfield": "Ben-Gurion",
+  "created": "2026-09-24T04:34:00Z",
+  "id": "A0775/26",
+  "location": "LLBG",
+  "raw": "(A0775/26 NOTAMN\nQ) LLLL/QMRLC/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2609290400 C) 2609291100\nE) RWY 03/21 CLSD EXC RWY INT DUE WIP.)",
+  "valid_from": "2026-09-29T04:00:00Z",
+  "valid_to": "2026-09-29T11:00:00Z"
+ },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
