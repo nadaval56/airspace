@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-24T14:56:21Z",
- "last_success": "2026-09-24T14:56:21Z",
+ "generated_at": "2026-09-24T19:02:30Z",
+ "last_success": "2026-09-24T19:02:30Z",
  "last_error": {
   "at": "2026-09-13T11:41:05Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 128,
+   "count": 135,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 128,
-  "mapped": 125,
+  "total": 135,
+  "mapped": 132,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 118,
+  "low_altitude": 124,
   "administrative": 4
  },
  "notams": [
@@ -3106,6 +3106,146 @@
    "low_altitude": true
   },
   {
+   "id": "C2037/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2037/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3037N03500E011\nA) LLLL B) 2609291700 C) 2609292200\nE) CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 35,
+     "upper_fl": 45,
+     "lower_ft": 3500,
+     "upper_ft": 4500,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 30.616666666666667,
+     "lon": 35.0,
+     "radius_nm": 11,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 30.616666666666667,
+    "lon": 35.0,
+    "radius_nm": 11,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 35,
+    "upper_fl": 45,
+    "lower_ft": 3500,
+    "upper_ft": 4500,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609291700",
+    "iso": "2026-09-29T17:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609292200",
+    "iso": "2026-09-29T22:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 3500,
+   "low_altitude": false
+  },
+  {
+   "id": "C2038/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2038/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/030/3137N03452E007\nA) LLLL B) 2609291630 C) 2609291900\nE) CVFR RTE CLSD NOAAM-GOVRN-ZHRYA.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 25,
+     "upper_fl": 30,
+     "lower_ft": 2500,
+     "upper_ft": 3000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.616666666666667,
+     "lon": 34.86666666666667,
+     "radius_nm": 7,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.616666666666667,
+    "lon": 34.86666666666667,
+    "radius_nm": 7,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 25,
+    "upper_fl": 30,
+    "lower_ft": 2500,
+    "upper_ft": 3000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609291630",
+    "iso": "2026-09-29T16:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609291900",
+    "iso": "2026-09-29T19:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CVFR RTE CLSD NOAAM-GOVRN-ZHRYA.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 2500,
+   "low_altitude": true
+  },
+  {
    "id": "C2014/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -3177,6 +3317,76 @@
     "feet": 2000,
     "reference": "AMSL"
    },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2036/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2036/26 NOTAMN\nQ) LLLL/QFALT/IV/NBO/A /000/999/3120N03523E005\nA) LLMZ B) 2609291400 C) 2610020700\nD) DAILY 1400-0700\nE) AIRSTRIP CLSD TO ALL FLT.\nOPS OF HEL BY PPR FM AIRSTRIP OPR ONLY.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLMZ"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QFALT",
+    "subject_code": "FA",
+    "subject": "שדה תעופה",
+    "subject_note": null,
+    "condition_code": "LT",
+    "condition": "מוגבל ל-",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 31.333333333333332,
+     "lon": 35.38333333333333,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.333333333333332,
+    "lon": 35.38333333333333,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2609291400",
+    "iso": "2026-09-29T14:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610020700",
+    "iso": "2026-10-02T07:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "DAILY 1400-0700",
+   "text": "AIRSTRIP CLSD TO ALL FLT.\nOPS OF HEL BY PPR FM AIRSTRIP OPR ONLY.)",
+   "lower_limit": null,
+   "upper_limit": null,
    "administrative": false,
    "parse_errors": [],
    "area": null,
@@ -3760,6 +3970,146 @@
    "low_altitude": true
   },
   {
+   "id": "C2032/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2032/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3101N03432E016\nA) LLLL B) 2609270300 C) 2610011550\nD) DAILY 0300-1550\nE) ULTRALIGHT BUBBLE CLSD SHIVTA (BSVTA).)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 20,
+     "lower_ft": 0,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.016666666666666,
+     "lon": 34.53333333333333,
+     "radius_nm": 16,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.016666666666666,
+    "lon": 34.53333333333333,
+    "radius_nm": 16,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 20,
+    "lower_ft": 0,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609270300",
+    "iso": "2026-09-27T03:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610011550",
+    "iso": "2026-10-01T15:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "DAILY 0300-1550",
+   "text": "ULTRALIGHT BUBBLE CLSD SHIVTA (BSVTA).)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2031/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2031/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/999/3043N03431E080\nA) LLLL B) 2609270300 C) 2609281550\nD) DAILY 0300-1550\nE) ULTRALIGHT BUBBLE CLSD\nSHALEM (BSHLM), YAM-HAMELCH (BYMLH), EIN-GEDI (BNGDI),\nGOVRIN-TZAFON (BGOVN), GOVRIN-DAROM (BGOVS),\nNITZANIM (BNZNI), SHDROT-TZAFON (BDRTN),\nSHDROT-DAROM (BDRTS), LEHAVIM (BLHAV), BEER-SHEVA (BSHEV),\nMEYTAR (BMTAR), ZOHAR (BZHAR), YERUHAM (BYERU), FARAN (BFRAN),\nCHARIF (BHARF), TZNIFIM (BZNIF), SHITIM (BSTIM),\nKTZIOTH (BKZOT).)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 30.716666666666665,
+     "lon": 34.516666666666666,
+     "radius_nm": 80,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 30.716666666666665,
+    "lon": 34.516666666666666,
+    "radius_nm": 80,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2609270300",
+    "iso": "2026-09-27T03:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2609281550",
+    "iso": "2026-09-28T15:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "DAILY 0300-1550",
+   "text": "ULTRALIGHT BUBBLE CLSD\nSHALEM (BSHLM), YAM-HAMELCH (BYMLH), EIN-GEDI (BNGDI),\nGOVRIN-TZAFON (BGOVN), GOVRIN-DAROM (BGOVS),\nNITZANIM (BNZNI), SHDROT-TZAFON (BDRTN),\nSHDROT-DAROM (BDRTS), LEHAVIM (BLHAV), BEER-SHEVA (BSHEV),\nMEYTAR (BMTAR), ZOHAR (BZHAR), YERUHAM (BYERU), FARAN (BFRAN),\nCHARIF (BHARF), TZNIFIM (BZNIF), SHITIM (BSTIM),\nKTZIOTH (BKZOT).)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
    "id": "C1986/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -3932,6 +4282,154 @@
    "upper_limit": {
     "raw": "3500FT AMSL)",
     "feet": 3500,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2028/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2028/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /010/030/3235N03513E013\nA) LLLL B) 2609250500 C) 2610021100\nD) SEP 25 0500-1100, 27-30 DAILY 0500-1550, OCT 01 0500-1550, 02\n0500-1100\nE) CVFR RTE CLSD DUE DUE GLIDER FLT IN VCY\nEIRON-ZMGID-AFULA-TAVOR.\nAFULA-EITAN.\nULTRALIGHT AND HEL RTE CLSD\nEIRON-ARRAA-ZMGID-NIRYA-MRHVA-TAVOR.\nTFC WILL BE DIVERTED VIA FRDIS-HASID.\nFLT TO/FM LLMG WILL BE COORD AND APPROVED BY AIRSTRIP OPR.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 10,
+     "upper_fl": 30,
+     "lower_ft": 1000,
+     "upper_ft": 3000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.583333333333336,
+     "lon": 35.21666666666667,
+     "radius_nm": 13,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.583333333333336,
+    "lon": 35.21666666666667,
+    "radius_nm": 13,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 10,
+    "upper_fl": 30,
+    "lower_ft": 1000,
+    "upper_ft": 3000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609250500",
+    "iso": "2026-09-25T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610021100",
+    "iso": "2026-10-02T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "SEP 25 0500-1100, 27-30 DAILY 0500-1550, OCT 01 0500-1550, 02\n0500-1100",
+   "text": "CVFR RTE CLSD DUE DUE GLIDER FLT IN VCY\nEIRON-ZMGID-AFULA-TAVOR.\nAFULA-EITAN.\nULTRALIGHT AND HEL RTE CLSD\nEIRON-ARRAA-ZMGID-NIRYA-MRHVA-TAVOR.\nTFC WILL BE DIVERTED VIA FRDIS-HASID.\nFLT TO/FM LLMG WILL BE COORD AND APPROVED BY AIRSTRIP OPR.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 1000,
+   "low_altitude": true
+  },
+  {
+   "id": "C2027/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2027/26 NOTAMN\nQ) LLLL/QWGLW/IV/M /W /000/100/3232N03453E060\nA) LLLL B) 2609250500 C) 2610021100\nD) SEP 25 0500-1100, 27-30 DAILY 0500-1550, OCT 01 0500-1550, 02\n0500-1100\nE) GLIDER COMPETITION FLT WILL TAKE PLACE AT LLMG AND VCY,\nFM GND UP TO 10,000FT AMSL.\nCTN ADZ.\nF) GND G) 10000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWGLW",
+    "subject_code": "WG",
+    "subject": "ירי קרקע-אוויר",
+    "subject_note": null,
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 100,
+     "lower_ft": 0,
+     "upper_ft": 10000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.53333333333333,
+     "lon": 34.88333333333333,
+     "radius_nm": 60,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.53333333333333,
+    "lon": 34.88333333333333,
+    "radius_nm": 60,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 100,
+    "lower_ft": 0,
+    "upper_ft": 10000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2609250500",
+    "iso": "2026-09-25T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610021100",
+    "iso": "2026-10-02T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "SEP 25 0500-1100, 27-30 DAILY 0500-1550, OCT 01 0500-1550, 02\n0500-1100",
+   "text": "GLIDER COMPETITION FLT WILL TAKE PLACE AT LLMG AND VCY,\nFM GND UP TO 10,000FT AMSL.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "10000FT AMSL)",
+    "feet": 10000,
     "reference": "AMSL"
    },
    "administrative": false,
@@ -4180,73 +4678,213 @@
    "low_altitude": true
   },
   {
-   "id": "C1982/26",
+   "id": "C2035/26",
    "type": "NOTAMN",
    "replaces": null,
-   "raw": "(C1982/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/030/3137N03452E007\nA) LLLL B) 2609241630 C) 2609241900\nE) CVFR RTE CLSD NOAAM-GOVRN-ZHRYA.)",
+   "raw": "(C2035/26 NOTAMN\nQ) LLLL/QAELP/IV/NBO/E /000/020/3101N03432E016\nA) LLLL B) 2609250300 C) 2610021550\nD) SEP 25 0300-1550, OCT 02 0300-1550\nE) ULTRALIGHT BUBBLE AVBL FOR FLT, PILOT SHALL COORD AND\nGET APPROVAL FOR FLT WI FIRE AREA WITH RELEVANT PIKUD\nSHIVTA (BSVTA).)",
    "source": "iaa:LLLL",
    "locations": [
     "LLLL"
    ],
    "q": {
     "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
+    "q_code": "QAELP",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LP",
+    "condition": "אסור",
     "traffic": "IV",
     "purpose": "NBO",
     "scope_code": "E",
     "scope": "נתיב טיסה",
     "altitude": {
-     "lower_fl": 25,
-     "upper_fl": 30,
-     "lower_ft": 2500,
-     "upper_ft": 3000,
+     "lower_fl": 0,
+     "upper_fl": 20,
+     "lower_ft": 0,
+     "upper_ft": 2000,
      "unlimited": false
     },
     "geo": {
-     "lat": 31.616666666666667,
-     "lon": 34.86666666666667,
-     "radius_nm": 7,
+     "lat": 31.016666666666666,
+     "lon": 34.53333333333333,
+     "radius_nm": 16,
      "fir_wide": false
     }
    },
    "geo": {
-    "lat": 31.616666666666667,
-    "lon": 34.86666666666667,
-    "radius_nm": 7,
+    "lat": 31.016666666666666,
+    "lon": 34.53333333333333,
+    "radius_nm": 16,
     "fir_wide": false
    },
    "altitude": {
-    "lower_fl": 25,
-    "upper_fl": 30,
-    "lower_ft": 2500,
-    "upper_ft": 3000,
+    "lower_fl": 0,
+    "upper_fl": 20,
+    "lower_ft": 0,
+    "upper_ft": 2000,
     "unlimited": false
    },
    "valid_from": {
-    "raw": "2609241630",
-    "iso": "2026-09-24T16:30:00Z",
+    "raw": "2609250300",
+    "iso": "2026-09-25T03:00:00Z",
     "permanent": false,
     "estimated": false
    },
    "valid_to": {
-    "raw": "2609241900",
-    "iso": "2026-09-24T19:00:00Z",
+    "raw": "2610021550",
+    "iso": "2026-10-02T15:50:00Z",
     "permanent": false,
     "estimated": false
    },
-   "schedule": null,
-   "text": "CVFR RTE CLSD NOAAM-GOVRN-ZHRYA.)",
+   "schedule": "SEP 25 0300-1550, OCT 02 0300-1550",
+   "text": "ULTRALIGHT BUBBLE AVBL FOR FLT, PILOT SHALL COORD AND\nGET APPROVAL FOR FLT WI FIRE AREA WITH RELEVANT PIKUD\nSHIVTA (BSVTA).)",
    "lower_limit": null,
    "upper_limit": null,
    "administrative": false,
    "parse_errors": [],
    "area": null,
-   "floor_ft": 2500,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2030/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2030/26 NOTAMN\nQ) LLLL/QAELP/IV/NBO/E /000/999/3043N03431E080\nA) LLLL B) 2609250300 C) 2610021550\nD) SEP 25-26 30 DAILY 0300-1550, 29 0300-1330, OCT 01-02 DAILY\n0300-1550\nE) ULTRALIGHT BUBBLE AVBL FOR FLT, PILOT SHALL COORD AND\nGET APPROVAL FOR FLT WI FIRE AREA WITH RELEVANT PIKUD\nSHALEM (BSHLM), YAM-HAMELCH (BYMLH), EIN-GEDI (BNGDI),\nGOVRIN-TZAFON (BGOVN), GOVRIN-DAROM (BGOVS),\nNITZANIM (BNZNI), SHDROT-TZAFON (BDRTN),\nSHDROT-DAROM (BDRTS), LEHAVIM (BLHAV), BEER-SHEVA (BSHEV),\nMEYTAR (BMTAR), ZOHAR (BZHAR), YERUHAM (BYERU), FARAN (BFRAN),\nCHARIF (BHARF), TZNIFIM (BZNIF), SHITIM (BSTIM),\nKTZIOTH (BKZOT).)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELP",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LP",
+    "condition": "אסור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 30.716666666666665,
+     "lon": 34.516666666666666,
+     "radius_nm": 80,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 30.716666666666665,
+    "lon": 34.516666666666666,
+    "radius_nm": 80,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2609250300",
+    "iso": "2026-09-25T03:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610021550",
+    "iso": "2026-10-02T15:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "SEP 25-26 30 DAILY 0300-1550, 29 0300-1330, OCT 01-02 DAILY\n0300-1550",
+   "text": "ULTRALIGHT BUBBLE AVBL FOR FLT, PILOT SHALL COORD AND\nGET APPROVAL FOR FLT WI FIRE AREA WITH RELEVANT PIKUD\nSHALEM (BSHLM), YAM-HAMELCH (BYMLH), EIN-GEDI (BNGDI),\nGOVRIN-TZAFON (BGOVN), GOVRIN-DAROM (BGOVS),\nNITZANIM (BNZNI), SHDROT-TZAFON (BDRTN),\nSHDROT-DAROM (BDRTS), LEHAVIM (BLHAV), BEER-SHEVA (BSHEV),\nMEYTAR (BMTAR), ZOHAR (BZHAR), YERUHAM (BYERU), FARAN (BFRAN),\nCHARIF (BHARF), TZNIFIM (BZNIF), SHITIM (BSTIM),\nKTZIOTH (BKZOT).)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2029/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2029/26 NOTAMN\nQ) LLLL/QAELP/IV/NBO/E /000/999/3232N03453E060\nA) LLLL B) 2609250300 C) 2610021550\nD) SEP 25-28 30 DAILY 0300-1550, 29 0300-1330, OCT 01-02 DAILY\n0300-1550\nE) ULTRALIGHT BUBBLE AVBL FOR FLT, PILOT SHALL COORD AND\nGET APPROVAL FOR FLT WI FIRE AREA WITH RELEVANT PIKUD\nRAMAT HAGOLAN (BRGOL) SOUTH OF ROAD NR 91, NETOFA (BNTOF),\nKINNERET (BKNRT), BET-OREN (BOORN), HASHARON-TZAFON (BSARN),\nARRA (BARRA), HARROD (BHROD), MEGIDO A-EAST (BMGEA),\nMEGIDO B-EAST (BMGEB), NAAMA (BNAMM), ALMOG (BLMOG).)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELP",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LP",
+    "condition": "אסור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.53333333333333,
+     "lon": 34.88333333333333,
+     "radius_nm": 60,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.53333333333333,
+    "lon": 34.88333333333333,
+    "radius_nm": 60,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2609250300",
+    "iso": "2026-09-25T03:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610021550",
+    "iso": "2026-10-02T15:50:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "SEP 25-28 30 DAILY 0300-1550, 29 0300-1330, OCT 01-02 DAILY\n0300-1550",
+   "text": "ULTRALIGHT BUBBLE AVBL FOR FLT, PILOT SHALL COORD AND\nGET APPROVAL FOR FLT WI FIRE AREA WITH RELEVANT PIKUD\nRAMAT HAGOLAN (BRGOL) SOUTH OF ROAD NR 91, NETOFA (BNTOF),\nKINNERET (BKNRT), BET-OREN (BOORN), HASHARON-TZAFON (BSARN),\nARRA (BARRA), HARROD (BHROD), MEGIDO A-EAST (BMGEA),\nMEGIDO B-EAST (BMGEB), NAAMA (BNAMM), ALMOG (BLMOG).)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
    "low_altitude": true
   },
   {
@@ -4460,84 +5098,6 @@
    "low_altitude": true
   },
   {
-   "id": "C2008/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2008/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/080/3120N03523E003\nA) LLLL B) 2609240800 C) 2609241600\nE) PJE AIRSPACE METZADA ACT FM 8,000FT AMSL.\nOPR BY PPR FM ATC ONLY.\nF) GND G) 8000FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWPLW",
-    "subject_code": "WP",
-    "subject": "צניחה חופשית",
-    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 80,
-     "lower_ft": 0,
-     "upper_ft": 8000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.333333333333332,
-     "lon": 35.38333333333333,
-     "radius_nm": 3,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.333333333333332,
-    "lon": 35.38333333333333,
-    "radius_nm": 3,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 80,
-    "lower_ft": 0,
-    "upper_ft": 8000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609240800",
-    "iso": "2026-09-24T08:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609241600",
-    "iso": "2026-09-24T16:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "PJE AIRSPACE METZADA ACT FM 8,000FT AMSL.\nOPR BY PPR FM ATC ONLY.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "8000FT AMSL)",
-    "feet": 8000,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
    "id": "C1990/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -4709,113 +5269,6 @@
     [
      34.898333,
      32.401944
-    ]
-   ],
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1951/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1951/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/025/3132N03451E003\nA) LLLL B) 2609220500 C) 2609241500\nD) DAILY 0500-1500\nE) UAS ACT WILL TAKE PLACE AT KELCH/LACHISH.\nAN AREA FM GND UP TO 2,500FT AMSL CLSD TO ALL FLT\nBTN FLW PSN 313226N0344801E 313225N0345409E\n313144N0345409E 313129N0345246E 313129N0345126E\n313125N0344843E\nOPS OF AGRICULTURE FLT WI 15MIN PPR FM ATC.\nCTN ADZ.\nF) GND G) 2500FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWULW",
-    "subject_code": "WU",
-    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
-    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 25,
-     "lower_ft": 0,
-     "upper_ft": 2500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.533333333333335,
-     "lon": 34.85,
-     "radius_nm": 3,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.533333333333335,
-    "lon": 34.85,
-    "radius_nm": 3,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 25,
-    "lower_ft": 0,
-    "upper_ft": 2500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609220500",
-    "iso": "2026-09-22T05:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609241500",
-    "iso": "2026-09-24T15:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "DAILY 0500-1500",
-   "text": "UAS ACT WILL TAKE PLACE AT KELCH/LACHISH.\nAN AREA FM GND UP TO 2,500FT AMSL CLSD TO ALL FLT\nBTN FLW PSN 313226N0344801E 313225N0345409E\n313144N0345409E 313129N0345246E 313129N0345126E\n313125N0344843E\nOPS OF AGRICULTURE FLT WI 15MIN PPR FM ATC.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "2500FT AMSL)",
-    "feet": 2500,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": [
-    [
-     34.800278,
-     31.540556
-    ],
-    [
-     34.9025,
-     31.540278
-    ],
-    [
-     34.9025,
-     31.528889
-    ],
-    [
-     34.879444,
-     31.524722
-    ],
-    [
-     34.857222,
-     31.524722
-    ],
-    [
-     34.811944,
-     31.523611
-    ],
-    [
-     34.800278,
-     31.540556
     ]
    ],
    "floor_ft": 0,
