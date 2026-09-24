@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-24T19:02:30Z",
- "last_success": "2026-09-24T19:02:30Z",
+ "generated_at": "2026-09-24T22:16:20Z",
+ "last_success": "2026-09-24T22:16:20Z",
  "last_error": {
   "at": "2026-09-13T11:41:05Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 135,
+   "count": 136,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 135,
-  "mapped": 132,
+  "total": 136,
+  "mapped": 133,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 124,
+  "low_altitude": 125,
   "administrative": 4
  },
  "notams": [
@@ -1334,6 +1334,76 @@
    "low_altitude": true
   },
   {
+   "id": "C2040/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2040/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/040/3119N03512E014\nA) LLLL B) 2610060700 C) 2610061140\nD) 0700-0740 1050-1140\nE) CVFR RTE CLSD, TFC WILL BE DIVERTED VIA MZDOT\nSOKET-MYTAR-TARAD-ARRAD-HATRU-ZOHAR.\nMMORR-ARRAD-LLMZ.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QARLC",
+    "subject_code": "AR",
+    "subject": "נתיב ATS",
+    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 35,
+     "upper_fl": 40,
+     "lower_ft": 3500,
+     "upper_ft": 4000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.316666666666666,
+     "lon": 35.2,
+     "radius_nm": 14,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.316666666666666,
+    "lon": 35.2,
+    "radius_nm": 14,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 35,
+    "upper_fl": 40,
+    "lower_ft": 3500,
+    "upper_ft": 4000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610060700",
+    "iso": "2026-10-06T07:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610061140",
+    "iso": "2026-10-06T11:40:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0700-0740 1050-1140",
+   "text": "CVFR RTE CLSD, TFC WILL BE DIVERTED VIA MZDOT\nSOKET-MYTAR-TARAD-ARRAD-HATRU-ZOHAR.\nMMORR-ARRAD-LLMZ.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 3500,
+   "low_altitude": false
+  },
+  {
    "id": "A0728/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -1607,6 +1677,84 @@
    "text": "DUE CRANE AT EL-AL JUNCTION,\nRWY 12 CLSD FOR TKOF,\nRWY 30 CLSD FOR LDG.)",
    "lower_limit": null,
    "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2039/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2039/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/110/3117N03443E004\nA) LLLL B) 2610050430 C) 2610061200\nD) DAILY 0430-1200\nE) PJE AIRSPACE TEIMAN CLSD.\nF) GND G) 11000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWPLW",
+    "subject_code": "WP",
+    "subject": "צניחה חופשית",
+    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 110,
+     "lower_ft": 0,
+     "upper_ft": 11000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.283333333333335,
+     "lon": 34.71666666666667,
+     "radius_nm": 4,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.283333333333335,
+    "lon": 34.71666666666667,
+    "radius_nm": 4,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 110,
+    "lower_ft": 0,
+    "upper_ft": 11000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610050430",
+    "iso": "2026-10-05T04:30:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610061200",
+    "iso": "2026-10-06T12:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "DAILY 0430-1200",
+   "text": "PJE AIRSPACE TEIMAN CLSD.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "11000FT AMSL)",
+    "feet": 11000,
+    "reference": "AMSL"
+   },
    "administrative": false,
    "parse_errors": [],
    "area": null,
@@ -4213,10 +4361,10 @@
    "low_altitude": true
   },
   {
-   "id": "C2025/26",
+   "id": "C2042/26",
    "type": "NOTAMN",
    "replaces": null,
-   "raw": "(C2025/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/035/3233N03517E002\nA) LLLL B) 2609250530 C) 2609251130\nE) UAS ACT WILL TAKE PLACE S OF LLMG.\nAN AREA WI 1.5NM RADIUS CENTERED ON PSN 323256N0351645E\nCLSD FM GND UP TO 3,500FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.\nF) GND G) 3500FT AMSL)",
+   "raw": "(C2042/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/035/3233N03517E002\nA) LLLL B) 2609250530 C) 2609251300\nE) UAS ACT WILL TAKE PLACE S OF LLMG.\nAN AREA WI 1.5NM RADIUS CENTERED ON PSN 323256N0351645E\nCLSD FM GND UP TO 3,500FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.\nF) GND G) 3500FT AMSL)",
    "source": "iaa:LLLL",
    "locations": [
     "LLLL"
@@ -4267,8 +4415,8 @@
     "estimated": false
    },
    "valid_to": {
-    "raw": "2609251130",
-    "iso": "2026-09-25T11:30:00Z",
+    "raw": "2609251300",
+    "iso": "2026-09-25T13:00:00Z",
     "permanent": false,
     "estimated": false
    },
@@ -4886,76 +5034,6 @@
    "area": null,
    "floor_ft": 0,
    "low_altitude": true
-  },
-  {
-   "id": "C1981/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1981/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3037N03500E011\nA) LLLL B) 2609241630 C) 2609242200\nE) CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 35,
-     "upper_fl": 45,
-     "lower_ft": 3500,
-     "upper_ft": 4500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 30.616666666666667,
-     "lon": 35.0,
-     "radius_nm": 11,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 30.616666666666667,
-    "lon": 35.0,
-    "radius_nm": 11,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 35,
-    "upper_fl": 45,
-    "lower_ft": 3500,
-    "upper_ft": 4500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609241630",
-    "iso": "2026-09-24T16:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609242200",
-    "iso": "2026-09-24T22:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 3500,
-   "low_altitude": false
   },
   {
    "id": "A0787/26",
