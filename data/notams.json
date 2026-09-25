@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-09-25T01:24:31Z",
- "last_success": "2026-09-25T01:24:31Z",
+ "generated_at": "2026-09-25T07:39:59Z",
+ "last_success": "2026-09-25T07:39:59Z",
  "last_error": {
   "at": "2026-09-13T11:41:05Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 136,
+   "count": 133,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 136,
-  "mapped": 133,
+  "total": 133,
+  "mapped": 130,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 125,
+  "low_altitude": 122,
   "administrative": 4
  },
  "notams": [
@@ -4665,167 +4665,6 @@
    "low_altitude": true
   },
   {
-   "id": "C2023/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2023/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3242N03521E006\nA) LLLL B) 2609250430 C) 2609250530\nE) ULTRALIGHT BUBBLE A-WEST (BMGWA) CLSD.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QAELC",
-    "subject_code": "AE",
-    "subject": "אזור בקרה (CTA)",
-    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 20,
-     "lower_ft": 0,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.7,
-     "lon": 35.35,
-     "radius_nm": 6,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.7,
-    "lon": 35.35,
-    "radius_nm": 6,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 20,
-    "lower_ft": 0,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609250430",
-    "iso": "2026-09-25T04:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609250530",
-    "iso": "2026-09-25T05:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "ULTRALIGHT BUBBLE A-WEST (BMGWA) CLSD.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C2022/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2022/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3244N03524E004\nA) LLLL B) 2609250430 C) 2609250530\nE) AN AREA AT KFAR-TAVOR WI LLMG TRG AREA NR A-WEST BTN FLW\nPSN CLSD FM GND UP TO 2,000FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT 324711N0352345E 324209N0352606E\n324118N0352338E 324624N0352133E.\nCTN ADZ.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QAELC",
-    "subject_code": "AE",
-    "subject": "אזור בקרה (CTA)",
-    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 20,
-     "lower_ft": 0,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.733333333333334,
-     "lon": 35.4,
-     "radius_nm": 4,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.733333333333334,
-    "lon": 35.4,
-    "radius_nm": 4,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 20,
-    "lower_ft": 0,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609250430",
-    "iso": "2026-09-25T04:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609250530",
-    "iso": "2026-09-25T05:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "AN AREA AT KFAR-TAVOR WI LLMG TRG AREA NR A-WEST BTN FLW\nPSN CLSD FM GND UP TO 2,000FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT 324711N0352345E 324209N0352606E\n324118N0352338E 324624N0352133E.\nCTN ADZ.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": [
-    [
-     35.395833,
-     32.786389
-    ],
-    [
-     35.435,
-     32.7025
-    ],
-    [
-     35.393889,
-     32.688333
-    ],
-    [
-     35.359167,
-     32.773333
-    ],
-    [
-     35.395833,
-     32.786389
-    ]
-   ],
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
    "id": "C2035/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -5169,84 +5008,6 @@
    "text": "SHANUN CTL (MIL SOUTHERN SECTOR) FREQ CHG TO 122.900MHZ.)",
    "lower_limit": null,
    "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C1990/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C1990/26 NOTAMN\nQ) LLLL/QWCLW/IV/M /W /000/027/3242N03519E001\nA) LLLL B) 2609230623 C) 2609250600\nE) CAPTIVE BALLOON WILL TAKE PLACE AT NAZARETH.\nAN AREA WI 0.4NM RADIUS CENTERED ON PSN 324212N0351902E\nCLSD FM GND UP TO 2,700FT AMSL, TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.\nF) GND G) 2700FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWCLW",
-    "subject_code": "WC",
-    "subject": "כדור פורח קשור / עפיפון",
-    "subject_note": "בלון הקשור לקרקע בכבל. הכבל — לא הבלון — הוא המכשול.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 27,
-     "lower_ft": 0,
-     "upper_ft": 2700,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.7,
-     "lon": 35.31666666666667,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.7,
-    "lon": 35.31666666666667,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 27,
-    "lower_ft": 0,
-    "upper_ft": 2700,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609230623",
-    "iso": "2026-09-23T06:23:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609250600",
-    "iso": "2026-09-25T06:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT NAZARETH.\nAN AREA WI 0.4NM RADIUS CENTERED ON PSN 324212N0351902E\nCLSD FM GND UP TO 2,700FT AMSL, TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "2700FT AMSL)",
-    "feet": 2700,
-    "reference": "AMSL"
-   },
    "administrative": false,
    "parse_errors": [],
    "area": null,
