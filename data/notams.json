@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-09-29T20:41:16Z",
- "last_success": "2026-09-29T15:41:58Z",
+ "generated_at": "2026-09-30T00:19:54Z",
+ "last_success": "2026-09-30T00:19:54Z",
  "last_error": {
   "at": "2026-09-29T20:41:16Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
  },
- "stale": true,
+ "stale": false,
  "fir": "LLLL",
  "airports": [
   "LLBG",
@@ -18,9 +18,9 @@
   {
    "source": "iaa",
    "icao": "LLLL",
-   "ok": false,
-   "count": 0,
-   "error": "HTTPError: HTTP Error 403: Forbidden"
+   "ok": true,
+   "count": 128,
+   "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
    "source": "iaa",
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 130,
-  "mapped": 127,
+  "total": 128,
+  "mapped": 125,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 120,
+  "low_altitude": 119,
   "administrative": 4
  },
  "notams": [
@@ -3407,146 +3407,6 @@
    "parse_errors": [],
    "area": null,
    "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C2037/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2037/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3037N03500E011\nA) LLLL B) 2609291700 C) 2609292200\nE) CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 35,
-     "upper_fl": 45,
-     "lower_ft": 3500,
-     "upper_ft": 4500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 30.616666666666667,
-     "lon": 35.0,
-     "radius_nm": 11,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 30.616666666666667,
-    "lon": 35.0,
-    "radius_nm": 11,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 35,
-    "upper_fl": 45,
-    "lower_ft": 3500,
-    "upper_ft": 4500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609291700",
-    "iso": "2026-09-29T17:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609292200",
-    "iso": "2026-09-29T22:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 3500,
-   "low_altitude": false
-  },
-  {
-   "id": "C2038/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2038/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/030/3137N03452E007\nA) LLLL B) 2609291630 C) 2609291900\nE) CVFR RTE CLSD NOAAM-GOVRN-ZHRYA.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QARLC",
-    "subject_code": "AR",
-    "subject": "נתיב ATS",
-    "subject_note": "נתיב תעופה מפורסם שבו זורמת תעבורה מבוקרת.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 25,
-     "upper_fl": 30,
-     "lower_ft": 2500,
-     "upper_ft": 3000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.616666666666667,
-     "lon": 34.86666666666667,
-     "radius_nm": 7,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.616666666666667,
-    "lon": 34.86666666666667,
-    "radius_nm": 7,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 25,
-    "upper_fl": 30,
-    "lower_ft": 2500,
-    "upper_ft": 3000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609291630",
-    "iso": "2026-09-29T16:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2609291900",
-    "iso": "2026-09-29T19:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "CVFR RTE CLSD NOAAM-GOVRN-ZHRYA.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 2500,
    "low_altitude": true
   },
   {
