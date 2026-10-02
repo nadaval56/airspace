@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-02T02:10:18Z",
- "last_success": "2026-10-02T02:10:18Z",
+ "generated_at": "2026-10-02T09:38:37Z",
+ "last_success": "2026-10-02T09:38:37Z",
  "last_error": {
   "at": "2026-09-29T20:41:16Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 105,
+   "count": 104,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 105,
-  "mapped": 102,
+  "total": 104,
+  "mapped": 101,
   "fir_wide": 3,
   "no_geo": 0,
-  "low_altitude": 96,
+  "low_altitude": 95,
   "administrative": 4
  },
  "notams": [
@@ -2313,6 +2313,76 @@
    "low_altitude": true
   },
   {
+   "id": "A0793/26",
+   "type": "NOTAMR",
+   "replaces": "A0792/26",
+   "raw": "(A0793/26 NOTAMR A0792/26\nQ) LLLL/QNMAS/IV/BO /E /000/999/3034N03510E025\nA) LLLL B) 2610020826 C) 2610030800\nE) VOR ZFR/ZOFAR 115.600MHZ CH103X\nWITHDRAWN FOR MAINT.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QNMAS",
+    "subject_code": "NM",
+    "subject": "משואת VOR/DME",
+    "subject_note": "משואת ניווט שמוסרת גם כיוון וגם מרחק.",
+    "condition_code": "AS",
+    "condition": "מושבת",
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 30.566666666666666,
+     "lon": 35.166666666666664,
+     "radius_nm": 25,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 30.566666666666666,
+    "lon": 35.166666666666664,
+    "radius_nm": 25,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610020826",
+    "iso": "2026-10-02T08:26:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610030800",
+    "iso": "2026-10-03T08:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "VOR ZFR/ZOFAR 115.600MHZ CH103X\nWITHDRAWN FOR MAINT.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
    "id": "C1998/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -3583,154 +3653,6 @@
      32.031111
     ]
    ],
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C2036/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2036/26 NOTAMN\nQ) LLLL/QFALT/IV/NBO/A /000/999/3120N03523E005\nA) LLMZ B) 2609291400 C) 2610020700\nD) DAILY 1400-0700\nE) AIRSTRIP CLSD TO ALL FLT.\nOPS OF HEL BY PPR FM AIRSTRIP OPR ONLY.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLMZ"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QFALT",
-    "subject_code": "FA",
-    "subject": "שדה תעופה",
-    "subject_note": null,
-    "condition_code": "LT",
-    "condition": "מוגבל ל-",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "A",
-    "scope": "שדה תעופה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 999,
-     "lower_ft": 0,
-     "upper_ft": 99900,
-     "unlimited": true
-    },
-    "geo": {
-     "lat": 31.333333333333332,
-     "lon": 35.38333333333333,
-     "radius_nm": 5,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.333333333333332,
-    "lon": 35.38333333333333,
-    "radius_nm": 5,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 999,
-    "lower_ft": 0,
-    "upper_ft": 99900,
-    "unlimited": true
-   },
-   "valid_from": {
-    "raw": "2609291400",
-    "iso": "2026-09-29T14:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2610020700",
-    "iso": "2026-10-02T07:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "DAILY 1400-0700",
-   "text": "AIRSTRIP CLSD TO ALL FLT.\nOPS OF HEL BY PPR FM AIRSTRIP OPR ONLY.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C2021/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2021/26 NOTAMN\nQ) LLLL/QWCLW/IV/M /W /000/027/3242N03519E001\nA) LLLL B) 2609271550 C) 2610020310\nD) DAILY 1550-0310\nE) CAPTIVE BALLOON WILL TAKE PLACE AT NAZARETH.\nAN AREA WI 0.4NM RADIUS CENTERED ON PSN 324212N0351902E\nCLSD FM GND UP TO 2,700FT AMSL, TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.\nF) GND G) 2700FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWCLW",
-    "subject_code": "WC",
-    "subject": "כדור פורח קשור / עפיפון",
-    "subject_note": "בלון הקשור לקרקע בכבל. הכבל — לא הבלון — הוא המכשול.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 27,
-     "lower_ft": 0,
-     "upper_ft": 2700,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.7,
-     "lon": 35.31666666666667,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.7,
-    "lon": 35.31666666666667,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 27,
-    "lower_ft": 0,
-    "upper_ft": 2700,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2609271550",
-    "iso": "2026-09-27T15:50:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2610020310",
-    "iso": "2026-10-02T03:10:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "DAILY 1550-0310",
-   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT NAZARETH.\nAN AREA WI 0.4NM RADIUS CENTERED ON PSN 324212N0351902E\nCLSD FM GND UP TO 2,700FT AMSL, TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "2700FT AMSL)",
-    "feet": 2700,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
    "floor_ft": 0,
    "low_altitude": true
   },
