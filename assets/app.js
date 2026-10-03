@@ -323,9 +323,11 @@ function initMap() {
 
   map = L.map('map', { center: CENTER, zoom: ZOOM, zoomControl: true });
 
-  const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  // אריחי CARTO דורשים כעת מפתח API ומחזירים תמונת "API KEY REQUIRED",
+  // לכן הרקע מגיע ישירות מ-OpenStreetMap.
+  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
 
   // רקע המפה מגיע משרת אריחים חיצוני. אם הוא לא נטען, האזורים עדיין
