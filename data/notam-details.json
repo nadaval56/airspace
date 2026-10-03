@@ -395,14 +395,14 @@
   "valid_from": "2026-10-01T06:21:00Z",
   "valid_to": "2026-10-15T20:59:00Z"
  },
- "A0793/26": {
+ "A0794/26": {
   "airfield": "Tel-Aviv FIR",
-  "created": "2026-10-02T08:27:00Z",
-  "id": "A0793/26",
+  "created": "2026-10-03T05:47:00Z",
+  "id": "A0794/26",
   "location": "LLLL",
-  "raw": "(A0793/26 NOTAMR A0792/26\nQ) LLLL/QNMAS/IV/BO /E /000/999/3034N03510E025\nA) LLLL B) 2610020826 C) 2610030800\nE) VOR ZFR/ZOFAR 115.600MHZ CH103X\nWITHDRAWN FOR MAINT.)",
-  "valid_from": "2026-10-02T08:26:00Z",
-  "valid_to": "2026-10-03T08:00:00Z"
+  "raw": "(A0794/26 NOTAMR A0793/26\nQ) LLLL/QNMAS/IV/BO /E /000/999/3034N03510E025\nA) LLLL B) 2610030544 C) 2610040800\nE) VOR ZFR/ZOFAR 115.600MHZ CH103X\nWITHDRAWN FOR MAINT.)",
+  "valid_from": "2026-10-03T05:44:00Z",
+  "valid_to": "2026-10-04T08:00:00Z"
  },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
