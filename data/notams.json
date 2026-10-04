@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-04T13:08:32Z",
- "last_success": "2026-10-04T13:08:32Z",
+ "generated_at": "2026-10-04T18:05:33Z",
+ "last_success": "2026-10-04T18:05:33Z",
  "last_error": {
   "at": "2026-09-29T20:41:16Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 113,
+   "count": 114,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,8 +197,8 @@
   }
  ],
  "counts": {
-  "total": 113,
-  "mapped": 109,
+  "total": 114,
+  "mapped": 110,
   "fir_wide": 4,
   "no_geo": 0,
   "low_altitude": 103,
@@ -2446,6 +2446,245 @@
    "low_altitude": true
   },
   {
+   "id": "C2082/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2082/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3242N03521E006\nA) LLLL B) 2610050545 C) 2610051200\nD) 0545-0800 0930-1200\nE) ULTRALIGHT BUBBLE A-WEST (BMGWA) CLSD.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 20,
+     "lower_ft": 0,
+     "upper_ft": 2000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.7,
+     "lon": 35.35,
+     "radius_nm": 6,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.7,
+    "lon": 35.35,
+    "radius_nm": 6,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 20,
+    "lower_ft": 0,
+    "upper_ft": 2000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610050545",
+    "iso": "2026-10-05T05:45:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610051200",
+    "iso": "2026-10-05T12:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0545-0800 0930-1200",
+   "text": "ULTRALIGHT BUBBLE A-WEST (BMGWA) CLSD.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2081/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2081/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/045/3245N03524E003\nA) LLLL B) 2610050545 C) 2610051200\nD) 0545-0800 0930-1200\nE) UAS ACT WILL TAKE PLACE AT KFAR-TAVOR.\nAN AREA WI LLMG TRG AREA NR A-WEST BTN FLW\nPSN CLSD FM GND UP TO 4,500FT AMSL TO ALL FLT.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC\n324711N0352345E 324317N0352534E 324210N0352322E\n324624N0352133E.\nCTN ADZ.\nF) GND G) 4500FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWULW",
+    "subject_code": "WU",
+    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
+    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 45,
+     "lower_ft": 0,
+     "upper_ft": 4500,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.75,
+     "lon": 35.4,
+     "radius_nm": 3,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.75,
+    "lon": 35.4,
+    "radius_nm": 3,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 45,
+    "lower_ft": 0,
+    "upper_ft": 4500,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610050545",
+    "iso": "2026-10-05T05:45:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610051200",
+    "iso": "2026-10-05T12:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0545-0800 0930-1200",
+   "text": "UAS ACT WILL TAKE PLACE AT KFAR-TAVOR.\nAN AREA WI LLMG TRG AREA NR A-WEST BTN FLW\nPSN CLSD FM GND UP TO 4,500FT AMSL TO ALL FLT.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC\n324711N0352345E 324317N0352534E 324210N0352322E\n324624N0352133E.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "4500FT AMSL)",
+    "feet": 4500,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": [
+    [
+     35.395833,
+     32.786389
+    ],
+    [
+     35.426111,
+     32.721389
+    ],
+    [
+     35.389444,
+     32.702778
+    ],
+    [
+     35.359167,
+     32.773333
+    ],
+    [
+     35.395833,
+     32.786389
+    ]
+   ],
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "A0799/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0799/26 NOTAMN\nQ) LLLL/QANLC/I /NBO/E /050/060/3241N03524E011\nA) LLLL B) 2610050545 C) 2610051200\nD) 0545-0800 0930-1200\nE) ATS RTE J14 CLSD BTN MEGID-GIMIK.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QANLC",
+    "subject_code": "AN",
+    "subject": "נתיב ניווט שטח (RNAV)",
+    "subject_note": "נתיב המוגדר בנקודות ציון ולא במשואות קרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "I",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 50,
+     "upper_fl": 60,
+     "lower_ft": 5000,
+     "upper_ft": 6000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.68333333333333,
+     "lon": 35.4,
+     "radius_nm": 11,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.68333333333333,
+    "lon": 35.4,
+    "radius_nm": 11,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 50,
+    "upper_fl": 60,
+    "lower_ft": 5000,
+    "upper_ft": 6000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610050545",
+    "iso": "2026-10-05T05:45:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610051200",
+    "iso": "2026-10-05T12:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "0545-0800 0930-1200",
+   "text": "ATS RTE J14 CLSD BTN MEGID-GIMIK.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 5000,
+   "low_altitude": false
+  },
+  {
    "id": "C2061/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -2953,113 +3192,6 @@
    "low_altitude": true
   },
   {
-   "id": "C2063/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2063/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/045/3243N03526E006\nA) LLLL B) 2610041130 C) 2610041330\nE) UAS ACT WILL TAKE PLACE AT KFAR-TAVOR.\nAN AREA WI LLMG TRG AREA NR A-WEST BTN FLW\nPSN CLSD FM GND UP TO 4,500FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT 324713N0352345E 324334N0352525E\n324206N0353046E 323959N0353009E 324142N0352328E\n324628N0352118E.\nCTN ADZ.\nF) GND G) 4500FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWULW",
-    "subject_code": "WU",
-    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
-    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 45,
-     "lower_ft": 0,
-     "upper_ft": 4500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.71666666666667,
-     "lon": 35.43333333333333,
-     "radius_nm": 6,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.71666666666667,
-    "lon": 35.43333333333333,
-    "radius_nm": 6,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 45,
-    "lower_ft": 0,
-    "upper_ft": 4500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2610041130",
-    "iso": "2026-10-04T11:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2610041330",
-    "iso": "2026-10-04T13:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "UAS ACT WILL TAKE PLACE AT KFAR-TAVOR.\nAN AREA WI LLMG TRG AREA NR A-WEST BTN FLW\nPSN CLSD FM GND UP TO 4,500FT AMSL TO ALL FLT INCLUDING\nAGRICULTURE FLT 324713N0352345E 324334N0352525E\n324206N0353046E 323959N0353009E 324142N0352328E\n324628N0352118E.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "4500FT AMSL)",
-    "feet": 4500,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": [
-    [
-     35.395833,
-     32.786944
-    ],
-    [
-     35.423611,
-     32.726111
-    ],
-    [
-     35.512778,
-     32.701667
-    ],
-    [
-     35.5025,
-     32.666389
-    ],
-    [
-     35.391111,
-     32.695
-    ],
-    [
-     35.355,
-     32.774444
-    ],
-    [
-     35.395833,
-     32.786944
-    ]
-   ],
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
    "id": "C2006/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -3167,76 +3299,6 @@
      32.385
     ]
    ],
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "A0749/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(A0749/26 NOTAMN\nQ) LLLL/QNDAS/IV/BO /E /000/999/3148N03502E025\nA) LLLL B) 2610040400 C) 2610041400\nE) DME BTM/BET-MEIR FREQ 112.000MHZ WITHDRAWN FOR MAINT.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QNDAS",
-    "subject_code": "ND",
-    "subject": "משואת DME",
-    "subject_note": "משואה המוסרת מרחק בלבד.",
-    "condition_code": "AS",
-    "condition": "מושבת",
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 999,
-     "lower_ft": 0,
-     "upper_ft": 99900,
-     "unlimited": true
-    },
-    "geo": {
-     "lat": 31.8,
-     "lon": 35.03333333333333,
-     "radius_nm": 25,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.8,
-    "lon": 35.03333333333333,
-    "radius_nm": 25,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 999,
-    "lower_ft": 0,
-    "upper_ft": 99900,
-    "unlimited": true
-   },
-   "valid_from": {
-    "raw": "2610040400",
-    "iso": "2026-10-04T04:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2610041400",
-    "iso": "2026-10-04T14:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "DME BTM/BET-MEIR FREQ 112.000MHZ WITHDRAWN FOR MAINT.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
    "floor_ft": 0,
    "low_altitude": true
   },
