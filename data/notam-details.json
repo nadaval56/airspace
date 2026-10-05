@@ -422,6 +422,15 @@
   "valid_from": "2026-10-05T05:45:00Z",
   "valid_to": "2026-10-05T12:00:00Z"
  },
+ "A0800/26": {
+  "airfield": "Tel-Aviv FIR",
+  "created": "2026-10-05T05:59:00Z",
+  "id": "A0800/26",
+  "location": "LLLL",
+  "raw": "(A0800/26 NOTAMN\nQ) LLLL/QNMAS/IV/BO /E /000/999/3220N03458E025\nA) LLLL B) 2610140700 C) 2610141000\nE) VOR/DME NAT FREQ 112.400MHZ WITHDRAWN FOR MAINT.)",
+  "valid_from": "2026-10-14T07:00:00Z",
+  "valid_to": "2026-10-14T10:00:00Z"
+ },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
