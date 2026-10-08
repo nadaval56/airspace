@@ -368,15 +368,6 @@
   "valid_from": "2026-10-12T10:00:00Z",
   "valid_to": "2026-10-12T13:00:00Z"
  },
- "A0815/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-10-07T19:26:00Z",
-  "id": "A0815/26",
-  "location": "LLLL",
-  "raw": "(A0815/26 NOTAMN\nQ) LLLL/QNMAS/IV/BO /E /000/999/3124N03520E025\nA) LLLL B) 2610071925 C) 2610081900\nE) VOR ZFR 115.600MHZ U/S.)",
-  "valid_from": "2026-10-07T19:25:00Z",
-  "valid_to": "2026-10-08T19:00:00Z"
- },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
@@ -1042,5 +1033,14 @@
   "raw": "(C2126/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /035/045/3037N03500E011\nA) LLLL B) 2610130600 C) 2610131340\nE) CVFR RTE CLSD ZOFAR-HRGVS-RUHOT.)",
   "valid_from": "2026-10-13T06:00:00Z",
   "valid_to": "2026-10-13T13:40:00Z"
+ },
+ "C2127/26": {
+  "airfield": "Tel-Aviv FIR",
+  "created": "2026-10-08T08:27:00Z",
+  "id": "C2127/26",
+  "location": "LLLL",
+  "raw": "(C2127/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/040/3257N03509E004\nA) LLLL B) 2610110550 C) 2610110640\nE) ZVULUN ULTRALIGHT BUBBLE N (BZVUN) CLSD TO ALL FLT.)",
+  "valid_from": "2026-10-11T05:50:00Z",
+  "valid_to": "2026-10-11T06:40:00Z"
  }
 }
