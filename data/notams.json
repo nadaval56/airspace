@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-11T15:34:45Z",
- "last_success": "2026-10-11T15:34:45Z",
+ "generated_at": "2026-10-11T20:11:22Z",
+ "last_success": "2026-10-11T20:11:22Z",
  "last_error": {
   "at": "2026-09-29T20:41:16Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -1931,6 +1931,76 @@
    "low_altitude": true
   },
   {
+   "id": "A0821/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(A0821/26 NOTAMN\nQ) LLLL/QMRLC/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2610120500 C) 2610121000\nE) RWY 12/30 CLSD EXC RWY INT DUE WIP.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLBG"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QMRLC",
+    "subject_code": "MR",
+    "subject": "מסלול",
+    "subject_note": null,
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "A",
+    "scope": "שדה תעופה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 999,
+     "lower_ft": 0,
+     "upper_ft": 99900,
+     "unlimited": true
+    },
+    "geo": {
+     "lat": 32.016666666666666,
+     "lon": 34.88333333333333,
+     "radius_nm": 5,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.016666666666666,
+    "lon": 34.88333333333333,
+    "radius_nm": 5,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 999,
+    "lower_ft": 0,
+    "upper_ft": 99900,
+    "unlimited": true
+   },
+   "valid_from": {
+    "raw": "2610120500",
+    "iso": "2026-10-12T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610121000",
+    "iso": "2026-10-12T10:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "RWY 12/30 CLSD EXC RWY INT DUE WIP.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
    "id": "A0784/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -2473,84 +2543,6 @@
    "upper_limit": {
     "raw": "1800FT AMSL)",
     "feet": 1800,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C2103/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2103/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/001/3118N03523E001\nA) LLLL B) 2610101800 C) 2610112000\nD) DAILY 1800-2000\nE) UAS/UAV AIR-SHOW WILL TAKE PLACE S OF LLMZ.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 311828N0352235E\nCLSD FM GND UP TO 50M AGL, (MINUS) -920FT AMSL.\nCTN ADZ.\nF) GND G) 100FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWULW",
-    "subject_code": "WU",
-    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
-    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 1,
-     "lower_ft": 0,
-     "upper_ft": 100,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.3,
-     "lon": 35.38333333333333,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.3,
-    "lon": 35.38333333333333,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 1,
-    "lower_ft": 0,
-    "upper_ft": 100,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2610101800",
-    "iso": "2026-10-10T18:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2610112000",
-    "iso": "2026-10-11T20:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "DAILY 1800-2000",
-   "text": "UAS/UAV AIR-SHOW WILL TAKE PLACE S OF LLMZ.\nAN AREA WI 0.3NM RADIUS CENTERED ON PSN 311828N0352235E\nCLSD FM GND UP TO 50M AGL, (MINUS) -920FT AMSL.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "100FT AMSL)",
-    "feet": 100,
     "reference": "AMSL"
    },
    "administrative": false,
