@@ -368,6 +368,15 @@
   "valid_from": "2026-10-12T10:00:00Z",
   "valid_to": "2026-10-12T13:00:00Z"
  },
+ "A0819/26": {
+  "airfield": "Ramon",
+  "created": "2026-10-11T06:25:00Z",
+  "id": "A0819/26",
+  "location": "LLER",
+  "raw": "(A0819/26 NOTAMN\nQ) LLLL/QPOCH/I /NBO/A /000/999/2944N03501E005\nA) LLER B) 2610110623 C) 2612312359\nE) LNAV/VNAV OCA(H) FOR RNP RWY 19 (MAP GRADIENT 2.5 PERCENTAGE)\nCHG TO 730(460) FOR ALL CAT.\nISRAEL AIP, PART AD, CHART AD 2 LLER IAC-19RNP. REF.)",
+  "valid_from": "2026-10-11T06:23:00Z",
+  "valid_to": "2026-12-31T23:59:00Z"
+ },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
@@ -890,15 +899,6 @@
   "valid_from": "2026-10-13T04:00:00Z",
   "valid_to": "2026-10-13T10:00:00Z"
  },
- "C2123/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-10-07T15:15:00Z",
-  "id": "C2123/26",
-  "location": "LLLL",
-  "raw": "(C2123/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /015/020/3253N03507E005\nA) LLLL B) 2610110550 C) 2610110640\nE) CVFR RTE CLSD EVLYM-AHIUD-AAKKO-SMRAT.)",
-  "valid_from": "2026-10-11T05:50:00Z",
-  "valid_to": "2026-10-11T06:40:00Z"
- },
  "C2124/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-10-07T15:19:00Z",
@@ -926,15 +926,6 @@
   "valid_from": "2026-10-13T06:00:00Z",
   "valid_to": "2026-10-13T13:40:00Z"
  },
- "C2127/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-10-08T08:27:00Z",
-  "id": "C2127/26",
-  "location": "LLLL",
-  "raw": "(C2127/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/040/3257N03509E004\nA) LLLL B) 2610110550 C) 2610110640\nE) ZVULUN ULTRALIGHT BUBBLE N (BZVUN) CLSD TO ALL FLT.)",
-  "valid_from": "2026-10-11T05:50:00Z",
-  "valid_to": "2026-10-11T06:40:00Z"
- },
  "C2128/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-10-08T13:09:00Z",
@@ -961,5 +952,14 @@
   "raw": "(C2130/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /010/030/3235N03513E013\nA) LLLL B) 2610140800 C) 2610140830\nE) CVFR RTE CLSD DUE ILS ACT WI LLRD\nEIRON-ZMGID-AFULA-TAVOR.\nAFULA-EITAN.\nULTRALIGHT AND HEL RTE CLSD\nEIRON-ARRAA-ZMGID-NIRYA-MRHVA-TAVOR\nTFC WILL BE DIVERTED VIA FRDIS-HASID.)",
   "valid_from": "2026-10-14T08:00:00Z",
   "valid_to": "2026-10-14T08:30:00Z"
+ },
+ "C2132/26": {
+  "airfield": "Tel-Aviv FIR",
+  "created": "2026-10-11T08:33:00Z",
+  "id": "C2132/26",
+  "location": "LLLL",
+  "raw": "(C2132/26 NOTAMN\nQ) LLLL/QWSLW/IV/M /W /000/012/3155N03455E001\nA) LLLL B) 2610120400 C) 2610120700\nE) AN AREA WI 1KM RADIUS CENTERED ON PSN 315455N0345500E\nAT GEZER POWER PLANT CLSD FM GND UP TO 1,200FT AMSL,\nDUE TO GAS EMISSION.\nCTN ADZ.\nF) GND G) 1200FT AMSL)",
+  "valid_from": "2026-10-12T04:00:00Z",
+  "valid_to": "2026-10-12T07:00:00Z"
  }
 }
