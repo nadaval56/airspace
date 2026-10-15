@@ -143,15 +143,6 @@
   "valid_from": "2026-08-31T09:45:00Z",
   "valid_to": "2026-11-30T23:59:00Z"
  },
- "A0718/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-09-02T07:01:00Z",
-  "id": "A0718/26",
-  "location": "LLLL",
-  "raw": "(A0718/26 NOTAMN\nQ) LLLL/QOATT/IV/BO /E /000/999/3123N03515E999\nA) LLLL B) 2610010001 C) 2610142359\nE) TRIGGER NOTAM - NIL AIRAC AIP AMDT WEF 01 OCT 2026.)",
-  "valid_from": "2026-10-01T00:01:00Z",
-  "valid_to": "2026-10-14T23:59:00Z"
- },
  "A0719/26": {
   "airfield": "Haifa",
   "created": "2026-09-02T13:47:00Z",
@@ -610,15 +601,6 @@
   "raw": "(C1843/26 NOTAMR C1590/26\nQ) LLLL/QCACI/IV/BO /AE/000/999/3158N03445E005\nA) LLRS B) 2608301326 C) 2610312159\nE) FLT DEPARTING AIRSTRIP NB VIA TYONA PILOT SHALL CONTACT\nPLUTO CTL FOR IDENT OVER TYONA.)",
   "valid_from": "2026-08-30T13:26:00Z",
   "valid_to": "2026-10-31T21:59:00Z"
- },
- "C1853/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-09-02T07:01:00Z",
-  "id": "C1853/26",
-  "location": "LLLL",
-  "raw": "(C1853/26 NOTAMN\nQ) LLLL/QOATT/IV/BO /E /000/999/3211N03515E015\nA) LLLL B) 2610010001 C) 2610142359\nE) TRIGGER NOTAM - NIL AIRAC DOM AIP AMDT WEF 01 OCT 2026.)",
-  "valid_from": "2026-10-01T00:01:00Z",
-  "valid_to": "2026-10-14T23:59:00Z"
  },
  "C1858/26": {
   "airfield": "Herzlia",
