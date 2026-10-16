@@ -35,15 +35,6 @@
   "valid_from": "2026-03-25T11:46:00Z",
   "valid_to": "2029-03-25T11:49:00Z"
  },
- "A0354/26": {
-  "airfield": "Ben-Gurion",
-  "created": "2026-04-23T14:17:00Z",
-  "id": "A0354/26",
-  "location": "LLBG",
-  "raw": "(A0354/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2610161500 C) 2610161955\nE) AD CLSD DUE WIP.)",
-  "valid_from": "2026-10-16T15:00:00Z",
-  "valid_to": "2026-10-16T19:55:00Z"
- },
  "A0457/26": {
   "airfield": "Ben-Gurion",
   "created": "2026-06-08T05:32:00Z",
