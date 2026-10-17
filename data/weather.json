@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-10-16T23:29:39Z",
+ "generated_at": "2026-10-17T04:14:08Z",
  "last_success": "2026-10-16T23:29:39Z",
  "last_error": {
-  "at": "2026-09-29T20:41:55Z",
-  "message": "HTTPError: HTTP Error 403: Forbidden"
+  "at": "2026-10-17T04:14:08Z",
+  "message": "URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1016)>"
  },
- "stale": false,
+ "stale": true,
  "source": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Weather",
  "source_name": "רשות שדות התעופה",
  "nearby": [
