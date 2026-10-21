@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-21T04:32:18Z",
- "last_success": "2026-10-21T04:32:18Z",
+ "generated_at": "2026-10-21T10:01:34Z",
+ "last_success": "2026-10-21T10:01:34Z",
  "last_error": {
   "at": "2026-10-19T20:31:59Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 121,
+   "count": 124,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 121,
-  "mapped": 117,
+  "total": 124,
+  "mapped": 120,
   "fir_wide": 4,
   "no_geo": 0,
-  "low_altitude": 111,
+  "low_altitude": 114,
   "administrative": 18
  },
  "notams": [
@@ -1295,6 +1295,84 @@
    "low_altitude": true
   },
   {
+   "id": "C2209/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2209/26 NOTAMN\nQ) LLLL/QWCLW/IV/M /W /000/018/3136N03436E001\nA) LLLL B) 2610290600 C) 2610291300\nE) CAPTIVE BALLOON WILL TAKE PLACE AT GVARAM.\nAN AREA WI 0.4NM RADIUS CENTERED ON PSN 313612N0343627E\nCLSD FM GND UP TO 1,800FT AMSL, TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.\nF) GND G) 1800FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWCLW",
+    "subject_code": "WC",
+    "subject": "כדור פורח קשור / עפיפון",
+    "subject_note": "בלון הקשור לקרקע בכבל. הכבל — לא הבלון — הוא המכשול.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 18,
+     "lower_ft": 0,
+     "upper_ft": 1800,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.6,
+     "lon": 34.6,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.6,
+    "lon": 34.6,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 18,
+    "lower_ft": 0,
+    "upper_ft": 1800,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610290600",
+    "iso": "2026-10-29T06:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610291300",
+    "iso": "2026-10-29T13:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT GVARAM.\nAN AREA WI 0.4NM RADIUS CENTERED ON PSN 313612N0343627E\nCLSD FM GND UP TO 1,800FT AMSL, TO ALL FLT INCLUDING\nAGRICULTURE FLT.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "1800FT AMSL)",
+    "feet": 1800,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
    "id": "C2205/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -1501,6 +1579,76 @@
      33.183889
     ]
    ],
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2211/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2211/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/007/3307N03536E001\nA) LLLL B) 2610260900 C) 2610271300\nD) 26 0900-1000, 27 0500-1300\nE) AN AREA AT HACHULA-LAKE WI 0.54NM RADIUS CENTERED ON\nPSN 330651N0353618E CLSD FM GND UP TO 660FT AGL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QAELC",
+    "subject_code": "AE",
+    "subject": "אזור בקרה (CTA)",
+    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
+    "condition_code": "LC",
+    "condition": "סגור",
+    "traffic": "IV",
+    "purpose": "NBO",
+    "scope_code": "E",
+    "scope": "נתיב טיסה",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 7,
+     "lower_ft": 0,
+     "upper_ft": 700,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 33.11666666666667,
+     "lon": 35.6,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 33.11666666666667,
+    "lon": 35.6,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 7,
+    "lower_ft": 0,
+    "upper_ft": 700,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610260900",
+    "iso": "2026-10-26T09:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610271300",
+    "iso": "2026-10-27T13:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": "26 0900-1000, 27 0500-1300",
+   "text": "AN AREA AT HACHULA-LAKE WI 0.54NM RADIUS CENTERED ON\nPSN 330651N0353618E CLSD FM GND UP TO 660FT AGL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
+   "lower_limit": null,
+   "upper_limit": null,
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
    "floor_ft": 0,
    "low_altitude": true
   },
@@ -1821,6 +1969,84 @@
    "upper_limit": {
     "raw": "3700FT AMSL)",
     "feet": 3700,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": null,
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
+   "id": "C2208/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2208/26 NOTAMN\nQ) LLLL/QWPLW/IV/M /W /000/110/3117N03443E004\nA) LLLL B) 2610230500 C) 2610231100\nE) PJE AIRSPACE TEIMAN ACT FM 11,000FT AMSL.\nIN CASE OF EMERG CLEAR THE AIRSPACE WI 5MIN.\nCTN ADZ.\nF) GND G) 11000FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWPLW",
+    "subject_code": "WP",
+    "subject": "צניחה חופשית",
+    "subject_note": "אזור שבו מתבצעות קפיצות צניחה.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "M",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 110,
+     "lower_ft": 0,
+     "upper_ft": 11000,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 31.283333333333335,
+     "lon": 34.71666666666667,
+     "radius_nm": 4,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 31.283333333333335,
+    "lon": 34.71666666666667,
+    "radius_nm": 4,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 110,
+    "lower_ft": 0,
+    "upper_ft": 11000,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610230500",
+    "iso": "2026-10-23T05:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2610231100",
+    "iso": "2026-10-23T11:00:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "PJE AIRSPACE TEIMAN ACT FM 11,000FT AMSL.\nIN CASE OF EMERG CLEAR THE AIRSPACE WI 5MIN.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "11000FT AMSL)",
+    "feet": 11000,
     "reference": "AMSL"
    },
    "administrative": false,
@@ -2521,6 +2747,141 @@
    "low_altitude": true
   },
   {
+   "id": "C2210/26",
+   "type": "NOTAMN",
+   "replaces": null,
+   "raw": "(C2210/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/009/3211N03455E001\nA) LLLL B) 2610210837 C) 2612312159\nE) UAS ACT WILL TAKE PLACE AT KFAR-SABA WI LLHZ TRG AREA NR 3,\nFM GND UP TO 400FT AGL.\nAN AREA BTN FLW PSN CLSD FM GND UP TO 900FT AMSL\n321038N0345552E 321015N0345531E 321023N0345500E\n321100N0345511E 321112N0345414E 321144N0345442E\n321143N0345448E 321141N0345447E 321132N0345511E\n321126N0345509E 321122N0345510E 321114N0345542E\n321045N0345541E.\nCTN ADZ.\nF) GND G) 900FT AMSL)",
+   "source": "iaa:LLLL",
+   "locations": [
+    "LLLL"
+   ],
+   "q": {
+    "fir": "LLLL",
+    "q_code": "QWULW",
+    "subject_code": "WU",
+    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
+    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
+    "condition_code": "LW",
+    "condition": null,
+    "traffic": "IV",
+    "purpose": "BO",
+    "scope_code": "W",
+    "scope": "אזהרה למרחב",
+    "altitude": {
+     "lower_fl": 0,
+     "upper_fl": 9,
+     "lower_ft": 0,
+     "upper_ft": 900,
+     "unlimited": false
+    },
+    "geo": {
+     "lat": 32.18333333333333,
+     "lon": 34.916666666666664,
+     "radius_nm": 1,
+     "fir_wide": false
+    }
+   },
+   "geo": {
+    "lat": 32.18333333333333,
+    "lon": 34.916666666666664,
+    "radius_nm": 1,
+    "fir_wide": false
+   },
+   "altitude": {
+    "lower_fl": 0,
+    "upper_fl": 9,
+    "lower_ft": 0,
+    "upper_ft": 900,
+    "unlimited": false
+   },
+   "valid_from": {
+    "raw": "2610210837",
+    "iso": "2026-10-21T08:37:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "valid_to": {
+    "raw": "2612312159",
+    "iso": "2026-12-31T21:59:00Z",
+    "permanent": false,
+    "estimated": false
+   },
+   "schedule": null,
+   "text": "UAS ACT WILL TAKE PLACE AT KFAR-SABA WI LLHZ TRG AREA NR 3,\nFM GND UP TO 400FT AGL.\nAN AREA BTN FLW PSN CLSD FM GND UP TO 900FT AMSL\n321038N0345552E 321015N0345531E 321023N0345500E\n321100N0345511E 321112N0345414E 321144N0345442E\n321143N0345448E 321141N0345447E 321132N0345511E\n321126N0345509E 321122N0345510E 321114N0345542E\n321045N0345541E.\nCTN ADZ.",
+   "lower_limit": {
+    "raw": "GND",
+    "feet": 0,
+    "reference": "AGL"
+   },
+   "upper_limit": {
+    "raw": "900FT AMSL)",
+    "feet": 900,
+    "reference": "AMSL"
+   },
+   "administrative": false,
+   "parse_errors": [],
+   "area": [
+    [
+     34.931111,
+     32.177222
+    ],
+    [
+     34.925278,
+     32.170833
+    ],
+    [
+     34.916667,
+     32.173056
+    ],
+    [
+     34.919722,
+     32.183333
+    ],
+    [
+     34.903889,
+     32.186667
+    ],
+    [
+     34.911667,
+     32.195556
+    ],
+    [
+     34.913333,
+     32.195278
+    ],
+    [
+     34.913056,
+     32.194722
+    ],
+    [
+     34.919722,
+     32.192222
+    ],
+    [
+     34.919167,
+     32.190556
+    ],
+    [
+     34.919444,
+     32.189444
+    ],
+    [
+     34.928333,
+     32.187222
+    ],
+    [
+     34.928056,
+     32.179167
+    ],
+    [
+     34.931111,
+     32.177222
+    ]
+   ],
+   "floor_ft": 0,
+   "low_altitude": true
+  },
+  {
    "id": "C2204/26",
    "type": "NOTAMN",
    "replaces": null,
@@ -2872,84 +3233,6 @@
    "text": "AN AREA AT HACHULA-LAKE WI 0.54NM RADIUS CENTERED ON\nPSN 330651N0353618E CLSD FM GND UP TO 660FT AGL\nTO ALL FLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN\nPPR FM ATC.\nCTN ADZ.)",
    "lower_limit": null,
    "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C2136/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2136/26 NOTAMN\nQ) LLLL/QWCLW/IV/M /W /000/022/3307N03534E001\nA) LLLL B) 2610200330 C) 2610210800\nD) DAILY 0330-0800\nE) CAPTIVE BALLOON WILL TAKE PLACE AT HACHULA-LAKE,\nFM GND UP TO 400M AGL. LIT AND DAY MARKED.\nAN AREA WI 0.54NM RADIUS CENTERED ON PSN 330646N0353414E\nCLSD FM GND UP TO 2,200FT AMSL.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nIN CASE OF EMERG LOWERED WI 10MIN.\nCTN ADZ.\nF) GND G) 2200FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWCLW",
-    "subject_code": "WC",
-    "subject": "כדור פורח קשור / עפיפון",
-    "subject_note": "בלון הקשור לקרקע בכבל. הכבל — לא הבלון — הוא המכשול.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "M",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 22,
-     "lower_ft": 0,
-     "upper_ft": 2200,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 33.11666666666667,
-     "lon": 35.56666666666667,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 33.11666666666667,
-    "lon": 35.56666666666667,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 22,
-    "lower_ft": 0,
-    "upper_ft": 2200,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2610200330",
-    "iso": "2026-10-20T03:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2610210800",
-    "iso": "2026-10-21T08:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "DAILY 0330-0800",
-   "text": "CAPTIVE BALLOON WILL TAKE PLACE AT HACHULA-LAKE,\nFM GND UP TO 400M AGL. LIT AND DAY MARKED.\nAN AREA WI 0.54NM RADIUS CENTERED ON PSN 330646N0353414E\nCLSD FM GND UP TO 2,200FT AMSL.\nOPS OF AGRICULTURE FLT WITH 15MIN PPR FM ATC.\nIN CASE OF EMERG LOWERED WI 10MIN.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "2200FT AMSL)",
-    "feet": 2200,
-    "reference": "AMSL"
-   },
    "administrative": false,
    "parse_errors": [],
    "area": null,
