@@ -827,15 +827,6 @@
   "valid_from": "2026-11-26T00:01:00Z",
   "valid_to": "2026-12-09T23:59:00Z"
  },
- "C2169/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-10-15T07:49:00Z",
-  "id": "C2169/26",
-  "location": "LLLL",
-  "raw": "(C2169/26 NOTAMN\nQ) LLLL/QARLT/IV/NBO/E /008/012/3155N03446E008\nA) LLLL B) 2610210900 C) 2610211800\nD) 0900-1000 1700-1800\nE) CVFR AND HEL RTE CLSD AT 1,200FT,\nAVBL BIDIRECTIONAL AT 800FT AMSL ONLY\nTYONA-SUPER-NTAIM-BOVED-NAGID-YAVNE-ZASHD.)",
-  "valid_from": "2026-10-21T09:00:00Z",
-  "valid_to": "2026-10-21T18:00:00Z"
- },
  "C2170/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-10-15T07:53:00Z",
