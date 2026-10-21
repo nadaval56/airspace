@@ -962,15 +962,6 @@
   "valid_from": "2026-11-01T00:01:00Z",
   "valid_to": "2026-11-30T21:59:00Z"
  },
- "C2202/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-10-20T07:41:00Z",
-  "id": "C2202/26",
-  "location": "LLLL",
-  "raw": "(C2202/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/004/3158N03445E001\nA) LLLL B) 2610211730 C) 2610212000\nE) UAS/UAV AIR-SHOW WILL TAKE PLACE AT RISHON LEZION.\nAN AREA WI 0.17NM RADIUS CENTERED ON PSN\n315832E0344954E CLSD FM GND UP TO 50M AGL 360FT AMSL.\nCTN ADZ.\nF) GND G) 360FT AMSL)",
-  "valid_from": "2026-10-21T17:30:00Z",
-  "valid_to": "2026-10-21T20:00:00Z"
- },
  "C2203/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-10-20T08:13:00Z",

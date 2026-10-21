@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-21T19:16:28Z",
- "last_success": "2026-10-21T19:16:28Z",
+ "generated_at": "2026-10-21T23:12:09Z",
+ "last_success": "2026-10-21T23:12:09Z",
  "last_error": {
   "at": "2026-10-19T20:31:59Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 124,
+   "count": 123,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 124,
-  "mapped": 120,
+  "total": 123,
+  "mapped": 119,
   "fir_wide": 4,
   "no_geo": 0,
-  "low_altitude": 115,
+  "low_altitude": 114,
   "administrative": 18
  },
  "notams": [
@@ -2876,84 +2876,6 @@
    "parse_errors": [],
    "area": null,
    "floor_ft": 800,
-   "low_altitude": true
-  },
-  {
-   "id": "C2202/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2202/26 NOTAMN\nQ) LLLL/QWULW/IV/BO /W /000/004/3158N03445E001\nA) LLLL B) 2610211730 C) 2610212000\nE) UAS/UAV AIR-SHOW WILL TAKE PLACE AT RISHON LEZION.\nAN AREA WI 0.17NM RADIUS CENTERED ON PSN\n315832E0344954E CLSD FM GND UP TO 50M AGL 360FT AMSL.\nCTN ADZ.\nF) GND G) 360FT AMSL)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QWULW",
-    "subject_code": "WU",
-    "subject": "כלי טיס בלתי מאויש (כטב\"ם)",
-    "subject_note": "פעילות כלי טיס בלתי מאויש — רחפן או מזל\"ט.",
-    "condition_code": "LW",
-    "condition": null,
-    "traffic": "IV",
-    "purpose": "BO",
-    "scope_code": "W",
-    "scope": "אזהרה למרחב",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 4,
-     "lower_ft": 0,
-     "upper_ft": 400,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.966666666666665,
-     "lon": 34.75,
-     "radius_nm": 1,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.966666666666665,
-    "lon": 34.75,
-    "radius_nm": 1,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 4,
-    "lower_ft": 0,
-    "upper_ft": 400,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2610211730",
-    "iso": "2026-10-21T17:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2610212000",
-    "iso": "2026-10-21T20:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "UAS/UAV AIR-SHOW WILL TAKE PLACE AT RISHON LEZION.\nAN AREA WI 0.17NM RADIUS CENTERED ON PSN\n315832E0344954E CLSD FM GND UP TO 50M AGL 360FT AMSL.\nCTN ADZ.",
-   "lower_limit": {
-    "raw": "GND",
-    "feet": 0,
-    "reference": "AGL"
-   },
-   "upper_limit": {
-    "raw": "360FT AMSL)",
-    "feet": 360,
-    "reference": "AMSL"
-   },
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
    "low_altitude": true
   },
   {
