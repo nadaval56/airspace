@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-23T09:57:29Z",
- "last_success": "2026-10-23T09:57:29Z",
+ "generated_at": "2026-10-23T14:57:22Z",
+ "last_success": "2026-10-23T14:57:22Z",
  "last_error": {
   "at": "2026-10-19T20:32:37Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,95 +20,55 @@
  ],
  "counts": {
   "total": 10,
-  "METAR": 4,
-  "TAF": 6
+  "TAF": 6,
+  "METAR": 4
  },
  "reports": [
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 230950Z VRB01KT CAVOK 34/10 Q1013 NOSIG=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
   {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 230600 TILL 240600, WIND VARIABLE, 4 KNOTS, CAVOK, BECOMING FROM 230800 TILL 231000 WIND 320 DEGREES, 10",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 231200 TILL 241200, WIND 340 DEGREES, 12 KNOTS, CAVOK, BECOMING FROM 231600 TILL 231800 WIND VARIABLE, 3",
    "truncated": true,
-   "valid_from": "230600",
-   "valid_to": "240600",
+   "valid_from": "231200",
+   "valid_to": "241200",
    "area": null
   },
   {
    "id": "METAR",
-   "station": "LLHA",
-   "kind": "METAR",
-   "text": "METAR LLHA 230950Z AUTO 12013KT CAVOK 33/10 Q1013=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLER",
-   "kind": "METAR",
-   "text": "METAR LLER 230950Z AUTO 02011KT CAVOK 31/13 Q1012=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLIB",
-   "kind": "METAR",
-   "text": "METAR LLIB 230950Z AUTO 13009KT 080V180 CAVOK 32/09 Q1016=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
    "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 230503Z 2306/2406 VRB04KT CAVOK TX35/2310Z TN18/2404Z BECMG 2308/2310 32010KT",
+   "kind": "METAR",
+   "text": "METAR LLBG 231450Z 30006KT CAVOK 29/19 Q1012 NOSIG=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
    "area": null
   },
   {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 230501Z 2306/2406 02015KT CAVOK TX33/2313Z TN21/2404Z PROB40 TEMPO 2307/2314 02020G30KT",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
+   "id": "METAR",
    "station": "LLHA",
-   "kind": "TAF",
-   "text": "TAF LLHA 230502Z 2306/2406 14005KT CAVOK TX34/2310Z TN20/2404Z PROB40 TEMPO 2306/2309 13015G25KT",
+   "kind": "METAR",
+   "text": "METAR LLHA 231450Z AUTO 36014KT CAVOK 27/21 Q1012=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
    "area": null
   },
   {
-   "id": "TAFLG",
+   "id": "METAR",
+   "station": "LLER",
+   "kind": "METAR",
+   "text": "METAR LLER 231450Z AUTO 01013KT CAVOK 32/10 Q1010=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "METAR",
    "station": "LLIB",
-   "kind": "TAF",
-   "text": "TAF LLIB 230504Z 2306/2406 02010KT CAVOK TX34/2312Z TN21/2404Z BECMG 2307/2309 13010KT",
+   "kind": "METAR",
+   "text": "METAR LLIB 231450Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -118,7 +78,47 @@
    "id": "TAFLG",
    "station": "LLHZ",
    "kind": "TAF",
-   "text": "TAF LLHZ 230502Z 2306/2406 VRB03KT CAVOK TX35/2309Z TN18/2404Z BECMG 2308/2310 32012KT",
+   "text": "TAF AMD LLHZ 231134Z 2312/2412 34012KT CAVOK TX32/2312Z TN20/2404Z BECMG 2316/2318 VRB03KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLHA",
+   "kind": "TAF",
+   "text": "TAF LLHA 231101Z 2312/2412 34012KT CAVOK TX34/2312Z TN20/2404Z TEMPO 2312/2313 10008KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLIB",
+   "kind": "TAF",
+   "text": "TAF LLIB 231100Z 2312/2412 13010KT CAVOK TX33/2312Z TN21/2404Z BECMG 2313/2315 34012KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 231102Z 2312/2412 34012KT CAVOK TX32/2312Z TN18/2404Z BECMG 2316/2318 VRB03KT",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 231102Z 2312/2412 02015KT CAVOK TX33/2313Z TN21/2404Z BECMG 2314/2316 33010KT",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
