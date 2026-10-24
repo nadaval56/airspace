@@ -989,15 +989,6 @@
   "valid_from": "2026-10-29T12:00:00Z",
   "valid_to": "2026-10-30T12:00:00Z"
  },
- "C2223/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-10-22T08:05:00Z",
-  "id": "C2223/26",
-  "location": "LLLL",
-  "raw": "(C2223/26 NOTAMN\nQ) LLLL/QWSLW/IV/M /W /000/008/3155N03455E001\nA) LLLL B) 2610241600 C) 2610241900\nE) AN AREA WI 1KM RADIUS CENTERED ON PSN 315455N0345500E\nAT GEZER POWER PLANT CLSD FM GND UP TO 800FT AMSL,\nDUE TO GAS EMISSION.\nCTN ADZ.\nF) GND G) 800FT AMSL)",
-  "valid_from": "2026-10-24T16:00:00Z",
-  "valid_to": "2026-10-24T19:00:00Z"
- },
  "C2224/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-10-22T08:55:00Z",
