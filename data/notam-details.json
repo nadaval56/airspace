@@ -215,15 +215,6 @@
   "valid_from": "2026-09-22T00:01:00Z",
   "valid_to": "2026-12-31T23:59:00Z"
  },
- "A0787/26": {
-  "airfield": "Ben-Gurion",
-  "created": "2026-09-24T14:29:00Z",
-  "id": "A0787/26",
-  "location": "LLBG",
-  "raw": "(A0787/26 NOTAMR A0670/26\nQ) LLLL/QFALT/IV/NBO/A /000/999/3201N03453E005\nA) LLBG B) 2609241428 C) 2610242359\nE) RESTRICTIONS OF LDG 4 ENGINE ACFT WI LLBG TEMPO WITHDRAWN.)",
-  "valid_from": "2026-09-24T14:28:00Z",
-  "valid_to": "2026-10-24T23:59:00Z"
- },
  "A0798/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-10-04T11:45:00Z",
