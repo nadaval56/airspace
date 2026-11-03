@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-11-03T14:59:45Z",
- "last_success": "2026-11-03T14:59:45Z",
+ "generated_at": "2026-11-03T20:54:50Z",
+ "last_success": "2026-11-03T20:54:50Z",
  "last_error": {
   "at": "2026-10-28T08:18:31Z",
   "message": "iaa/LLLL: HTTPError: HTTP Error 403: Forbidden; iaa/LLBG: החזיר 200 אך ללא נוטאמים; iaa/LLHA: החזיר 200 אך ללא נוטאמים; iaa/LLIB: החזיר 200 אך ללא נוטאמים; iaa/LLRD: החזיר 200 אך ללא נוטאמים; iaa/LLHZ: החזיר 200 אך ללא נוטאמים; faa-api/LLLL: חסרים FAA_CLIENT_ID ו-FAA_CLIENT_SECRET. הרשמה חינם ב-api.faa.gov.; faa-api/LLBG: דולג — המקור לא הוגדר; faa-api/LLHA: דולג — המקור לא הוגדר; faa-api/LLIB: דולג — המקור לא הוגדר; faa-api/LLRD: דולג — המקור לא הוגדר; faa-api/LLHZ: דולג — המקור לא הוגדר; autorouter/LLLL: חסרים AUTOROUTER_CLIENT_ID ו-AUTOROUTER_CLIENT_SECRET. הרשמה חינם ב-autorouter.aero.; autorouter/LLBG: דולג — המקור לא הוגדר; autorouter/LLHA: דולג — המקור לא הוגדר; autorouter/LLIB: דולג — המקור לא הוגדר; autorouter/LLRD: דולג — המקור לא הוגדר; autorouter/LLHZ: דולג — המקור לא הוגדר; faa-dins/LLLL: RuntimeError: https://www.notams.faa.gov/dinsQueryWeb/queryRetrievalMapAction.do?reportType=Raw&retrieveLocId=LLLL&actionType=notamRetrievalByICAOs&submit=View+NOTAMs — <urlopen error [Er"
@@ -19,7 +19,7 @@
    "source": "iaa",
    "icao": "LLLL",
    "ok": true,
-   "count": 115,
+   "count": 113,
    "url": "https://brin.iaa.gov.il/aeroinfo/AeroInfo.aspx?msgType=Notam"
   },
   {
@@ -197,11 +197,11 @@
   }
  ],
  "counts": {
-  "total": 115,
-  "mapped": 111,
+  "total": 113,
+  "mapped": 109,
   "fir_wide": 4,
   "no_geo": 0,
-  "low_altitude": 108,
+  "low_altitude": 106,
   "administrative": 18
  },
  "notams": [
@@ -2663,163 +2663,6 @@
    "administrative": false,
    "parse_errors": [],
    "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C2296/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2296/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/020/3242N03521E006\nA) LLLL B) 2611030730 C) 2611031530\nD) 0730-0830 1430-1530\nE) ULTRALIGHT BUBBLE A-WEST (BMGWA) CLSD.)",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QAELC",
-    "subject_code": "AE",
-    "subject": "אזור בקרה (CTA)",
-    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 20,
-     "lower_ft": 0,
-     "upper_ft": 2000,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 32.7,
-     "lon": 35.35,
-     "radius_nm": 6,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 32.7,
-    "lon": 35.35,
-    "radius_nm": 6,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 20,
-    "lower_ft": 0,
-    "upper_ft": 2000,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2611030730",
-    "iso": "2026-11-03T07:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2611031530",
-    "iso": "2026-11-03T15:30:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": "0730-0830 1430-1530",
-   "text": "ULTRALIGHT BUBBLE A-WEST (BMGWA) CLSD.)",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": null,
-   "floor_ft": 0,
-   "low_altitude": true
-  },
-  {
-   "id": "C2335/26",
-   "type": "NOTAMN",
-   "replaces": null,
-   "raw": "(C2335/26 NOTAMN\nQ) LLLL/QAELC/IV/NBO/E /000/015/3113N03431E003\nA) LLLL B) 2611030600 C) 2611031600\nE) AN AREA AT TZEELIM BTN FLW PSN CLSD FM GND UP TO 1,500 AMSL TO\nALL\nFLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN PPR FM ATC.\n311548N0343054E 311536N0343157E 311105N343147E\n311050N0343052E.\nCTN ADZ.))",
-   "source": "iaa:LLLL",
-   "locations": [
-    "LLLL"
-   ],
-   "q": {
-    "fir": "LLLL",
-    "q_code": "QAELC",
-    "subject_code": "AE",
-    "subject": "אזור בקרה (CTA)",
-    "subject_note": "מרחב מבוקר שמתחיל בגובה מוגדר ומעלה, לא מהקרקע.",
-    "condition_code": "LC",
-    "condition": "סגור",
-    "traffic": "IV",
-    "purpose": "NBO",
-    "scope_code": "E",
-    "scope": "נתיב טיסה",
-    "altitude": {
-     "lower_fl": 0,
-     "upper_fl": 15,
-     "lower_ft": 0,
-     "upper_ft": 1500,
-     "unlimited": false
-    },
-    "geo": {
-     "lat": 31.216666666666665,
-     "lon": 34.516666666666666,
-     "radius_nm": 3,
-     "fir_wide": false
-    }
-   },
-   "geo": {
-    "lat": 31.216666666666665,
-    "lon": 34.516666666666666,
-    "radius_nm": 3,
-    "fir_wide": false
-   },
-   "altitude": {
-    "lower_fl": 0,
-    "upper_fl": 15,
-    "lower_ft": 0,
-    "upper_ft": 1500,
-    "unlimited": false
-   },
-   "valid_from": {
-    "raw": "2611030600",
-    "iso": "2026-11-03T06:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "valid_to": {
-    "raw": "2611031600",
-    "iso": "2026-11-03T16:00:00Z",
-    "permanent": false,
-    "estimated": false
-   },
-   "schedule": null,
-   "text": "AN AREA AT TZEELIM BTN FLW PSN CLSD FM GND UP TO 1,500 AMSL TO\nALL\nFLT, OPS OF AGRICULTURE FLT AVBL WITH 15MIN PPR FM ATC.\n311548N0343054E 311536N0343157E 311105N343147E\n311050N0343052E.\nCTN ADZ.))",
-   "lower_limit": null,
-   "upper_limit": null,
-   "administrative": false,
-   "parse_errors": [],
-   "area": [
-    [
-     34.515,
-     31.263333
-    ],
-    [
-     34.5325,
-     31.26
-    ],
-    [
-     34.514444,
-     31.180556
-    ],
-    [
-     34.515,
-     31.263333
-    ]
-   ],
    "floor_ft": 0,
    "low_altitude": true
   },
