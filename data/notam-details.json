@@ -683,15 +683,6 @@
   "valid_from": "2026-10-30T00:01:00Z",
   "valid_to": "2027-01-30T21:59:00Z"
  },
- "C2295/26": {
-  "airfield": "Tel-Aviv FIR",
-  "created": "2026-10-29T06:47:00Z",
-  "id": "C2295/26",
-  "location": "LLLL",
-  "raw": "(C2295/26 NOTAMN\nQ) LLLL/QARLC/IV/NBO/E /025/030/3247N03529E007\nA) LLLL B) 2611022300 C) 2611030300\nE) CVFR RTE CLSD TAVOR-DESHE.)",
-  "valid_from": "2026-11-02T23:00:00Z",
-  "valid_to": "2026-11-03T03:00:00Z"
- },
  "C2296/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-10-29T06:53:00Z",
