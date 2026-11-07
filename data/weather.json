@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-11-07T16:20:04Z",
- "last_success": "2026-11-07T16:20:04Z",
+ "generated_at": "2026-11-07T20:49:23Z",
+ "last_success": "2026-11-07T20:49:23Z",
  "last_error": {
   "at": "2026-10-28T08:19:09Z",
   "message": "HTTPError: HTTP Error 403: Forbidden"
@@ -20,26 +20,36 @@
  ],
  "counts": {
   "total": 12,
-  "TAF": 6,
   "METAR": 4,
+  "TAF": 6,
   "AIRMET": 2
  },
  "reports": [
   {
+   "id": "METAR",
+   "station": "LLBG",
+   "kind": "METAR",
+   "text": "METAR LLBG 072020Z 16010KT 9999 FEW050 16/15 Q1015 RERA NOSIG RMK SCT080=",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
    "id": "VOLMET",
    "station": "LLBG",
    "kind": "TAF",
-   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 071200 TILL 081200, WIND 180 DEGREES, 10 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 3 THOUSAND",
+   "text": "THIS IS BEN GURION VOLMET. TAF BEN GURION, VALID FROM 071800 TILL 081800, WIND 180 DEGREES, 10 KNOTS, VISIBILITY 10 KILOMETERS OR MORE, CLOUD SCATTERED 3 THOUSAND",
    "truncated": true,
-   "valid_from": "071200",
-   "valid_to": "081200",
+   "valid_from": "071800",
+   "valid_to": "081800",
    "area": null
   },
   {
    "id": "METAR",
    "station": "LLHA",
    "kind": "METAR",
-   "text": "METAR LLHA 071550Z AUTO VRB03KT CAVOK 18/15 Q1013 RMK SCT070=",
+   "text": "METAR LLHA 071950Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -49,7 +59,7 @@
    "id": "METAR",
    "station": "LLER",
    "kind": "METAR",
-   "text": "METAR LLER 071550Z AUTO 33011KT CAVOK 23/07 Q1014 RMK FEW100=",
+   "text": "METAR LLER 071950Z AUTO 03004KT CAVOK 20/08 Q1016=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -59,17 +69,7 @@
    "id": "METAR",
    "station": "LLIB",
    "kind": "METAR",
-   "text": "METAR LLIB 071550Z AUTO VRB02KT CAVOK 16/15 Q1013 RMK BKN090=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "METAR",
-   "station": "LLBG",
-   "kind": "METAR",
-   "text": "METAR LLBG 071550Z 18011KT 9999 DZ SCT027 16/15 Q1014 RERA TEMPO 5000 TSRA FEW025CB RMK SCT070=",
+   "text": "METAR LLIB 071950Z NIL=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -79,38 +79,7 @@
    "id": "AIRMET",
    "station": "LLLL",
    "kind": "AIRMET",
-   "text": "LLLL AIRMET 19 VALID 071600/072000 LLBD- LLLL TEL AVIV FIR OCNL TS FCST WI N3317 E03450 - N3315 E03557 - N3044 E03425 - N3225 E03340 - N3317 E03450 TOP FL260 MOV SE 20KT WKN=",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": [
-    [
-     34.833333,
-     33.283333
-    ],
-    [
-     35.95,
-     33.25
-    ],
-    [
-     34.416667,
-     30.733333
-    ],
-    [
-     33.666667,
-     32.416667
-    ],
-    [
-     34.833333,
-     33.283333
-    ]
-   ]
-  },
-  {
-   "id": "AIRMET",
-   "station": "LLLL",
-   "kind": "AIRMET",
-   "text": "LLLL AIRMET 18 VALID 071600/072000 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3118 E03510 - N3123 E03453 - N3321 E03548 STNR INTSF=",
+   "text": "LLLL AIRMET 20 VALID 072000/080000 LLBD- LLLL TEL AVIV FIR MT OBSC FCST WI N3321 E03548 - N3257 E03555 - N3018 E03435 - N3042 E03426 - N3321 E03548 STNR INTSF=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -124,12 +93,12 @@
      32.95
     ],
     [
-     35.166667,
-     31.3
+     34.583333,
+     30.3
     ],
     [
-     34.883333,
-     31.383333
+     34.433333,
+     30.7
     ],
     [
      35.8,
@@ -138,30 +107,41 @@
    ]
   },
   {
-   "id": "TAFLG",
-   "station": "LLBG",
-   "kind": "TAF",
-   "text": "TAF LLBG 071106Z 0712/0812 18010KT 9999 SCT030 BKN040 TX22/0712Z TN16/0803Z PROB40 TEMPO 0712/0724 24018G28KT 5000 TSRA FEW025CB BKN030",
+   "id": "AIRMET",
+   "station": "LLLL",
+   "kind": "AIRMET",
+   "text": "LLLL AIRMET 21 VALID 072000/080000 LLBD- LLLL TEL AVIV FIR ISOL TS FCST WI N3317 E03450 - N3315 E03557 - N3119 E03526 - N3225 E03340 - N3317 E03450 TOP FL260 MOV SE 15KT WKN=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
-   "area": null
-  },
-  {
-   "id": "TAFLG",
-   "station": "LLER",
-   "kind": "TAF",
-   "text": "TAF LLER 071107Z 0712/0812 32010KT 9999 FEW050 TX25/0712Z TN17/0803Z PROB40 TEMPO 0712/0717 32016KT BKN040",
-   "truncated": true,
-   "valid_from": null,
-   "valid_to": null,
-   "area": null
+   "area": [
+    [
+     34.833333,
+     33.283333
+    ],
+    [
+     35.95,
+     33.25
+    ],
+    [
+     35.433333,
+     31.316667
+    ],
+    [
+     33.666667,
+     32.416667
+    ],
+    [
+     34.833333,
+     33.283333
+    ]
+   ]
   },
   {
    "id": "TAFLG",
    "station": "LLHA",
    "kind": "TAF",
-   "text": "TAF LLHA 071106Z 0712/0812 18010KT 9999 SCT030 BKN040 TX22/0712Z TN17/0803Z PROB40 TEMPO 0712/0806 26015G25KT 5000 TSRA FEW025CB BKN030",
+   "text": "TAF LLHA 071704Z 0718/0818 18010KT 9999 SCT030 BKN040 TX22/0811Z TN17/0803Z PROB40 TEMPO 0718/0806 26015G25KT 5000 TSRA FEW025CB BKN030",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -171,7 +151,7 @@
    "id": "TAFLG",
    "station": "LLIB",
    "kind": "TAF",
-   "text": "TAF LLIB 071106Z 0712/0812 18008KT 9999 SCT030 BKN040 TX20/0712Z TN14/0803Z PROB40 TEMPO 0712/0716 30016G26KT 5000 TSRA FEW025CB BKN030",
+   "text": "TAF LLIB 071659Z 0718/0818 18008KT 9999 SCT030 BKN040 TX21/0812Z TN14/0803Z PROB40 TEMPO 0718/0806 21012G22KT 4000 TSRA BR SCT015 FEW020CB",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
@@ -181,7 +161,27 @@
    "id": "TAFLG",
    "station": "LLHZ",
    "kind": "TAF",
-   "text": "TAF LLHZ 071106Z 0712/0812 18008KT 9999 SCT030 BKN040 TX22/0712Z TN18/0803Z PROB40 TEMPO 0712/0724 27018G28KT 5000 TSRA FEW025CB BKN030",
+   "text": "TAF LLHZ 071702Z 0718/0818 18008KT 9999 SCT030 BKN040 TX22/0811Z TN18/0803Z PROB40 TEMPO 0718/0724 27018G28KT 5000 TSRA FEW025CB BKN030",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLBG",
+   "kind": "TAF",
+   "text": "TAF LLBG 071700Z 0718/0818 18010KT 9999 SCT030 BKN040 TX22/0812Z TN16/0803Z PROB40 TEMPO 0718/0724 24018G28KT 5000 TSRA FEW025CB BKN030",
+   "truncated": true,
+   "valid_from": null,
+   "valid_to": null,
+   "area": null
+  },
+  {
+   "id": "TAFLG",
+   "station": "LLER",
+   "kind": "TAF",
+   "text": "TAF LLER 071700Z 0718/0818 33010KT 9999 FEW050 TX23/0811Z TN15/0803Z BECMG 0812/0814 02010KT CAVOK=",
    "truncated": true,
    "valid_from": null,
    "valid_to": null,
