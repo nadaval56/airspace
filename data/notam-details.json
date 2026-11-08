@@ -341,6 +341,15 @@
   "valid_from": "2026-11-12T07:00:00Z",
   "valid_to": "2026-11-12T11:00:00Z"
  },
+ "A0886/26": {
+  "airfield": "Ramon",
+  "created": "2026-11-08T05:38:00Z",
+  "id": "A0886/26",
+  "location": "LLER",
+  "raw": "(A0886/26 NOTAMN\nQ) LLLL/QFALC/IV/NBO/A /000/999/2944N03501E005\nA) LLER B) 2611091105 C) 2611091210\nE) AD CLSD TO ALL FLT DUE WIP.\nIN CASE OF EMERG AVBL WI 5MIN PPR FM ATC.)",
+  "valid_from": "2026-11-09T11:05:00Z",
+  "valid_to": "2026-11-09T12:10:00Z"
+ },
  "C0005/26": {
   "airfield": "Tel-Aviv FIR",
   "created": "2026-01-01T06:33:00Z",
